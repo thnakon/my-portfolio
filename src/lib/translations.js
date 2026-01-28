@@ -5,17 +5,49 @@ const translations = {
         nav: {
             home: "Home",
             about: "About",
-            skills: "Skills",
-            projects: "Projects",
-            contact: "Contact",
+            work: "Work",
+            blog: "Blog",
+            more: "More",
             bookCall: "Book a Call",
+            greetings: {
+                morning: "Good Morning...",
+                afternoon: "Good Afternoon...",
+                evening: "Good Evening...",
+                night: "Good Night...",
+            },
+            moreDropdown: {
+                guestbook: {
+                    title: "Guestbook",
+                    desc: "Let me know you were here"
+                },
+                bucketList: {
+                    title: "Bucket List",
+                    desc: "Things to do at least once in my life"
+                },
+                links: {
+                    title: "Links",
+                    desc: "All my links are here"
+                },
+                uses: {
+                    title: "Uses",
+                    desc: "A peek into my digital..."
+                },
+                attribution: {
+                    title: "Attribution",
+                    desc: "Journey to create this site"
+                }
+            }
         },
 
         // Hero Section
         hero: {
-            headline: "I help founders turn ideas into seamless",
-            headlineAccent: "digital experiences",
-            description: "I'm Thanakon, a proactive full-stack developer passionate about creating dynamic web experiences. From frontend to backend, I thrive on solving complex problems with clean, efficient code. My expertise spans React, Next.js, Laravel, and modern web technologies.",
+            announcement: {
+                tag: "Upcoming",
+                message: "A new project is launching soon!"
+            },
+            headline: "Building innovative and",
+            headlineAccent: "clean digital products",
+            description: "I'm Thanakon, a proactive full-stack developer passionate about creating dynamic web experiences. From frontend to backend, I thrive on solving complex problems with clean, efficient code.",
             cta: "Get in Touch",
             scrollDown: "Scroll Down",
         },
@@ -96,17 +128,49 @@ const translations = {
         nav: {
             home: "หน้าแรก",
             about: "เกี่ยวกับ",
-            skills: "ทักษะ",
-            projects: "ผลงาน",
-            contact: "ติดต่อ",
+            work: "ผลงาน",
+            blog: "บล็อก",
+            more: "เพิ่มเติม",
             bookCall: "นัดคุย",
+            greetings: {
+                morning: "สวัสดีตอนเช้า...",
+                afternoon: "สวัสดีตอนบ่าย...",
+                evening: "สวัสดีตอนเย็น...",
+                night: "ราตรีสวัสดิ์...",
+            },
+            moreDropdown: {
+                guestbook: {
+                    title: "สมุดเยี่ยม",
+                    desc: "เขียนข้อความทักทายกันได้ที่นี่"
+                },
+                bucketList: {
+                    title: "รายการสิ่งที่อยากทำ",
+                    desc: "สิ่งที่อยากทำให้ได้สักครั้งในชีวิต"
+                },
+                links: {
+                    title: "ลิงก์ต่างๆ",
+                    desc: "รวมลิงก์ทั้งหมดของผม"
+                },
+                uses: {
+                    title: "อุปกรณ์ที่ใช้",
+                    desc: "แอบดูเครื่องมือและซอฟต์แวร์ที่ผมใช้"
+                },
+                attribution: {
+                    title: "ที่มา",
+                    desc: "บันทึกการสร้างเว็บไซต์นี้"
+                }
+            }
         },
 
         // Hero Section
         hero: {
-            headline: "ผมช่วยเปลี่ยนไอเดียให้กลายเป็น",
-            headlineAccent: "ประสบการณ์ดิจิทัลที่ลื่นไหล",
-            description: "สวัสดีครับ ผมธนากร Full Stack Web Developer ที่เชี่ยวชาญด้าน Laravel, Next.js และเทคโนโลยีเว็บสมัยใหม่ ผมไม่ได้แค่เขียนโค้ด แต่ผมสร้างระบบที่แก้ปัญหาได้จริง ด้วยประสบการณ์ในการพัฒนาเว็บแอปพลิเคชันที่รองรับการขยายตัว ผมให้ความสำคัญกับการเขียนโค้ดที่สะอาด มีประสิทธิภาพ และทำงานได้รวดเร็ว",
+            announcement: {
+                tag: "เร็วๆ นี้",
+                message: "โปรเจกต์ใหม่กำลังจะเปิดตัว!"
+            },
+            headline: "สร้างสรรค์ผลิตภัณฑ์ดิจิทัล",
+            headlineAccent: "ที่ทันสมัยและเรียบง่าย",
+            description: "สวัสดีครับ ผมธนากร Full Stack Web Developer ที่เชี่ยวชาญด้าน Laravel, Next.js และเทคโนโลยีเว็บสมัยใหม่ ผมมุ่งมั่นที่จะพัฒนาเว็บแอปพลิเคชันที่มีประสิทธิภาพและใช้งานง่าย เพื่อช่วยแก้ปัญหาและนำคุณค่ามาสู่ผู้ใช้อย่างแท้จริง",
             cta: "ติดต่อผม",
             scrollDown: "เลื่อนลง",
         },
