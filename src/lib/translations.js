@@ -52,6 +52,14 @@ const translations = {
             scrollDown: "Scroll Down",
         },
 
+        // Overview Section
+        overview: {
+            tag: "OVERVIEW",
+            title: "At a",
+            titleAccent: "glance",
+            description: "A brief overview of who I am, what I do, and the value I bring to every project.",
+        },
+
         // About Section
         about: {
             title: "About Me",
@@ -205,6 +213,14 @@ const translations = {
             description: "ผมธนากร Full Stack Web Developer ที่มุ่งมั่นพัฒนาเว็บแอปพลิเคชันที่ทันสมัยและมีประสิทธิภาพ",
             cta: "ติดต่อผม",
             scrollDown: "เลื่อนลง",
+        },
+
+        // Overview Section
+        overview: {
+            tag: "ภาพรวม",
+            title: "ทำความรู้จัก",
+            titleAccent: "ผมสักหน่อย",
+            description: "ภาพรวมสั้นๆ เกี่ยวกับตัวผม สิ่งที่ผมทำ และคุณค่าที่ผมมอบให้กับทุกโปรเจกต์",
         },
 
         // About Section
