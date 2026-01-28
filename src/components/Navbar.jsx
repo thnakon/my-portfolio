@@ -81,6 +81,26 @@ export default function Navbar({ t, lang, setLang, theme, setTheme, onBookCall }
 
   return (
     <>
+      {/* Logo */}
+      <div className="fixed top-[20px] left-6 md:left-12 z-[1001] flex items-center h-[56px]">
+        <img 
+          src={theme === 'dark' ? '/logo-light.png' : '/logo-dark.png'} 
+          alt="Logo" 
+          className="h-8 md:h-10 w-auto cursor-pointer transition-opacity hover:opacity-80"
+          onClick={() => scrollToSection('home')}
+        />
+      </div>
+
+      {/* Command Icon (Top Right) */}
+      <button 
+        onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+        className="fixed top-[20px] right-6 md:right-12 z-[1001] flex items-center justify-center h-[56px] w-[56px] text-primary hover:opacity-80 transition-opacity"
+      >
+        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 6v12a3 3 0 1 0 3-3H6a3 3 0 1 0 3 3V6a3 3 0 1 0-3 3h12a3 3 0 1 0-3-3z" />
+        </svg>
+      </button>
+
       <nav className="navbar">
         <div className="flex items-center gap-2">
           {/* Desktop Navigation */}
