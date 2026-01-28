@@ -1,8 +1,24 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function Hero({ t }) {
   const [copied, setCopied] = useState(false);
+  const [fireflies, setFireflies] = useState([]);
   const email = 'thnakon.d@gmail.com';
+
+  useEffect(() => {
+    const flies = Array.from({ length: 150 }).map((_, i) => ({
+      id: i,
+      left: `${Math.random() * 100}%`,
+      top: `${Math.random() * 100}%`,
+      size: `${1 + Math.random() * 3}px`,
+      duration: `${3 + Math.random() * 5}s`,
+      floatDuration: `${15 + Math.random() * 25}s`,
+      delay: `${Math.random() * 10}s`,
+      endX: `${(Math.random() - 0.5) * 300}px`,
+      endY: `${(Math.random() - 0.5) * 300}px`,
+    }));
+    setFireflies(flies);
+  }, []);
 
   const scrollToContact = () => {
     const element = document.getElementById('contact');
@@ -19,6 +35,28 @@ export default function Hero({ t }) {
 
   return (
     <section id="home" className="min-h-screen flex items-center justify-center text-center px-6 pt-16 pb-20 relative">
+      {/* Fireflies Background */}
+      <div className="firefly-container">
+        {fireflies.map((fly) => (
+          <div
+            key={fly.id}
+            className="firefly"
+            style={{
+              left: fly.left,
+              top: fly.top,
+              width: fly.size,
+              height: fly.size,
+              '--duration': fly.duration,
+              '--float-duration': fly.floatDuration,
+              '--delay': fly.delay,
+              '--end-x': fly.endX,
+              '--end-y': fly.endY,
+              animationDelay: `${fly.delay}, 0s`,
+            }}
+          />
+        ))}
+      </div>
+
       <div className="max-w-4xl mx-auto">
         {/* Announcement Badge */}
         <div className="hero-announcement group">
@@ -82,14 +120,6 @@ export default function Hero({ t }) {
             </div>
           </button>
         </div>
-      </div>
-      
-      {/* Scroll Indicator */}
-      <div className="scroll-indicator absolute bottom-10 left-1/2 flex flex-col items-center gap-2 text-muted text-sm">
-        <span>{t.hero.scrollDown}</span>
-        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-        </svg>
       </div>
     </section>
   );

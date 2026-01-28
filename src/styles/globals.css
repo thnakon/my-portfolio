@@ -431,7 +431,11 @@ h1, h2, h3, h4, h5, h6 {
 
 .hero-headline em {
   font-style: italic;
-  color: var(--text-secondary);
+  background: linear-gradient(135deg, var(--text-primary) 20%, var(--text-muted) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
 }
 
 /* Skill Card */
@@ -685,4 +689,40 @@ h1, h2, h3, h4, h5, h6 {
     width: calc(100% - 32px);
     max-width: 400px;
   }
+}
+
+/* Fireflies Background */
+.firefly-container {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.firefly {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: var(--text-primary);
+  border-radius: 50%;
+  opacity: 0;
+  filter: blur(0.5px);
+  box-shadow: 0 0 8px 1px rgba(0, 0, 0, 0.1);
+  animation: firefly-blink var(--duration) infinite alternate, firefly-float var(--float-duration) infinite linear;
+}
+
+[data-theme='dark'] .firefly {
+  background: #FFFACD;
+  box-shadow: 0 0 12px 2px rgba(255, 250, 205, 0.4);
+}
+
+@keyframes firefly-blink {
+  0%, 100% { opacity: 0.1; transform: scale(0.6); }
+  50% { opacity: 0.6; transform: scale(1.1); }
+}
+
+@keyframes firefly-float {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(var(--end-x), var(--end-y)); }
 }
