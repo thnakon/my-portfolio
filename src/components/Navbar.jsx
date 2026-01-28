@@ -89,7 +89,7 @@ export default function Navbar({ t, lang, setLang, theme, setTheme, onBookCall }
             <img 
               src={theme === 'dark' ? '/logo-light.png' : '/logo-dark.png'} 
               alt="Logo" 
-              className="h-10 w-auto cursor-pointer transition-transform duration-200 hover:opacity-80 active:scale-90"
+              className="h-9 w-auto cursor-pointer transition-transform duration-200 hover:opacity-80 active:scale-90"
               onClick={() => {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
                 setActiveSection('home');
