@@ -82,21 +82,24 @@ export default function Navbar({ t, lang, setLang, theme, setTheme, onBookCall }
   return (
     <>
       {/* Logo */}
-      <div className="fixed top-[10px] left-6 md:left-12 z-[1001] flex items-center h-7">
+      <div className="fixed top-4 left-6 md:left-12 z-[1001] flex items-center h-12">
         <img 
           src={theme === 'dark' ? '/logo-light.png' : '/logo-dark.png'} 
           alt="Logo" 
-          className="h-4 md:h-5 w-auto cursor-pointer transition-opacity hover:opacity-80"
-          onClick={() => scrollToSection('home')}
+          className="h-9 md:h-11 w-auto cursor-pointer transition-transform duration-200 hover:opacity-80 active:scale-90"
+          onClick={() => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            setActiveSection('home');
+          }}
         />
       </div>
 
       {/* Command Icon (Top Right) */}
       <button 
         onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-        className="fixed top-[10px] right-6 md:right-12 z-[1001] flex items-center justify-center h-7 w-7 text-primary hover:opacity-80 transition-opacity"
+        className="fixed top-4 right-6 md:right-12 z-[1001] flex items-center justify-center h-12 w-12 text-primary hover:opacity-80 transition-opacity active:scale-90"
       >
-        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 6v12a3 3 0 1 0 3-3H6a3 3 0 1 0 3 3V6a3 3 0 1 0-3 3h12a3 3 0 1 0-3-3z" />
         </svg>
       </button>
