@@ -38,7 +38,7 @@ export default function App({ Component, pageProps }) {
         <meta property="og:type" content="website" />
 
         {/* Favicon */}
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/favicon.png" />
       </Head>
       <Component {...pageProps} theme={theme} setTheme={setTheme} lang={lang} setLang={setLang} />
     </>
