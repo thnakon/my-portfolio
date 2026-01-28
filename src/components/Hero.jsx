@@ -1,9 +1,15 @@
 import { useState, useEffect } from 'react';
 
-export default function Hero({ t }) {
+export default function Hero({ t, onGetInTouch }) {
   const [copied, setCopied] = useState(false);
   const [fireflies, setFireflies] = useState([]);
+  const [typedText, setTypedText] = useState('');
+  const [showContent, setShowContent] = useState(false);
+  const [typingComplete, setTypingComplete] = useState(false);
   const email = 'thnakon.d@gmail.com';
+
+  // Full headline text
+  const fullHeadline = `${t.hero.headline} ${t.hero.headlineAccent}`;
 
   useEffect(() => {
     const flies = Array.from({ length: 150 }).map((_, i) => ({
@@ -20,6 +26,30 @@ export default function Hero({ t }) {
     setFireflies(flies);
   }, []);
 
+  // Typewriter effect - synced with navbar greeting (2 seconds)
+  useEffect(() => {
+    let currentIndex = 0;
+    // Calculate typing speed to finish in ~2 seconds (same as navbar greeting)
+    const totalDuration = 2000; // 2 seconds
+    const typingSpeed = Math.max(30, totalDuration / fullHeadline.length);
+
+    const typeInterval = setInterval(() => {
+      if (currentIndex <= fullHeadline.length) {
+        setTypedText(fullHeadline.slice(0, currentIndex));
+        currentIndex++;
+      } else {
+        clearInterval(typeInterval);
+        setTypingComplete(true);
+        // Start fading in content after typing is complete
+        setTimeout(() => {
+          setShowContent(true);
+        }, 200);
+      }
+    }, typingSpeed);
+
+    return () => clearInterval(typeInterval);
+  }, [fullHeadline]);
+
   const scrollToContact = () => {
     const element = document.getElementById('contact');
     if (element) {
@@ -32,6 +62,11 @@ export default function Hero({ t }) {
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
+
+  // Split typed text to apply accent styling
+  const headlineLength = t.hero.headline.length;
+  const typedHeadline = typedText.slice(0, headlineLength);
+  const typedAccent = typedText.slice(headlineLength + 1); // +1 for the space
 
   return (
     <section id="home" className="min-h-screen flex items-center justify-center text-center px-6 pt-16 pb-20 relative">
@@ -58,8 +93,15 @@ export default function Hero({ t }) {
       </div>
 
       <div className="max-w-4xl mx-auto">
-        {/* Announcement Badge */}
-        <div className="hero-announcement group">
+        {/* Announcement Badge - Hidden until typing completes */}
+        <div 
+          className="hero-announcement group transition-all duration-700"
+          style={{
+            opacity: showContent ? 1 : 0,
+            transform: showContent ? 'translateY(0)' : 'translateY(-16px)',
+            pointerEvents: showContent ? 'auto' : 'none'
+          }}
+        >
           <span className="announcement-tag">{t.hero.announcement.tag}</span>
           <div className="announcement-content">
             <span className="announcement-message ann-shimmer">
@@ -71,21 +113,37 @@ export default function Hero({ t }) {
           </div>
         </div>
 
-        {/* Headline */}
+        {/* Headline with Typewriter Effect */}
         <h1 className="hero-headline font-heading mb-8">
-          {t.hero.headline}{' '}
-          <em>{t.hero.headlineAccent}</em>
+          {typedHeadline}
+          {typedAccent && <em> {typedAccent}</em>}
+          <span className={`inline-block w-[3px] h-[1em] bg-[var(--text-primary)] ml-1 align-middle ${typingComplete ? 'opacity-0' : 'animate-blink'}`} />
         </h1>
         
         {/* Description */}
-        <p className="text-secondary text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
+        <p 
+          className="text-secondary text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed transition-all duration-700"
+          style={{
+            opacity: showContent ? 1 : 0,
+            transform: showContent ? 'translateY(0)' : 'translateY(16px)',
+            transitionDelay: '100ms'
+          }}
+        >
           {t.hero.description}
         </p>
         
         {/* CTA Buttons */}
-        <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+        <div 
+          className="flex flex-col sm:flex-row gap-6 justify-center items-center transition-all duration-700"
+          style={{
+            opacity: showContent ? 1 : 0,
+            transform: showContent ? 'translateY(0)' : 'translateY(16px)',
+            transitionDelay: '200ms',
+            pointerEvents: showContent ? 'auto' : 'none'
+          }}
+        >
           <button
-            onClick={scrollToContact}
+            onClick={onGetInTouch}
             className="btn-premium-cta"
           >
             {t.hero.cta}

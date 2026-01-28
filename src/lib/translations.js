@@ -114,6 +114,38 @@ const translations = {
             booking: "Booking...",
             success: "Booking confirmed! I'll send you a confirmation email.",
         },
+        contactModal: {
+            title: "Get in touch",
+            book: {
+                title: "Book a Call",
+                desc: "Schedule a 30-min chat"
+            },
+            email: {
+                title: "Email Me",
+                desc: "thnakon.d@gmail.com"
+            },
+            message: {
+                title: "Or write me a message here",
+                action: "Tap to open"
+            },
+            socials: "CONNECT ON SOCIALS",
+            form: {
+                title: "Send a message",
+                back: "Back to options",
+                name: "Name",
+                namePlaceholder: "Jane Doe",
+                email: "Email",
+                emailPlaceholder: "jane@example.com",
+                message: "Message",
+                messagePlaceholder: "How can I help you?",
+                submit: "Send Message",
+                sending: "Sending...",
+                success: "Message sent successfully!",
+                error: "Failed to send. Please try again.",
+                thankYouTitle: "Thank you!",
+                thankYouMessage: "Your message has been sent. I'll reply to your email soon."
+            }
+        },
 
         // Footer
         footer: {
@@ -236,6 +268,38 @@ const translations = {
             book: "จองเลย",
             booking: "กำลังจอง...",
             success: "จองสำเร็จ! ผมจะส่งอีเมลยืนยันให้ครับ",
+        },
+        contactModal: {
+            title: "ติดต่อสอบถาม",
+            book: {
+                title: "นัดคุยย่อย",
+                desc: "นัดหมายล่วงหน้า 30 นาที"
+            },
+            email: {
+                title: "ส่งอีเมล",
+                desc: "thnakon.d@gmail.com"
+            },
+            message: {
+                title: "หรือส่งข้อความถึงผมที่นี่",
+                action: "คลิกเพื่อเปิด"
+            },
+            socials: "ช่องทางโซเชียล",
+            form: {
+                title: "ส่งข้อความ",
+                back: "กลับไปหน้าตัวเลือก",
+                name: "ชื่อ",
+                namePlaceholder: "สมชาย ใจดี",
+                email: "อีเมล",
+                emailPlaceholder: "somchai@example.com",
+                message: "ข้อความ",
+                messagePlaceholder: "มีอะไรให้ช่วยครับ?",
+                submit: "ส่งข้อความ",
+                sending: "กำลังส่ง...",
+                success: "ส่งข้อความสำเร็จ!",
+                error: "ส่งไม่สำเร็จ กรุณาลองใหม่",
+                thankYouTitle: "ขอบคุณครับ!",
+                thankYouMessage: "ข้อความของคุณถูกส่งเรียบร้อยแล้ว ผมจะตอบกลับทางอีเมลโดยเร็วครับ"
+            }
         },
 
         // Footer

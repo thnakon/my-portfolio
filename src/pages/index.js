@@ -28,7 +28,7 @@ export default function Home({ theme, setTheme, lang, setLang }) {
       />
 
       {/* Hero Section */}
-      <Hero t={t} />
+      <Hero t={t} onGetInTouch={() => setBookingOpen(true)} />
 
       {/* About Section */}
       <About t={t} />

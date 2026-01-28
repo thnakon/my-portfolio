@@ -272,8 +272,13 @@ export default function Navbar({ t, lang, setLang, theme, setTheme, onBookCall }
             ))}
             
             {/* Book a Call CTA */}
-            <button onClick={onBookCall} className="nav-cta">
+            <button onClick={onBookCall} className="btn-premium-nav">
               {t.nav.bookCall}
+              <div className="nav-arrow-circle">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7-7 7M3 12h18" />
+                </svg>
+              </div>
             </button>
           </div>
         </div>
