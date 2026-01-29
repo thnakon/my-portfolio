@@ -134,7 +134,7 @@ export default function Overview({ t }) {
   return (
     <section 
       ref={sectionRef}
-      className="relative py-24 px-6 bg-[var(--bg-primary)] overflow-hidden"
+      className="relative pt-24 pb-8 px-6 bg-[var(--bg-primary)] overflow-hidden"
     >
       {/* Fireflies Background */}
       <div className="firefly-container opacity-20">
@@ -249,8 +249,8 @@ export default function Overview({ t }) {
               <circle cx="75%" cy="70%" r="2" fill="var(--text-muted)" opacity="0.2" />
               
               {/* Decorative Arcs */}
-              <path d="M 5% 40% Q 15% 30%, 25% 40%" stroke="var(--text-muted)" strokeWidth="0.5" fill="none" opacity="0.3" />
-              <path d="M 75% 40% Q 85% 30%, 95% 40%" stroke="var(--text-muted)" strokeWidth="0.5" fill="none" opacity="0.3" />
+              <path d="M 10 80 Q 30 60, 50 80" stroke="var(--text-muted)" strokeWidth="0.5" fill="none" opacity="0.3" />
+              <path d="M 150 80 Q 170 60, 190 80" stroke="var(--text-muted)" strokeWidth="0.5" fill="none" opacity="0.3" />
             </svg>
 
             {/* Corner Decorations */}
@@ -284,6 +284,7 @@ export default function Overview({ t }) {
                       src="/images/profile-bento.jpg"
                       alt="Thanakon"
                       fill
+                      sizes="96px"
                       className="object-cover"
                     />
                   </div>
@@ -413,11 +414,25 @@ export default function Overview({ t }) {
             {/* 1. Background Gradient */}
             <div className="absolute inset-0 bg-gradient-to-b from-[var(--bg-secondary)] to-[var(--bg-tertiary)]/50" />
             
-            {/* 2. Map Dots Pattern */}
-            <div className="absolute inset-0 opacity-[0.05] group-hover/remote:opacity-[0.1] transition-opacity duration-700" style={{
-              backgroundImage: 'radial-gradient(circle, var(--text-muted) 1px, transparent 1px)',
-              backgroundSize: '24px 24px'
-            }}></div>
+            {/* 2. Map Dots Pattern & Radar */}
+            <div className="absolute inset-0 z-0">
+               {/* Grid Pattern */}
+               <div className="absolute inset-0 opacity-[0.03] group-hover/remote:opacity-[0.06] transition-opacity duration-700" style={{
+                  backgroundImage: 'radial-gradient(var(--text-muted) 1px, transparent 1px)',
+                  backgroundSize: '20px 20px'
+               }}></div>
+               
+               {/* Rotating Radar Overlay */}
+               <div className="absolute inset-0 overflow-hidden opacity-[0.05] group-hover/remote:opacity-[0.1] transition-opacity">
+                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[conic-gradient(from_0deg,transparent_0deg,var(--text-primary)_360deg)] opacity-10 rounded-full animate-spin-slow-reverse mask-radial-fade"></div>
+               </div>
+
+               {/* Flight Paths */}
+               <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-20" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M -10 100 Q 100 -20 250 50" stroke="var(--text-muted)" strokeWidth="0.5" fill="none" strokeDasharray="4 4" className="animate-dash" />
+                  <path d="M -10 200 Q 50 100 250 150" stroke="var(--text-muted)" strokeWidth="0.5" fill="none" strokeDasharray="3 3" className="animate-dash-reverse" />
+               </svg>
+            </div>
 
             {/* 3. Animated Globe Wireframe */}
             <div className="absolute -right-20 top-1/2 -translate-y-1/2 w-80 h-80 opacity-30 group-hover/remote:opacity-50 transition-all duration-700 pointer-events-none group-hover/remote:scale-110 group-hover/remote:rotate-12">
@@ -529,12 +544,92 @@ export default function Overview({ t }) {
           </div>
 
           {/* Row 3: Current Work (spans 2 columns) */}
-          <div className="md:col-span-2 bento-card bento-card-current">
-            <div className="text-center">
-              <span className="bento-tag">{bento.currentWork.tag}</span>
-              <h3 className="text-2xl md:text-3xl font-heading text-[var(--text-primary)] mt-2">
-                {bento.currentWork.title}
-              </h3>
+          {/* Row 3: Current Work (spans 2 columns) */}
+          <div className="md:col-span-2 bento-card bento-card-current relative group/current overflow-hidden !flex !flex-row !items-start !justify-start transition-all duration-500 hover:shadow-2xl">
+            {/* Background Effects */}
+            <div className="absolute inset-0 bg-gradient-to-br from-[var(--bg-secondary)] via-[var(--bg-secondary)] to-[var(--bg-tertiary)]" />
+            
+            {/* Enhanced Background (Radar + Grid) */}
+            <div className="absolute inset-0 z-0 pointer-events-none">
+                <div className="absolute inset-0 opacity-[0.03] group-hover/current:opacity-[0.06] transition-opacity duration-700" style={{ backgroundImage: 'radial-gradient(var(--text-muted) 1px, transparent 1px)', backgroundSize: '16px 16px' }} />
+                
+                {/* Rotating Radar Overlay */}
+                <div className="absolute inset-0 overflow-hidden opacity-[0.03] group-hover/current:opacity-[0.08] transition-opacity">
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[conic-gradient(from_0deg,transparent_0deg,var(--text-primary)_360deg)] opacity-10 rounded-full animate-spin-slow mask-radial-fade"></div>
+                </div>
+            </div>
+            
+            {/* Left Content - Compact & Top-Left Aligned */}
+            <div className="relative z-10 p-4 flex flex-col items-start text-left w-full md:w-[45%] justify-start gap-3">
+              <div>
+                <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-yellow-500/10 border border-yellow-500/20 text-yellow-500 text-[9px] font-bold tracking-wider uppercase mb-2 animate-pulse">
+                  <span className="w-1 h-1 rounded-full bg-yellow-500" />
+                  Dev
+                </div>
+                
+                <h3 className="text-lg md:text-xl font-heading text-[var(--text-primary)] mb-1 leading-tight">
+                  {bento.currentWork.title}
+                </h3>
+                <p className="text-[10px] md:text-xs text-[var(--text-secondary)] leading-relaxed max-w-[200px]">
+                  AI-driven workflow automation for teams.
+                </p>
+              </div>
+              
+              <div className="flex items-center gap-3 text-[9px] font-mono text-[var(--text-muted)] mt-2">
+                <div className="flex items-center gap-1">
+                  <svg className="w-2.5 h-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                  <span>v0.1.0</span>
+                </div>
+                <div className="w-0.5 h-0.5 rounded-full bg-[var(--text-muted)]" />
+                <div className="flex items-center gap-1">
+                  <svg className="w-2.5 h-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" /></svg>
+                  <span>Next 14</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Visual - Abstract SaaS Mockup */}
+            <div className="absolute right-[-40px] top-4 w-[65%] h-full z-0 pointer-events-none perspective-1000 md:block hidden">
+              <div className="relative w-full h-full transform rotate-[-6deg] translate-x-10 group-hover/current:rotate-0 group-hover/current:translate-x-0 transition-all duration-700 ease-out">
+                {/* Main Window */}
+                <div className="absolute inset-0 bg-[var(--bg-primary)] rounded-tl-lg border border-[var(--border-color)] shadow-xl overflow-hidden">
+                  {/* Window Header */}
+                  <div className="h-6 bg-[var(--bg-tertiary)] border-b border-[var(--border-color)] flex items-center px-3 gap-1.5">
+                    <div className="w-2 h-2 rounded-full bg-[var(--border-color)]" />
+                    <div className="w-2 h-2 rounded-full bg-[var(--border-color)]" />
+                  </div>
+                  
+                  <div className="flex h-full">
+                    {/* Sidebar */}
+                    <div className="w-12 border-r border-[var(--border-color)] bg-[var(--bg-secondary)]/50 p-2 space-y-2">
+                       <div className="h-6 w-6 rounded bg-[var(--color-primary)]/10" />
+                       <div className="h-1.5 w-8 bg-[var(--text-muted)]/20 rounded-full" />
+                       <div className="h-1.5 w-6 bg-[var(--text-muted)]/20 rounded-full" />
+                    </div>
+                    {/* Content */}
+                    <div className="flex-1 p-3 bg-[var(--bg-tertiary)]/10">
+                       <div className="flex gap-2 mb-3">
+                         <div className="h-16 flex-1 rounded bg-[var(--bg-primary)] border border-[var(--border-color)]" />
+                         <div className="h-16 flex-1 rounded bg-[var(--bg-primary)] border border-[var(--border-color)]" />
+                       </div>
+                       <div className="h-2 w-full bg-[var(--text-muted)]/10 rounded mb-1" />
+                       <div className="h-2 w-2/3 bg-[var(--text-muted)]/10 rounded" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            {/* Visual for Mobile (Simplified Background) */}
+            <div className="absolute -right-10 -bottom-10 w-40 h-40 bg-[var(--color-primary)]/5 rounded-full blur-3xl md:hidden" />
+
+            {/* Hover Arrow Button */}
+            <div className="absolute bottom-4 right-4 z-20 opacity-0 scale-75 group-hover/current:opacity-100 group-hover/current:scale-100 transition-all duration-300">
+              <div className="inline-flex items-center justify-center w-8 h-8 rounded-full border border-[var(--border-color)] bg-[var(--bg-secondary)] hover:border-[var(--text-muted)] hover:bg-[var(--bg-tertiary)] transition-all cursor-pointer shadow-lg">
+                <svg className="w-3 h-3 text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:translate-x-0.5 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </div>
             </div>
           </div>
         </div>

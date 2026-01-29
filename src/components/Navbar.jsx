@@ -52,7 +52,7 @@ export default function Navbar({ t, lang, setLang, theme, setTheme, onBookCall }
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
       
-      const sections = ['home', 'about', 'skills', 'projects', 'contact'];
+      const sections = ['home', 'projects', 'contact'];
       for (const section of sections) {
         const element = document.getElementById(section);
         if (element) {
@@ -92,7 +92,6 @@ export default function Navbar({ t, lang, setLang, theme, setTheme, onBookCall }
 
   const navItems = [
     { id: 'home', label: t.nav.home },
-    { id: 'about', label: t.nav.about },
     { id: 'projects', label: t.nav.work }, // 'projects' section ID for 'Work'
     { id: 'blog', label: t.nav.blog },
     { id: 'more', label: t.nav.more, hasArrow: true },

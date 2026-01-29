@@ -114,6 +114,13 @@ const translations = {
             tools: "Tools & Others",
         },
 
+        // Portfolio Section Header
+        portfolio: {
+            sectionTitlePrefix: "Our",
+            sectionTitleAccent: "Work",
+            sectionSubtitle: "Explore projects crafted with intention and attention to every detail.",
+        },
+
         // Projects Section
         projects: {
             title: "Featured Projects",
@@ -306,6 +313,13 @@ const translations = {
             backend: "Backend",
             database: "ฐานข้อมูล",
             tools: "เครื่องมือ",
+        },
+
+        // Portfolio Section Header
+        portfolio: {
+            sectionTitlePrefix: "ผลงาน",
+            sectionTitleAccent: "ของเรา",
+            sectionSubtitle: "สำรวจโปรเจกต์ที่สร้างสรรค์ด้วยความตั้งใจและความใส่ใจในทุกรายละเอียด",
         },
 
         // Projects Section
