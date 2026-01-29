@@ -129,6 +129,21 @@ const translations = {
             viewCode: "View Code",
             comingSoon: "Coming Soon",
             projectDesc: "Project details will be added soon.",
+            obounERP: {
+                title: "Oboun ERP",
+                description: "A comprehensive Enterprise Resource Planning system designed for SMEs. Streamlining operations across sales, inventory, and finance through high-performance automation.",
+                type: "Enterprise ERP"
+            },
+            babybib: {
+                title: "Babybib",
+                description: "Babybib is an advanced, automated bibliography generation system designed to streamline the academic citation process. Built around the APA 7th Edition standard, it empowers students, researchers, and faculty to create accurate references for various sources including books, journals, websites, and more, ensuring compliance with international academic standards.",
+                type: "Academic Tool"
+            },
+            scribehub: {
+                title: "ScribeHub",
+                description: "ScribeHub is a premium, all-in-one platform designed for modern researchers, academics, and students. It seamlessly integrates reference management, collaborative project tools, and advanced AI intelligence to streamline the entire research lifecycle—from discovery to manuscript.",
+                type: "Research Ecosystem"
+            }
         },
 
         // Contact Section
@@ -329,6 +344,21 @@ const translations = {
             viewProject: "ดูผลงาน",
             viewCode: "ดูโค้ด",
             comingSoon: "เร็วๆ นี้",
+            obounERP: {
+                title: "Oboun ERP",
+                description: "ระบบวางแผนทรัพยากรองค์กรที่ครอบคลุมสำหรับ SME ปรับปรุงการดำเนินงานในด้านการขาย สินค้าคงคลัง และการเงิน ผ่านการทำงานอัตโนมัติที่มีประสิทธิภาพสูง",
+                type: "ระบบ ERP องค์กร"
+            },
+            babybib: {
+                title: "Babybib",
+                description: "Babybib คือระบบสร้างบรรณานุกรมอัตโนมัติขั้นสูงที่ออกแบบมาเพื่อลดความซับซ้อนในกระบวนการอ้างอิงทางวิชาการ ตามมาตรฐาน APA ฉบับพิมพ์ครั้งที่ 7 ช่วยให้นักเรียน นักวิจัย และคณาจารย์สามารถสร้างการอ้างอิงที่ถูกต้องสําหรับแหล่งข้อมูลต่างๆ เช่น หนังสือ วารสาร เว็บไซต์ และอื่นๆ",
+                type: "เครื่องมือวิชาการ"
+            },
+            scribehub: {
+                title: "ScribeHub",
+                description: "ScribeHub คือแพลตฟอร์มระดับพรีเมียมแบบครบวงจรที่ออกแบบมาสำหรับนักวิจัย นักวิชาการ และนักศึกษา ยุคใหม่ โดยผสานรวมการจัดการการอ้างอิง เครื่องมือโครงการที่ทำงานร่วมกัน และปัญญาประดิษฐ์ (AI) ขั้นสูง เพื่อปรับปรุงวงจรการวิจัยทั้งหมด ตั้งแต่การค้นพบไปจนถึงขั้นตอนการทำต้นฉบับ",
+                type: "แพลตฟอร์มวิจัย"
+            },
             projectDesc: "รายละเอียดโปรเจคจะเพิ่มเร็วๆ นี้",
         },
 

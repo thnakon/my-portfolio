@@ -20,104 +20,172 @@ const Icons = {
   )
 };
 
-const IDEMockup = ({ project }) => {
+const IDEMockup = ({ project, isSecondary = false }) => {
   return (
-    <div className="w-full relative rounded-xl overflow-hidden bg-[#0D0D0D] border border-white/10 shadow-2xl group/ide transition-all duration-700 hover:border-white/20">
+    <div className={`w-full relative rounded-xl overflow-hidden bg-[#0D0D0D] border border-white/10 shadow-2xl group/ide transition-all duration-700 hover:border-white/20 ${isSecondary ? 'opacity-90 scale-95 origin-center' : ''}`}>
       {/* Title Bar */}
-      <div className="flex items-center justify-between px-4 py-2 border-b border-white/10 bg-[#161616]/50">
+      <div className="flex items-center justify-between px-4 py-1.5 border-b border-white/10 bg-[#161616]/50">
         <div className="flex items-center gap-1.5">
-          <div className="w-2.5 h-2.5 rounded-full bg-[#FF5F56]" />
-          <div className="w-2.5 h-2.5 rounded-full bg-[#FFBD2E]" />
-          <div className="w-2.5 h-2.5 rounded-full bg-[#27C93F]" />
+          <div className="w-2 h-2 rounded-full bg-[#FF5F56]" />
+          <div className="w-2 h-2 rounded-full bg-[#FFBD2E]" />
+          <div className="w-2 h-2 rounded-full bg-[#27C93F]" />
         </div>
-        <div className="text-[10px] font-mono text-white/40 tracking-wider">
-           {project.fileName || 'index.tsx'} - {project.title}
+        <div className="text-[9px] font-mono text-white/40 tracking-wider">
+           {isSecondary ? (project.secondaryFileName || 'App.vue') : (project.fileName || 'index.tsx')}
         </div>
-        <div className="w-10" />
+        <div className="w-8" />
       </div>
 
       {/* Main Container */}
-      <div className="flex h-[320px] md:h-[400px]">
+      <div className="flex h-[280px] md:h-[350px]">
         {/* Sidebar */}
-        <div className="w-10 border-r border-white/5 bg-[#121212] flex flex-col items-center py-4 gap-6 opacity-60">
-           <svg className="w-4 h-4 text-white/40" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" /></svg>
-           <svg className="w-4 h-4 text-white/40" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
-           <svg className="w-4 h-4 text-white/40" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+        <div className="w-8 border-r border-white/5 bg-[#121212] flex flex-col items-center py-4 gap-5 opacity-40">
+           <svg className="w-3.5 h-3.5 text-white/40" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" /></svg>
+           <svg className="w-3.5 h-3.5 text-white/40" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+           <svg className="w-3.5 h-3.5 text-white/40" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
         </div>
 
         {/* Content Area */}
         <div className="flex-1 flex flex-col min-w-0">
-          {/* Tabs */}
-          <div className="flex items-center bg-[#161616]/30 border-b border-white/5">
-            <div className="px-4 py-2 bg-[#0D0D0D] border-r border-white/5 flex items-center gap-2 text-blue-400">
-               <span className="text-[10px] font-mono">{project.fileName || 'index.tsx'}</span>
-               <span className="text-[8px] opacity-40">M</span>
-            </div>
-            <div className="px-4 py-2 border-r border-white/5 flex items-center gap-2 text-white/40">
-               <span className="text-[10px] font-mono">styles.css</span>
-            </div>
-          </div>
-
-          {/* Breadcrumbs */}
-          <div className="px-4 py-1.5 flex items-center gap-2 text-[10px] font-mono text-white/20 border-b border-white/5">
-             <span>src</span>
-             <span>›</span>
-             <span>app</span>
-             <span>›</span>
-             <span className="text-white/40">{project.fileName || 'index.tsx'}</span>
-          </div>
-
           {/* Editor Area */}
-          <div className="flex-1 overflow-hidden p-4 font-mono text-[11px] md:text-xs leading-relaxed">
+          <div className="flex-1 overflow-hidden p-4 font-mono text-[10px] md:text-[11px] leading-relaxed">
              <div className="flex">
-                <div className="w-8 flex-shrink-0 text-white/10 text-right pr-4 select-none">
-                   {project.codeContent?.map((_, i) => (
+                <div className="w-6 flex-shrink-0 text-white/10 text-right pr-3 select-none">
+                   {(isSecondary ? (project.secondaryCodeLines || []) : (project.codeLines || [])).map((_, i) => (
                      <div key={i}>{i + 1}</div>
-                   )) || [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14].map(n => <div key={n}>{n}</div>)}
+                   ))}
                 </div>
-                <div className="flex-1 min-w-0 text-white/80 overflow-hidden whitespace-pre group-hover/ide:text-white/100 transition-colors">
-                   {project.codeLines ? project.codeLines.map((line, i) => (
+                <div className="flex-1 min-w-0 text-white/80 overflow-hidden whitespace-pre">
+                   {(isSecondary ? (project.secondaryCodeLines || []) : (project.codeLines || [])).map((line, i) => (
                      <div key={i} dangerouslySetInnerHTML={{ __html: line }} />
-                   )) : (
-                     <>
-                        <div className="text-blue-400">"use client"<span className="text-white/60">;</span></div>
-                        <div className="h-4" />
-                        <div><span className="text-purple-400">export default function</span> <span className="text-yellow-400">{project.functionName || 'App'}</span>() {"{"}</div>
-                        <div className="pl-4"><span className="text-purple-400">const</span> <span className="text-blue-300">onSubmit</span> = () =&gt; {"{"}</div>
-                        <div className="pl-8 text-white/60">console.log("Submitted");</div>
-                        <div className="pl-4">{"}"}</div>
-                        <div className="h-4" />
-                        <div className="pl-4"><span className="text-purple-400">return</span> (</div>
-                        <div className="pl-8 text-blue-300">&lt;form <span className="text-yellow-200">onSubmit</span>={`{onSubmit}`}<span>&gt;</span></div>
-                        <div className="pl-12 text-white/40">&lt;label <span className="text-yellow-200">htmlFor</span>="origin"&gt;Origin&lt;/label&gt;</div>
-                        <div className="pl-12 text-white/40">&lt;input <span className="text-yellow-200">type</span>="text" ... /&gt;</div>
-                        <div className="h-4" />
-                        <div className="pl-12 text-white/40">&lt;button <span className="text-yellow-200">type</span>="submit"&gt;Submit&lt;/button&gt;</div>
-                        <div className="pl-8 text-blue-300">&lt;/form&gt;</div>
-                        <div className="pl-4">);</div>
-                        <div>{"}"}</div>
-                     </>
-                   )}
+                   ))}
                 </div>
              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const ProjectItem = ({ project, index, t }) => {
+  const [isVisible, setIsVisible] = useState(false);
+  const [typedDesc, setTypedDesc] = useState('');
+  const [startTyping, setStartTyping] = useState(false);
+  const itemRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          setTimeout(() => setStartTyping(true), 600);
+        }
+      },
+      { threshold: 0.2 }
+    );
+
+    if (itemRef.current) observer.observe(itemRef.current);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!startTyping) return;
+
+    let currentIndex = 0;
+    const fullText = project.descriptionPrefix;
+    const interval = setInterval(() => {
+      if (currentIndex <= fullText.length) {
+        setTypedDesc(fullText.slice(0, currentIndex));
+        currentIndex++;
+      } else {
+        clearInterval(interval);
+      }
+    }, 15);
+
+    return () => clearInterval(interval);
+  }, [startTyping, project.descriptionPrefix]);
+
+  return (
+    <div 
+      ref={itemRef}
+      className={`flex flex-col lg:flex-row items-center gap-12 lg:gap-20 transition-all duration-1000 ${
+        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+      }`}
+    >
+      {/* Text Content */}
+      <div className="flex-1 w-full lg:max-w-[400px]">
+        <div className={`flex items-center gap-3 mb-6 transition-all duration-700 delay-300 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4'}`}>
+          <div className={`px-2.5 py-1 rounded-md bg-${project.accent}-500/10 border border-${project.accent}-500/20 text-${project.accent}-500 text-[10px] font-mono uppercase tracking-widest`}>
+            {project.type}
+          </div>
+          {project.comingSoon && (
+            <div className="px-2.5 py-1 rounded-md bg-yellow-500/10 border border-yellow-500/20 text-yellow-600 text-[10px] font-mono uppercase tracking-widest animate-pulse">
+                Coming Soon
+            </div>
+          )}
+        </div>
+        
+        <h2 className={`text-3xl md:text-5xl font-heading text-[var(--text-primary)] mb-6 leading-tight transition-all duration-700 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+          {project.title}
+        </h2>
+        
+        <div className="min-h-[6em]">
+          <p className="text-base md:text-lg text-[var(--text-secondary)] mb-10 leading-relaxed font-body">
+            {typedDesc}
+            {startTyping && typedDesc.length < project.descriptionPrefix.length && (
+              <span className="inline-block w-[2px] h-[1.1em] bg-[var(--text-primary)] ml-1 animate-blink align-middle" />
+            )}
+          </p>
+        </div>
+        
+        {/* Tech Stack Pills */}
+        <div className={`flex flex-wrap gap-3 mb-10 transition-all duration-700 delay-700 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
+           {project.tech.map((tech, i) => (
+             <div 
+               key={i} 
+               className="flex items-center gap-2 px-3 py-1.5 transparent-pill border border-[var(--border-color)] text-[var(--text-muted)] text-[11px] font-medium rounded-full hover:border-[var(--text-primary)] hover:text-[var(--text-primary)] hover:scale-105 transition-all cursor-default group/pill"
+               style={{ transitionDelay: `${800 + (i * 100)}ms` }}
+             >
+                <img 
+                  src={`https://skillicons.dev/icons?i=${tech.icon}`} 
+                  alt={tech.name} 
+                  className="w-3.5 h-3.5 object-contain" 
+                />
+                <span>{tech.name}</span>
+             </div>
+           ))}
+        </div>
+
+        {!project.comingSoon && (
+           <div className={`flex flex-wrap gap-5 items-center transition-all duration-700 delay-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+              <a href={project.viewUrl || "#"} className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-[var(--text-primary)] text-[var(--bg-primary)] text-sm font-medium hover:scale-105 transition-all shadow-xl">
+                 {Icons.external}
+                 {t.projects.viewProject}
+              </a>
+              <a href={project.githubUrl || "#"} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+                 {Icons.github}
+                 {t.projects.viewCode}
+              </a>
+           </div>
+        )}
+      </div>
+
+      {/* Enhanced IDE Mockup Visual with Side-Push Hover Effect */}
+      <div className={`flex-1 w-full max-w-[700px] perspective-1000 transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
+        <div className="relative group/visuals w-full h-[320px] md:h-[400px]">
+          {/* Primary Mockup - Moves slightly left on hover */}
+          <div className="absolute inset-0 z-20 transform transition-all duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover/visuals:-translate-x-[15%] group-hover/visuals:-rotate-3 group-hover/visuals:scale-95 group-hover/visuals:opacity-40">
+            <IDEMockup project={project} />
+          </div>
+          
+          {/* Secondary Mockup - Pops out slightly to the right on hover */}
+          <div className="absolute inset-0 z-10 opacity-0 scale-95 translate-x-[10%] transition-all duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover/visuals:z-30 group-hover/visuals:opacity-100 group-hover/visuals:scale-100 group-hover/visuals:translate-x-[15%] group-hover/visuals:rotate-2">
+            <IDEMockup project={project} isSecondary={true} />
           </div>
 
-          {/* Status Bar */}
-          <div className="flex items-center justify-between px-3 py-1 bg-[#0D0D0D] border-t border-white/5 text-[9px] font-mono text-white/30">
-             <div className="flex items-center gap-3">
-               <div className="flex items-center gap-1.5">
-                  <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 24 24"><path d="M12.2 2c-.3 0-.6.1-.8.4L7.1 6.7c-.2.2-.3.5-.3.8v9c0 .3.1.6.3.8l4.3 4.3c.2.2.5.3.8.3s.6-.1.8-.3l4.3-4.3c.2-.2.3-.5.3-.8v-9c0-.3-.1-.6-.3-.8L13 2.4c-.2-.3-.5-.4-.8-.4zm-1.2 5.5l1.2-1.2 1.2 1.2M9 9h6m-6 3h6m-3 3h3" /></svg>
-                  <span>main*</span>
-               </div>
-               <div className="flex items-center gap-1.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-yellow-400/50" />
-                  <span>0 △ 0</span>
-               </div>
-             </div>
-             <div className="flex items-center gap-4">
-                <span>Tab - Showing completions</span>
-             </div>
-          </div>
+          {/* Background Decorative Blur */}
+          <div className={`absolute -inset-10 bg-${project.accent}-500/10 rounded-full blur-[100px] opacity-0 group-hover/visuals:opacity-100 transition-opacity duration-1000`} />
         </div>
       </div>
     </div>
@@ -142,21 +210,15 @@ export default function Projects({ t }) {
       { threshold: 0.1 }
     );
 
-    if (portfolioRef.current) {
-      observer.observe(portfolioRef.current);
-    }
-
+    if (portfolioRef.current) observer.observe(portfolioRef.current);
     return () => observer.disconnect();
   }, []);
 
   // Portfolio Typing Effect
   useEffect(() => {
     if (!startPortfolioTyping) return;
-
     const portfolioText = t.portfolio?.sectionSubtitle || 'Explore projects crafted with intention and attention to every detail.';
     let currentIndex = 0;
-    const typingSpeed = 25;
-
     const interval = setInterval(() => {
       if (currentIndex <= portfolioText.length) {
         setTypedPortfolioDesc(portfolioText.slice(0, currentIndex));
@@ -164,41 +226,135 @@ export default function Projects({ t }) {
       } else {
         clearInterval(interval);
       }
-    }, typingSpeed);
-
+    }, 25);
     return () => clearInterval(interval);
   }, [startPortfolioTyping, t.portfolio?.sectionSubtitle]);
 
   const projects = [
     {
-      title: 'An AI IDE Core',
-      descriptionPrefix: "Google Antigravity's Editor view offers tab autocompletion, natural language code commands, and a configurable, and context-aware configurable agent.",
-      type: 'IDE Engine',
-      tech: ['TypeScript', 'Monaco', 'WebAssembly'],
-      fileName: 'page.tsx',
-      functionName: 'Editor',
+      title: t.projects.obounERP.title,
+      descriptionPrefix: t.projects.obounERP.description,
+      type: t.projects.obounERP.type,
+      githubUrl: "https://github.com/thnakon/ERP_PMS",
+      tech: [
+        { name: 'Laravel 11', icon: 'laravel' },
+        { name: 'Vue.js 3', icon: 'vue' },
+        { name: 'MySQL', icon: 'mysql' },
+        { name: 'Tailwind', icon: 'tailwind' }
+      ],
+      fileName: 'SaleController.php',
+      codeLines: [
+        '<span class="text-purple-400">public function</span> <span class="text-yellow-400">store</span>(SaleRequest <span class="text-blue-300">$request</span>)',
+        '{',
+        '    <span class="text-blue-300">$sale</span> = <span class="text-emerald-400">Sale</span>::create(<span class="text-blue-300">$request</span>->validated());',
+        '    ',
+        '    <span class="text-purple-400">foreach</span> (<span class="text-blue-300">$request</span>->items <span class="text-purple-400">as</span> <span class="text-blue-300">$item</span>) {',
+        '        <span class="text-blue-300">$sale</span>->items()->create([',
+        '            <span class="text-emerald-300">\'product_id\'</span> => <span class="text-blue-300">$item</span>[\'id\'],',
+        '            <span class="text-emerald-300">\'quantity\'</span>   => <span class="text-blue-300">$item</span>[\'qty\'],',
+        '            <span class="text-emerald-300">\'price\'</span>      => <span class="text-blue-300">$item</span>[\'price\'],',
+        '        ]);',
+        '        ',
+        '        <span class="text-blue-300">$item</span>->decrementInventory();',
+        '    }',
+        '    ',
+        '    <span class="text-purple-400">return</span> response()->json(<span class="text-blue-300">$sale</span>->load(<span class="text-emerald-300">\'items\'</span>));',
+        '}'
+      ],
+      secondaryFileName: 'InventoryDetail.vue',
+      secondaryCodeLines: [
+        '<span class="text-blue-300">&lt;template&gt;</span>',
+        '  <span class="text-white/40">&lt;div class="p-6"&gt;</span>',
+        '    <span class="text-white/40">&lt;h3&gt;Stock Status&lt;/h3&gt;</span>',
+        '    <span class="text-white/40">&lt;Chart :data="stockLevels" /&gt;</span>',
+        '    <span class="text-white/40">&lt;p&gt;Warehouse: Zone A&lt;/p&gt;</span>',
+        '  <span class="text-white/40">&lt;/div&gt;</span>',
+        '<span class="text-blue-300">&lt;/template&gt;</span>',
+        '',
+        '<span class="text-purple-400">&lt;script setup&gt;</span>',
+        '<span class="text-purple-400">const</span> <span class="text-blue-300">props</span> = defineProps([\'id\']);',
+        '<span class="text-purple-400">const</span> <span class="text-blue-300">stockLevels</span> = ref([]);',
+        '<span class="text-purple-400">&lt;/script&gt;</span>'
+      ],
       accent: 'blue',
       comingSoon: false
     },
     {
-      title: 'Fintech Dashboard v2',
-      descriptionPrefix: "Real-time analytics and transaction management for modern startups. Built with high-performance visualization engines.",
-      type: 'Web Application',
-      tech: ['Next.js 15', 'Three.js', 'PostgreSQL'],
-      fileName: 'Dashboard.tsx',
-      functionName: 'Analytics',
+      title: t.projects.babybib.title,
+      descriptionPrefix: t.projects.babybib.description,
+      type: t.projects.babybib.type,
+      githubUrl: "https://github.com/thnakon/Babybib",
+      tech: [
+        { name: 'HTML5', icon: 'html' },
+        { name: 'CSS3', icon: 'css' },
+        { name: 'JavaScript', icon: 'js' },
+        { name: 'PHP', icon: 'php' }
+      ],
+      fileName: 'index.php',
+      codeLines: [
+        '<span class="text-blue-300">&lt;?php</span>',
+        '<span class="text-purple-400">require_once</span> <span class="text-emerald-300">\'config.php\'</span>;',
+        '',
+        '<span class="text-purple-400">function</span> <span class="text-yellow-400">getBibliography</span>(<span class="text-blue-300">$type</span>) {',
+        '    <span class="text-blue-300">$sql</span> = <span class="text-emerald-300">"SELECT * FROM citations WHERE type = ?"</span>;',
+        '    <span class="text-blue-300">$stmt</span> = <span class="text-blue-300">$pdo</span>->prepare(<span class="text-blue-300">$sql</span>);',
+        '    <span class="text-blue-300">$stmt</span>->execute([<span class="text-blue-300">$type</span>]);',
+        '    <span class="text-purple-400">return</span> <span class="text-blue-300">$stmt</span>->fetchAll();',
+        '}',
+        '<span class="text-blue-300">?&gt;</span>'
+      ],
+      secondaryFileName: 'scripts.js',
+      secondaryCodeLines: [
+        '<span class="text-purple-400">const</span> <span class="text-yellow-400">formatCitation</span> = (data) => {',
+        '  <span class="text-purple-400">return</span> <span class="text-emerald-300">`${data.author} (${data.year}).`</span>;',
+        '};',
+        '',
+        '<span class="text-blue-300">document</span>.querySelector(<span class="text-emerald-300">\'#citeBtn\'</span>).addEventListener(<span class="text-emerald-300">\'click\'</span>, () => {',
+        '  <span class="text-white/40">// Handle generation logic</span>',
+        '});'
+      ],
       accent: 'purple',
-      comingSoon: true
+      comingSoon: false
     },
     {
-      title: 'Global Supply Chain AI',
-      descriptionPrefix: "Optimizing logistics routes using deep learning models. Visualizing complex data paths with interactive 3D globes.",
-      type: 'Enterprise Tool',
-      tech: ['Python', 'React', 'PyTorch'],
-      fileName: 'SupplyChain.py',
-      functionName: 'Optimize',
+      title: t.projects.scribehub.title,
+      descriptionPrefix: t.projects.scribehub.description,
+      type: t.projects.scribehub.type,
+      githubUrl: "https://github.com/thnakon/scribehub",
+      tech: [
+        { name: 'React', icon: 'react' },
+        { name: 'Next.js', icon: 'nextjs' },
+        { name: 'Supabase', icon: 'supabase' },
+        { name: 'TypeScript', icon: 'ts' },
+        { name: 'Tailwind', icon: 'tailwind' }
+      ],
+      fileName: 'ResearchAgent.ts',
+      codeLines: [
+        '<span class="text-purple-400">export async function</span> <span class="text-yellow-400">analyzePaper</span>(content: string) {',
+        '  <span class="text-purple-400">const</span> <span class="text-blue-300">completion</span> = <span class="text-purple-400">await</span> openai.chat.completions.create({',
+        '    model: <span class="text-emerald-300">"gpt-4-turbo"</span>,',
+        '    messages: [',
+        '      { role: <span class="text-emerald-300">"system"</span>, content: <span class="text-emerald-300">"Expert researcher agent"</span> },',
+        '      { role: <span class="text-emerald-300">"user"</span>, content: content }',
+        '    ]',
+        '  });',
+        '  <span class="text-purple-400">return</span> <span class="text-blue-300">completion</span>.choices[0].message;',
+        '}'
+      ],
+      secondaryFileName: 'Workspace.tsx',
+      secondaryCodeLines: [
+        '<span class="text-purple-400">export const</span> <span class="text-yellow-400">ScribeWorkspace</span> = () => {',
+        '  <span class="text-purple-400">const</span> { nodes, edges } = useResearchGraph();',
+        '  <span class="text-purple-400">return</span> (',
+        '    <span class="text-blue-300">&lt;KnowledgeGraph</span> ',
+        '      <span class="text-blue-300">nodes</span>={<span class="text-blue-300">nodes</span>} ',
+        '      <span class="text-blue-300">edges</span>={<span class="text-blue-300">edges</span>} ',
+        '    <span class="text-blue-300">/&gt;</span>',
+        '  );',
+        '};'
+      ],
       accent: 'emerald',
-      comingSoon: true
+      comingSoon: false
     },
   ];
 
@@ -206,30 +362,20 @@ export default function Projects({ t }) {
     <section id="projects" className="pt-4 pb-24 bg-[var(--bg-primary)] overflow-hidden">
       <div className="max-w-6xl mx-auto px-6">
         
-        {/* Our Work Section Header (Moved from Overview) */}
+        {/* Our Work Section Header */}
         <div ref={portfolioRef} className="mb-24">
           <div className="text-center mb-8">
-            <span 
-              className={`inline-block text-[10px] tracking-[0.3em] font-bold text-[var(--text-muted)] uppercase mb-6 transition-all duration-1000 ${
-                portfolioVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-              }`}
-            >
+            <span className={`inline-block text-[10px] tracking-[0.3em] font-bold text-[var(--text-muted)] uppercase mb-6 transition-all duration-1000 ${portfolioVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
               PORTFOLIO
             </span>
-            
-            <h2 
-              className={`text-3xl md:text-5xl font-heading tracking-tight mb-8 transition-all duration-1000 delay-300 ${
-                portfolioVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-              }`}
-            >
+            <h2 className={`text-3xl md:text-5xl font-heading tracking-tight mb-8 transition-all duration-1000 delay-300 ${portfolioVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
               <span className="text-[var(--text-primary)]">{t.portfolio?.sectionTitlePrefix || 'Our'} </span>
               <em className="overview-title-accent">{t.portfolio?.sectionTitleAccent || 'Work'}</em>
             </h2>
-            
             <div className="min-h-[3em]">
               <p className="text-base md:text-lg text-[var(--text-secondary)] max-w-2xl mx-auto leading-relaxed">
                 {typedPortfolioDesc}
-                {startPortfolioTyping && typedPortfolioDesc.length < (t.portfolio?.sectionSubtitle || 'Explore projects crafted with intention and attention to every detail.').length && (
+                {startPortfolioTyping && typedPortfolioDesc.length < (t.portfolio?.sectionSubtitle || '').length && (
                   <span className="inline-block w-[2px] h-[1.1em] bg-[var(--text-primary)] ml-1 animate-blink align-middle" />
                 )}
               </p>
@@ -239,65 +385,7 @@ export default function Projects({ t }) {
 
         <div className="flex flex-col gap-32">
           {projects.map((project, index) => (
-            <div 
-              key={index} 
-              className={`flex flex-col lg:flex-row items-center gap-12 lg:gap-20 ${
-                index % 2 !== 0 ? 'lg:flex-row-reverse' : ''
-              }`}
-            >
-              {/* Text Content */}
-              <div className="flex-1 w-full lg:max-w-[400px]">
-                <div className="flex items-center gap-3 mb-6">
-                  <div className={`px-2.5 py-1 rounded-md bg-${project.accent}-500/10 border border-${project.accent}-500/20 text-${project.accent}-500 text-[10px] font-mono uppercase tracking-widest`}>
-                    {project.type}
-                  </div>
-                  {project.comingSoon && (
-                    <div className="px-2.5 py-1 rounded-md bg-yellow-500/10 border border-yellow-500/20 text-yellow-600 text-[10px] font-mono uppercase tracking-widest animate-pulse">
-                        Coming Soon
-                    </div>
-                  )}
-                </div>
-                
-                <h2 className="text-3xl md:text-5xl font-heading text-[var(--text-primary)] mb-6 leading-tight">
-                  {project.title}
-                </h2>
-                
-                <p className="text-base md:text-lg text-[var(--text-secondary)] mb-10 leading-relaxed font-body">
-                  {project.descriptionPrefix}
-                </p>
-                
-                {/* Tech Stack Pills */}
-                <div className="flex flex-wrap gap-2 mb-10">
-                   {project.tech.map((tech, i) => (
-                     <span key={i} className="px-3 py-1 transparent-pill border border-[var(--border-color)] text-[var(--text-muted)] text-[11px] font-medium rounded-full hover:border-[var(--text-primary)] hover:text-[var(--text-primary)] transition-all cursor-default">
-                        {tech}
-                     </span>
-                   ))}
-                </div>
-
-                {!project.comingSoon && (
-                   <div className="flex flex-wrap gap-5 items-center">
-                      <a href="#" className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-[var(--text-primary)] text-[var(--bg-primary)] text-sm font-medium hover:scale-105 transition-all shadow-xl">
-                         {Icons.external}
-                         {t.projects.viewProject}
-                      </a>
-                      <a href="#" className="inline-flex items-center gap-2 text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
-                         {Icons.github}
-                         {t.projects.viewCode}
-                      </a>
-                   </div>
-                )}
-              </div>
-
-              {/* IDE Mockup Visual */}
-              <div className="flex-1 w-full max-w-[700px] perspective-1000">
-                <div className={`transform transition-all duration-1000 group-hover:rotate-0 group-hover:translate-y-0 ${
-                  index % 2 === 0 ? 'rotate-[-2deg]' : 'rotate-[2deg]'
-                }`}>
-                  <IDEMockup project={project} />
-                </div>
-              </div>
-            </div>
+            <ProjectItem key={index} project={project} index={index} t={t} />
           ))}
         </div>
       </div>
