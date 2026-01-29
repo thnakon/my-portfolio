@@ -447,6 +447,232 @@ h1, h2, h3, h4, h5, h6 {
   display: inline-block;
 }
 
+/* ===================================
+   BENTO GRID CARDS
+=================================== */
+
+.bento-card {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  padding: 24px;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.bento-card:hover {
+  border-color: var(--text-muted);
+  transform: translateY(-2px);
+}
+
+.bento-card-lg {
+  padding: 32px;
+}
+
+.bento-card-tech {
+  background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+}
+
+.bento-card-remote {
+  background: var(--bg-secondary);
+  position: relative;
+  overflow: hidden;
+  min-height: 200px;
+}
+
+.bento-card-cta {
+  background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+}
+
+.bento-card-performance {
+  background: var(--bg-secondary);
+}
+
+.bento-card-current {
+  background: linear-gradient(90deg, var(--bg-secondary) 0%, var(--bg-tertiary) 50%, var(--bg-secondary) 100%);
+  padding: 40px 24px;
+}
+
+.bento-tag {
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.bento-tech-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  font-size: 13px;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  color: var(--text-primary);
+  white-space: nowrap;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="dark"] .bento-tech-tag {
+  background-color: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(8px);
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.bento-tech-tag:hover {
+  transform: translateY(-2px);
+  background-color: var(--bg-tertiary);
+  border-color: var(--text-muted);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] .bento-tech-tag:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.bento-flag-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  font-size: 11px;
+  background-color: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  color: var(--text-secondary);
+}
+
+/* Dark theme specific adjustments */
+[data-theme="dark"] .bento-card {
+  background-color: rgba(20, 20, 20, 0.8);
+}
+
+[data-theme="dark"] .bento-card-tech {
+  background: linear-gradient(135deg, rgba(20, 20, 20, 0.9) 0%, rgba(30, 30, 30, 0.9) 100%);
+}
+
+[data-theme="dark"] .bento-card-cta {
+  background: linear-gradient(180deg, rgba(20, 20, 20, 0.9) 0%, rgba(25, 25, 25, 0.9) 100%);
+}
+
+[data-theme="dark"] .bento-card-current {
+  background: linear-gradient(90deg, rgba(15, 15, 15, 0.9) 0%, rgba(25, 25, 25, 0.9) 50%, rgba(15, 15, 15, 0.9) 100%);
+}
+
+/* Collaboration Card */
+.bento-card-collaboration {
+  padding: 40px 32px;
+  background: var(--bg-secondary);
+}
+
+[data-theme="dark"] .bento-card-collaboration {
+  background: linear-gradient(180deg, rgba(15, 15, 20, 0.95) 0%, rgba(20, 20, 25, 0.95) 100%);
+}
+
+/* Radial gradient utility */
+.bg-gradient-radial {
+  background: radial-gradient(circle, var(--tw-gradient-stops));
+}
+
+/* Orbit Animations */
+@keyframes orbit-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes orbit-reverse {
+  from { transform: rotate(360deg); }
+  to { transform: rotate(0deg); }
+}
+
+@keyframes orbit-dot {
+  0% { transform: translateX(-50%) rotate(0deg) translateY(-60px); }
+  100% { transform: translateX(-50%) rotate(360deg) translateY(-60px); }
+}
+
+@keyframes orbit-dot-reverse {
+  0% { transform: rotate(0deg) translateX(80px); }
+  100% { transform: rotate(-360deg) translateX(80px); }
+}
+
+.animate-orbit-slow {
+  animation: orbit-slow 20s linear infinite;
+}
+
+.animate-orbit-reverse {
+  animation: orbit-reverse 15s linear infinite;
+}
+
+.animate-orbit-dot {
+  animation: orbit-slow 8s linear infinite;
+}
+
+.animate-orbit-dot-reverse {
+  animation: orbit-reverse 12s linear infinite;
+}
+
+/* Marquee Animations for Tech Tags */
+@keyframes marquee-left {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes marquee-right {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+
+.animate-marquee-left {
+  animation: marquee-left 20s linear infinite;
+}
+
+.animate-marquee-right {
+  animation: marquee-right 20s linear infinite;
+}
+
+/* Pause animation on hover */
+.bento-card-tech:hover .animate-marquee-left,
+.bento-card-tech:hover .animate-marquee-right {
+  animation-play-state: paused;
+}
+
+@keyframes scan-shimmer {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+
+.animate-scan-shimmer {
+  animation: scan-shimmer 2.5s ease-in-out infinite;
+}
+
+@keyframes circuit-flow {
+  0% { stroke-dashoffset: 300; opacity: 0; }
+  20% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { stroke-dashoffset: 0; opacity: 0; }
+}
+
+@keyframes circuit-flow-reverse {
+  0% { stroke-dashoffset: -300; opacity: 0; }
+  20% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { stroke-dashoffset: 0; opacity: 0; }
+}
+
+.animate-circuit-flow {
+  animation: circuit-flow 4s linear infinite;
+}
+
+.animate-circuit-flow-reverse {
+  animation: circuit-flow-reverse 4s linear infinite;
+}
+
 /* Skill Card */
 .skill-card {
   padding: 32px;

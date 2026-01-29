@@ -60,6 +60,37 @@ const translations = {
             description: "A brief overview of who I am, what I do, and the value I bring to every project.",
         },
 
+        // Bento Grid
+        bento: {
+            collaboration: {
+                tag: "COLLABORATION",
+                title: "Turning ideas into elegant web solutions",
+            },
+            techStack: {
+                title: "Building with powerful",
+                titleAccent: "frameworks",
+            },
+            remote: {
+                tag: "REMOTE",
+                location: "THAILAND",
+                title: "Seamless collaboration across all time zones.",
+            },
+            cta: {
+                title: "Ready to start your next",
+                titleAccent: "digital journey?",
+                subtitle: "Let's build something extraordinary.",
+                email: "thnakon.d@gmail.com",
+            },
+            performance: {
+                title: "Engineered for Speed.",
+                subtitle: "High-performance web architecture.",
+            },
+            currentWork: {
+                tag: "THE INSIDE SCOOP",
+                title: "Currently building a SaaS Application",
+            },
+        },
+
         // About Section
         about: {
             title: "About Me",
@@ -221,6 +252,37 @@ const translations = {
             title: "ทำความรู้จัก",
             titleAccent: "ผมสักหน่อย",
             description: "ภาพรวมสั้นๆ เกี่ยวกับตัวผม สิ่งที่ผมทำ และคุณค่าที่ผมมอบให้กับทุกโปรเจกต์",
+        },
+
+        // Bento Grid
+        bento: {
+            collaboration: {
+                tag: "การทำงานร่วมกัน",
+                title: "เปลี่ยนไอเดียให้กลายเป็นเว็บที่สวยงาม",
+            },
+            techStack: {
+                title: "สร้างสรรค์ด้วย",
+                titleAccent: "เครื่องมือที่ทรงพลัง",
+            },
+            remote: {
+                tag: "รีโมท",
+                location: "ประเทศไทย",
+                title: "ทำงานร่วมกันได้อย่างราบรื่นไร้พรมแดน",
+            },
+            cta: {
+                title: "พร้อมเริ่ม",
+                titleAccent: "การผจญภัยดิจิทัลหรือยัง?",
+                subtitle: "มาสร้างสิ่งที่พิเศษกว่าใครไปพร้อมกัน",
+                email: "thnakon.d@gmail.com",
+            },
+            performance: {
+                title: "วิศวกรรมเพื่อความเร็ว",
+                subtitle: "สถาปัตยกรรมเว็บประสิทธิภาพสูง",
+            },
+            currentWork: {
+                tag: "กำลังทำอยู่",
+                title: "กำลังสร้าง SaaS Application อยู่ครับ",
+            },
         },
 
         // About Section
