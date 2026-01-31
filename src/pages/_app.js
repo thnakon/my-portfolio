@@ -16,6 +16,25 @@ export default function App({ Component, pageProps }) {
     setLang(savedLang);
     document.documentElement.setAttribute('data-theme', savedTheme);
     setMounted(true);
+
+    // Scroll Restoration Logic
+    const savedScrollPos = sessionStorage.getItem('scrollPos');
+    if (savedScrollPos) {
+      // Small delay to ensure content is rendered before scrolling
+      setTimeout(() => {
+        window.scrollTo({
+          top: parseInt(savedScrollPos),
+          behavior: 'instant'
+        });
+      }, 100);
+    }
+
+    const handleScroll = () => {
+      sessionStorage.setItem('scrollPos', window.scrollY.toString());
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   // Prevent flash of unstyled content

@@ -129,7 +129,21 @@ export default function Hero({ t, onGetInTouch }) {
             transitionDelay: '100ms'
           }}
         >
-          {t.hero.description}
+          {t.hero.description.split('Thanakon').map((part, index, array) => (
+            <span key={index}>
+              {part}
+              {index < array.length - 1 && (
+                <span className="inline-flex items-center gap-2 align-middle mx-1">
+                  <span className="text-primary">Thanakon</span>
+                  <img 
+                    src="/images/profile-bento.jpg" 
+                    alt="Thanakon" 
+                    className="w-10 h-10 md:w-12 md:h-12 rounded-full object-cover border-2 border-[var(--border-color)] shadow-sm hover:scale-110 transition-transform duration-300"
+                  />
+                </span>
+              )}
+            </span>
+          ))}
         </p>
         
         {/* CTA Buttons */}

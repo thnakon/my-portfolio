@@ -47,7 +47,7 @@ const translations = {
             },
             headline: "Building innovative and",
             headlineAccent: "clean digital products",
-            description: "I'm Thanakon, a proactive full-stack developer dedicated to building modern web applications.",
+            description: "I'm Thanakon, building high-performance digital products.",
             cta: "Get in Touch",
             scrollDown: "Scroll Down",
         },
@@ -93,21 +93,27 @@ const translations = {
 
         // About Section
         about: {
+            tag: "KNOW ABOUT ME",
             title: "About Me",
-            subtitle: "Get to know me better",
-            bio: "Hello, I'm Thanakon Dungkumwattanasiri. A Full Stack Web Developer based in Chiang Mai, specializing in Laravel, Next.js, and modern web technologies. I don't just write code; I build systems that solve real-world problems. With a strong background in developing scalable web applications, I focus on delivering clean, efficient, and high-performance solutions. I am passionate about bridging the gap between complex backend logic and seamless frontend experiences. Currently open for opportunities to help businesses grow through technology.",
+            subtitle: "Behind the code and complexity",
+            highlight: "Crafting scalable architecture with a focus on user-centric experiences.",
+            bio: "Hello, I'm Thanakon Dungkumwattanasiri, a Full Stack Web Developer based in Chiang Mai. I architect scalable systems using Laravel and Next.js to solve complex, real-world problems.\n\nI specialize in AI Integration and AI Agent orchestration. By professionally commanding advanced AI engines, I automate complex workflows and build intelligent digital experiences that go beyond traditional development.\n\nI empower businesses to grow and scale through cutting-edge technology and seamless user experiences.",
             age: "Age",
             location: "Location",
             email: "Email",
             experience: "Experience",
+            availableFor: "Available For",
+            availableStatus: "Professional Projects",
+            hireMe: "Hire Me",
+            workExperience: "Work Experience",
             chiangMai: "Chiang Mai, Thailand",
             years: "years old",
         },
 
         // Skills Section
         skills: {
-            title: "Skills & Expertise",
-            subtitle: "Technologies I work with",
+            title: "My Skills",
+            subtitle: "The Secret Sauce",
             frontend: "Frontend",
             backend: "Backend",
             database: "Database",
@@ -143,7 +149,8 @@ const translations = {
                 title: "ScribeHub",
                 description: "ScribeHub is a premium, all-in-one platform designed for modern researchers, academics, and students. It seamlessly integrates reference management, collaborative project tools, and advanced AI intelligence to streamline the entire research lifecycle—from discovery to manuscript.",
                 type: "Research Ecosystem"
-            }
+            },
+            seeMoreWork: "See more work"
         },
 
         // Contact Section
@@ -263,7 +270,7 @@ const translations = {
             },
             headline: "สร้างสรรค์ผลิตภัณฑ์ดิจิทัล",
             headlineAccent: "ที่ทันสมัยและเรียบง่าย",
-            description: "ผมธนากร Full Stack Web Developer ที่มุ่งมั่นพัฒนาเว็บแอปพลิเคชันที่ทันสมัยและมีประสิทธิภาพ",
+            description: "ผมธนากร ผู้สร้างสรรค์ผลิตภัณฑ์ดิจิทัลประสิทธิภาพสูง",
             cta: "ติดต่อผม",
             scrollDown: "เลื่อนลง",
         },
@@ -309,21 +316,27 @@ const translations = {
 
         // About Section
         about: {
+            tag: "KNOW ABOUT ME",
             title: "เกี่ยวกับผม",
-            subtitle: "ทำความรู้จักผมให้มากขึ้น",
-            bio: "สวัสดีครับ ผมธนากร ดวงคำวัฒนสิริ Full Stack Web Developer ที่อยู่เชียงใหม่ เชี่ยวชาญด้าน Laravel, Next.js และเทคโนโลยีเว็บสมัยใหม่ ผมไม่ได้แค่เขียนโค้ด แต่ผมสร้างระบบที่แก้ปัญหาได้จริง ด้วยประสบการณ์ในการพัฒนาเว็บแอปพลิเคชันที่รองรับการขยายตัว (Scalable) ผมให้ความสำคัญกับการเขียนโค้ดที่สะอาด มีประสิทธิภาพ และทำงานได้รวดเร็ว ผมหลงใหลในการเชื่อมโยงระบบหลังบ้านที่ซับซ้อน ให้กลายเป็นการใช้งานหน้าบ้านที่ลื่นไหลและตอบโจทย์ผู้ใช้ พร้อมเปิดรับโอกาสในการใช้เทคโนโลยีเพื่อช่วยให้ธุรกิจเติบโต",
+            subtitle: "เบื้องหลังความทุ่มเทและการแก้ปัญหา",
+            highlight: "สร้างสรรค์โครงสร้างระบบที่ขยายตัวได้ โดยมุ่งเน้นประสบการณ์ของผู้ใช้เป็นสำคัญ",
+            bio: "สวัสดีครับ ผมธนากร ดวงคำวัฒนสิริ Full Stack Web Developer ที่เชียงใหม่ ผมออกแบบระบบที่เน้นความเชื่อถือได้และการขยายตัว (Scalability) ผ่านเทคโนโลยีอย่าง Laravel และ Next.js เพื่อแก้ปัญหาจริงในโลกธุรกิจ\n\nผมเชี่ยวชาญด้าน AI Integration และการสั่งการ AI Agents ระดับมืออาชีพ เพื่อเพิ่มประสิทธิภาพการพัฒนาระบบ และสร้างฟีเจอร์อัจฉริยะที่ช่วยยกระดับประสบการณ์ผู้ใช้งานให้ก้าวล้ำไปอีกขั้น\n\nผมพร้อมช่วยให้คุณเติบโตอย่างมั่นคงด้วยเทคโนโลยีที่ทันสมัยที่สุดครับ",
             age: "อายุ",
             location: "ที่อยู่",
             email: "อีเมล",
             experience: "ประสบการณ์",
+            availableFor: "พร้อมสำหรับ",
+            availableStatus: "โปรเจกต์ระดับมืออาชีพ",
+            hireMe: "จ้างงานผม",
+            workExperience: "ประสบการณ์ทำงาน",
             chiangMai: "เชียงใหม่, ประเทศไทย",
             years: "ปี",
         },
 
         // Skills Section
         skills: {
-            title: "ทักษะและความเชี่ยวชาญ",
-            subtitle: "เทคโนโลยีที่ผมใช้งาน",
+            title: "ทักษะของผม",
+            subtitle: "The Secret Sauce",
             frontend: "Frontend",
             backend: "Backend",
             database: "ฐานข้อมูล",
@@ -360,6 +373,7 @@ const translations = {
                 type: "แพลตฟอร์มวิจัย"
             },
             projectDesc: "รายละเอียดโปรเจคจะเพิ่มเร็วๆ นี้",
+            seeMoreWork: "ดูผลงานเพิ่มเติม"
         },
 
         // Contact Section

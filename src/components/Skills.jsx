@@ -1,73 +1,180 @@
-// SVG Icons for Skills section
-const Icons = {
-  frontend: (
-    <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-    </svg>
-  ),
-  backend: (
-    <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" />
-    </svg>
-  ),
-  database: (
-    <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" />
-    </svg>
-  ),
-  tools: (
-    <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-    </svg>
-  ),
-};
+import { useState, useEffect, useRef } from 'react';
 
 export default function Skills({ t }) {
-  const skillCategories = [
-    {
-      icon: Icons.frontend,
-      title: t.skills.frontend,
-      skills: ['HTML', 'CSS', 'JavaScript', 'React', 'Next.js', 'Tailwind CSS', 'Vue.js'],
-    },
-    {
-      icon: Icons.backend,
-      title: t.skills.backend,
-      skills: ['PHP', 'Laravel', 'Node.js', 'Express.js', 'REST API', 'GraphQL'],
-    },
-    {
-      icon: Icons.database,
-      title: t.skills.database,
-      skills: ['MySQL', 'PostgreSQL', 'MongoDB', 'Redis', 'Firebase'],
-    },
-    {
-      icon: Icons.tools,
-      title: t.skills.tools,
-      skills: ['Git', 'Docker', 'VS Code', 'Figma', 'Linux', 'Vercel', 'AWS'],
-    },
+  const [isVisible, setIsVisible] = useState(false);
+  const [typedSkillsDesc, setTypedSkillsDesc] = useState('');
+  const [startSkillsTyping, setStartSkillsTyping] = useState(false);
+  const sectionRef = useRef(null);
+
+  const allSkills = [
+    { name: 'React', icon: 'react' },
+    { name: 'Next.js', icon: 'nextjs' },
+    { name: 'TypeScript', icon: 'ts' },
+    { name: 'Tailwind CSS', icon: 'tailwind' },
+    { name: 'Laravel', icon: 'laravel' },
+    { name: 'Vue.js', icon: 'vue' },
+    { name: 'PHP', icon: 'php' },
+    { name: 'JavaScript', icon: 'js' },
+    { name: 'HTML5', icon: 'html' },
+    { name: 'CSS3', icon: 'css' },
+    { name: 'Node.js', icon: 'nodejs' },
+    { name: 'Express', icon: 'express' },
+    { name: 'Python', icon: 'py' },
+    { name: 'MySQL', icon: 'mysql' },
+    { name: 'PostgreSQL', icon: 'postgres' },
+    { name: 'MongoDB', icon: 'mongodb' },
+    { name: 'Redis', icon: 'redis' },
+    { name: 'Supabase', icon: 'supabase' },
+    { name: 'Firebase', icon: 'firebase' },
+    { name: 'Docker', icon: 'docker' },
+    { name: 'Git', icon: 'git' },
+    { name: 'GitHub', icon: 'github' },
+    { name: 'Figma', icon: 'figma' },
+    { name: 'Linux', icon: 'linux' },
+    { name: 'Vercel', icon: 'vercel' },
+    { name: 'Postman', icon: 'postman' },
+    { name: 'AWS', icon: 'aws' },
+    { name: 'Cloudflare', icon: 'cloudflare' },
   ];
 
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        // Toggle visibility based on intersection to allow "scatter" and "assemble"
+        setIsVisible(entry.isIntersecting);
+        if (entry.isIntersecting) {
+          setTimeout(() => setStartSkillsTyping(true), 800);
+        } else {
+          setStartSkillsTyping(false);
+          setTypedSkillsDesc('');
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!startSkillsTyping) return;
+    const skillsText = t.skills.subtitle || 'The Secret Sauce';
+    let currentIndex = 0;
+    const interval = setInterval(() => {
+      if (currentIndex <= skillsText.length) {
+        setTypedSkillsDesc(skillsText.slice(0, currentIndex));
+        currentIndex++;
+      } else {
+        clearInterval(interval);
+      }
+    }, 25);
+    return () => clearInterval(interval);
+  }, [startSkillsTyping, t.skills.subtitle]);
+
+  // Helper to get scatter transform for the assemble/disperse effect
+  const getRandomScatter = (index) => {
+    if (isVisible) return 'translate(0, 0) rotate(0deg) scale(1)';
+    
+    // Create distinct scatter patterns based on index
+    const angles = [0, 45, 90, 135, 180, 225, 270, 315];
+    const angle = angles[index % angles.length] * (Math.PI / 180);
+    const distance = 40 + (index % 4) * 20; // Varying distances
+    
+    const x = Math.cos(angle) * distance;
+    const y = Math.sin(angle) * distance;
+    const rotation = (index % 2 === 0 ? 1 : -1) * (15 + (index % 10));
+    
+    return `translate(${x}px, ${y}px) rotate(${rotation}deg) scale(0.8)`;
+  };
+
   return (
-    <section id="skills" className="py-24">
-      <div className="max-w-6xl mx-auto px-6">
-        {/* Section Title */}
-        <div className="text-center mb-16">
-          <h2 className="font-heading text-4xl md:text-5xl mb-4">{t.skills.title}</h2>
-          <p className="text-secondary text-lg">{t.skills.subtitle}</p>
+    <section id="skills" className="relative py-24 bg-[var(--bg-primary)] overflow-hidden" ref={sectionRef}>
+      {/* Dynamic Background Elements */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        {/* Subtle Grid */}
+        <div 
+          className="absolute inset-x-0 top-0 h-full opacity-[0.03] dark:opacity-[0.05]"
+          style={{
+            backgroundImage: `radial-gradient(var(--text-primary) 1px, transparent 1px)`,
+            backgroundSize: '40px 40px',
+            maskImage: 'radial-gradient(circle at center, black, transparent 80%)'
+          }}
+        />
+        
+        {/* Abstract Tech Lines */}
+        <svg className="absolute inset-0 w-full h-full opacity-[0.1] dark:opacity-[0.15]">
+          <path 
+            d="M-100,100 L200,400 L500,300 L800,600 L1200,400" 
+            fill="none" 
+            stroke="var(--text-primary)" 
+            strokeWidth="1" 
+            className="transition-all duration-[3000ms] ease-out"
+            style={{ 
+              strokeDasharray: 2000, 
+              strokeDashoffset: isVisible ? 0 : 2000,
+              opacity: isVisible ? 1 : 0 
+            }}
+          />
+          <path 
+            d="M1300,100 L1000,300 L700,200 L400,500 L-100,300" 
+            fill="none" 
+            stroke="var(--text-primary)" 
+            strokeWidth="1"
+            className="transition-all duration-[3000ms] delay-500 ease-out"
+            style={{ 
+              strokeDasharray: 2000, 
+              strokeDashoffset: isVisible ? 0 : 2000,
+              opacity: isVisible ? 1 : 0
+            }}
+          />
+        </svg>
+
+        {/* Floating Glows */}
+        <div className={`absolute top-1/4 -right-20 w-96 h-96 bg-blue-500/10 rounded-full blur-[120px] transition-all duration-1000 ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-50'}`} />
+        <div className={`absolute bottom-1/4 -left-20 w-96 h-96 bg-purple-500/10 rounded-full blur-[120px] transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-50'}`} />
+      </div>
+
+      <div className="relative z-10 max-w-5xl mx-auto px-6">
+        
+        {/* Section Header */}
+        <div className="mb-20 text-center">
+            <span className={`inline-block text-[10px] tracking-[0.3em] font-bold text-[var(--text-muted)] uppercase mb-6 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+              EXPERTISE
+            </span>
+            <h2 className={`text-3xl md:text-5xl font-heading tracking-tight mb-8 transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+              <span className="text-[var(--text-primary)]">{t.skills.title.split(' ')[0]} </span>
+              <em className="overview-title-accent">{t.skills.title.split(' ').slice(1).join(' ')}</em>
+            </h2>
+            <div className="min-h-[2em]">
+              <p className="text-base md:text-lg text-[var(--text-secondary)] max-w-2xl mx-auto leading-relaxed">
+                {typedSkillsDesc}
+                {startSkillsTyping && typedSkillsDesc.length < (t.skills.subtitle || '').length && (
+                  <span className="inline-block w-[2px] h-[1.1em] bg-[var(--text-primary)] ml-1 animate-blink align-middle" />
+                )}
+              </p>
+            </div>
         </div>
         
-        {/* Skills Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {skillCategories.map((category, index) => (
-            <div key={index} className="skill-card">
-              <div className="text-primary mb-5">{category.icon}</div>
-              <h3 className="font-heading text-xl mb-4">{category.title}</h3>
-              <div className="flex flex-wrap gap-2">
-                {category.skills.map((skill, skillIndex) => (
-                  <span key={skillIndex} className="skill-tag">
-                    {skill}
-                  </span>
-                ))}
+        {/* Skills Wall */}
+        <div className="flex flex-wrap justify-center gap-3 md:gap-4 max-w-4xl mx-auto">
+          {allSkills.map((skill, index) => (
+            <div 
+              key={index}
+              className={`group relative p-3 md:p-4 rounded-xl bg-[var(--bg-secondary)] dark:bg-white/[0.02] backdrop-blur-sm border border-[var(--border-color)] transition-all duration-700 hover:border-[var(--text-primary)]/40 hover:-translate-y-2 hover:shadow-xl hover:shadow-[var(--text-primary)]/10 cursor-default ${isVisible ? 'opacity-100' : 'opacity-0'}`}
+              style={{ 
+                transitionDelay: isVisible ? `${(index % 8) * 50 + 800}ms` : '0ms',
+                transform: getRandomScatter(index)
+              }}
+            >
+              <img 
+                src={`https://skillicons.dev/icons?i=${skill.icon}`} 
+                alt={skill.name}
+                className="w-7 h-7 md:w-9 md:h-9 transition-all duration-500 group-hover:scale-110"
+              />
+              
+              {/* Tooltip */}
+              <div className="absolute -top-10 left-1/2 -translate-x-1/2 px-3 py-1 bg-[var(--text-primary)] text-[var(--bg-primary)] text-[10px] font-bold rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none whitespace-nowrap z-10 shadow-lg">
+                {skill.name}
               </div>
             </div>
           ))}

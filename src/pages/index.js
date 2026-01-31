@@ -3,7 +3,9 @@ import translations from '@/lib/translations';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import Overview from '@/components/Overview';
+import About from '@/components/About';
 import Projects from '@/components/Projects';
+import Skills from '@/components/Skills';
 import Contact from '@/components/Contact';
 import BookingModal from '@/components/BookingModal';
 import Footer from '@/components/Footer';
@@ -34,6 +36,12 @@ export default function Home({ theme, setTheme, lang, setLang }) {
 
       {/* Projects Section */}
       <Projects t={t} />
+
+      {/* Skills Section */}
+      <Skills t={t} />
+
+      {/* About Section */}
+      <About t={t} />
 
       {/* Contact Section */}
       <Contact t={t} />
