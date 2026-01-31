@@ -74,6 +74,32 @@ const ProjectItem = ({ project, index, t }) => {
   const [startTyping, setStartTyping] = useState(false);
   const itemRef = useRef(null);
 
+  // Color map to handle Tailwind dynamic classes (Tailwind needs static strings)
+  const colorMap = {
+    blue: {
+      bg: 'bg-blue-500',
+      text: 'text-blue-500',
+      icon: 'text-blue-400'
+    },
+    purple: {
+      bg: 'bg-purple-500',
+      text: 'text-purple-500',
+      icon: 'text-purple-400'
+    },
+    emerald: {
+      bg: 'bg-emerald-500',
+      text: 'text-emerald-500',
+      icon: 'text-emerald-400'
+    },
+    sky: {
+      bg: 'bg-sky-400',
+      text: 'text-sky-500',
+      icon: 'text-sky-400'
+    }
+  };
+
+  const colors = colorMap[project.accent] || colorMap.blue;
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -114,38 +140,53 @@ const ProjectItem = ({ project, index, t }) => {
       }`}
     >
       {/* Text Content */}
-      <div className="flex-1 w-full lg:max-w-[400px]">
-        <div className={`flex items-center gap-3 mb-6 transition-all duration-700 delay-300 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4'}`}>
-          <div className={`px-2.5 py-1 rounded-md bg-${project.accent}-500/10 border border-${project.accent}-500/20 text-${project.accent}-500 text-[10px] font-mono uppercase tracking-widest`}>
+      <div className="flex-1 w-full lg:max-w-[450px]">
+        {/* Decorative Line & Category */}
+        <div className={`flex items-center gap-4 mb-8 transition-all duration-700 delay-300 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4'}`}>
+          <div className={`w-12 h-[2px] rounded-full ${colors.bg}`} />
+          <div className={`text-[10px] font-mono uppercase tracking-[0.2em] font-bold ${colors.text}`}>
             {project.type}
           </div>
-          {project.comingSoon && (
-            <div className="px-2.5 py-1 rounded-md bg-yellow-500/10 border border-yellow-500/20 text-yellow-600 text-[10px] font-mono uppercase tracking-widest animate-pulse">
-                Coming Soon
-            </div>
-          )}
         </div>
         
-        <h2 className={`text-3xl md:text-5xl font-heading text-[var(--text-primary)] mb-6 leading-tight transition-all duration-700 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+        {/* Title */}
+        <h2 className={`text-3xl md:text-5xl font-heading text-[var(--text-primary)] mb-8 leading-tight transition-all duration-700 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
           {project.title}
         </h2>
         
-        <div className="min-h-[6em]">
-          <p className="text-base md:text-lg text-[var(--text-secondary)] mb-10 leading-relaxed font-body">
+        {/* Description */}
+        <div className="mb-10 min-h-[4em]">
+          <p className="text-base md:text-lg text-[var(--text-secondary)] leading-relaxed font-body">
             {typedDesc}
             {startTyping && typedDesc.length < project.descriptionPrefix.length && (
               <span className="inline-block w-[2px] h-[1.1em] bg-[var(--text-primary)] ml-1 animate-blink align-middle" />
             )}
           </p>
         </div>
-        
-        {/* Tech Stack Pills */}
-        <div className={`flex flex-wrap gap-3 mb-10 transition-all duration-700 delay-700 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
+
+        {/* Features List */}
+        <ul className={`space-y-3 mb-8 transition-all duration-700 delay-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+          {(project.features || []).slice(0, 4).map((feature, i) => (
+            <li key={i} className="flex items-start gap-4 group/feature" style={{ transitionDelay: `${900 + (i * 100)}ms` }}>
+              <div className="mt-1 flex-shrink-0">
+                <svg className={`w-3.5 h-3.5 ${colors.icon} group-hover/feature:scale-125 transition-transform duration-300`} fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2l2.4 7.2L22 12l-7.6 2.8L12 22l-2.4-7.2L2 12l7.6-2.8L12 2z" />
+                </svg>
+              </div>
+              <span className="text-sm md:text-[15px] text-[var(--text-primary)] leading-snug">
+                {feature}
+              </span>
+            </li>
+          ))}
+        </ul>
+
+        {/* Tech Stack Pills (RESTORING) */}
+        <div className={`flex flex-wrap gap-2.5 mb-10 transition-all duration-700 delay-900 ${isVisible ? 'opacity-100' : 'opacity-0 translate-y-4'}`}>
            {project.tech.map((tech, i) => (
              <div 
                key={i} 
-               className="flex items-center gap-2 px-3 py-1.5 transparent-pill border border-[var(--border-color)] text-[var(--text-muted)] text-[11px] font-medium rounded-full hover:border-[var(--text-primary)] hover:text-[var(--text-primary)] hover:scale-105 transition-all cursor-default group/pill"
-               style={{ transitionDelay: `${800 + (i * 100)}ms` }}
+               className="flex items-center gap-2 px-3 py-1.5 bg-[var(--bg-secondary)] border border-[var(--border-color)] text-[var(--text-primary)] text-[10px] md:text-[11px] font-medium rounded-full hover:border-[var(--text-primary)] hover:scale-105 transition-all cursor-default group/pill"
+               style={{ transitionDelay: `${1100 + (i * 100)}ms` }}
              >
                 <img 
                   src={`https://skillicons.dev/icons?i=${tech.icon}`} 
@@ -156,7 +197,7 @@ const ProjectItem = ({ project, index, t }) => {
              </div>
            ))}
         </div>
-
+        
         {!project.comingSoon && (
            <div className={`flex flex-wrap gap-5 items-center transition-all duration-700 delay-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
               <a href={project.viewUrl || "#"} className="btn-premium-cta hover:scale-105 !py-1.5 !px-2 !pl-6 !text-sm">
@@ -282,6 +323,7 @@ export default function Projects({ t }) {
         '<span class="text-purple-400">&lt;/script&gt;</span>'
       ],
       accent: 'blue',
+      features: t.projects.obounERP.features,
       comingSoon: false
     },
     {
@@ -319,6 +361,7 @@ export default function Projects({ t }) {
         '});'
       ],
       accent: 'purple',
+      features: t.projects.babybib.features,
       comingSoon: false
     },
     {
@@ -358,7 +401,8 @@ export default function Projects({ t }) {
         '  );',
         '};'
       ],
-      accent: 'emerald',
+      accent: 'sky',
+      features: t.projects.scribehub.features,
       comingSoon: false
     },
   ];

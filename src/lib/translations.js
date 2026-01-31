@@ -138,17 +138,41 @@ const translations = {
             obounERP: {
                 title: "Oboun ERP",
                 description: "A comprehensive Enterprise Resource Planning system designed for SMEs. Streamlining operations across sales, inventory, and finance through high-performance automation.",
-                type: "Enterprise ERP"
+                type: "Enterprise ERP",
+                features: [
+                    "Developed with Laravel 11 and Vue.js 3, ensuring long-term maintainability.",
+                    "Implemented complex logic for real-time multi-warehouse inventory sync.",
+                    "Designed automated financial reporting with precise tax and ledger management.",
+                    "Optimized MySQL database with advanced indexing for high-scale performance.",
+                    "Integrated Role-Based Access Control (RBAC) for secure organizational data.",
+                    "Engineered with a focus on high-performance automation and sleek UI."
+                ]
             },
             babybib: {
                 title: "Babybib",
-                description: "Babybib is an advanced, automated bibliography generation system designed to streamline the academic citation process. Built around the APA 7th Edition standard, it empowers students, researchers, and faculty to create accurate references for various sources including books, journals, websites, and more, ensuring compliance with international academic standards.",
-                type: "Academic Tool"
+                description: "Babybib is an advanced, automated bibliography generation system designed to streamline the academic citation process. Built around the APA 7th Edition standard, it empowers students and researchers to create accurate references.",
+                type: "Academic Tool",
+                features: [
+                    "Architected a robust engine for automated APA 7th Edition citation standards.",
+                    "Supports diverse sources including journals, books, and digital media.",
+                    "Built with a responsive UI that prioritizes user productivity and rapid work.",
+                    "Features real-time bibliography previews and instant validation logic.",
+                    "Developed custom export modules for Word, PDF, and BibTeX formats.",
+                    "Designed for seamless integration into the academic research lifecycle."
+                ]
             },
             scribehub: {
                 title: "ScribeHub",
-                description: "ScribeHub is a premium, all-in-one platform designed for modern researchers, academics, and students. It seamlessly integrates reference management, collaborative project tools, and advanced AI intelligence to streamline the entire research lifecycle—from discovery to manuscript.",
-                type: "Research Ecosystem"
+                description: "ScribeHub is a premium, all-in-one platform for modern researchers. It seamlessly integrates reference management, collaborative tools, and advanced AI intelligence to streamline the entire research lifecycle.",
+                type: "Research Ecosystem",
+                features: [
+                    "Leveraged OpenAI's GPT-4 to create an intelligent research paper assistant.",
+                    "Engineered a collaborative environment with real-time updates for research teams.",
+                    "Integrated a reference management system with automatic metadata extraction.",
+                    "Developed an interactive knowledge graph for visual data discovery.",
+                    "Focused on a premium user experience for seamless research interactions.",
+                    "Built with Next.js and Supabase for real-time scalability and secure data."
+                ]
             },
             seeMoreWork: "See more work"
         },
@@ -360,17 +384,41 @@ const translations = {
             obounERP: {
                 title: "Oboun ERP",
                 description: "ระบบวางแผนทรัพยากรองค์กรที่ครอบคลุมสำหรับ SME ปรับปรุงการดำเนินงานในด้านการขาย สินค้าคงคลัง และการเงิน ผ่านการทำงานอัตโนมัติที่มีประสิทธิภาพสูง",
-                type: "ระบบ ERP องค์กร"
+                type: "ระดับเอ็นเตอร์ไพรส์",
+                features: [
+                    "พัฒนาด้วย Laravel 11 และ Vue.js 3 เพื่อความเสถียรและการบำรุงรักษาระยะยาว",
+                    "พัฒนาระบบซิงค์สต็อกสินค้าข้ามคลังแบบเรียลไทม์ด้วยตรรกะที่ซับซ้อน",
+                    "ออกแบบรายงานทางการเงินอัตโนมัติพร้อมระบบจัดการภาษีและบัญชีแยกประเภท",
+                    "เพิ่มประสิทธิภาพฐานข้อมูล MySQL ด้วยการทำ Indexing ขั้นสูงเพื่อรองรับงานขนาดใหญ่",
+                    "รวมระบบควบคุมการเข้าถึงตามบทบาท (RBAC) เพื่อความปลอดภัยของข้อมูลองค์กร",
+                    "ออกแบบโดยเน้นความเป็นอัตโนมัติประสิทธิภาพสูงและส่วนติดต่อผู้ใช้ที่ทันสมัย"
+                ]
             },
             babybib: {
                 title: "Babybib",
-                description: "Babybib คือระบบสร้างบรรณานุกรมอัตโนมัติขั้นสูงที่ออกแบบมาเพื่อลดความซับซ้อนในกระบวนการอ้างอิงทางวิชาการ ตามมาตรฐาน APA ฉบับพิมพ์ครั้งที่ 7 ช่วยให้นักเรียน นักวิจัย และคณาจารย์สามารถสร้างการอ้างอิงที่ถูกต้องสําหรับแหล่งข้อมูลต่างๆ เช่น หนังสือ วารสาร เว็บไซต์ และอื่นๆ",
-                type: "เครื่องมือวิชาการ"
+                description: "ระบบสร้างบรรณานุกรมอัตโนมัติขั้นสูงที่ช่วยลดความยุ่งยากในงานวิชาการ พัฒนาขึ้นตามมาตรฐาน APA ฉบับที่ 7 เพื่อช่วยให้นักศึกษาและนักวิจัยสร้างการอ้างอิงที่ถูกต้องแม่นยำ",
+                type: "เครื่องมือวิชาการ",
+                features: [
+                    "วางโครงสร้างระบบที่มีความยืดหยุ่นสูงสำหรับมาตรฐานการอ้างอิง APA ฉบับที่ 7",
+                    "รองรับแหล่งข้อมูลที่หลากหลายทั้งวารสาร หนังสือ และสื่อดิจิทัลต่างๆ",
+                    "สร้างด้วย UI ที่รองรับการแสดงผลทุกหน้าจอและเน้นความรวดเร็วในการทำงาน",
+                    "มีระบบแสดงตัวอย่างบรรณานุกรมแบบเรียลไทม์และการตรวจสอบความถูกต้องทันที",
+                    "พัฒนาโมดูลส่งออกข้อมูลที่กำหนดเองได้ทั้งรูปแบบ Word, PDF และ BibTeX",
+                    "ออกแบบมาเพื่อผสานเข้ากับวงจรการวิจัยทางวิชาการได้อย่างไร้รอยต่อ"
+                ]
             },
             scribehub: {
                 title: "ScribeHub",
-                description: "ScribeHub คือแพลตฟอร์มระดับพรีเมียมแบบครบวงจรที่ออกแบบมาสำหรับนักวิจัย นักวิชาการ และนักศึกษา ยุคใหม่ โดยผสานรวมการจัดการการอ้างอิง เครื่องมือโครงการที่ทำงานร่วมกัน และปัญญาประดิษฐ์ (AI) ขั้นสูง เพื่อปรับปรุงวงจรการวิจัยทั้งหมด ตั้งแต่การค้นพบไปจนถึงขั้นตอนการทำต้นฉบับ",
-                type: "แพลตฟอร์มวิจัย"
+                description: "แพลตฟอร์มวิจัยระดับพรีเมียมแบบครบวงจรที่รวบรวมการจัดการอ้างอิง เครื่องมือทำงานร่วมกัน และ AI ขั้นสูง เพื่อช่วยให้นักวิจัยทำงานได้อย่างเป็นระบบ",
+                type: "ระบบนิเวศงานวิจัย",
+                features: [
+                    "ใช้ GPT-4 ของ OpenAI เพื่อสร้างผู้ช่วยวิจัยอัจฉริยะสำหรับการวิเคราะห์บทความ",
+                    "วางระบบพื้นที่ทำงานร่วมกันพร้อมการอัปเดตแบบเรียลไทม์สำหรับทีมวิจัย",
+                    "รวมระบบจัดการการอ้างอิงพร้อมการดึงข้อมูลเมตาจากบทความโดยอัตโนมัติ",
+                    "พัฒนากราฟความรู้เชิงโต้ตอบเพื่อการค้นพบข้อมูลและความเกี่ยวโยงในเชิงภาพ",
+                    "เน้นประสบการณ์ผู้ใช้ระดับพรีเมียมเพื่อการตอบโต้ในงานวิจัยที่ราบรื่น",
+                    "พัฒนาด้วย Next.js และ Supabase เพื่อการขยายตัวและระบบข้อมูลที่รัดกุม"
+                ]
             },
             projectDesc: "รายละเอียดโปรเจคจะเพิ่มเร็วๆ นี้",
             seeMoreWork: "ดูผลงานเพิ่มเติม"
