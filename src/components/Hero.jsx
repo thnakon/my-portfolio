@@ -69,7 +69,7 @@ export default function Hero({ t, onGetInTouch }) {
   const typedAccent = typedText.slice(headlineLength + 1); // +1 for the space
 
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center text-center px-6 pt-16 pb-20 relative">
+    <section id="home" className="min-h-screen flex items-center justify-center text-center px-6 pt-16 pb-20 relative snap-start snap-always">
       {/* Fireflies Background */}
       <div className="firefly-container">
         {fireflies.map((fly) => (

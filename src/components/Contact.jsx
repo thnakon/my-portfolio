@@ -65,7 +65,7 @@ export default function Contact({ t }) {
   };
 
   return (
-    <section id="contact" className="py-24">
+    <section id="contact" className="py-24 min-h-screen flex flex-col justify-center snap-start snap-always">
       <div className="max-w-6xl mx-auto px-6">
         {/* Section Title */}
         <div className="text-center mb-16">

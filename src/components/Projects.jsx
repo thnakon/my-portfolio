@@ -82,7 +82,7 @@ const ProjectItem = ({ project, index, t }) => {
           setTimeout(() => setStartTyping(true), 600);
         }
       },
-      { threshold: 0.2 }
+      { threshold: 0.5 }
     );
 
     if (itemRef.current) observer.observe(itemRef.current);
@@ -109,7 +109,7 @@ const ProjectItem = ({ project, index, t }) => {
   return (
     <div 
       ref={itemRef}
-      className={`flex flex-col lg:flex-row items-center gap-12 lg:gap-20 transition-all duration-1000 ${
+      className={`min-h-screen flex flex-col lg:flex-row items-center gap-12 lg:gap-20 transition-all duration-1000 snap-start snap-always py-20 ${
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
       }`}
     >
@@ -364,11 +364,11 @@ export default function Projects({ t }) {
   ];
 
   return (
-    <section id="projects" className="pt-4 pb-24 bg-[var(--bg-primary)] overflow-hidden">
+    <section id="projects" className="bg-[var(--bg-primary)]">
       <div className="max-w-6xl mx-auto px-6">
         
         {/* Our Work Section Header */}
-        <div ref={portfolioRef} className="mb-24">
+        <div ref={portfolioRef} className="min-h-screen flex flex-col justify-center snap-start snap-always">
           <div className="text-center mb-8">
             <span className={`inline-block text-[10px] tracking-[0.3em] font-bold text-[var(--text-muted)] uppercase mb-6 transition-all duration-1000 ${portfolioVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
               PORTFOLIO
@@ -388,7 +388,7 @@ export default function Projects({ t }) {
           </div>
         </div>
 
-        <div className="flex flex-col gap-32">
+        <div className="flex flex-col">
           {projects.map((project, index) => (
             <ProjectItem key={index} project={project} index={index} t={t} />
           ))}
@@ -396,7 +396,7 @@ export default function Projects({ t }) {
 
         {/* See More Work Button */}
         <div 
-          className={`mt-16 flex justify-center transition-all duration-1000 delay-500 ${
+          className={`min-h-[50vh] flex flex-col items-center justify-center transition-all duration-1000 delay-500 snap-start snap-always ${
             portfolioVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >

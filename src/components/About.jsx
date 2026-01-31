@@ -37,7 +37,7 @@ export default function About({ t }) {
   }, [startAboutTyping, t.about.subtitle]);
 
   return (
-    <section id="about" className="relative py-32 bg-[var(--bg-primary)] overflow-hidden" ref={sectionRef}>
+    <section id="about" className="relative py-32 bg-[var(--bg-primary)] overflow-hidden min-h-screen flex flex-col justify-center snap-start snap-always" ref={sectionRef}>
       <div className="max-w-6xl mx-auto px-6 relative z-10">
         
         {/* Section Header */}
