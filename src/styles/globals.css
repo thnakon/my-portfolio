@@ -5,7 +5,7 @@
 =================================== */
 
 /* Google Fonts - MUST be at the very top */
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Instrument+Sans:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Instrument+Sans:wght@300;400;500;600;700&display=swap');
 
 /* Tailwind */
 @import "tailwindcss";
@@ -83,7 +83,6 @@
 /* Base Styles */
 html {
   scroll-behavior: smooth;
-  scroll-snap-type: y mandatory;
 }
 
 body {
@@ -165,6 +164,15 @@ h1, h2, h3, h4, h5, h6 {
     opacity: 1;
     filter: blur(0);
   }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 8s linear infinite;
 }
 
 /* Navigation Styles */

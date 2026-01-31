@@ -88,7 +88,7 @@ export default function Skills({ t }) {
   };
 
   return (
-    <section id="skills" className="relative py-24 bg-[var(--bg-primary)] overflow-hidden min-h-screen flex flex-col justify-center snap-start snap-always" ref={sectionRef}>
+    <section id="skills" className="relative py-24 bg-[var(--bg-primary)] overflow-hidden" ref={sectionRef}>
       {/* Dynamic Background Elements */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         {/* Subtle Grid */}

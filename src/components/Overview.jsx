@@ -134,7 +134,7 @@ export default function Overview({ t }) {
   return (
     <section 
       ref={sectionRef}
-      className="relative pt-24 pb-8 px-6 bg-[var(--bg-primary)] overflow-hidden min-h-screen flex flex-col justify-center snap-start snap-always"
+      className="relative pt-24 pb-8 px-6 bg-[var(--bg-primary)] overflow-hidden"
     >
       {/* Fireflies Background */}
       <div className="firefly-container opacity-20">

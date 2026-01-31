@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import MySite from './MySite';
 
 export default function About({ t }) {
   const [isVisible, setIsVisible] = useState(false);
@@ -37,7 +38,7 @@ export default function About({ t }) {
   }, [startAboutTyping, t.about.subtitle]);
 
   return (
-    <section id="about" className="relative py-32 bg-[var(--bg-primary)] overflow-hidden min-h-screen flex flex-col justify-center snap-start snap-always" ref={sectionRef}>
+    <section id="about" className="relative py-32 bg-[var(--bg-primary)] overflow-hidden" ref={sectionRef}>
       <div className="max-w-6xl mx-auto px-6 relative z-10">
         
         {/* Section Header */}
@@ -62,11 +63,11 @@ export default function About({ t }) {
         <div className="grid lg:grid-cols-12 gap-12 lg:gap-20 items-stretch">
           {/* Left Side: Bio & Details */}
           <div className={`lg:col-span-7 order-2 lg:order-1 flex flex-col transition-all duration-1000 delay-700 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-12'}`}>
-            <h3 className="text-xl md:text-2xl font-body font-bold text-[var(--text-primary)] mb-6 leading-relaxed">
+            <h3 className="text-lg md:text-xl font-body font-semibold text-[var(--text-primary)] mb-6 leading-relaxed">
               {t.about.highlight}
             </h3>
             
-            <p className="text-[var(--text-secondary)] text-base md:text-lg leading-relaxed mb-10 font-medium whitespace-pre-wrap">
+            <p className="text-[var(--text-secondary)] text-sm md:text-base leading-relaxed mb-10 font-normal whitespace-pre-wrap opacity-90">
               {t.about.bio}
             </p>
 
@@ -152,6 +153,9 @@ export default function About({ t }) {
              </div>
           </div>
         </div>
+
+        {/* My Site Section Integration */}
+        <MySite t={t} />
       </div>
     </section>
   );

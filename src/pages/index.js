@@ -44,7 +44,7 @@ export default function Home({ theme, setTheme, lang, setLang }) {
       <About t={t} />
 
       {/* Contact Section */}
-      <Contact t={t} />
+      <Contact t={t} onGetInTouch={() => setBookingOpen(true)} />
 
       {/* Footer */}
       <Footer t={t} />

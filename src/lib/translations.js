@@ -110,6 +110,28 @@ const translations = {
             years: "years old",
         },
 
+        // My Site Section
+        mySite: {
+            tag: "INSIDE THE BOX",
+            title: "My Site",
+            subtitle: "Curated with high-performance technologies for an optimal experience.",
+            description: "Built with the latest cutting-edge technologies for maximum performance, SEO, and seamless user experience.",
+            toolsTag: "WORKING TOOLS",
+            toolsTitle: "Handpicked for Professional Craftsmanship",
+            guestbookTag: "GUESTBOOK",
+            guestbookTitle: "Leave a message for posterity",
+            musicTag: "PLAYING NOW",
+            musicTitle: "FaSHioN",
+            musicArtist: "CORTIS",
+            tech: [
+                { name: "Next.js 15", icon: "nextjs" },
+                { name: "React 19", icon: "react" },
+                { name: "Tailwind v4", icon: "tailwindcss" },
+                { name: "Laravel 11", icon: "laravel" },
+                { name: "IDEs (AI Agents)", icon: "vscode" }
+            ]
+        },
+
         // Skills Section
         skills: {
             title: "My Skills",
@@ -179,8 +201,9 @@ const translations = {
 
         // Contact Section
         contact: {
-            title: "Get In Touch",
-            subtitle: "Have a project in mind? Let's work together",
+            tag: "FINAL CHAPTER",
+            title: "Beyond the Code",
+            subtitle: "Thank you for exploring my journey. I'm ready to bring this same passion and precision to our next collaboration. Let's build something extraordinary together.",
             nameLabel: "Your Name",
             namePlaceholder: "John Doe",
             emailLabel: "Your Email",
@@ -424,10 +447,33 @@ const translations = {
             seeMoreWork: "ดูผลงานเพิ่มเติม"
         },
 
+        // My Site Section
+        mySite: {
+            tag: "เทคโนโลยีที่คุณเห็นอยู่",
+            title: "เว็บไซต์นี้",
+            subtitle: "คัดสรรเทคโนโลยีสมรรถนะสูง เพื่อประสบการณ์ใช้งานที่ยอดเยี่ยมที่สุด",
+            description: "สร้างด้วยเทคโนโลยีล่าสุดที่เป็นระดับ Cutting-edge เพื่อประสิทธิภาพสูงสุด, SEO ที่ยอดเยี่ยม และประสบการณ์การใช้งานที่ราบรื่น",
+            toolsTag: "เครื่องมือที่ใช้",
+            toolsTitle: "คัดสรรเพื่อความประณีตระดับมืออาชีพ",
+            guestbookTag: "สมุดเยี่ยม",
+            guestbookTitle: "เขียนข้อความทิ้งไว้เป็นที่ระลึกได้นะครับ",
+            musicTag: "กำลังเล่น",
+            musicTitle: "FaSHioN",
+            musicArtist: "CORTIS",
+            tech: [
+                { name: "Next.js 15", icon: "nextjs" },
+                { name: "React 19", icon: "react" },
+                { name: "Tailwind v4", icon: "tailwindcss" },
+                { name: "Laravel 11", icon: "laravel" },
+                { name: "IDEs (AI Agents)", icon: "vscode" }
+            ]
+        },
+
         // Contact Section
         contact: {
-            title: "ติดต่อผม",
-            subtitle: "มีโปรเจคในใจ? มาทำงานร่วมกันครับ",
+            tag: "บทส่งท้าย",
+            title: "เบื้องหลังความสำเร็จ",
+            subtitle: "ขอบคุณที่ร่วมเดินทางมาถึงจุดนี้ ผมพร้อมแล้วที่จะนำความมุ่งมั่นและความแม่นยำเหล่านี้ ไปสร้างสรรค์ผลงานที่ยอดเยี่ยมร่วมกับคุณ มาสร้างสิ่งที่พิเศษด้วยกันนะครับ",
             nameLabel: "ชื่อของคุณ",
             namePlaceholder: "สมชาย ใจดี",
             emailLabel: "อีเมลของคุณ",

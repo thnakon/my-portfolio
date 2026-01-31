@@ -135,7 +135,7 @@ const ProjectItem = ({ project, index, t }) => {
   return (
     <div 
       ref={itemRef}
-      className={`min-h-screen flex flex-col lg:flex-row items-center gap-12 lg:gap-20 transition-all duration-1000 snap-start snap-always py-20 ${
+      className={`py-16 flex flex-col lg:flex-row items-center gap-12 lg:gap-20 transition-all duration-1000 ${
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
       }`}
     >
@@ -412,7 +412,7 @@ export default function Projects({ t }) {
       <div className="max-w-6xl mx-auto px-6">
         
         {/* Our Work Section Header */}
-        <div ref={portfolioRef} className="min-h-screen flex flex-col justify-center snap-start snap-always">
+        <div ref={portfolioRef} className="pt-32 pb-12 flex flex-col justify-center">
           <div className="text-center mb-8">
             <span className={`inline-block text-[10px] tracking-[0.3em] font-bold text-[var(--text-muted)] uppercase mb-6 transition-all duration-1000 ${portfolioVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
               PORTFOLIO
@@ -440,7 +440,7 @@ export default function Projects({ t }) {
 
         {/* See More Work Button */}
         <div 
-          className={`min-h-[50vh] flex flex-col items-center justify-center transition-all duration-1000 delay-500 snap-start snap-always ${
+          className={`py-20 flex flex-col items-center justify-center transition-all duration-1000 delay-500 ${
             portfolioVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
