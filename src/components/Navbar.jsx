@@ -54,6 +54,11 @@ const Icons = {
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
     </svg>
   ),
+  mail: (
+    <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+    </svg>
+  ),
 };
 
 export default function Navbar({ t, lang, setLang, theme, setTheme, onBookCall }) {
@@ -126,10 +131,14 @@ export default function Navbar({ t, lang, setLang, theme, setTheme, onBookCall }
       {/* 1. Header Layer (Logo & Command) */}
       <div className="fixed top-0 left-0 right-0 z-[1001] pointer-events-none">
         <div className="max-w-6xl mx-auto px-6 h-[80px] flex items-center justify-between">
-          <Link href="/" className="pointer-events-auto transition-transform active:scale-95">
+          <Link href="/" className="pointer-events-auto transition-transform active:scale-95 animate-reveal-fade-up" style={{ animationDelay: '0.1s' }}>
             <img src={theme === 'dark' ? '/logo-light.png' : '/logo-dark.png'} alt="Logo" className="h-9 w-auto" />
           </Link>
-          <button onClick={() => setIsExpanded(!isExpanded)} className="pointer-events-auto w-10 h-10 flex items-center justify-center text-[var(--text-primary)] hover:scale-110 transition-all active:scale-90">
+          <button 
+            onClick={() => setIsExpanded(!isExpanded)} 
+            className="pointer-events-auto w-10 h-10 flex items-center justify-center text-[var(--text-primary)] hover:scale-110 transition-all active:scale-90 animate-reveal-fade-up"
+            style={{ animationDelay: '0.2s' }}
+          >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 6v12a3 3 0 1 0 3-3H6a3 3 0 1 0 3 3V6a3 3 0 1 0-3 3h12a3 3 0 1 0-3-3z" />
             </svg>
@@ -153,8 +162,8 @@ export default function Navbar({ t, lang, setLang, theme, setTheme, onBookCall }
                  ? 'bg-black/60 border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.4)]' 
                  : 'bg-white/70 border border-black/5 shadow-[0_20px_50px_rgba(0,0,0,0.1)]'}
                ${isGreeting ? 'w-[140px] h-[36px] rounded-full' : ''}
-               ${!isGreeting && !isExpanded ? 'w-[420px] h-[44px] rounded-full px-4' : ''}
-               ${isExpanded ? 'w-[750px] h-[480px] rounded-[42px] p-6 pt-12' : ''}
+               ${!isGreeting && !isExpanded ? 'w-[90vw] md:w-[480px] h-[44px] rounded-full px-4' : ''}
+               ${isExpanded ? 'w-[95vw] min-h-[500px] md:w-[750px] md:h-[480px] rounded-[32px] md:rounded-[42px] p-6 pt-12' : ''}
              `}
            >
               {/* Greeting Layer */}
@@ -166,45 +175,63 @@ export default function Navbar({ t, lang, setLang, theme, setTheme, onBookCall }
 
               {/* Nav Items Level */}
               <div className={`w-full flex items-center h-[44px] shrink-0 transition-all duration-500 ${!isGreeting ? 'opacity-100' : 'opacity-0 pointer-events-none'} ${isExpanded ? 'mb-8' : ''}`}>
-                 <div className="w-full flex items-center justify-between">
-                   {navItems.map((item) => (
-                     <Link 
-                       key={item.id} 
-                       href={item.href}
+                 <div className="w-full flex items-center justify-between overflow-x-auto no-scrollbar md:overflow-visible">
+                   <div className="flex items-center gap-0.5 shrink-0">
+                     {navItems.map((item) => (
+                       <Link 
+                         key={item.id} 
+                         href={item.href}
+                         className={`
+                           px-3 md:px-4 py-1.5 rounded-full text-[12px] font-bold transition-all duration-300
+                           ${activeSection === item.id 
+                             ? (theme === 'dark' ? 'bg-white text-black' : 'bg-black text-white') 
+                             : (theme === 'dark' ? 'text-white/50 hover:text-white' : 'text-black/50 hover:text-black')}
+                         `}
+                       >
+                         {item.label}
+                       </Link>
+                     ))}
+                     
+                     {/* MORE TRIGGER */}
+                     <div 
+                       onMouseEnter={() => setIsExpanded(true)}
                        className={`
-                         px-4 py-1.5 rounded-full text-[12px] font-bold transition-all duration-300
-                         ${activeSection === item.id 
+                         px-3 md:px-4 py-1.5 rounded-full text-[12px] font-bold cursor-pointer transition-all duration-300 flex items-center gap-1
+                         ${isExpanded 
                            ? (theme === 'dark' ? 'bg-white text-black' : 'bg-black text-white') 
                            : (theme === 'dark' ? 'text-white/50 hover:text-white' : 'text-black/50 hover:text-black')}
                        `}
                      >
-                       {item.label}
-                     </Link>
-                   ))}
-                   
-                   {/* MORE TRIGGER */}
-                   <div 
-                     onMouseEnter={() => setIsExpanded(true)}
-                     className={`
-                       px-4 py-1.5 rounded-full text-[12px] font-bold cursor-pointer transition-all duration-300 flex items-center gap-1
-                       ${isExpanded 
-                         ? (theme === 'dark' ? 'bg-white text-black' : 'bg-black text-white') 
-                         : (theme === 'dark' ? 'text-white/50 hover:text-white' : 'text-black/50 hover:text-black')}
-                     `}
-                   >
-                     <span>{t.nav.more}</span>
-                     <div className={`transition-transform duration-500 ${isExpanded ? 'rotate-180' : ''}`}>
-                       {Icons.chevronDown}
+                       <span>{t.nav.more}</span>
+                       <div className={`transition-transform duration-500 ${isExpanded ? 'rotate-180' : ''}`}>
+                         {Icons.chevronDown}
+                       </div>
                      </div>
                    </div>
+
+                   {/* GET IN TOUCH CTA */}
+                   <button 
+                     onClick={onBookCall}
+                     className={`
+                       flex shrink-0 items-center gap-1.5 px-1.5 py-1 rounded-full transition-all duration-300 group/cta border ml-2 md:ml-0
+                       ${theme === 'dark' ? 'border-white/20 text-white hover:bg-white/10' : 'border-black/10 text-black hover:bg-black/5'}
+                     `}
+                   >
+                     <span className="text-[10px] font-bold whitespace-nowrap">{t.hero.cta}</span>
+                     <div className={`w-5 h-5 rounded-full flex items-center justify-center transition-all duration-300 ${theme === 'dark' ? 'bg-white text-black' : 'bg-black text-white'}`}>
+                        <svg className="w-3 h-3 transition-transform duration-300 group-hover/cta:rotate-[-45deg]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M14 5l7 7-7 7M3 12h18" />
+                        </svg>
+                     </div>
+                   </button>
                  </div>
               </div>
 
               {/* Dashboard Dropdown Content (Expanded) */}
-              <div className={`w-full flex-1 transition-all duration-500 delay-100 grid grid-cols-12 gap-6 ${isExpanded ? 'opacity-100 scale-100' : 'opacity-0 scale-95 pointer-events-none'}`}>
+              <div className={`w-full flex-1 transition-all duration-500 delay-100 flex flex-col md:grid md:grid-cols-12 gap-6 overflow-y-auto md:overflow-hidden ${isExpanded ? 'opacity-100 scale-100' : 'opacity-0 scale-95 pointer-events-none'}`}>
                  {/* Left side: Grid of Visual Cards */}
-                 <div className="col-span-8 grid grid-cols-2 gap-4">
-                    <Link href="/guestbook" className={`relative group rounded-3xl overflow-hidden border transition-all ${theme === 'dark' ? 'bg-white/5 border-white/10 hover:border-white/20' : 'bg-black/5 border-black/5 hover:border-black/10'}`}>
+                 <div className="w-full md:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-4 shrink-0">
+                    <Link href="/guestbook" className={`relative group h-[180px] md:h-auto rounded-3xl overflow-hidden border transition-all ${theme === 'dark' ? 'bg-white/5 border-white/10 hover:border-white/20' : 'bg-black/5 border-black/5 hover:border-black/10'}`}>
                        <img src="/nav/guestbook_bg.png" className="absolute inset-0 w-full h-full object-cover grayscale opacity-30 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-1000" />
                        <div className={`absolute inset-0 bg-gradient-to-t via-transparent to-transparent ${theme === 'dark' ? 'from-black/80' : 'from-white/80'}`} />
                        <div className="absolute bottom-6 left-6">
@@ -215,7 +242,7 @@ export default function Navbar({ t, lang, setLang, theme, setTheme, onBookCall }
                          <p className={`text-[10px] leading-tight max-w-[140px] ${theme === 'dark' ? 'text-white/60' : 'text-black/60'}`}>{t.nav.moreDropdown.guestbook.desc}</p>
                        </div>
                     </Link>
-                    <Link href="/bucket-list" className={`relative group rounded-3xl overflow-hidden border transition-all ${theme === 'dark' ? 'bg-white/5 border-white/10 hover:border-white/20' : 'bg-black/5 border-black/5 hover:border-black/10'}`}>
+                    <Link href="/bucket-list" className={`relative group h-[180px] md:h-auto rounded-3xl overflow-hidden border transition-all ${theme === 'dark' ? 'bg-white/5 border-white/10 hover:border-white/20' : 'bg-black/5 border-black/5 hover:border-black/10'}`}>
                        <img src="/nav/bucketlist_bg.png" className="absolute inset-0 w-full h-full object-cover grayscale opacity-30 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-1000" />
                        <div className={`absolute inset-0 bg-gradient-to-t via-transparent to-transparent ${theme === 'dark' ? 'from-black/80' : 'from-white/80'}`} />
                        <div className="absolute bottom-6 left-6">
@@ -229,7 +256,7 @@ export default function Navbar({ t, lang, setLang, theme, setTheme, onBookCall }
                  </div>
 
                  {/* Right side: Quick Tool Links */}
-                 <div className="col-span-4 flex flex-col gap-2">
+                 <div className="w-full md:col-span-4 flex flex-col gap-2 shrink-0 pb-4 md:pb-0">
                     {[
                       { id: 'links', icon: Icons.link, ...t.nav.moreDropdown.links },
                       { id: 'uses', icon: Icons.monitor, ...t.nav.moreDropdown.uses },
@@ -258,7 +285,7 @@ export default function Navbar({ t, lang, setLang, theme, setTheme, onBookCall }
            {/* RIGHT AUXILIARY PILL (Status Icon) */}
            <div className={`
              pointer-events-auto
-             flex items-center justify-center
+             hidden md:flex items-center justify-center
              backdrop-blur-2xl transition-all duration-700 ease-[cubic-bezier(0.2,0.8,0.2,1)]
              ${theme === 'dark' ? 'bg-black/60 border border-white/10' : 'bg-white/70 border border-black/5'}
              ${!isGreeting && !isExpanded ? 'w-[38px] h-[38px] rounded-full opacity-100 shadow-lg' : 'w-0 h-0 opacity-0 overflow-hidden'}
