@@ -264,9 +264,15 @@ const translations = {
 
         // Footer
         footer: {
-            copyright: "© 2026 Thanakon Dungkumwattanasiri. All rights reserved.",
+            tagline: "Building scalable systems and intelligent digital experiences with passion and precision.",
+            copyright: "© 2026 Thanakon D. All rights reserved.",
             madeWith: "Made with",
             inThailand: "in Thailand",
+            linksTitle: "Links",
+            legalTitle: "Legal",
+            socialTitle: "Social",
+            privacy: "Privacy Policy",
+            terms: "Terms of Service"
         },
     },
 
@@ -534,9 +540,15 @@ const translations = {
 
         // Footer
         footer: {
-            copyright: "© 2026 ธนากร ดวงคำวัฒนสิริ สงวนลิขสิทธิ์",
+            tagline: "สร้างสรรค์ระบบที่รองรับการเติบโต และประสบการณ์ดิจิทัลที่ชาญฉลาด ด้วยความมุ่งมั่นและความประณีต",
+            copyright: "© 2026 Thanakon D. สงวนลิขสิทธิ์ทั้งหมด",
             madeWith: "สร้างด้วย",
-            inThailand: "ในประเทศไทย",
+            inThailand: "ในเชียงใหม่, ประเทศไทย",
+            linksTitle: "ลิงก์หลัก",
+            legalTitle: "กฎหมาย",
+            socialTitle: "โซเชียล",
+            privacy: "นโยบายความเป็นส่วนตัว",
+            terms: "ข้อกำหนดการใช้งาน"
         },
     },
 };
