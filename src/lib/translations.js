@@ -62,24 +62,43 @@ const translations = {
 
         // Bento Grid
         bento: {
+            intro: {
+                title: "Digital Craftsmanship",
+                desc: "Blending aesthetic precision with robust engineering to build the next generation of digital products.",
+                expLabel: "Experience",
+                projectLabel: "Projects",
+                cta: "Get in Touch"
+            },
+            ai: {
+                tag: "Neural Suite",
+                title: "Modular Intelligence",
+                desc: "Commanding and orchestrating advanced AI for rapid engineering.",
+                units: {
+                    logic: "Logic & Reasoning",
+                    vision: "Multi-modal Vision",
+                    creative: "Creative Context",
+                    system: "System Control"
+                }
+            },
             collaboration: {
                 tag: "COLLABORATION",
                 title: "Turning ideas into elegant web solutions",
             },
             techStack: {
-                title: "Building with powerful",
+                title: "Specialized Tech Stack",
                 titleAccent: "frameworks",
             },
             remote: {
-                tag: "REMOTE",
+                tag: "BASED IN",
                 location: "THAILAND",
-                title: "Seamless collaboration across all time zones.",
+                title: "Flexible with all time zones",
             },
             cta: {
-                title: "Ready to start your next",
+                title: "Let's work together",
                 titleAccent: "digital journey?",
-                subtitle: "Let's build something extraordinary.",
+                subtitle: "Open for new projects.",
                 email: "thnakon.d@gmail.com",
+                copyLabel: "Click to copy contact"
             },
             performance: {
                 title: "Engineered for Speed.",
@@ -361,24 +380,43 @@ const translations = {
 
         // Bento Grid
         bento: {
+            intro: {
+                title: "ความประณีตทางดิจิทัล",
+                desc: "ผสมผสานความแม่นยำด้านสุนทรียวิทยากับวิศวกรรมที่แข็งแกร่ง เพื่อสร้างผลิตภัณฑ์ดิจิทัลยุคใหม่",
+                expLabel: "ประสบการณ์",
+                projectLabel: "โปรเจกต์",
+                cta: "พูดคุยกับผม"
+            },
+            ai: {
+                tag: "ห้องประมวลผล",
+                title: "ปัญญาประดิษฐ์อัจฉริยะ",
+                desc: "การสั่งการและจัดการ AI ขั้นสูง เพื่อการพัฒนาซอฟต์แวร์ที่รวดเร็ว",
+                units: {
+                    logic: "ตรรกะและเหตุผล",
+                    vision: "การประมวลผลภาพ",
+                    creative: "ความคิดสร้างสรรค์",
+                    system: "การควบคุมระบบ"
+                }
+            },
             collaboration: {
                 tag: "การทำงานร่วมกัน",
                 title: "เปลี่ยนไอเดียให้กลายเป็นเว็บที่สวยงาม",
             },
             techStack: {
-                title: "สร้างสรรค์ด้วย",
+                title: "เทคโนโลยีที่เชี่ยวชาญ",
                 titleAccent: "เครื่องมือที่ทรงพลัง",
             },
             remote: {
-                tag: "รีโมท",
+                tag: "ที่อยู่ปัจจุบัน",
                 location: "ประเทศไทย",
-                title: "ทำงานร่วมกันได้อย่างราบรื่นไร้พรมแดน",
+                title: "พร้อมทำงานในทุกเขตเวลา",
             },
             cta: {
-                title: "พร้อมเริ่ม",
+                title: "มาทำงานร่วมกัน",
                 titleAccent: "การผจญภัยดิจิทัลหรือยัง?",
-                subtitle: "มาสร้างสิ่งที่พิเศษกว่าใครไปพร้อมกัน",
+                subtitle: "เปิดรับสำหรับโปรเจกต์ใหม่ๆ",
                 email: "thnakon.d@gmail.com",
+                copyLabel: "คลิกเพื่อคัดลอกรายชื่อติดต่อ"
             },
             performance: {
                 title: "วิศวกรรมเพื่อความเร็ว",

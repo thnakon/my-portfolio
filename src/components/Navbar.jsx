@@ -161,8 +161,8 @@ export default function Navbar({ t, lang, setLang, theme, setTheme, onBookCall }
                transition-all duration-700 ease-[cubic-bezier(0.2,0.8,0.2,1)]
                backdrop-blur-2xl
                ${theme === 'dark' 
-                 ? 'bg-black/60 border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.4)]' 
-                 : 'bg-white/70 border border-black/5 shadow-[0_20px_50px_rgba(0,0,0,0.1)]'}
+                 ? 'bg-black/40 border border-white/25 shadow-[0_20px_50px_rgba(0,0,0,0.5)]' 
+                 : 'bg-white/40 border border-black/10 shadow-[0_20px_50px_rgba(0,0,0,0.08)]'}
                ${isGreeting ? 'w-[140px] h-[36px] rounded-full' : ''}
                ${!isGreeting && !isExpanded ? 'w-[90vw] md:w-[480px] h-[44px] rounded-full px-4' : ''}
                ${isExpanded ? 'w-[95vw] min-h-[500px] md:w-[750px] md:h-[480px] rounded-[32px] md:rounded-[42px] p-6 pt-12' : ''}
@@ -184,7 +184,7 @@ export default function Navbar({ t, lang, setLang, theme, setTheme, onBookCall }
                          key={item.id} 
                          href={item.href}
                          className={`
-                           px-3 md:px-4 py-1.5 rounded-full text-[12px] font-bold transition-all duration-300
+                           px-3 md:px-4 py-1.5 rounded-full text-[12px] font-semibold transition-all duration-300
                            ${activeSection === item.id 
                              ? (theme === 'dark' ? 'bg-white text-black' : 'bg-black text-white') 
                              : (theme === 'dark' ? 'text-white/50 hover:text-white' : 'text-black/50 hover:text-black')}
@@ -198,7 +198,7 @@ export default function Navbar({ t, lang, setLang, theme, setTheme, onBookCall }
                      <div 
                        onMouseEnter={() => setIsExpanded(true)}
                        className={`
-                         px-3 md:px-4 py-1.5 rounded-full text-[12px] font-bold cursor-pointer transition-all duration-300 flex items-center gap-1
+                         px-3 md:px-4 py-1.5 rounded-full text-[12px] font-semibold cursor-pointer transition-all duration-300 flex items-center gap-1
                          ${isExpanded 
                            ? (theme === 'dark' ? 'bg-white text-black' : 'bg-black text-white') 
                            : (theme === 'dark' ? 'text-white/50 hover:text-white' : 'text-black/50 hover:text-black')}
@@ -219,7 +219,7 @@ export default function Navbar({ t, lang, setLang, theme, setTheme, onBookCall }
                        ${theme === 'dark' ? 'border-white/20 text-white hover:bg-white/10' : 'border-black/10 text-black hover:bg-black/5'}
                      `}
                    >
-                     <span className="text-[10px] font-bold whitespace-nowrap">{t.hero.cta}</span>
+                     <span className="text-[10px] font-semibold whitespace-nowrap">{t.hero.cta}</span>
                      <div className={`w-5 h-5 rounded-full flex items-center justify-center transition-all duration-300 ${theme === 'dark' ? 'bg-white text-black' : 'bg-black text-white'}`}>
                         <svg className="w-3 h-3 transition-transform duration-300 group-hover/cta:rotate-[-45deg]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M14 5l7 7-7 7M3 12h18" />
@@ -289,7 +289,7 @@ export default function Navbar({ t, lang, setLang, theme, setTheme, onBookCall }
              pointer-events-auto
              hidden md:flex items-center justify-center
              backdrop-blur-2xl transition-all duration-700 ease-[cubic-bezier(0.2,0.8,0.2,1)]
-             ${theme === 'dark' ? 'bg-black/60 border border-white/10' : 'bg-white/70 border border-black/5'}
+             ${theme === 'dark' ? 'bg-black/40 border border-white/25' : 'bg-white/40 border border-black/10'}
              ${!isGreeting && !isExpanded ? 'w-[38px] h-[38px] rounded-full opacity-100 shadow-lg' : 'w-0 h-0 opacity-0 overflow-hidden'}
            `}>
              <div className={`scale-100 animate-reveal-fade-up ${theme === 'dark' ? 'text-white' : 'text-black'}`}>

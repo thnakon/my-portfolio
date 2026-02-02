@@ -1334,3 +1334,36 @@ h1, h2, h3, h4, h5, h6 {
 .animate-reveal-from-island-right {
   animation: reveal-from-island-right 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
 }
+
+/* Marquee Animations */
+@keyframes marquee-left {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes marquee-right {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+
+.animate-marquee-left {
+  animation: marquee-left 20s linear infinite;
+}
+
+.animate-marquee-right {
+  animation: marquee-right 20s linear infinite;
+}
+
+.animate-marquee-left:hover, .animate-marquee-right:hover {
+  animation-play-state: paused;
+}
+@keyframes scan {
+  0% { transform: translateY(0); opacity: 0; }
+  20% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { transform: translateY(320px); opacity: 0; }
+}
+
+.animate-scan {
+  animation: scan 4s linear infinite;
+}

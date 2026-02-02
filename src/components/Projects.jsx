@@ -169,8 +169,8 @@ const ProjectItem = ({ project, index, t }) => {
           {(project.features || []).slice(0, 4).map((feature, i) => (
             <li key={i} className="flex items-start gap-4 group/feature" style={{ transitionDelay: `${900 + (i * 100)}ms` }}>
               <div className="mt-1 flex-shrink-0">
-                <svg className={`w-3.5 h-3.5 ${colors.icon} group-hover/feature:scale-125 transition-transform duration-300`} fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 2l2.4 7.2L22 12l-7.6 2.8L12 22l-2.4-7.2L2 12l7.6-2.8L12 2z" />
+                <svg className={`w-4 h-4 ${colors.icon} mt-0.5`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
                 </svg>
               </div>
               <span className="text-sm md:text-[15px] text-[var(--text-primary)] leading-snug">
@@ -445,8 +445,7 @@ export default function Projects({ t }) {
           }`}
         >
           <Link 
-            href="https://github.com/thnakon" 
-            target="_blank"
+            href="/work" 
             className="btn-premium-cta !border-none !bg-transparent !py-2 !pl-6 !pr-2 group scale-90 md:scale-100"
           >
             <span className="text-[10px] md:text-xs font-bold tracking-[0.2em] uppercase transition-all duration-500">

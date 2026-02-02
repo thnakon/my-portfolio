@@ -70,69 +70,8 @@ export default function Skills({ t }) {
     }, 25);
     return () => clearInterval(interval);
   }, [startSkillsTyping, t.skills.subtitle]);
-
-  // Helper to get scatter transform for the assemble/disperse effect
-  const getRandomScatter = (index) => {
-    if (isVisible) return 'translate(0, 0) rotate(0deg) scale(1)';
-    
-    // Create distinct scatter patterns based on index
-    const angles = [0, 45, 90, 135, 180, 225, 270, 315];
-    const angle = angles[index % angles.length] * (Math.PI / 180);
-    const distance = 40 + (index % 4) * 20; // Varying distances
-    
-    const x = Math.cos(angle) * distance;
-    const y = Math.sin(angle) * distance;
-    const rotation = (index % 2 === 0 ? 1 : -1) * (15 + (index % 10));
-    
-    return `translate(${x}px, ${y}px) rotate(${rotation}deg) scale(0.8)`;
-  };
-
   return (
-    <section id="skills" className="relative py-24 bg-[var(--bg-primary)] overflow-hidden" ref={sectionRef}>
-      {/* Dynamic Background Elements */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        {/* Subtle Grid */}
-        <div 
-          className="absolute inset-x-0 top-0 h-full opacity-[0.03] dark:opacity-[0.05]"
-          style={{
-            backgroundImage: `radial-gradient(var(--text-primary) 1px, transparent 1px)`,
-            backgroundSize: '40px 40px',
-            maskImage: 'radial-gradient(circle at center, black, transparent 80%)'
-          }}
-        />
-        
-        {/* Abstract Tech Lines */}
-        <svg className="absolute inset-0 w-full h-full opacity-[0.1] dark:opacity-[0.15]">
-          <path 
-            d="M-100,100 L200,400 L500,300 L800,600 L1200,400" 
-            fill="none" 
-            stroke="var(--text-primary)" 
-            strokeWidth="1" 
-            className="transition-all duration-[3000ms] ease-out"
-            style={{ 
-              strokeDasharray: 2000, 
-              strokeDashoffset: isVisible ? 0 : 2000,
-              opacity: isVisible ? 1 : 0 
-            }}
-          />
-          <path 
-            d="M1300,100 L1000,300 L700,200 L400,500 L-100,300" 
-            fill="none" 
-            stroke="var(--text-primary)" 
-            strokeWidth="1"
-            className="transition-all duration-[3000ms] delay-500 ease-out"
-            style={{ 
-              strokeDasharray: 2000, 
-              strokeDashoffset: isVisible ? 0 : 2000,
-              opacity: isVisible ? 1 : 0
-            }}
-          />
-        </svg>
-
-        {/* Floating Glows */}
-        <div className={`absolute top-1/4 -right-20 w-96 h-96 bg-blue-500/10 rounded-full blur-[120px] transition-all duration-1000 ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-50'}`} />
-        <div className={`absolute bottom-1/4 -left-20 w-96 h-96 bg-purple-500/10 rounded-full blur-[120px] transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-50'}`} />
-      </div>
+    <section id="skills" className="relative py-24 bg-white" ref={sectionRef}>
 
       <div className="relative z-10 max-w-5xl mx-auto px-6">
         
@@ -154,16 +93,17 @@ export default function Skills({ t }) {
               </p>
             </div>
         </div>
-        
+
         {/* Skills Wall */}
         <div className="flex flex-wrap justify-center gap-3 md:gap-4 max-w-4xl mx-auto">
           {allSkills.map((skill, index) => (
             <div 
               key={index}
-              className={`group relative p-3 md:p-4 rounded-xl bg-[var(--bg-secondary)] dark:bg-white/[0.02] backdrop-blur-sm border border-[var(--border-color)] transition-all duration-700 hover:border-[var(--text-primary)]/40 hover:-translate-y-2 hover:shadow-xl hover:shadow-[var(--text-primary)]/10 cursor-default ${isVisible ? 'opacity-100' : 'opacity-0'}`}
+              className={`group relative p-3 md:p-4 rounded-xl bg-[var(--bg-secondary)] border border-[var(--border-color)] transition-all duration-700 hover:border-[var(--text-primary)]/40 hover:-translate-y-2 hover:shadow-xl hover:shadow-[var(--text-primary)]/10 cursor-default ${
+                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+              }`}
               style={{ 
-                transitionDelay: isVisible ? `${(index % 8) * 50 + 800}ms` : '0ms',
-                transform: getRandomScatter(index)
+                transitionDelay: isVisible ? `${(index % 12) * 50 + 600}ms` : '0ms'
               }}
             >
               <img 

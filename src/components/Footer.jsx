@@ -39,7 +39,7 @@ export default function Footer({ t }) {
           <div className="md:col-span-5 flex flex-col items-start gap-6">
             <div className="flex items-center gap-3 group cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
                 <div className="w-10 h-10 rounded-full overflow-hidden border border-[var(--border-color)] group-hover:border-[var(--text-primary)] transition-colors duration-500">
-                    <img src="/images/profile-bento.jpg" alt="Profile" className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" />
+                    <img src="/images/profile-bento.jpg" alt="Profile" className="w-full h-full object-cover transition-all duration-500" />
                 </div>
                 <span className="font-heading text-xl font-bold tracking-tight text-[var(--text-primary)]">Thanakon D.</span>
             </div>
