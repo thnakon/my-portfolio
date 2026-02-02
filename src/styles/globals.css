@@ -5,7 +5,7 @@
 =================================== */
 
 /* Google Fonts - MUST be at the very top */
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Instrument+Sans:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&display=swap');
 
 /* Tailwind */
 @import "tailwindcss";
@@ -14,7 +14,7 @@
 @theme {
   /* Fonts */
   --font-heading: 'Playfair Display', Georgia, serif;
-  --font-body: 'Instrument Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: -apple-system, BlinkMacSystemFont, 'Inter', 'IBM Plex Sans Thai', sans-serif;
   
   /* Custom Colors - Light Theme */
   --color-bg-primary: #FFFFFF;
@@ -1299,4 +1299,38 @@ h1, h2, h3, h4, h5, h6 {
 @keyframes blink {
   from, to { opacity: 1; }
   50% { opacity: 0; }
+}
+
+@keyframes reveal-from-island-left {
+  0% {
+    opacity: 0;
+    transform: translateX(50px) scale(0.7);
+    filter: blur(8px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes reveal-from-island-right {
+  0% {
+    opacity: 0;
+    transform: translateX(-50px) scale(0.7);
+    filter: blur(8px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+.animate-reveal-from-island-left {
+  animation: reveal-from-island-left 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+.animate-reveal-from-island-right {
+  animation: reveal-from-island-right 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
 }

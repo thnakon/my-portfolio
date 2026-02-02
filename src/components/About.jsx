@@ -1,11 +1,20 @@
 import { useState, useEffect, useRef } from 'react';
+import Link from 'next/link';
+import WorkExperience from './WorkExperience';
 import MySite from './MySite';
 
-export default function About({ t }) {
+export default function About({ t, isFull = true }) {
   const [isVisible, setIsVisible] = useState(false);
   const [typedAboutDesc, setTypedAboutDesc] = useState('');
   const [startAboutTyping, setStartAboutTyping] = useState(false);
   const sectionRef = useRef(null);
+
+  const [currentImage, setCurrentImage] = useState(0);
+  const aboutImages = [
+    '/images/profile-bento.jpg',
+    '/images/about-2.jpg',
+    '/images/about-3.jpg'
+  ];
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -36,6 +45,13 @@ export default function About({ t }) {
     }, 25);
     return () => clearInterval(interval);
   }, [startAboutTyping, t.about.subtitle]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImage((prev) => (prev + 1) % aboutImages.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <section id="about" className="relative py-32 bg-[var(--bg-primary)] overflow-hidden" ref={sectionRef}>
@@ -111,21 +127,21 @@ export default function About({ t }) {
                 </a>
               </div>
 
-              <a 
-                href="#experience" 
+              <Link 
+                href={isFull ? "#experience" : "/about#experience"} 
                 className="group inline-flex items-center gap-3 text-sm font-bold tracking-wider text-[var(--text-primary)] hover:gap-5 transition-all duration-300 mb-6"
               >
                 <span>{t.about.workExperience}</span>
                 <svg className="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
-              </a>
+              </Link>
               
               <div className="w-full border-t border-[var(--border-color)] translate-y-6" />
             </div>
           </div>
 
-          {/* Right Side: Image/Visual */}
+          {/* Right Side: Image Slider */}
           <div className={`lg:col-span-5 order-1 lg:order-2 relative group transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-12'}`}>
              <div className="relative aspect-[3/4] max-w-[450px] mx-auto">
                 {/* Decorative Frames */}
@@ -133,14 +149,34 @@ export default function About({ t }) {
                 <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-3xl -rotate-6 scale-[0.9] blur-xl opacity-0 group-hover:opacity-100 transition-all duration-700" />
                 
                 {/* Main Image Container */}
-                <div className="absolute inset-0 bg-[var(--bg-secondary)] rounded-3xl border border-[var(--border-color)] overflow-hidden shadow-2xl flex items-center justify-center group-hover:border-[var(--text-primary)]/30 transition-all duration-700">
-                    <img 
-                      src="/images/profile-bento.jpg" 
-                      alt="Thanakon" 
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                    />
+                <div className="absolute inset-0 bg-[var(--bg-secondary)] rounded-3xl border border-[var(--border-color)] overflow-hidden shadow-2xl group-hover:border-[var(--text-primary)]/30 transition-all duration-700">
+                    <div className="relative w-full h-full">
+                      {aboutImages.map((src, idx) => (
+                        <img 
+                          key={src}
+                          src={src} 
+                          alt={`Lifestyle ${idx + 1}`} 
+                          className={`absolute inset-0 w-full h-full object-cover transition-all duration-1000 ease-in-out group-hover:scale-105 ${
+                            currentImage === idx ? 'opacity-100 scale-100' : 'opacity-0 scale-110 pointer-events-none'
+                          }`}
+                        />
+                      ))}
+                    </div>
+
+                    {/* Progress Dots */}
+                    <div className="absolute bottom-6 right-6 flex gap-1.5 z-20">
+                      {aboutImages.map((_, idx) => (
+                        <div 
+                          key={idx}
+                          className={`h-1  rounded-full transition-all duration-500 ${
+                            currentImage === idx ? 'w-4 bg-[var(--text-primary)]' : 'w-1 bg-[var(--text-muted)]/30'
+                          }`}
+                        />
+                      ))}
+                    </div>
+
                     {/* Floating Info Badge */}
-                    <div className="absolute bottom-6 left-6 right-6 p-4 rounded-2xl bg-[var(--bg-primary)]/80 backdrop-blur-md border border-[var(--border-color)] transform translate-y-12 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-700 delay-100 font-mono text-[10px]">
+                    <div className="absolute bottom-6 left-6 p-4 rounded-2xl bg-[var(--bg-primary)]/80 backdrop-blur-md border border-[var(--border-color)] transform translate-y-12 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-700 delay-100 font-mono text-[10px] w-[calc(100%-80px)]">
                         <div className="flex justify-between items-center mb-1">
                             <span className="text-[var(--text-muted)]">SYSTEM_STATUS</span>
                             <span className="text-emerald-400">ACTIVE</span>
@@ -154,8 +190,13 @@ export default function About({ t }) {
           </div>
         </div>
 
-        {/* My Site Section Integration */}
-        <MySite t={t} />
+        {/* Work Experience Section */}
+        {isFull && (
+          <>
+            <WorkExperience t={t} />
+            <MySite t={t} />
+          </>
+        )}
       </div>
     </section>
   );

@@ -110,6 +110,29 @@ const translations = {
             years: "years old",
         },
 
+        // Experience Section
+        experience: {
+            tag: "MY JOURNEY",
+            title: "Career",
+            titleAccent: "Path",
+            items: [
+                {
+                    role: "Full Stack Developer",
+                    company: "Freelance",
+                    duration: "2023 - Present",
+                    description: "Developing scalable web applications and AI-integrated solutions for various clients.",
+                    achievements: ["Architected Oboun ERP", "Developed Babybib Tool", "AI Agent Implementation"]
+                },
+                {
+                    role: "Web Developer",
+                    company: "Local Tech Firm",
+                    duration: "2021 - 2023",
+                    description: "Focused on frontend development and modernizing legacy web systems.",
+                    achievements: ["Improved performance by 40%", "Migrated to Next.js", "Lead UI Redesign"]
+                }
+            ]
+        },
+
         // My Site Section
         mySite: {
             tag: "INSIDE THE BOX",
@@ -384,6 +407,29 @@ const translations = {
             workExperience: "ประสบการณ์ทำงาน",
             chiangMai: "เชียงใหม่, ประเทศไทย",
             years: "ปี",
+        },
+
+        // Experience Section
+        experience: {
+            tag: "เส้นทางของผม",
+            title: "ประสบการณ์",
+            titleAccent: "ทำงาน",
+            items: [
+                {
+                    role: "Full Stack Developer",
+                    company: "Freelance",
+                    duration: "2023 - ปัจจุบัน",
+                    description: "พัฒนาเว็บแอปพลิเคชันที่รองรับการขยายตัวและโซลูชันที่รวม AI สำหรับลูกค้าที่หลากหลาย",
+                    achievements: ["ออกแบบโครงสร้าง Oboun ERP", "พัฒนาเครื่องมือ Babybib", "การนำ AI Agent มาใช้งาน"]
+                },
+                {
+                    role: "Web Developer",
+                    company: "บริษัทเทคโนโลยีท้องถิ่น",
+                    duration: "2021 - 2023",
+                    description: "มุ่งเน้นการพัฒนา Frontend และการปรับปรุงระบบเว็บรุ่นเก่าให้ทันสมัย",
+                    achievements: ["ปรับปรุงประสิทธิภาพขึ้น 40%", "ย้ายระบบไปยัง Next.js", "หัวหน้าทีมออกแบบ UI ใหม่"]
+                }
+            ]
         },
 
         // Skills Section

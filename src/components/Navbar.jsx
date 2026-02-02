@@ -131,13 +131,15 @@ export default function Navbar({ t, lang, setLang, theme, setTheme, onBookCall }
       {/* 1. Header Layer (Logo & Command) */}
       <div className="fixed top-0 left-0 right-0 z-[1001] pointer-events-none">
         <div className="max-w-6xl mx-auto px-6 h-[80px] flex items-center justify-between">
-          <Link href="/" className="pointer-events-auto transition-transform active:scale-95 animate-reveal-fade-up" style={{ animationDelay: '0.1s' }}>
+          <Link 
+            href="/" 
+            className={`pointer-events-auto transition-transform active:scale-95 ${!isGreeting ? 'animate-reveal-from-island-left' : 'opacity-0'}`}
+          >
             <img src={theme === 'dark' ? '/logo-light.png' : '/logo-dark.png'} alt="Logo" className="h-9 w-auto" />
           </Link>
           <button 
             onClick={() => setIsExpanded(!isExpanded)} 
-            className="pointer-events-auto w-10 h-10 flex items-center justify-center text-[var(--text-primary)] hover:scale-110 transition-all active:scale-90 animate-reveal-fade-up"
-            style={{ animationDelay: '0.2s' }}
+            className={`pointer-events-auto w-10 h-10 flex items-center justify-center text-[var(--text-primary)] hover:scale-110 transition-all active:scale-90 ${!isGreeting ? 'animate-reveal-from-island-right' : 'opacity-0'}`}
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 6v12a3 3 0 1 0 3-3H6a3 3 0 1 0 3 3V6a3 3 0 1 0-3 3h12a3 3 0 1 0-3-3z" />

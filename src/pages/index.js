@@ -6,6 +6,7 @@ import Overview from '@/components/Overview';
 import About from '@/components/About';
 import Projects from '@/components/Projects';
 import Skills from '@/components/Skills';
+import MySite from '@/components/MySite';
 import Contact from '@/components/Contact';
 import BookingModal from '@/components/BookingModal';
 import Footer from '@/components/Footer';
@@ -34,14 +35,17 @@ export default function Home({ theme, setTheme, lang, setLang }) {
       {/* Overview Section */}
       <Overview t={t} />
 
+      {/* About Section */}
+      <About t={t} isFull={false} />
+
       {/* Projects Section */}
       <Projects t={t} />
 
       {/* Skills Section */}
       <Skills t={t} />
 
-      {/* About Section */}
-      <About t={t} />
+      {/* My Site Section */}
+      <MySite t={t} />
 
       {/* Contact Section */}
       <Contact t={t} onGetInTouch={() => setBookingOpen(true)} />
