@@ -71,7 +71,7 @@ export default function Skills({ t }) {
     return () => clearInterval(interval);
   }, [startSkillsTyping, t.skills.subtitle]);
   return (
-    <section id="skills" className="relative py-24 bg-white" ref={sectionRef}>
+    <section id="skills" className="relative py-24 bg-[var(--bg-primary)]" ref={sectionRef}>
 
       <div className="relative z-10 max-w-5xl mx-auto px-6">
         

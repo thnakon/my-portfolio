@@ -20,9 +20,9 @@ const translations = {
                     title: "Guestbook",
                     desc: "Let me know you were here"
                 },
-                bucketList: {
-                    title: "Bucket List",
-                    desc: "Things to do at least once in my life"
+                aiToolkit: {
+                    title: "AI Toolkit",
+                    desc: "Mastering the neural frontier"
                 },
                 links: {
                     title: "Links",
@@ -422,9 +422,9 @@ const translations = {
                     title: "สมุดเยี่ยม",
                     desc: "เขียนข้อความทักทายกันได้ที่นี่"
                 },
-                bucketList: {
-                    title: "รายการสิ่งที่อยากทำ",
-                    desc: "สิ่งที่อยากทำให้ได้สักครั้งในชีวิต"
+                aiToolkit: {
+                    title: "AI Toolkit",
+                    desc: "ทักษะการใช้ Ai ต่างๆ"
                 },
                 links: {
                     title: "ลิงก์ต่างๆ",

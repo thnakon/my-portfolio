@@ -102,7 +102,7 @@ export default function Overview({ t, onGetInTouch }) {
                 {/* Default State: Single Large Circular Photo */}
                 <div className="relative z-20">
                    <div className="relative w-28 h-28 rounded-full border-4 border-[var(--bg-secondary)] shadow-2xl overflow-hidden group-hover:scale-105 transition-transform duration-500 ring-1 ring-[var(--border-color)]">
-                      <Image src="/images/me-1.jpg" alt="Thanakon" fill className="object-cover" />
+                      <Image src="/images/me-1.jpg" alt="Thanakon" fill sizes="112px" className="object-cover" />
                    </div>
                    
                    {/* Black "THANAKON" Badge (from reference) */}
@@ -149,22 +149,22 @@ export default function Overview({ t, onGetInTouch }) {
                 {/* Photo Drop Logic - Now all Circular */}
                 <div className="absolute top-[8%] left-[8%] w-32 h-32 rounded-full overflow-hidden border-4 border-white shadow-2xl -rotate-6 translate-y-[-200%] group-hover:translate-y-0 transition-all duration-1000 delay-100 ease-out">
                    <div className="relative w-full h-full">
-                      <Image src="/images/me-1.jpg" alt="Profile" fill className="object-cover" />
+                      <Image src="/images/me-1.jpg" alt="Profile" fill sizes="128px" className="object-cover" />
                    </div>
                 </div>
                 <div className="absolute top-[5%] right-[8%] w-36 h-36 rounded-full overflow-hidden border-4 border-white shadow-2xl rotate-12 translate-y-[-200%] group-hover:translate-y-0 transition-all duration-1000 delay-300 ease-out">
                    <div className="relative w-full h-full">
-                      <Image src="/images/me-3.jpg" alt="Profile" fill className="object-cover" />
+                      <Image src="/images/me-3.jpg" alt="Profile" fill sizes="144px" className="object-cover" />
                    </div>
                 </div>
                 <div className="absolute bottom-[8%] left-[12%] w-34 h-34 rounded-full overflow-hidden border-4 border-white shadow-2xl -rotate-12 translate-y-[200%] group-hover:translate-y-0 transition-all duration-1000 delay-500 ease-out">
                    <div className="relative w-full h-full">
-                      <Image src="/images/me-4.jpg" alt="Profile" fill className="object-cover" />
+                      <Image src="/images/me-4.jpg" alt="Profile" fill sizes="136px" className="object-cover" />
                    </div>
                 </div>
                 <div className="absolute bottom-[5%] right-[10%] w-32 h-32 rounded-full overflow-hidden border-4 border-white shadow-2xl rotate-6 translate-y-[200%] group-hover:translate-y-0 transition-all duration-1000 delay-700 ease-out">
                    <div className="relative w-full h-full">
-                      <Image src="/images/me-2.jpg" alt="Profile" fill className="object-cover" />
+                      <Image src="/images/me-2.jpg" alt="Profile" fill sizes="128px" className="object-cover" />
                    </div>
                 </div>
              </div>
@@ -265,6 +265,7 @@ export default function Overview({ t, onGetInTouch }) {
                      src="/images/projects/project-preview-1.png" 
                      alt="Project Preview" 
                      fill 
+                     sizes="(max-width: 768px) 100vw, 50vw"
                      className="object-cover object-top opacity-90 group-hover:opacity-100 transition-all duration-700 group-hover:scale-105"
                    />
                    <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg-primary)]/20 to-transparent" />
@@ -282,6 +283,7 @@ export default function Overview({ t, onGetInTouch }) {
                   src="/images/location-bg.jpg" 
                   alt="Location Background" 
                   fill 
+                  sizes="(max-width: 768px) 100vw, 33vw"
                   className="object-cover scale-110 group-hover:scale-100 transition-transform duration-[3000ms] ease-out"
                 />
              </div>
