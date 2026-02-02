@@ -103,7 +103,7 @@ export default function Navbar({ t, lang, setLang, theme, setTheme, onBookCall }
         if (router.pathname === '/about') setActiveSection('about');
         else if (router.pathname.includes('/work')) setActiveSection('projects');
         else if (router.pathname === '/blog') setActiveSection('blog');
-        else if (router.pathname === '/guestbook') setActiveSection('guestbook');
+        else if (['/guestbook', '/ai-toolkit', '/links', '/uses', '/attribution'].includes(router.pathname)) setActiveSection('more');
       }
     };
     window.addEventListener('scroll', handleScroll);
@@ -202,12 +202,12 @@ export default function Navbar({ t, lang, setLang, theme, setTheme, onBookCall }
                      {/* MORE TRIGGER */}
                      <div 
                        onMouseEnter={() => setIsExpanded(true)}
-                       className={`
-                         px-3 md:px-4 py-1.5 rounded-full text-[12px] font-semibold cursor-pointer transition-all duration-300 flex items-center gap-1
-                         ${isExpanded 
-                           ? (theme === 'dark' ? 'bg-white text-black' : 'bg-black text-white') 
-                           : (theme === 'dark' ? 'text-white/50 hover:text-white' : 'text-black/50 hover:text-black')}
-                       `}
+                        className={`
+                          px-3 md:px-4 py-1.5 rounded-full text-[12px] font-semibold cursor-pointer transition-all duration-300 flex items-center gap-1
+                          ${(isExpanded || activeSection === 'more')
+                            ? (theme === 'dark' ? 'bg-white text-black' : 'bg-black text-white') 
+                            : (theme === 'dark' ? 'text-white/50 hover:text-white' : 'text-black/50 hover:text-black')}
+                        `}
                      >
                        <span>{t.nav.more}</span>
                        <div className={`transition-transform duration-500 ${isExpanded ? 'rotate-180' : ''}`}>

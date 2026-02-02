@@ -56,11 +56,11 @@ export default function About({ t, isFull = true, onGetInTouch }) {
   }, []);
 
   return (
-    <section id="about" className="relative py-32 bg-[var(--bg-primary)] overflow-hidden" ref={sectionRef}>
+    <section id="about" className="relative pt-20 pb-32 bg-[var(--bg-primary)] overflow-hidden" ref={sectionRef}>
       <div className="max-w-6xl mx-auto px-6 relative z-10">
         
         {/* Section Header */}
-        <div className="mb-24 text-center">
+        <div className="mb-16 text-center">
             <span className={`inline-block text-[10px] tracking-[0.3em] font-bold text-[var(--text-muted)] uppercase mb-6 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
               {t.about.tag}
             </span>
