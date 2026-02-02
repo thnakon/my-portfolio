@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import WorkExperience from './WorkExperience';
 import MySite from './MySite';
+import OpenSource from './OpenSource';
 
 export default function About({ t, isFull = true }) {
   const [isVisible, setIsVisible] = useState(false);
@@ -194,6 +195,7 @@ export default function About({ t, isFull = true }) {
         {isFull && (
           <>
             <WorkExperience t={t} />
+            <OpenSource t={t} />
             <MySite t={t} />
           </>
         )}

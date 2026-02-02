@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 export default function Hero({ t, onGetInTouch }) {
   const [copied, setCopied] = useState(false);
@@ -11,19 +11,95 @@ export default function Hero({ t, onGetInTouch }) {
   // Full headline text
   const fullHeadline = `${t.hero.headline} ${t.hero.headlineAccent}`;
 
+  /* Interactive Fireflies Logic */
+  const firefliesRef = useRef([]);
+  const mouseRef = useRef({ x: 0, y: 0 });
+  const [flies, setFlies] = useState([]);
+
   useEffect(() => {
-    const flies = Array.from({ length: 150 }).map((_, i) => ({
+    // Initialize firefly data
+    const count = 40;
+    const newFlies = Array.from({ length: count }).map((_, i) => ({
       id: i,
-      left: `${Math.random() * 100}%`,
-      top: `${Math.random() * 100}%`,
-      size: `${1 + Math.random() * 3}px`,
-      duration: `${3 + Math.random() * 5}s`,
-      floatDuration: `${15 + Math.random() * 25}s`,
-      delay: `${Math.random() * 10}s`,
-      endX: `${(Math.random() - 0.5) * 300}px`,
-      endY: `${(Math.random() - 0.5) * 300}px`,
+      x: Math.random() * window.innerWidth,
+      y: Math.random() * window.innerHeight,
+      size: 2 + Math.random() * 4,
+      // Random wandering parameters
+      angle: Math.random() * Math.PI * 2,
+      speed: 0.5 + Math.random() * 1.5,
+      // Appearance delay
+      delay: i * 150, // 150ms stagger
     }));
-    setFireflies(flies);
+    setFlies(newFlies);
+
+    // Initialize physics state in ref to avoid re-renders
+    firefliesRef.current = newFlies.map(fly => ({
+      ...fly,
+      vx: (Math.random() - 0.5) * 2,
+      vy: (Math.random() - 0.5) * 2
+    }));
+
+    const handleMouseMove = (e) => {
+      mouseRef.current = { x: e.clientX, y: e.clientY };
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+
+    let animationFrameId;
+
+    const animate = () => {
+      const { x: mouseX, y: mouseY } = mouseRef.current;
+      
+      firefliesRef.current.forEach((fly, i) => {
+        const el = document.getElementById(`firefly-${i}`);
+        if (!el) return;
+
+        // 1. Attraction to mouse (gentle pull)
+        const dx = mouseX - fly.x;
+        const dy = mouseY - fly.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        
+        // Only attract if reasonably close (e.g., within 400px) or just global weak pull
+        const attractionStrength = 0.0005; // Very weak global pull
+        
+        // 2. Random wandering (noise-like)
+        fly.angle += (Math.random() - 0.5) * 0.2;
+        fly.vx += Math.cos(fly.angle) * 0.05;
+        fly.vy += Math.sin(fly.angle) * 0.05;
+
+        // Apply attraction
+        if (dist > 0) {
+           fly.vx += (dx / dist) * attractionStrength * dist * 0.5;
+           fly.vy += (dy / dist) * attractionStrength * dist * 0.5;
+        }
+
+        // Dampen velocity to prevent infinite acceleration
+        fly.vx *= 0.98;
+        fly.vy *= 0.98;
+
+        // Update position
+        fly.x += fly.vx;
+        fly.y += fly.vy;
+
+        // Wrap around screen edges (optional, or bounce)
+        // Here we'll just let them float freely, maybe wrapping keeps them in view
+        if (fly.x < -50) fly.x = window.innerWidth + 50;
+        if (fly.x > window.innerWidth + 50) fly.x = -50;
+        if (fly.y < -50) fly.y = window.innerHeight + 50;
+        if (fly.y > window.innerHeight + 50) fly.y = -50;
+
+        el.style.transform = `translate(${fly.x}px, ${fly.y}px)`;
+      });
+
+      animationFrameId = requestAnimationFrame(animate);
+    };
+
+    animate();
+
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      cancelAnimationFrame(animationFrameId);
+    };
   }, []);
 
   // Typewriter effect - synced with navbar greeting (2 seconds)
@@ -69,30 +145,34 @@ export default function Hero({ t, onGetInTouch }) {
   const typedAccent = typedText.slice(headlineLength + 1); // +1 for the space
 
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center text-center px-6 pt-16 pb-20 relative">
-      {/* Fireflies Background */}
-      <div className="firefly-container">
-        {fireflies.map((fly) => (
+    <section id="home" className="min-h-screen flex items-center justify-center text-center px-6 pt-16 pb-20 relative overflow-hidden">
+      {/* Interactive Fireflies */}
+      <div className="absolute inset-0 pointer-events-none z-0">
+        {flies.map((fly, i) => (
           <div
+            id={`firefly-${fly.id}`}
             key={fly.id}
-            className="firefly"
+            className="absolute rounded-full bg-[var(--text-primary)] transition-opacity duration-1000"
             style={{
-              left: fly.left,
-              top: fly.top,
-              width: fly.size,
-              height: fly.size,
-              '--duration': fly.duration,
-              '--float-duration': fly.floatDuration,
-              '--delay': fly.delay,
-              '--end-x': fly.endX,
-              '--end-y': fly.endY,
-              animationDelay: `${fly.delay}, 0s`,
+              left: 0,
+              top: 0,
+              width: `${fly.size}px`,
+              height: `${fly.size}px`,
+              opacity: 0, // Start invisible, handled by animation delay
+              animation: `fadeIn 1s forwards ${fly.delay}ms`,
+              boxShadow: `0 0 ${fly.size * 2}px ${fly.size / 2}px rgba(255, 255, 255, 0.3)`
             }}
           />
         ))}
+        {/* Keyframes for the one-by-one appearance */}
+        <style jsx>{`
+          @keyframes fadeIn {
+            to { opacity: 0.6; } /* Max opacity */
+          }
+        `}</style>
       </div>
 
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-4xl mx-auto relative z-10">
         {/* Announcement Badge - Hidden until typing completes */}
         <div 
           className="hero-announcement group transition-all duration-700"

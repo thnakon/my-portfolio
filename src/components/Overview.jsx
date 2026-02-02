@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import confetti from 'canvas-confetti';
 
-export default function Overview({ t }) {
+export default function Overview({ t, onGetInTouch }) {
   const [isVisible, setIsVisible] = useState(false);
   const [typedDescription, setTypedDescription] = useState('');
   const sectionRef = useRef(null);
@@ -131,15 +131,17 @@ export default function Overview({ t }) {
                 </div>
 
                 {/* Get in Touch Button */}
-                <Link 
-                  href="/#contact"
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[var(--text-primary)] text-[var(--bg-primary)] text-xs font-bold uppercase tracking-widest hover:scale-105 active:scale-95 transition-all shadow-xl hover:shadow-[0_0_20px_rgba(255,255,255,0.15)] group/cta-btn"
+                <button 
+                  onClick={onGetInTouch}
+                  className="btn-premium-cta hover:scale-105 !py-1.5 !px-2 !pl-6 !text-sm"
                 >
                   {bento.intro.cta}
-                  <svg className="w-4 h-4 group-hover/cta-btn:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                  </svg>
-                </Link>
+                  <div className="cta-arrow-circle !w-8 !h-8">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7-7 7M3 12h18" />
+                    </svg>
+                  </div>
+                </button>
              </div>
 
              {/* Personal Surprise - 4 Dropping Photos on Hover */}

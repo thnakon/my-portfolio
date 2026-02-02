@@ -200,14 +200,14 @@ const ProjectItem = ({ project, index, t }) => {
         
         {!project.comingSoon && (
            <div className={`flex flex-wrap gap-5 items-center transition-all duration-700 delay-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-              <a href={project.viewUrl || "#"} className="btn-premium-cta hover:scale-105 !py-1.5 !px-2 !pl-6 !text-sm">
+              <Link href="/work" className="btn-premium-cta hover:scale-105 !py-1.5 !px-2 !pl-6 !text-sm">
                  {t.projects.viewProject}
                  <div className="cta-arrow-circle !w-8 !h-8">
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7-7 7M3 12h18" />
                     </svg>
                  </div>
-              </a>
+              </Link>
               <a href={project.githubUrl || "#"} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
                  {Icons.github}
                  {t.projects.viewCode}

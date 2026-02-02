@@ -33,7 +33,7 @@ export default function Home({ theme, setTheme, lang, setLang }) {
       <Hero t={t} onGetInTouch={() => setBookingOpen(true)} />
 
       {/* Overview Section */}
-      <Overview t={t} />
+      <Overview t={t} onGetInTouch={() => setBookingOpen(true)} />
 
       {/* About Section */}
       <About t={t} isFull={false} />

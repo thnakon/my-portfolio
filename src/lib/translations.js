@@ -152,6 +152,21 @@ const translations = {
             ]
         },
 
+        // Open Source Section
+        openSource: {
+            tag: "CONTRIBUTIONS",
+            title: "Code &",
+            titleAccent: "Open Source",
+            items: [
+                {
+                    name: "Open Source Projects",
+                    project: "GitHub Community",
+                    description: "Contributing to the developer ecosystem through tools, libraries, and documentation. Passionate about building public goods that help other developers grow.",
+                    achievements: ["ScribeHub AI Assistant", "UI Component Libraries", "Developer Documentation"]
+                }
+            ]
+        },
+
         // My Site Section
         mySite: {
             tag: "INSIDE THE BOX",
@@ -466,6 +481,21 @@ const translations = {
                     duration: "2021 - 2023",
                     description: "มุ่งเน้นการพัฒนา Frontend และการปรับปรุงระบบเว็บรุ่นเก่าให้ทันสมัย",
                     achievements: ["ปรับปรุงประสิทธิภาพขึ้น 40%", "ย้ายระบบไปยัง Next.js", "หัวหน้าทีมออกแบบ UI ใหม่"]
+                }
+            ]
+        },
+
+        // Open Source Section
+        openSource: {
+            tag: "CONTRIBUTIONS",
+            title: "โค้ดและ",
+            titleAccent: "โอเพนซอร์ส",
+            items: [
+                {
+                    name: "โปรเจกต์โอเพนซอร์ส",
+                    project: "GitHub Community",
+                    description: "ร่วมทีมพัฒนาซอฟต์แวร์สาธารณะผ่านเครื่องมือ ไลบรารี และเอกสารประกอบการใช้งาน หลงใหลในการสร้างสิ่งที่มีประโยชน์แก่คอมมูนิตี้นักพัฒนา",
+                    achievements: ["ScribeHub AI Assistant", "UI Component Libraries", "Developer Documentation"]
                 }
             ]
         },
