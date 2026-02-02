@@ -36,7 +36,11 @@ export default function Home({ theme, setTheme, lang, setLang }) {
       <Overview t={t} onGetInTouch={() => setBookingOpen(true)} />
 
       {/* About Section */}
-      <About t={t} isFull={false} />
+      <About
+        t={t}
+        isFull={false}
+        onGetInTouch={() => setBookingOpen(true)}
+      />
 
       {/* Projects Section */}
       <Projects t={t} />

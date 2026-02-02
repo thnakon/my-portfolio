@@ -21,7 +21,10 @@ export default function AboutPage({ theme, setTheme, lang, setLang }) {
             />
 
             <div className="pt-20">
-                <About t={t} />
+                <About
+                    t={t}
+                    onGetInTouch={() => setBookingOpen(true)}
+                />
             </div>
 
             <Footer t={t} />

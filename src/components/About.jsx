@@ -3,8 +3,9 @@ import Link from 'next/link';
 import WorkExperience from './WorkExperience';
 import MySite from './MySite';
 import OpenSource from './OpenSource';
+import Contact from './Contact';
 
-export default function About({ t, isFull = true }) {
+export default function About({ t, isFull = true, onGetInTouch }) {
   const [isVisible, setIsVisible] = useState(false);
   const [typedAboutDesc, setTypedAboutDesc] = useState('');
   const [startAboutTyping, setStartAboutTyping] = useState(false);
@@ -197,6 +198,9 @@ export default function About({ t, isFull = true }) {
             <WorkExperience t={t} />
             <OpenSource t={t} />
             <MySite t={t} />
+            <div className="mt-32">
+               <Contact t={t} onGetInTouch={onGetInTouch} />
+            </div>
           </>
         )}
       </div>

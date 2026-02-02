@@ -137,17 +137,77 @@ const translations = {
             items: [
                 {
                     role: "Full Stack Developer",
-                    company: "Freelance",
-                    duration: "2023 - Present",
-                    description: "Developing scalable web applications and AI-integrated solutions for various clients.",
-                    achievements: ["Architected Oboun ERP", "Developed Babybib Tool", "AI Agent Implementation"]
+                    company: "Chiang Mai University",
+                    location: "Chiang Mai, Thailand",
+                    workType: "Hybrid",
+                    logo: "/images/logos/cmu-logo.png",
+                    duration: "Oct 2025 - PRESENT",
+                    description: "Leading complex end-to-end development projects and mastering advanced tech stacks. Focus on scalable architecture and automation.",
+                    achievements: [
+                        "<b>Oboun ERP</b>: Developed a full-scale Pharmacy Management System using <b>Docker</b>, <b>Laravel</b>, <b>Vue.js</b>, and <b>MySQL</b>.",
+                        "<b>Babybib</b>: Built an automatic APA 7th bibliography generator with .docx export capabilities.",
+                        "<b>ScribeHub</b>: Upgraded research tools into a comprehensive platform for academic research.",
+                        "<b>Future Stack</b>: Mastering <b>Next.js</b>, <b>TypeScript</b>, and <b>Bun</b> for modern web applications.",
+                        "<b>Mai-lon Vision</b>: Creating a platform for student success and career life balance."
+                    ],
+                    technologies: [
+                        { name: "Docker", icon: "https://skillicons.dev/icons?i=docker" },
+                        { name: "Laravel", icon: "https://skillicons.dev/icons?i=laravel" },
+                        { name: "Vue.js", icon: "https://skillicons.dev/icons?i=vue" },
+                        { name: "Mysql", icon: "https://skillicons.dev/icons?i=mysql" },
+                        { name: "React", icon: "https://skillicons.dev/icons?i=react" },
+                        { name: "Next.js", icon: "https://skillicons.dev/icons?i=nextjs" },
+                        { name: "TypeScript", icon: "https://skillicons.dev/icons?i=ts" },
+                        { name: "Supabase", icon: "https://skillicons.dev/icons?i=supabase" }
+                    ]
                 },
                 {
-                    role: "Web Developer",
-                    company: "Local Tech Firm",
-                    duration: "2021 - 2023",
-                    description: "Focused on frontend development and modernizing legacy web systems.",
-                    achievements: ["Improved performance by 40%", "Migrated to Next.js", "Lead UI Redesign"]
+                    role: "Full Stack Developer (Internship)",
+                    company: "Merge Digital Agency",
+                    location: "Ladprao, Bangkok",
+                    workType: "On-site",
+                    logo: "/images/logos/merge-logo.png",
+                    duration: "April 2025 - Oct 2025",
+                    description: "Full-service digital agency work spanning Web Production, Mobile Apps, and AI integration. Contributed to enterprise-level projects like <a href='https://singha.com/' target='_blank' rel='noopener noreferrer' class='text-[var(--text-primary)] font-bold border-b border-[var(--text-primary)]/20 hover:border-[var(--text-primary)] transition-all decoration-transparent'>singha.com</a>.",
+                    achievements: [
+                        "<b>Tech Stack</b>: Mastered <b>Laravel</b>, <b>Vue.js</b>, and <b>Tailwind CSS</b> for high-performance agency projects.",
+                        "<b>Automated Testing</b>: Integrated <b>Cypress</b> for E2E testing to ensure zero-defect deployments.",
+                        "<b>Dental CMS</b>: Developed a full-cycle clinic management system with customized CMS controls.",
+                        "<b>AI Vision</b>: Implemented <b>Python YOLO</b> for automated product receipt information extraction.",
+                        "<b>Enterprise Support</b>: Actively improved and maintained <a href='https://singha.com/' target='_blank' rel='noopener noreferrer' class='text-[var(--text-primary)] font-bold hover:underline'>singha.com</a> as part of the core dev team."
+                    ],
+                    technologies: [
+                        { name: "Laravel", icon: "https://skillicons.dev/icons?i=laravel" },
+                        { name: "Vue.js", icon: "https://skillicons.dev/icons?i=vue" },
+                        { name: "Tailwind", icon: "https://skillicons.dev/icons?i=tailwind" },
+                        { name: "Python", icon: "https://skillicons.dev/icons?i=python" },
+                        { name: "GitLab", icon: "https://skillicons.dev/icons?i=gitlab" },
+                        { name: "Figma", icon: "https://skillicons.dev/icons?i=figma" },
+                        { name: "Mysql", icon: "https://skillicons.dev/icons?i=mysql" }
+                    ]
+                },
+                {
+                    role: "Open Source Contributor",
+                    company: "Github",
+                    location: "Global",
+                    workType: "Remote",
+                    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg",
+                    duration: "Apr 2024 - Mar 2025",
+                    description: "Began the engineering journey by contributing to open-source projects and mastering core web foundations.",
+                    achievements: [
+                        "Foundation: Mastered HTML5, CSS3, and JavaScript fundamentals.",
+                        "PHP & Python: Started exploring backend logic and automation scripts.",
+                        "Collaboration: Engaged with developer communities on innovative solutions.",
+                        "Quality Focus: Improved code quality and documentation for community projects."
+                    ],
+                    technologies: [
+                        { name: "PHP", icon: "https://skillicons.dev/icons?i=php" },
+                        { name: "Python", icon: "https://skillicons.dev/icons?i=python" },
+                        { name: "HTML5", icon: "https://skillicons.dev/icons?i=html" },
+                        { name: "CSS3", icon: "https://skillicons.dev/icons?i=css" },
+                        { name: "JS", icon: "https://skillicons.dev/icons?i=js" },
+                        { name: "Bootstrap", icon: "https://skillicons.dev/icons?i=bootstrap" }
+                    ]
                 }
             ]
         },
@@ -474,22 +534,82 @@ const translations = {
         // Experience Section
         experience: {
             tag: "เส้นทางของผม",
-            title: "ประสบการณ์",
-            titleAccent: "ทำงาน",
+            title: "Career",
+            titleAccent: "Path",
             items: [
                 {
                     role: "Full Stack Developer",
-                    company: "Freelance",
-                    duration: "2023 - ปัจจุบัน",
-                    description: "พัฒนาเว็บแอปพลิเคชันที่รองรับการขยายตัวและโซลูชันที่รวม AI สำหรับลูกค้าที่หลากหลาย",
-                    achievements: ["ออกแบบโครงสร้าง Oboun ERP", "พัฒนาเครื่องมือ Babybib", "การนำ AI Agent มาใช้งาน"]
+                    company: "มหาวิทยาลัยเชียงใหม่",
+                    location: "เชียงใหม่, ประเทศไทย",
+                    workType: "Hybrid",
+                    logo: "/images/logos/cmu-logo.png",
+                    duration: "ต.ค. 2025 - ปัจจุบัน",
+                    description: "เน้นการพัฒนาโปรเจกต์ขนาดใหญ่ที่ซับซ้อนและฝึกฝน Techstack สมัยใหม่เพื่อประสิทธิภาพสูงสุด",
+                    achievements: [
+                        "<b>Oboun ERP</b>: โปรแกรมจัดการร้านยาครบวงจรด้วย <b>Docker</b>, <b>Laravel</b>, <b>Vue.js</b> และ <b>MySQL</b>",
+                        "<b>Babybib</b>: ระบบสร้างบรรณานุกรมอัตโนมัติ APA 7th พร้อมส่งออกเป็นไฟล์ .docx",
+                        "<b>ScribeHub</b>: อัปเกรดเครื่องมือวิจัยให้เป็นแพลตฟอร์มที่ครบวงจรที่สุด",
+                        "<b>Future Stack</b>: เชี่ยวชาญ <b>Next.js</b>, <b>TypeScript</b> และ <b>Bun</b> สำหรับเว็บแอปพลิเคชันรุ่นใหม่",
+                        "<b>Mai-lon Vision</b>: แพลตฟอร์มเพื่อช่วยให้นักศึกษาประสบความสำเร็จในอาชีพและชีวิต"
+                    ],
+                    technologies: [
+                        { name: "Docker", icon: "https://skillicons.dev/icons?i=docker" },
+                        { name: "Laravel", icon: "https://skillicons.dev/icons?i=laravel" },
+                        { name: "Vue.js", icon: "https://skillicons.dev/icons?i=vue" },
+                        { name: "Mysql", icon: "https://skillicons.dev/icons?i=mysql" },
+                        { name: "React", icon: "https://skillicons.dev/icons?i=react" },
+                        { name: "Next.js", icon: "https://skillicons.dev/icons?i=nextjs" },
+                        { name: "TypeScript", icon: "https://skillicons.dev/icons?i=ts" },
+                        { name: "Supabase", icon: "https://skillicons.dev/icons?i=supabase" }
+                    ]
                 },
                 {
-                    role: "Web Developer",
-                    company: "บริษัทเทคโนโลยีท้องถิ่น",
-                    duration: "2021 - 2023",
-                    description: "มุ่งเน้นการพัฒนา Frontend และการปรับปรุงระบบเว็บรุ่นเก่าให้ทันสมัย",
-                    achievements: ["ปรับปรุงประสิทธิภาพขึ้น 40%", "ย้ายระบบไปยัง Next.js", "หัวหน้าทีมออกแบบ UI ใหม่"]
+                    role: "Full Stack Developer (ฝึกงาน)",
+                    company: "Merge Digital Agency",
+                    location: "ลาดพร้าว, กรุงเทพฯ",
+                    workType: "On-site",
+                    logo: "/images/logos/merge-logo.png",
+                    duration: "เม.ย. 2025 - ต.ค. 2025",
+                    description: "บริษัท Digital Agency ชั้นนำที่ให้บริการพัฒนาสื่อดิจิทัลครบวงจร ทั้ง Web Production, Mobile Apps และงาน AI Programming ร่วมเป็นส่วนหนึ่งในการพัฒนา <a href='https://singha.com/' target='_blank' rel='noopener noreferrer' class='text-[var(--text-primary)] font-bold border-b border-[var(--text-primary)]/20 hover:border-[var(--text-primary)] transition-all'>singha.com</a>",
+                    achievements: [
+                        "<b>Laravel & Tools</b>: เชี่ยวชาญ <b>Laravel</b> ที่เป็นแกนหลัก พร้อม <b>Cypress</b> สำหรับการทดสอบอัตโนมัติ",
+                        "<b>Dental CMS</b>: พัฒนาระบบเว็บคลินิกทำฟันและ CMS ควบคุมระบบหลังบ้านทั้งหมด",
+                        "<b>AI Vision</b>: พัฒนาระบบตรวจจับใบเสร็จสินค้าอัตโนมัติด้วย <b>Python YOLO</b>",
+                        "<b>Real Experience</b>: ร่วมเป็นหนึ่งในทีมพัฒนาและปรับปรุงเว็บไซต์ <a href='https://singha.com/' target='_blank' rel='noopener noreferrer' class='text-[var(--text-primary)] font-bold hover:underline'>singha.com</a>",
+                        "<b>Soft Skills</b>: เติบโตจากการทำงานทีมแบบ Agile และการแก้ปัญหาที่ซับซ้อน"
+                    ],
+                    technologies: [
+                        { name: "Laravel", icon: "https://skillicons.dev/icons?i=laravel" },
+                        { name: "Vue.js", icon: "https://skillicons.dev/icons?i=vue" },
+                        { name: "Tailwind", icon: "https://skillicons.dev/icons?i=tailwind" },
+                        { name: "Python", icon: "https://skillicons.dev/icons?i=python" },
+                        { name: "GitLab", icon: "https://skillicons.dev/icons?i=gitlab" },
+                        { name: "Figma", icon: "https://skillicons.dev/icons?i=figma" },
+                        { name: "Mysql", icon: "https://skillicons.dev/icons?i=mysql" }
+                    ]
+                },
+                {
+                    role: "Open Source Contributor",
+                    company: "Github",
+                    location: "Global",
+                    workType: "Remote",
+                    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg",
+                    duration: "เม.ย. 2024 - มี.ค. 2025",
+                    description: "เริ่มต้นเส้นทางสายวิศวกรรมซอฟต์แวร์ด้วยการร่วมพัฒนาโปรเจกต์โอเพนซอร์สและการวางรากฐานเว็บที่แข็งแกร่ง",
+                    achievements: [
+                        "Core Foundation: พัฒนาพื้นฐาน HTML5, CSS3 และ JavaScript",
+                        "PHP & Python: เริ่มต้นการเขียน PHP และ Python สำหรับงาน Backend",
+                        "Community Engagement: ร่วมมือกับทีมนักพัฒนาในการแก้ไขปัญหาและสร้างสรรค์ฟีเจอร์ใหม่",
+                        "Quality Focus: ปรับปรุงคุณภาพโค้ดและเอกสารให้มีความเป็นสากล"
+                    ],
+                    technologies: [
+                        { name: "PHP", icon: "https://skillicons.dev/icons?i=php" },
+                        { name: "Python", icon: "https://skillicons.dev/icons?i=python" },
+                        { name: "HTML5", icon: "https://skillicons.dev/icons?i=html" },
+                        { name: "CSS3", icon: "https://skillicons.dev/icons?i=css" },
+                        { name: "JS", icon: "https://skillicons.dev/icons?i=js" },
+                        { name: "Bootstrap", icon: "https://skillicons.dev/icons?i=bootstrap" }
+                    ]
                 }
             ]
         },
