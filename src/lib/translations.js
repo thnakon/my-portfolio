@@ -157,12 +157,21 @@ const translations = {
             tag: "CONTRIBUTIONS",
             title: "Code &",
             titleAccent: "Open Source",
+            viewProfile: "VIEW PROFILE",
+            timeline: "Developer activity timeline",
+            followers: "Followers",
+            followersSubtitle: "Active Developers",
+            repos: "Public Repos",
+            reposSubtitle: "Open Source Repos",
+            stars: "Total Stars",
+            starsSubtitle: "Community Appreciation",
+            less: "Less",
+            more: "More",
+            contributionTitle: "GitHub Contributions",
             items: [
                 {
-                    name: "Open Source Projects",
-                    project: "GitHub Community",
-                    description: "Contributing to the developer ecosystem through tools, libraries, and documentation. Passionate about building public goods that help other developers grow.",
-                    achievements: ["ScribeHub AI Assistant", "UI Component Libraries", "Developer Documentation"]
+                    name: "thnakon",
+                    project: "GitHub",
                 }
             ]
         },
@@ -490,12 +499,21 @@ const translations = {
             tag: "CONTRIBUTIONS",
             title: "โค้ดและ",
             titleAccent: "โอเพนซอร์ส",
+            viewProfile: "ดูโปรไฟล์",
+            timeline: "ไทม์ไลน์กิจกรรมการเขียนโค้ด",
+            followers: "ผู้ติดตาม",
+            followersSubtitle: "นักพัฒนาที่ติดตาม",
+            repos: "โปรเจกต์สาธารณะ",
+            reposSubtitle: "Repository โอเพนซอร์ส",
+            stars: "ดาวทั้งหมด",
+            starsSubtitle: "การยอมรับจากชุมชน",
+            less: "น้อย",
+            more: "มาก",
+            contributionTitle: "กิจกรรมบน GitHub",
             items: [
                 {
-                    name: "โปรเจกต์โอเพนซอร์ส",
-                    project: "GitHub Community",
-                    description: "ร่วมทีมพัฒนาซอฟต์แวร์สาธารณะผ่านเครื่องมือ ไลบรารี และเอกสารประกอบการใช้งาน หลงใหลในการสร้างสิ่งที่มีประโยชน์แก่คอมมูนิตี้นักพัฒนา",
-                    achievements: ["ScribeHub AI Assistant", "UI Component Libraries", "Developer Documentation"]
+                    name: "thnakon",
+                    project: "GitHub",
                 }
             ]
         },
