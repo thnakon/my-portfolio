@@ -103,7 +103,9 @@ export default function Navbar({ t, lang, setLang, theme, setTheme, onBookCall }
         if (router.pathname === '/about') setActiveSection('about');
         else if (router.pathname.includes('/work')) setActiveSection('projects');
         else if (router.pathname === '/blog') setActiveSection('blog');
-        else if (['/guestbook', '/ai-toolkit', '/links', '/uses', '/attribution'].includes(router.pathname)) setActiveSection('more');
+        else if (router.pathname === '/uses') setActiveSection('uses');
+        else if (router.pathname === '/guestbook') setActiveSection('guestbook');
+        else if (['/ai-toolkit', '/links', '/attribution'].includes(router.pathname)) setActiveSection('more');
       }
     };
     window.addEventListener('scroll', handleScroll);
@@ -303,6 +305,8 @@ export default function Navbar({ t, lang, setLang, theme, setTheme, onBookCall }
                {activeSection === 'projects' && Icons.work}
                {activeSection === 'blog' && Icons.blog}
                {activeSection === 'guestbook' && Icons.book}
+               {activeSection === 'uses' && Icons.monitor}
+               {activeSection === 'more' && Icons.ai}
              </div>
            </div>
         </div>

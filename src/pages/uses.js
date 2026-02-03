@@ -37,108 +37,160 @@ const TypewriterText = ({ text, delay = 50, startDelay = 500, onComplete }) => {
     );
 };
 
-const HardwareShowcase = ({ lang, isVisible }) => {
+/* --- Specialized Component 1: Workstation --- */
+const WorkstationShowcase = ({ lang, isVisible }) => {
+    const [expandedIndex, setExpandedIndex] = useState(null);
+
     const specs = [
-        { label: lang === 'en' ? 'Size' : 'ขนาด', value: '13.6"' },
-        { label: lang === 'en' ? 'Color' : 'สี', value: lang === 'en' ? 'Midnight' : 'มิดไนท์' },
-        { label: lang === 'en' ? 'Display' : 'จอภาพ', value: 'Liquid Retina' },
-        { label: lang === 'en' ? 'Storage' : 'ความจุ', value: '256GB SSD' },
-        { label: lang === 'en' ? 'Memory' : 'หน่วยความจำ', value: '16GB RAM' },
+        {
+            en: 'Macbook Air M2',
+            th: 'Macbook Air M2',
+            value: '13.6-inch',
+            image: '/images/macbook-air-m2.png',
+            badge: { en: 'Midnight Edition', th: 'สีมิดไนท์', color: '#2e3641' },
+            details: [
+                { label: lang === 'en' ? 'Color' : 'สี', val: lang === 'en' ? 'Midnight' : 'สีมิดไนท์' },
+                { label: lang === 'en' ? 'Display' : 'จอภาพ', val: 'Liquid Retina' },
+                { label: lang === 'en' ? 'Chip' : 'ชิป', val: 'Apple M2' },
+                { label: lang === 'en' ? 'RAM' : 'หน่วยความจำ', val: '16GB' }
+            ]
+        },
+        {
+            en: 'Lofree Flow',
+            th: 'Lofree Flow',
+            value: 'Low-Profile',
+            image: '/images/lofree-flow.png',
+            badge: { en: 'Space Gray', th: 'สีสเปซเกรย์', color: '#555559' },
+            details: [
+                { label: lang === 'en' ? 'Switch' : 'สวิตช์', val: 'Phantom (Tactile)' },
+                { label: lang === 'en' ? 'Material' : 'วัสดุ', val: 'Aluminum' },
+                { label: lang === 'en' ? 'Mount' : 'การยึด', val: 'Gasket Mount' }
+            ]
+        },
     ];
 
+    const currentSpec = expandedIndex !== null ? specs[expandedIndex] : specs[0];
+
     return (
-        <div className={`relative mb-32 transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-            <div className="relative bg-[#050505] rounded-[40px] border border-white/5 overflow-hidden p-8 md:p-16 flex flex-col md:flex-row items-center gap-12">
-                {/* Hotspots / Specs List */}
-                <div className="flex flex-col gap-4 w-full md:w-auto z-10">
-                    {specs.map((spec, i) => (
-                        <div key={i} className="group/spec flex items-center gap-4 bg-white/5 hover:bg-white/10 border border-white/5 rounded-full px-5 py-3 transition-all duration-300 backdrop-blur-md cursor-default">
-                            <div className="w-5 h-5 rounded-full border border-white/20 flex items-center justify-center group-hover/spec:scale-110 group-hover/spec:border-white/40 transition-all">
-                                <div className="w-1.5 h-1.5 bg-white rounded-full group-hover/spec:scale-125 transition-all" />
+        <div className={`relative overflow-hidden bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-[40px] p-8 md:p-16 mb-24 h-[500px] md:h-[600px] flex items-center justify-center transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'} hover:border-[var(--text-primary)]/20 shadow-sm`}>
+
+            {/* Top Left: Spec Pills */}
+            <div className="absolute top-8 left-8 md:top-12 md:left-12 z-20 flex flex-col gap-3 items-start">
+                {specs.map((spec, i) => (
+                    <div
+                        key={i}
+                        onClick={() => setExpandedIndex(expandedIndex === i ? null : i)}
+                        className={`group flex flex-col gap-4 bg-[var(--bg-primary)]/80 hover:bg-[var(--bg-primary)] border border-[var(--border-color)] hover:border-[var(--text-primary)]/30 transition-all duration-500 backdrop-blur-md cursor-pointer w-fit hover:scale-[1.02] hover:shadow-glow shadow-xl
+                        ${expandedIndex === i ? 'rounded-[32px] p-8 pb-12 min-w-[350px]' : 'rounded-full px-5 py-3 overflow-hidden'}`}
+                    >
+                        <div className="flex items-center gap-4">
+                            <div className={`w-6 h-6 rounded-full border border-[var(--text-primary)] flex items-center justify-center transition-all duration-500 shadow-sm ${expandedIndex === i ? 'bg-[var(--text-primary)] rotate-45' : 'bg-[var(--text-primary)]'}`}>
+                                <svg className={`w-3.5 h-3.5 transition-colors ${expandedIndex === i ? 'text-[var(--bg-primary)]' : 'text-[var(--bg-primary)]'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                                </svg>
                             </div>
                             <div className="flex flex-col">
-                                <span className="text-[10px] text-white/40 uppercase font-bold tracking-widest">{spec.label}</span>
-                                <span className="text-sm text-white/90 font-medium">{spec.value}</span>
+                                <span className={`text-sm font-medium text-[var(--text-primary)] tracking-tight transition-all ${expandedIndex === i ? 'text-lg font-bold' : ''}`}>
+                                    {lang === 'en' ? spec.en : spec.th}
+                                </span>
+                                <span className="text-[10px] text-[var(--text-muted)] uppercase font-bold tracking-widest mt-0.5">
+                                    {spec.value}
+                                </span>
                             </div>
                         </div>
-                    ))}
-                </div>
 
-                {/* Laptop Mockup Area */}
-                <div className="relative flex-1 flex justify-center items-center py-10">
-                    {/* Glow background */}
-                    <div className="absolute inset-x-0 inset-y-0 bg-blue-500/10 blur-[100px] rounded-full" />
-
-                    <div className="relative group/laptop">
-                        {/* MacBook Air M2 Midnight Mockup */}
-                        <div className="relative w-72 md:w-[500px] transition-transform duration-1000 group-hover/laptop:scale-[1.02] group-hover/laptop:-translate-y-2">
-                            {/* Screen */}
-                            <div className="relative aspect-[16/10.5] bg-[#0c0c0c] border-[10px] border-[#18181b] rounded-t-[1.5rem] shadow-2xl overflow-hidden">
-                                {/* Wallpaper Abstract */}
-                                <div className="absolute inset-0 bg-gradient-to-br from-[#121421] via-[#1a1c2e] to-black opacity-80">
-                                    <div className="absolute top-[20%] left-[-10%] w-[120%] h-full bg-blue-500/10 blur-[80px] rounded-full animate-pulse" />
-                                </div>
-                                {/* Notch */}
-                                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-4 bg-[#18181b] rounded-b-lg z-10" />
-
-                                <img
-                                    src="https://www.apple.com/v/macbook-air-m2/e/images/overview/design/design_midnight__e5w98305msiu_large.jpg"
-                                    className="absolute inset-0 w-full h-full object-contain opacity-90 transition-transform duration-700 group-hover/laptop:scale-110"
-                                    alt="MacBook Air M2"
-                                />
+                        {expandedIndex === i && (
+                            <div className="grid grid-cols-1 gap-3 mt-2 animate-in fade-in slide-in-from-top-2 duration-500">
+                                {spec.details.map((detail, di) => (
+                                    <div key={di} className="flex justify-between items-center gap-8 border-t border-[var(--border-color)]/50 pt-3 first:border-0 first:pt-0">
+                                        <span className="text-[10px] uppercase tracking-wider text-[var(--text-muted)] font-bold">{detail.label}</span>
+                                        <span className="text-xs font-medium text-[var(--text-primary)]">{detail.val}</span>
+                                    </div>
+                                ))}
                             </div>
-                            {/* Bottom Case */}
-                            <div className="h-4 bg-gradient-to-b from-[#18181b] to-[#0a0a0d] rounded-b-lg border-t border-white/5 shadow-2xl relative">
-                                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-[2px] bg-white/10 rounded-full" />
-                            </div>
-                        </div>
+                        )}
                     </div>
-                </div>
+                ))}
+            </div>
 
-                {/* Info Text Bubble */}
-                <div className="absolute bottom-8 right-8 z-10 hidden md:block">
-                    <div className="bg-white/5 backdrop-blur-xl border border-white/10 p-4 rounded-2xl max-w-[200px]">
-                        <p className="text-[10px] text-white/40 uppercase font-bold mb-2 tracking-tighter">Daily Driver</p>
-                        <p className="text-xs text-white/80 leading-relaxed font-light italic">
-                            {lang === 'en' ? '"The perfect balance of portability and power. M2 is magic."' : '"ความสมดุลที่ลงตัวระหว่างความเบาและประสิทธิภาพ"'}
-                        </p>
-                    </div>
-                </div>
+            {/* Bottom Right: Color Badge */}
+            <div className="absolute bottom-8 right-8 md:bottom-12 md:right-12 z-20 flex items-center gap-3 bg-[var(--bg-primary)]/80 backdrop-blur-md border border-[var(--border-color)] px-4 py-2 rounded-2xl shadow-lg hover:border-[var(--text-primary)]/30 transition-all duration-500 cursor-default group">
+                <div
+                    className="w-3.5 h-3.5 rounded-full border border-white/20 shadow-inner group-hover:scale-110 transition-all duration-500"
+                    style={{ backgroundColor: currentSpec.badge.color }}
+                />
+                <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[var(--text-primary)]">
+                    {lang === 'en' ? currentSpec.badge.en : currentSpec.badge.th}
+                </span>
+            </div>
+
+            {/* Center: Product Image */}
+            <div className="relative w-full max-w-[450px] z-10 flex justify-center items-center hover:scale-[1.03] transition-all duration-700 md:translate-x-32 lg:translate-x-40">
+                <img
+                    key={currentSpec.image}
+                    src={currentSpec.image}
+                    className="w-full h-auto drop-shadow-[0_40px_80px_rgba(0,0,0,0.4)] animate-product-swap"
+                    alt={lang === 'en' ? currentSpec.en : currentSpec.th}
+                />
             </div>
         </div>
     );
 };
 
-const UsesSection = ({ title, items }) => (
-    <div className="mb-20">
-        <h2 className="text-xl font-heading mb-8 flex items-center gap-3">
-            <span className="w-8 h-[1px] bg-[var(--text-muted)] opacity-30"></span>
-            {title}
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {items.map((item, i) => (
-                <div key={i} className="group relative p-6 rounded-2xl bg-[var(--bg-secondary)] border border-[var(--border-color)] hover:border-[var(--text-primary)] transition-all duration-500 overflow-hidden">
-                    {/* Glow Effect */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-[var(--text-primary)]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
+/* --- Specialized Component 2: Development Tools (Bento Style) --- */
+const DevToolsBento = ({ lang, isVisible }) => {
+    const tools = [
+        { name: 'VS Code', icon: 'vscode', desc: 'Main IDE', size: 'col-span-2' },
+        { name: 'Warp', icon: 'bash', desc: '21st Century Terminal', size: 'col-span-1' },
+        { name: 'TablePlus', icon: 'mysql', desc: 'DB Manager', size: 'col-span-1' },
+        { name: 'Postman', icon: 'postman', desc: 'API Testing', size: 'col-span-2' }
+    ];
 
-                    <div className="relative z-10 flex items-start justify-between">
-                        <div>
-                            <h3 className="text-[var(--text-primary)] font-medium mb-1">{item.name}</h3>
-                            <p className="text-[var(--text-muted)] text-sm leading-relaxed">{item.description}</p>
+    return (
+        <div className={`grid grid-cols-2 lg:grid-cols-4 gap-4 mb-24 transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+            {tools.map((tool, i) => (
+                <div key={i} className={`group relative p-6 rounded-3xl bg-[var(--bg-secondary)] border border-[var(--border-color)] hover:border-[var(--text-primary)] transition-all duration-500 overflow-hidden ${tool.size}`}>
+                    <div className="absolute inset-0 bg-gradient-to-br from-[var(--text-primary)]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+                    <div className="relative z-10 flex flex-col h-full items-center text-center gap-4">
+                        <div className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center border border-white/10 group-hover:scale-110 transition-transform duration-500 group-hover:-rotate-3">
+                            <img src={`https://skillicons.dev/icons?i=${tool.icon}`} className="w-7 h-7" alt={tool.name} />
                         </div>
-                        {item.link && (
-                            <Link href={item.link} target="_blank" className="text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors">
-                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                                </svg>
-                            </Link>
-                        )}
+                        <div>
+                            <h4 className="text-[var(--text-primary)] font-bold text-sm tracking-tight">{tool.name}</h4>
+                            <p className="text-[var(--text-muted)] text-[10px] uppercase font-bold tracking-[0.2em] mt-1 group-hover:text-[var(--text-primary)] transition-colors">{tool.desc}</p>
+                        </div>
                     </div>
                 </div>
             ))}
         </div>
-    </div>
-);
+    );
+};
+
+/* --- Specialized Component 3: Software & Productivity (Floating List) --- */
+const ProductivityGrid = ({ lang, isVisible }) => {
+    const apps = [
+        { name: 'Notion', desc: 'Second Brain & Knowledge Base', icon: 'notion' },
+        { name: 'Figma', desc: 'UI/UX Design Workflow', icon: 'figma' },
+        { name: 'Arc', desc: 'Modular Web Browsing', icon: 'chrome' },
+        { name: 'Slack', desc: 'Professional Communication', icon: 'slack' }
+    ];
+
+    return (
+        <div className={`grid grid-cols-1 md:grid-cols-2 gap-6 mb-24 transition-all duration-1000 delay-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+            {apps.map((app, i) => (
+                <div key={i} className="group relative flex items-center gap-6 p-6 rounded-[32px] bg-[var(--bg-secondary)] border border-[var(--border-color)] hover:bg-[var(--primary)] transition-all duration-500">
+                    <div className="w-16 h-16 rounded-[20px] bg-[var(--bg-primary)] border border-[var(--border-color)] flex items-center justify-center p-4 group-hover:scale-110 transition-transform duration-700 shadow-glow">
+                        <img src={`https://skillicons.dev/icons?i=${app.icon}`} className="w-full h-full object-contain" alt={app.name} />
+                    </div>
+                    <div>
+                        <h4 className="text-[var(--text-primary)] font-medium text-lg leading-tight mb-1">{app.name}</h4>
+                        <p className="text-[var(--text-muted)] text-sm leading-relaxed">{app.desc}</p>
+                    </div>
+                </div>
+            ))}
+        </div>
+    );
+};
 
 export default function UsesPage({ theme, setTheme, lang, setLang }) {
     const [bookingOpen, setBookingOpen] = useState(false);
@@ -151,39 +203,11 @@ export default function UsesPage({ theme, setTheme, lang, setLang }) {
         return () => clearTimeout(timer);
     }, []);
 
-    const categories = [
-        {
-            title: lang === 'en' ? "Workstation" : "ชุดโต๊ะคทำงาน",
-            items: [
-                { name: "MacBook Air M2 13\"", description: lang === 'en' ? "Midnight, 16GB RAM, 256GB SSD. My perfectly silent powerhouse." : "สี Midnight, RAM 16GB, SSD 256GB. ขุมพลังที่เงียบสนิทและลงตัวที่สุด", link: "https://www.apple.com/th/macbook-air-m2/" },
-                { name: "Lofree Flow", description: lang === 'en' ? "Low Profile Mechanical Keyboard with smooth tactile feel." : "คีย์บอร์ด Low Profile Mechanical ที่สัมผัสลื่นไหลและดีไซน์มินิมอล", link: "https://www.lofree.co/products/lofree-flow-artistic-low-profile-mechanical-keyboard" },
-            ]
-        },
-        {
-            title: lang === 'en' ? "Development Tools" : "เครื่องมือการพัฒนา",
-            items: [
-                { name: "Visual Studio Code", description: "Theme: Tokyo Night, Font: JetBrains Mono.", link: "https://code.visualstudio.com/" },
-                { name: "Warp", description: "The terminal for the 21st century. Blazing fast.", link: "https://www.warp.dev/" },
-                { name: "TablePlus", description: "Modern, native tool for database management.", link: "https://tableplus.com/" },
-                { name: "Postman", description: "Essential for API development and testing.", link: "https://www.postman.com/" }
-            ]
-        },
-        {
-            title: lang === 'en' ? "Software & Productivity" : "ซอฟต์แวร์และผลงาน",
-            items: [
-                { name: "Notion", description: "Where my entire life and second brain live.", link: "https://www.notion.so/" },
-                { name: "Figma", description: "All my UI/UX designs start and end here.", link: "https://www.figma.com/" },
-                { name: "Arc Browser", description: "A better way to browse the internet.", link: "https://arc.net/" },
-                { name: "Slack", description: "Communication hub for all professional collaboration.", link: "https://slack.com/" }
-            ]
-        }
-    ];
-
     return (
         <main className="min-h-screen transition-theme bg-[var(--bg-primary)]">
             <Navbar t={t} lang={lang} setLang={setLang} theme={theme} setTheme={setTheme} onBookCall={() => setBookingOpen(true)} />
 
-            <div className="pt-32 pb-24 max-w-[1000px] mx-auto px-6">
+            <div className="pt-32 pb-24 max-w-[1050px] mx-auto px-6">
                 {/* Header Section */}
                 <div className="text-center mb-24">
                     <span className={`inline-block text-[10px] tracking-[0.4em] font-bold text-[var(--text-muted)] uppercase mb-6 transition-all duration-1000 ${showContent ? 'opacity-60 translate-y-0' : 'opacity-0 translate-y-4'}`}>
@@ -195,27 +219,44 @@ export default function UsesPage({ theme, setTheme, lang, setLang }) {
                     </h1>
                     <div className="text-[var(--text-secondary)] text-lg md:text-xl font-light leading-relaxed h-8">
                         {showContent && (
-                            <TypewriterText text={lang === 'en' ? "The tools I use for building modern digital products." : "เครื่องมือที่ผมใช้สร้างสรรค์ผลงานดิจิทัลสมัยใหม่"} />
+                            <TypewriterText text={lang === 'en' ? "A collection of tools and gear I use on a daily basis." : "รวมเครื่องมือและอุปกรณ์ที่ผมใช้งานเป็นประจำทุกวัน"} />
                         )}
                     </div>
                 </div>
 
-                {/* Featured Hardware Showcase */}
-                <HardwareShowcase lang={lang} isVisible={showContent} />
+                {/* --- Section 1: Workstation --- */}
+                <div className="mb-20">
+                    <h2 className="text-xl font-heading mb-12 flex items-center gap-4">
+                        <span className="w-12 h-[1px] bg-gradient-to-r from-[var(--text-primary)] to-transparent opacity-20"></span>
+                        {lang === 'en' ? "Workstation" : "ชุดโต๊ะคทำงาน"}
+                    </h2>
+                    <WorkstationShowcase lang={lang} isVisible={showContent} />
+                </div>
 
-                {/* Categories */}
-                <div className={`transition-all duration-1000 delay-700 ${showContent ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-                    {categories.map((cat, i) => (
-                        <UsesSection key={i} title={cat.title} items={cat.items} />
-                    ))}
+                {/* --- Section 2: Development Tools --- */}
+                <div className="mb-20">
+                    <h2 className="text-xl font-heading mb-12 flex items-center gap-4">
+                        <span className="w-12 h-[1px] bg-gradient-to-r from-[var(--text-primary)] to-transparent opacity-20"></span>
+                        {lang === 'en' ? "Development Tools" : "เครื่องมือการพัฒนา"}
+                    </h2>
+                    <DevToolsBento lang={lang} isVisible={showContent} />
+                </div>
+
+                {/* --- Section 3: Software & Productivity --- */}
+                <div className="mb-20">
+                    <h2 className="text-xl font-heading mb-12 flex items-center gap-4">
+                        <span className="w-12 h-[1px] bg-gradient-to-r from-[var(--text-primary)] to-transparent opacity-20"></span>
+                        {lang === 'en' ? "Software & Productivity" : "ซอฟต์แวร์และผลงาน"}
+                    </h2>
+                    <ProductivityGrid lang={lang} isVisible={showContent} />
                 </div>
 
                 {/* Bottom Callout */}
-                <div className={`mt-20 p-8 rounded-[32px] bg-[var(--bg-secondary)] border border-[var(--border-color)] text-center transition-all duration-1000 delay-1000 ${showContent ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-                    <p className="text-[var(--text-secondary)] italic mb-4">
+                <div className={`mt-20 p-8 rounded-[40px] bg-gradient-to-b from-white/[0.03] to-transparent border border-white/5 text-center transition-all duration-1000 delay-1000 ${showContent ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+                    <p className="text-[var(--text-secondary)] italic mb-6">
                         {lang === 'en' ? "Note: This list is constantly evolving as I try new tools." : "หมายเหตุ: รายการเหล่านี้อาจมีการเปลี่ยนแปลงเมื่อผมได้ลองเครื่องมือใหม่ๆ"}
                     </p>
-                    <Link href="/" className="text-sm font-bold uppercase tracking-widest text-[var(--text-primary)] hover:opacity-70 transition-opacity">
+                    <Link href="/" className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-[var(--text-primary)] hover:gap-4 transition-all duration-300">
                         {lang === 'en' ? "← Back to Home" : "← กลับสู่หน้าหลัก"}
                     </Link>
                 </div>
