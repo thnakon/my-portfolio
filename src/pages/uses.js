@@ -37,6 +37,78 @@ const TypewriterText = ({ text, delay = 50, startDelay = 500, onComplete }) => {
     );
 };
 
+const HardwareShowcase = ({ lang, isVisible }) => {
+    const specs = [
+        { label: lang === 'en' ? 'Size' : 'ขนาด', value: '13.6"' },
+        { label: lang === 'en' ? 'Color' : 'สี', value: lang === 'en' ? 'Midnight' : 'มิดไนท์' },
+        { label: lang === 'en' ? 'Display' : 'จอภาพ', value: 'Liquid Retina' },
+        { label: lang === 'en' ? 'Storage' : 'ความจุ', value: '256GB SSD' },
+        { label: lang === 'en' ? 'Memory' : 'หน่วยความจำ', value: '16GB RAM' },
+    ];
+
+    return (
+        <div className={`relative mb-32 transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+            <div className="relative bg-[#050505] rounded-[40px] border border-white/5 overflow-hidden p-8 md:p-16 flex flex-col md:flex-row items-center gap-12">
+                {/* Hotspots / Specs List */}
+                <div className="flex flex-col gap-4 w-full md:w-auto z-10">
+                    {specs.map((spec, i) => (
+                        <div key={i} className="group/spec flex items-center gap-4 bg-white/5 hover:bg-white/10 border border-white/5 rounded-full px-5 py-3 transition-all duration-300 backdrop-blur-md cursor-default">
+                            <div className="w-5 h-5 rounded-full border border-white/20 flex items-center justify-center group-hover/spec:scale-110 group-hover/spec:border-white/40 transition-all">
+                                <div className="w-1.5 h-1.5 bg-white rounded-full group-hover/spec:scale-125 transition-all" />
+                            </div>
+                            <div className="flex flex-col">
+                                <span className="text-[10px] text-white/40 uppercase font-bold tracking-widest">{spec.label}</span>
+                                <span className="text-sm text-white/90 font-medium">{spec.value}</span>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+
+                {/* Laptop Mockup Area */}
+                <div className="relative flex-1 flex justify-center items-center py-10">
+                    {/* Glow background */}
+                    <div className="absolute inset-x-0 inset-y-0 bg-blue-500/10 blur-[100px] rounded-full" />
+
+                    <div className="relative group/laptop">
+                        {/* MacBook Air M2 Midnight Mockup */}
+                        <div className="relative w-72 md:w-[500px] transition-transform duration-1000 group-hover/laptop:scale-[1.02] group-hover/laptop:-translate-y-2">
+                            {/* Screen */}
+                            <div className="relative aspect-[16/10.5] bg-[#0c0c0c] border-[10px] border-[#18181b] rounded-t-[1.5rem] shadow-2xl overflow-hidden">
+                                {/* Wallpaper Abstract */}
+                                <div className="absolute inset-0 bg-gradient-to-br from-[#121421] via-[#1a1c2e] to-black opacity-80">
+                                    <div className="absolute top-[20%] left-[-10%] w-[120%] h-full bg-blue-500/10 blur-[80px] rounded-full animate-pulse" />
+                                </div>
+                                {/* Notch */}
+                                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-4 bg-[#18181b] rounded-b-lg z-10" />
+
+                                <img
+                                    src="https://www.apple.com/v/macbook-air-m2/e/images/overview/design/design_midnight__e5w98305msiu_large.jpg"
+                                    className="absolute inset-0 w-full h-full object-contain opacity-90 transition-transform duration-700 group-hover/laptop:scale-110"
+                                    alt="MacBook Air M2"
+                                />
+                            </div>
+                            {/* Bottom Case */}
+                            <div className="h-4 bg-gradient-to-b from-[#18181b] to-[#0a0a0d] rounded-b-lg border-t border-white/5 shadow-2xl relative">
+                                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-[2px] bg-white/10 rounded-full" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Info Text Bubble */}
+                <div className="absolute bottom-8 right-8 z-10 hidden md:block">
+                    <div className="bg-white/5 backdrop-blur-xl border border-white/10 p-4 rounded-2xl max-w-[200px]">
+                        <p className="text-[10px] text-white/40 uppercase font-bold mb-2 tracking-tighter">Daily Driver</p>
+                        <p className="text-xs text-white/80 leading-relaxed font-light italic">
+                            {lang === 'en' ? '"The perfect balance of portability and power. M2 is magic."' : '"ความสมดุลที่ลงตัวระหว่างความเบาและประสิทธิภาพ"'}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+};
+
 const UsesSection = ({ title, items }) => (
     <div className="mb-20">
         <h2 className="text-xl font-heading mb-8 flex items-center gap-3">
@@ -83,10 +155,8 @@ export default function UsesPage({ theme, setTheme, lang, setLang }) {
         {
             title: lang === 'en' ? "Workstation" : "ชุดโต๊ะคทำงาน",
             items: [
-                { name: "MacBook Pro M3 Pro", description: "14-inch, Space Black, 36GB RAM. My daily driver for everything.", link: "https://www.apple.com/macbook-pro/" },
-                { name: "LG UltraFine 4K", description: "27-inch display for that crisp 4K real estate.", link: "#" },
-                { name: "Keychron K6 Pro", description: "Mechanical keyboard with Gateron G Pro Brown switches.", link: "#" },
-                { name: "Logitech MX Master 3S", description: "The ultimate productivity mouse. Highly recommend.", link: "#" }
+                { name: "MacBook Air M2 13\"", description: lang === 'en' ? "Midnight, 16GB RAM, 256GB SSD. My perfectly silent powerhouse." : "สี Midnight, RAM 16GB, SSD 256GB. ขุมพลังที่เงียบสนิทและลงตัวที่สุด", link: "https://www.apple.com/th/macbook-air-m2/" },
+                { name: "Lofree Flow", description: lang === 'en' ? "Low Profile Mechanical Keyboard with smooth tactile feel." : "คีย์บอร์ด Low Profile Mechanical ที่สัมผัสลื่นไหลและดีไซน์มินิมอล", link: "https://www.lofree.co/products/lofree-flow-artistic-low-profile-mechanical-keyboard" },
             ]
         },
         {
@@ -113,7 +183,7 @@ export default function UsesPage({ theme, setTheme, lang, setLang }) {
         <main className="min-h-screen transition-theme bg-[var(--bg-primary)]">
             <Navbar t={t} lang={lang} setLang={setLang} theme={theme} setTheme={setTheme} onBookCall={() => setBookingOpen(true)} />
 
-            <div className="pt-32 pb-24 max-w-[900px] mx-auto px-6">
+            <div className="pt-32 pb-24 max-w-[1000px] mx-auto px-6">
                 {/* Header Section */}
                 <div className="text-center mb-24">
                     <span className={`inline-block text-[10px] tracking-[0.4em] font-bold text-[var(--text-muted)] uppercase mb-6 transition-all duration-1000 ${showContent ? 'opacity-60 translate-y-0' : 'opacity-0 translate-y-4'}`}>
@@ -130,8 +200,11 @@ export default function UsesPage({ theme, setTheme, lang, setLang }) {
                     </div>
                 </div>
 
+                {/* Featured Hardware Showcase */}
+                <HardwareShowcase lang={lang} isVisible={showContent} />
+
                 {/* Categories */}
-                <div className={`transition-all duration-1000 delay-500 ${showContent ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+                <div className={`transition-all duration-1000 delay-700 ${showContent ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
                     {categories.map((cat, i) => (
                         <UsesSection key={i} title={cat.title} items={cat.items} />
                     ))}
