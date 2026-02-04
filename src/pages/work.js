@@ -2,6 +2,7 @@ import { useState } from 'react';
 import translations from '@/lib/translations';
 import Navbar from '@/components/Navbar';
 import Projects from '@/components/Projects';
+import Contact from '@/components/Contact';
 import BookingModal from '@/components/BookingModal';
 import Footer from '@/components/Footer';
 
@@ -23,6 +24,8 @@ export default function WorkPage({ theme, setTheme, lang, setLang }) {
             <div className="pt-20">
                 <Projects t={t} lang={lang} isHistory={true} />
             </div>
+
+            <Contact t={t} onGetInTouch={() => setBookingOpen(true)} />
 
             <Footer t={t} />
 

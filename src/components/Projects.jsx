@@ -211,7 +211,7 @@ const ProjectItem = ({ project, index, t, isHistory }) => {
                     
                     {!project.comingSoon && (
                         <div className={`flex flex-wrap gap-5 items-center ${isLeft ? 'lg:justify-end' : 'lg:justify-start'}`}>
-                            <Link href="/work" className="btn-premium-cta !py-1.5 !px-2 !pl-6 !text-sm hover:scale-105">
+                            <Link href={`/work/${project.slug}`} className="btn-premium-cta !py-1.5 !px-2 !pl-6 !text-sm hover:scale-105">
                                 {t.projects.viewProject}
                                 <div className="cta-arrow-circle !w-8 !h-8">
                                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -302,7 +302,7 @@ const ProjectItem = ({ project, index, t, isHistory }) => {
         
         {!project.comingSoon && (
            <div className={`flex flex-wrap gap-5 items-center transition-all duration-700 delay-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-              <Link href="/work" className="btn-premium-cta hover:scale-105 !py-1.5 !px-2 !pl-6 !text-sm">
+              <Link href={`/work/${project.slug}`} className="btn-premium-cta hover:scale-105 !py-1.5 !px-2 !pl-6 !text-sm">
                  {t.projects.viewProject}
                  <div className="cta-arrow-circle !w-8 !h-8">
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -365,13 +365,7 @@ export default function Projects({ t, lang, isHistory = false }) {
   useEffect(() => {
     if (!startPortfolioTyping) return;
     
-    const historyText = lang === 'en' 
-        ? 'A detailed look into the projects I have built.' 
-        : 'เจาะลึกรายละเอียดและเบื้องหลังการพัฒนาโปรเจกต์ต่างๆ ของผม';
-        
-    const portfolioText = isHistory 
-        ? historyText 
-        : (t.portfolio?.sectionSubtitle || 'Explore projects crafted with intention and attention to every detail.');
+    const portfolioText = t.portfolio?.sectionSubtitle || 'Explore projects crafted with intention and attention to every detail.';
 
     let currentIndex = 0;
     const interval = setInterval(() => {
@@ -387,6 +381,7 @@ export default function Projects({ t, lang, isHistory = false }) {
 
   const projects = [
     {
+      slug: 'obounerp',
       title: t.projects.obounERP.title,
       period: t.projects.obounERP.period,
       descriptionPrefix: t.projects.obounERP.description,
@@ -438,6 +433,7 @@ export default function Projects({ t, lang, isHistory = false }) {
       comingSoon: false
     },
     {
+      slug: 'babybib',
       title: t.projects.babybib.title,
       period: t.projects.babybib.period,
       descriptionPrefix: t.projects.babybib.description,
@@ -477,6 +473,7 @@ export default function Projects({ t, lang, isHistory = false }) {
       comingSoon: false
     },
     {
+      slug: 'scribehub',
       title: t.projects.scribehub.title,
       period: t.projects.scribehub.period,
       descriptionPrefix: t.projects.scribehub.description,
@@ -519,6 +516,7 @@ export default function Projects({ t, lang, isHistory = false }) {
       comingSoon: false
     },
     {
+      slug: 'mailon',
       title: t.projects.mailon.title,
       period: t.projects.mailon.period,
       descriptionPrefix: t.projects.mailon.description,
@@ -561,6 +559,7 @@ export default function Projects({ t, lang, isHistory = false }) {
       comingSoon: false
     },
     {
+      slug: 'klin',
       title: t.projects.klin.title,
       period: t.projects.klin.period,
       descriptionPrefix: t.projects.klin.description,
@@ -601,6 +600,7 @@ export default function Projects({ t, lang, isHistory = false }) {
       comingSoon: false
     },
     {
+      slug: 'singha',
       title: t.projects.singha.title,
       period: t.projects.singha.period,
       descriptionPrefix: t.projects.singha.description,
@@ -638,6 +638,7 @@ export default function Projects({ t, lang, isHistory = false }) {
       comingSoon: false
     },
     {
+      slug: 'my-portfolio',
       title: t.projects.myPortfolio.title,
       period: t.projects.myPortfolio.period,
       descriptionPrefix: t.projects.myPortfolio.description,
@@ -684,20 +685,18 @@ export default function Projects({ t, lang, isHistory = false }) {
         <div ref={portfolioRef} className="pt-20 pb-12 flex flex-col justify-center">
           <div className="text-center mb-8">
             <span className={`inline-block text-[10px] tracking-[0.3em] font-bold text-[var(--text-muted)] uppercase mb-6 transition-all duration-1000 ${portfolioVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-              {isHistory ? (lang === 'en' ? 'PROJECTS ARCHIVE' : 'บันทึกผลงาน') : 'PORTFOLIO'}
+              PORTFOLIO
             </span>
             <h2 className={`text-3xl md:text-5xl font-heading tracking-tight mb-8 transition-all duration-1000 delay-300 ${portfolioVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-              <span className="text-[var(--text-primary)]">{isHistory ? (lang === 'en' ? 'About My' : 'เกี่ยวกับ') : (t.portfolio?.sectionTitlePrefix || 'Our')} </span>
-              <em className="overview-title-accent">{isHistory ? (lang === 'en' ? 'Projects' : 'โปรเจกต์ของฉัน') : (t.portfolio?.sectionTitleAccent || 'Work')}</em>
+              <span className="text-[var(--text-primary)]">{(t.portfolio?.sectionTitlePrefix || 'Our')} </span>
+              <em className="overview-title-accent">{(t.portfolio?.sectionTitleAccent || 'Work')}</em>
             </h2>
             <div className="min-h-[2em]">
               <p className="text-base md:text-lg text-[var(--text-secondary)] max-w-2xl mx-auto leading-relaxed">
                 {typedPortfolioDesc}
                 {startPortfolioTyping && (
                   <span className={`inline-block w-[2px] h-[1.1em] bg-[var(--text-primary)] ml-1 animate-blink align-middle ${
-                    typedPortfolioDesc.length === (isHistory 
-                      ? (lang === 'en' ? 'A detailed look into the projects I have built.' : 'เจาะลึกรายละเอียดและเบื้องหลังการพัฒนาโปรเจกต์ต่างๆ ของผม')
-                      : (t.portfolio?.sectionSubtitle || '').length) ? 'opacity-0' : 'opacity-100'
+                    typedPortfolioDesc.length === (t.portfolio?.sectionSubtitle || '').length ? 'opacity-0' : 'opacity-100'
                   }`} />
                 )}
               </p>
@@ -709,7 +708,7 @@ export default function Projects({ t, lang, isHistory = false }) {
           {isHistory && (
              <div className="hidden lg:block absolute left-1/2 top-0 bottom-0 w-[1px] bg-[var(--border-color)] -translate-x-1/2 opacity-20" />
           )}
-          {(isHistory ? projects : projects.filter(p => p.title === t.projects.scribehub.title)).map((project, index) => (
+          {(isHistory ? projects : projects.filter(p => [t.projects.obounERP.title, t.projects.babybib.title, t.projects.scribehub.title].includes(p.title))).map((project, index) => (
             <ProjectItem key={index} project={project} index={index} t={t} isHistory={isHistory} />
           ))}
         </div>
