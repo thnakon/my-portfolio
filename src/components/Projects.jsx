@@ -97,6 +97,31 @@ const ProjectItem = ({ project, index, t, isHistory }) => {
       bg: 'bg-sky-400',
       text: 'text-sky-500',
       icon: 'text-sky-400'
+    },
+    yellow: {
+      bg: 'bg-yellow-400',
+      text: 'text-yellow-500',
+      icon: 'text-yellow-400'
+    },
+    cyan: {
+      bg: 'bg-cyan-400',
+      text: 'text-cyan-500',
+      icon: 'text-cyan-400'
+    },
+    orange: {
+      bg: 'bg-orange-400',
+      text: 'text-orange-500',
+      icon: 'text-orange-400'
+    },
+    amber: {
+      bg: 'bg-amber-400',
+      text: 'text-amber-500',
+      icon: 'text-amber-400'
+    },
+    black: {
+      bg: 'bg-zinc-900',
+      text: 'text-zinc-950',
+      icon: 'text-zinc-800'
     }
   };
 
@@ -174,7 +199,11 @@ const ProjectItem = ({ project, index, t, isHistory }) => {
                     <div className={`flex flex-wrap gap-2.5 mb-10 ${isLeft ? 'lg:justify-end' : 'lg:justify-start'} transition-all duration-700 delay-900 ${isVisible ? 'opacity-100' : 'opacity-0 translate-y-4'}`}>
                         {project.tech.map((tech, i) => (
                             <div key={i} className="flex items-center gap-2 px-3 py-1.5 bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-full text-[10px]">
-                                <img src={`https://skillicons.dev/icons?i=${tech.icon}`} alt={tech.name} className="w-3.5 h-3.5 object-contain" />
+                                <img 
+                                    src={tech.icon.startsWith('/') ? tech.icon : `https://skillicons.dev/icons?i=${tech.icon}`} 
+                                    alt={tech.name} 
+                                    className="w-3.5 h-3.5 object-contain" 
+                                />
                                 <span>{tech.name}</span>
                             </div>
                         ))}
@@ -262,7 +291,7 @@ const ProjectItem = ({ project, index, t, isHistory }) => {
                style={{ transitionDelay: `${1100 + (i * 100)}ms` }}
              >
                 <img 
-                  src={`https://skillicons.dev/icons?i=${tech.icon}`} 
+                  src={tech.icon.startsWith('/') ? tech.icon : `https://skillicons.dev/icons?i=${tech.icon}`} 
                   alt={tech.name} 
                   className="w-3.5 h-3.5 object-contain" 
                 />
@@ -485,10 +514,166 @@ export default function Projects({ t, lang, isHistory = false }) {
         '  );',
         '};'
       ],
-      accent: 'sky',
+      accent: 'emerald',
       features: t.projects.scribehub.features,
       comingSoon: false
     },
+    {
+      title: t.projects.mailon.title,
+      period: t.projects.mailon.period,
+      descriptionPrefix: t.projects.mailon.description,
+      type: t.projects.mailon.type,
+      githubUrl: "#",
+      tech: [
+        { name: 'Next.js 14', icon: 'nextjs' },
+        { name: 'Supabase', icon: 'supabase' },
+        { name: 'Tailwind', icon: 'tailwind' },
+        { name: 'TypeScript', icon: 'ts' },
+        { name: 'shadcn/ui', icon: 'react' }
+      ],
+      fileName: 'StudentJourney.tsx',
+      codeLines: [
+        '<span class="text-purple-400">export default function</span> <span class="text-yellow-400">JourneyTracker</span>() {',
+        '  <span class="text-purple-400">const</span> { <span class="text-blue-300">user</span> } = useAuth();',
+        '  <span class="text-purple-400">const</span> [ <span class="text-blue-300">goals</span>, <span class="text-blue-300">setGoals</span> ] = useState([]);',
+        '  ',
+        '  <span class="text-purple-400">return</span> (',
+        '    <span class="text-blue-300">&lt;div</span> <span class="text-emerald-300">className="grid gap-6"</span><span class="text-blue-300">&gt;</span>',
+        '      <span class="text-blue-300">&lt;StudyHardCard</span> <span class="text-blue-300">/&gt;</span>',
+        '      <span class="text-blue-300">&lt;CareerSuccessGrid</span> <span class="text-blue-300">/&gt;</span>',
+        '      <span class="text-blue-300">&lt;GoodLifeMetrics</span> <span class="text-blue-300">/&gt;</span>',
+        '    <span class="text-blue-300">&lt;/div&gt;</span>',
+        '  );',
+        '}'
+      ],
+      secondaryFileName: 'database.sql',
+      secondaryCodeLines: [
+        '<span class="text-purple-400">CREATE TABLE</span> <span class="text-yellow-400">student_milestones</span> (',
+        '  <span class="text-blue-300">id</span> uuid <span class="text-purple-400">PRIMARY KEY</span>,',
+        '  <span class="text-blue-300">user_id</span> uuid <span class="text-purple-400">REFERENCES auth.users</span>,',
+        '  <span class="text-blue-300">title</span> text,',
+        '  <span class="text-blue-300">status</span> milestone_status,',
+        '  <span class="text-blue-300">created_at</span> timestamptz',
+        ');'
+      ],
+      accent: 'yellow',
+      features: t.projects.mailon.features,
+      comingSoon: false
+    },
+    {
+      title: t.projects.klin.title,
+      period: t.projects.klin.period,
+      descriptionPrefix: t.projects.klin.description,
+      type: t.projects.klin.type,
+      githubUrl: "#",
+      tech: [
+        { name: 'Laravel', icon: 'laravel' },
+        { name: 'Bootstrap', icon: 'css' },
+        { name: 'MySQL', icon: 'mysql' },
+        { name: 'JavaScript', icon: 'js' }
+      ],
+      fileName: 'BookingController.php',
+      codeLines: [
+        '<span class="text-purple-400">public function</span> <span class="text-yellow-400">createAppointment</span>(Request <span class="text-blue-300">$request</span>)',
+        '{',
+        '    <span class="text-blue-300">$patient</span> = <span class="text-emerald-400">Patient</span>::find(<span class="text-blue-300">$request</span>->id);',
+        '    <span class="text-blue-300">$appointment</span> = <span class="text-emerald-400">Appointment</span>::create([',
+        '        <span class="text-emerald-300">\'patient_id\'</span> => <span class="text-blue-300">$patient</span>->id,',
+        '        <span class="text-emerald-300">\'dentist_id\'</span> => <span class="text-blue-300">$request</span>->dentist_id,',
+        '        <span class="text-emerald-300">\'scheduled_at\'</span> => <span class="text-blue-300">$request</span>->date',
+        '    ]);',
+        '    <span class="text-purple-400">return</span> redirect()->back()->with(<span class="text-emerald-300">\'success\'</span>, <span class="text-emerald-300">\'Booked!\'</span>);',
+        '}'
+      ],
+      secondaryFileName: 'booking.js',
+      secondaryCodeLines: [
+        '<span class="text-purple-400">function</span> <span class="text-yellow-400">initDatePicker</span>() {',
+        '  <span class="text-blue-300">$</span>(<span class="text-emerald-300">"#calendar"</span>).datepicker({',
+        '    minDate: <span class="text-emerald-300">0</span>,',
+        '    onSelect: <span class="text-purple-400">function</span>(date) {',
+        '      <span class="text-blue-300">fetchAvailableSlots</span>(date);',
+        '    }',
+        '  });',
+        '}'
+      ],
+      accent: 'cyan',
+      features: t.projects.klin.features,
+      comingSoon: false
+    },
+    {
+      title: t.projects.singha.title,
+      period: t.projects.singha.period,
+      descriptionPrefix: t.projects.singha.description,
+      type: t.projects.singha.type,
+      githubUrl: "https://singha.com/",
+      tech: [
+        { name: 'Laravel', icon: 'laravel' },
+        { name: 'Git', icon: 'github' },
+        { name: 'Sourcetree', icon: '/images/uses/sourcetree-logo.png' }
+      ],
+      fileName: 'ProductService.php',
+      codeLines: [
+        '<span class="text-purple-400">namespace</span> App\\Services;',
+        '',
+        '<span class="text-purple-400">class</span> <span class="text-yellow-400">ProductService</span>',
+        '{',
+        '    <span class="text-purple-400">public function</span> <span class="text-yellow-400">getBrandDetails</span>(<span class="text-blue-300">$slug</span>)',
+        '    {',
+        '        <span class="text-purple-400">return</span> <span class="text-emerald-400">Brand</span>::where(<span class="text-emerald-300">\'slug\'</span>, <span class="text-blue-300">$slug</span>)',
+        '            ->with(<span class="text-emerald-300">\'products\'</span>)',
+        '            ->firstOrFail();',
+        '    }',
+        '}'
+      ],
+      secondaryFileName: 'app.blade.php',
+      secondaryCodeLines: [
+        '<span class="text-blue-300">&lt;div</span> <span class="text-emerald-300">class="singha-exclusive"</span><span class="text-blue-300">&gt;</span>',
+        '    <span class="text-white/40">@foreach($brands as $brand)</span>',
+        '        <span class="text-blue-300">&lt;x-brand-card</span> <span class="text-blue-300">:brand</span>="<span class="text-blue-300">$brand</span>" <span class="text-blue-300">/&gt;</span>',
+        '    <span class="text-white/40">@endforeach</span>',
+        '<span class="text-blue-300">&lt;/div&gt;</span>'
+      ],
+      accent: 'amber',
+      features: t.projects.singha.features,
+      comingSoon: false
+    },
+    {
+      title: t.projects.myPortfolio.title,
+      period: t.projects.myPortfolio.period,
+      descriptionPrefix: t.projects.myPortfolio.description,
+      type: t.projects.myPortfolio.type,
+      githubUrl: "https://github.com/thnakon/my-portfolio",
+      tech: [
+        { name: 'Next.js', icon: 'nextjs' },
+        { name: 'React', icon: 'react' },
+        { name: 'Tailwind', icon: 'tailwind' },
+        { name: 'Framer Motion', icon: '/images/tech/framer.png' },
+        { name: 'Lucide', icon: '/images/tech/lucide.png' }
+      ],
+      fileName: 'Navbar.jsx',
+      codeLines: [
+        '<span class="text-purple-400">const</span> <span class="text-yellow-400">getGreeting</span> = () => {',
+        '  <span class="text-purple-400">const</span> <span class="text-blue-300">hour</span> = <span class="text-purple-400">new</span> Date().getHours();',
+        '  <span class="text-purple-400">if</span> (<span class="text-blue-300">hour</span> &lt; 12) <span class="text-purple-400">return</span> t.nav.greetings.morning;',
+        '  <span class="text-purple-400">if</span> (<span class="text-blue-300">hour</span> &lt; 17) <span class="text-purple-400">return</span> t.nav.greetings.afternoon;',
+        '  <span class="text-purple-400">return</span> t.nav.greetings.evening;',
+        '};'
+      ],
+      secondaryFileName: 'Config.js',
+      secondaryCodeLines: [
+        '<span class="text-purple-400">export const</span> <span class="text-blue-300">themeConfig</span> = {',
+        '  initial: <span class="text-emerald-300">\'dark\'</span>,',
+        '  tokens: {',
+        '    primary: <span class="text-emerald-300">\'#000000\'</span>,',
+        '    accent: <span class="text-emerald-300">\'#ffffff\'</span>',
+        '  }',
+        '};'
+      ],
+      accent: 'black',
+      features: t.projects.myPortfolio.features,
+      comingSoon: false
+    }
+,
   ];
 
   return (
@@ -524,7 +709,7 @@ export default function Projects({ t, lang, isHistory = false }) {
           {isHistory && (
              <div className="hidden lg:block absolute left-1/2 top-0 bottom-0 w-[1px] bg-[var(--border-color)] -translate-x-1/2 opacity-20" />
           )}
-          {projects.map((project, index) => (
+          {(isHistory ? projects : projects.filter(p => p.title === t.projects.scribehub.title)).map((project, index) => (
             <ProjectItem key={index} project={project} index={index} t={t} isHistory={isHistory} />
           ))}
         </div>

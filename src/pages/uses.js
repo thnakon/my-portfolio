@@ -48,6 +48,7 @@ const WorkstationShowcase = ({ lang, isVisible }) => {
             th: 'Macbook Air M2',
             value: '13.6-inch',
             image: '/images/macbook-air-m2.png',
+            url: 'https://www.apple.com/macbook-air-13-and-15-m2/',
             badge: { en: 'Midnight Edition', th: 'สีมิดไนท์', color: '#2e3641' },
             details: [
                 { label: lang === 'en' ? 'Color' : 'สี', val: lang === 'en' ? 'Midnight' : 'สีมิดไนท์' },
@@ -61,11 +62,38 @@ const WorkstationShowcase = ({ lang, isVisible }) => {
             th: 'Lofree Flow',
             value: 'Low-Profile',
             image: '/images/lofree-flow.png',
+            url: 'https://www.lofree.co/products/lofree-flow-artistic-mechanical-keyboard',
             badge: { en: 'Space Gray', th: 'สีสเปซเกรย์', color: '#555559' },
             details: [
                 { label: lang === 'en' ? 'Switch' : 'สวิตช์', val: 'Phantom (Tactile)' },
                 { label: lang === 'en' ? 'Material' : 'วัสดุ', val: 'Aluminum' },
                 { label: lang === 'en' ? 'Mount' : 'การยึด', val: 'Gasket Mount' }
+            ]
+        },
+        {
+            en: 'Logitech G Pro',
+            th: 'Logitech G Pro',
+            value: 'Wireless',
+            image: '/images/uses/gpro-wireless.png',
+            url: 'https://www.logitechg.com/en-us/products/gaming-mice/pro-wireless-mouse.910-005270.html',
+            badge: { en: 'Performance Mouse', th: 'เมาส์ไร้สาย', color: '#00adef' },
+            details: [
+                { label: lang === 'en' ? 'Sensor' : 'เซนเซอร์', val: 'HERO 25K' },
+                { label: lang === 'en' ? 'Weight' : 'น้ำหนัก', val: '80g' },
+                { label: lang === 'en' ? 'Battery' : 'แบตเตอรี่', val: '60h+' }
+            ]
+        },
+        {
+            en: 'ASUS ProArt',
+            th: 'ASUS ProArt',
+            value: '27" 4K HDR',
+            image: '/images/uses/asus-proart.png',
+            url: 'https://www.asus.com/displays-desktops/monitors/proart/proart-display-pa279crv/',
+            badge: { en: 'Creative Professional', th: 'สายงานสร้างสรรค์', color: '#888' },
+            details: [
+                { label: lang === 'en' ? 'Resolution' : 'ความละเอียด', val: '4K UHD' },
+                { label: lang === 'en' ? 'Accuracy' : 'ความแม่นยำสี', val: 'Calman Verified' },
+                { label: lang === 'en' ? 'Connectivity' : 'การเชื่อมต่อ', val: 'USB-C (96W PD)' }
             ]
         },
     ];
@@ -74,6 +102,18 @@ const WorkstationShowcase = ({ lang, isVisible }) => {
 
     return (
         <div className={`relative overflow-hidden bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-[40px] p-8 md:p-16 mb-24 h-[500px] md:h-[600px] flex items-center justify-center transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'} hover:border-[var(--text-primary)]/20 shadow-sm`}>
+            {/* Top Right: Visit Website Link */}
+            <a
+                href={currentSpec.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="absolute top-8 right-8 md:top-12 md:right-12 z-20 flex items-center gap-2 px-4 py-2 rounded-full border border-[var(--border-color)] bg-[var(--bg-primary)]/50 backdrop-blur-md text-[10px] font-bold uppercase tracking-[0.2em] text-[var(--text-primary)] hover:bg-[var(--text-primary)] hover:text-[var(--bg-primary)] transition-all duration-300 group shadow-lg"
+            >
+                <span>{lang === 'en' ? 'Visit Website' : 'ไปยังเว็บไซต์'}</span>
+                <svg className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+            </a>
 
             {/* Top Left: Spec Pills */}
             <div className="absolute top-8 left-8 md:top-12 md:left-12 z-20 flex flex-col gap-3 items-start">
@@ -160,7 +200,9 @@ const DevToolsBento = ({ lang, isVisible }) => {
         { name: 'Notion', icon: 'notion', desc: lang === 'en' ? 'Workflow' : 'เวิร์คโฟลว์', url: 'https://notion.so' },
         { name: 'Raycast', icon: '/images/raycast-logo.png', desc: lang === 'en' ? 'Launcher' : 'ตัวช่วยเปิดแอป', url: 'https://raycast.com' },
         { name: 'Discord', icon: 'discord', desc: lang === 'en' ? 'Community' : 'คอมมูนิตี้', url: 'https://discord.com' },
-        { name: 'Sourcetree', icon: 'https://w7.pngwing.com/pngs/307/701/png-transparent-sourcetree-atlassian-bitbucket-git-github-blue-angle-electronics-thumbnail.png', desc: lang === 'en' ? 'Git Client' : 'จัดการ Git', url: 'https://www.sourcetreeapp.com' }
+        { name: 'GitLab', icon: '/images/uses/gitlab-logo.png', desc: lang === 'en' ? 'Source Control' : 'จัดการโค้ด', url: 'https://gitlab.com' },
+        { name: 'Sourcetree', icon: '/images/uses/sourcetree-logo.png', desc: lang === 'en' ? 'Git Client' : 'จัดการ Git', url: 'https://www.sourcetreeapp.com' },
+        { name: 'YouTube Music', icon: 'https://upload.wikimedia.org/wikipedia/commons/6/6a/Youtube_Music_icon.svg', desc: lang === 'en' ? 'Music & Focus' : 'ฟังเพลง & สมาธิ', url: 'https://music.youtube.com' }
     ];
 
     return (

@@ -325,6 +325,62 @@ const translations = {
                     "Built with Next.js and Supabase for real-time scalability and secure data."
                 ]
             },
+            mailon: {
+                title: "Mai-lon",
+                period: "2026",
+                description: "A single platform that helps students \"study hard, succeed in their careers, and live a good life.\" Designed to empower student journeys from academic excellence to professional success.",
+                type: "Education Platform",
+                features: [
+                    "Built with Next.js 14 App Router for optimal performance and SEO.",
+                    "Integrated Supabase for secure authentication and real-time database.",
+                    "Designed with shadcn/ui and Tailwind CSS for a premium user experience.",
+                    "Implemented automated student support workflows and career tracking.",
+                    "Scalable architecture designed for high-volume student engagement.",
+                    "Features dedicated storage for academic resources and portfolio assets."
+                ]
+            },
+            klin: {
+                title: "Klin Dental Clinic",
+                period: "2025",
+                description: "A comprehensive dental clinic management and booking platform. Developed during an internship to streamline patient scheduling and clinic operations.",
+                type: "Medical Platform (Internship)",
+                features: [
+                    "Engineered a seamless appointment booking system for patients and clinic staff.",
+                    "Implemented a secure patient record management system using MySQL.",
+                    "Designed a responsive and modern UI using Bootstrap and custom JavaScript.",
+                    "Streamlined clinic workflows including service selection and schedule management.",
+                    "Developed high-performance backend logic using the Laravel framework.",
+                    "Integrated automated notification systems for booking confirmations."
+                ]
+            },
+            singha: {
+                title: "Singha.com",
+                period: "2024",
+                description: "Contribution to the development of the official Singha website during an internship. Focused on enhancing web performance and implementing new features.",
+                type: "Enterprise Web (Internship)",
+                features: [
+                    "Collaborated in a professional development environment using Git and Sourcetree for version control.",
+                    "Developed and maintained corporate web features using the Laravel framework.",
+                    "Assisted in optimizing frontend assets and ensuring cross-browser compatibility.",
+                    "Participated in professional code reviews and enterprise-level deployment workflows.",
+                    "Contributed to the scalability and internationalization support of the platform.",
+                    "Worked closely with a multidisciplinary team to deliver high-quality web solutions."
+                ]
+            },
+            myPortfolio: {
+                title: "My Portfolio",
+                period: "2026",
+                description: "A high-performance personal portfolio website built with a focus on premium aesthetics, narrative storytelling, and cutting-edge web technologies.",
+                type: "Personal Portfolio",
+                features: [
+                    "Engineered with Next.js 14 and React for lightning-fast performance.",
+                    "Implemented a custom narrative storytelling experience with smooth animations.",
+                    "Designed a premium, responsive UI with multi-language support (EN/TH).",
+                    "Optimized for SEO with semantic HTML and modern web standards.",
+                    "Features a dynamic project timeline and interactive tool showcase.",
+                    "Built with a focus on visual excellence and seamless user interactions."
+                ]
+            },
             seeMoreWork: "See more work"
         },
 
@@ -705,6 +761,62 @@ const translations = {
                     "พัฒนากราฟความรู้เชิงโต้ตอบเพื่อการค้นพบข้อมูลและความเกี่ยวโยงในเชิงภาพ",
                     "เน้นประสบการณ์ผู้ใช้ระดับพรีเมียมเพื่อการตอบโต้ในงานวิจัยที่ราบรื่น",
                     "พัฒนาด้วย Next.js และ Supabase เพื่อการขยายตัวและระบบข้อมูลที่รัดกุม"
+                ]
+            },
+            mailon: {
+                title: "Mai-lon",
+                period: "2569",
+                description: "แพลตฟอร์มที่ช่วยให้นักศึกษา \"เรียนให้เต็มที่ ประสบความสำเร็จในอาชีพ และมีชีวิตที่ดี\" ออกแบบมาเพื่อส่งเสริมนักศึกษาตั้งแต่การเรียนจนถึงความสำเร็จในอาชีพการงาน",
+                type: "แพลตฟอร์มการศึกษา",
+                features: [
+                    "พัฒนาด้วย Next.js 14 App Router เพื่อประสิทธิภาพสูงสุดและการทำ SEO",
+                    "ใช้งาน Supabase สำหรับระบบสมาชิกและความปลอดภัยของข้อมูลแบบเรียลไทม์",
+                    "ออกแบบด้วย shadcn/ui และ Tailwind CSS เพื่อประสบการณ์ใช้งานที่พรีเมียม",
+                    "ระบบสนับสนุนนักศึกษาและการติดตามความก้าวหน้าในอาชีพแบบอัตโนมัติ",
+                    "โครงสร้างระบบที่รองรับการใช้งานจำนวนมากได้อย่างเสถียร",
+                    "จัดการทรัพยากรการเรียนและพอร์ตโฟลิโอผ่านระบบจัดการไฟล์อัจฉริยะ"
+                ]
+            },
+            klin: {
+                title: "Klin Dental Clinic",
+                period: "2568",
+                description: "แพลตฟอร์มจัดการและจองคิวออนไลน์สำหรับคลินิกทันตกรรม พัฒนาขึ้นในช่วงการฝึกงานเพื่อช่วยให้กระบวนการนัดหมายและการดำเนินงานในคลินิกเป็นไปอย่างราบรื่น",
+                type: "แพลตฟอร์มการแพทย์ (ฝึกงาน)",
+                features: [
+                    "ออกแบบและพัฒนาระบบการจองนัดหมายที่ใช้งานง่ายสำหรับคนไข้และเจ้าหน้าที่",
+                    "พัฒนาระบบจัดการทะเบียนประวัติคนไข้ที่ปลอดภัยด้วย MySQL",
+                    "สร้างหน้าจอผู้ใช้งานที่ทันสมัยและรองรับทุกอุปกรณ์ด้วย Bootstrap และ JavaScript",
+                    "ปรับปรุงเวิร์กโฟลว์ของคลินิกให้มีประสิทธิภาพ ทั้งการเลือกบริการและจัดการตารางเวลา",
+                    "เขียนระบบหลังบ้านที่มีประสิทธิภาพสูงด้วยเฟรมเวิร์ก Laravel",
+                    "ผสานระบบแจ้งเตือนอัตโนมัติสำหรับการยืนยันการจอง"
+                ]
+            },
+            singha: {
+                title: "Singha.com",
+                period: "2567",
+                description: "มีส่วนร่วมในการพัฒนาเว็บไซต์อย่างเป็นทางการของ Singha ในช่วงการฝึกงาน โดยมุ่งเน้นที่การเพิ่มประสิทธิภาพของเว็บและการพัฒนาฟีเจอร์ใหม่ๆ",
+                type: "เว็บไซต์องค์กร (ฝึกงาน)",
+                features: [
+                    "ทำงานร่วมกันในสภาพแวดล้อมการพัฒนาระดับมืออาชีพโดยใช้ Git และ Sourcetree",
+                    "พัฒนาและดูแลฟีเจอร์ต่างๆ ของเว็บไซต์องค์กรด้วย Laravel",
+                    "มีส่วนช่วยในการปรับปรุงประสิทธิภาพส่วนหน้า (Frontend Optimization)",
+                    "เข้าร่วมการตรวจสอบโค้ด (Code Review) และขั้นตอนการปรับใช้ระบบระดับองค์กร",
+                    "ช่วยในการขยายขีดความสามารถและระบบรองรับหลายภาษาของแพลตฟอร์ม",
+                    "ทำงานร่วมกับทีมผู้เชี่ยวชาญจากหลายสายงานเพื่อส่งมอบคุณภาพระดับพรีเมียม"
+                ]
+            },
+            myPortfolio: {
+                title: "My Portfolio",
+                period: "2569",
+                description: "เว็บไซต์พอร์ตโฟลิโอส่วนตัวประสิทธิภาพสูง ที่สร้างขึ้นโดยเน้นสุนทรียภาพระดับพรีเมียม การเล่าเรื่องราวผ่านดีไซน์ และเทคโนโลยีเว็บที่ทันสมัยที่สุด",
+                type: "พอร์ตโฟลิโอส่วนตัว",
+                features: [
+                    "ออกแบบด้วย Next.js 14 และ React เพื่อประสิทธิภาพที่รวดเร็วที่สุด",
+                    "ระบบเล่าเรื่องแบบ Narrative Storytelling พร้อมอนิเมชั่นที่นุ่มนวล",
+                    "ดีไซน์อินเทอร์เฟซระดับพรีเมียม รองรับทั้งภาษาไทยและอังกฤษ",
+                    "ปรับแต่ง SEO ให้ติดอันดับการค้นหาด้วยมาตรฐานเว็บสมัยใหม่",
+                    "รวบรวมผลงานในรูปแบบ Timeline และคลังเครื่องมือที่ชัดเจน",
+                    "เน้นความสวยงามทางสายตาและการโต้ตอบที่ลื่นไหลไร้รอยต่อ"
                 ]
             },
             projectDesc: "รายละเอียดโปรเจคจะเพิ่มเร็วๆ นี้",
