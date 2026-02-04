@@ -189,9 +189,262 @@ const ProjectShowcase = ({ project }) => {
     );
 };
 
+const AccordionItem = ({ title, content, isOpen, onClick }) => {
+    return (
+        <div className="border-b border-white/5 last:border-0">
+            <button
+                onClick={onClick}
+                className="w-full py-5 flex items-center justify-between group text-left"
+            >
+                <div className="flex items-center gap-4">
+                    <motion.span
+                        animate={{ rotate: isOpen ? 90 : 0 }}
+                        transition={{ duration: 0.3 }}
+                        className="text-[var(--text-muted)] group-hover:text-blue-500 transition-colors"
+                    >
+                        <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
+                        </svg>
+                    </motion.span>
+                    <span className={`text-sm md:text-base font-medium transition-colors ${isOpen ? 'text-[var(--text-primary)]' : 'text-[var(--text-secondary)] group-hover:text-[var(--text-primary)]'}`}>
+                        {title}
+                    </span>
+                </div>
+                <div className="text-[var(--text-muted)] opacity-0 group-hover:opacity-40 transition-opacity">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+                    </svg>
+                </div>
+            </button>
+            <AnimatePresence>
+                {isOpen && (
+                    <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.3, ease: 'easeInOut' }}
+                        className="overflow-hidden"
+                    >
+                        <div className="pb-6 pl-11 text-sm md:text-[15px] text-[var(--text-muted)] leading-relaxed space-y-2">
+                            {content.split('\n').map((line, i) => (
+                                <div key={i} className="flex gap-2">
+                                    <span className="text-blue-500 opacity-50 select-none">•</span>
+                                    {line}
+                                </div>
+                            ))}
+                        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+        </div>
+    );
+};
+
+const TechBadge = ({ tech, i }) => {
+    const [isOpen, setIsOpen] = useState(false);
+
+    return (
+        <div className="relative">
+            <motion.button
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4 + (i * 0.1) }}
+                onClick={() => setIsOpen(!isOpen)}
+                className={`flex items-center gap-2.5 px-4 py-2 bg-[var(--bg-secondary)] border ${isOpen ? 'border-blue-500/50 ring-1 ring-blue-500/20' : 'border-[var(--border-color)]'} rounded-xl hover:border-[var(--text-primary)]/30 transition-all group relative z-20`}
+            >
+                <img src={`https://skillicons.dev/icons?i=${tech.icon}`} alt={tech.name} className="w-5 h-5 object-contain" />
+                <span className="text-xs font-medium text-[var(--text-primary)]">{tech.name}</span>
+                <motion.span
+                    animate={{ rotate: isOpen ? 180 : 0 }}
+                    className="text-[var(--text-muted)] opacity-50"
+                >
+                    <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
+                    </svg>
+                </motion.span>
+            </motion.button>
+
+            <AnimatePresence>
+                {isOpen && (
+                    <motion.div
+                        initial={{ opacity: 0, y: -10, scale: 0.95 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: -10, scale: 0.95 }}
+                        className="absolute top-full left-0 mt-2 w-64 p-4 bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-2xl shadow-2xl z-30"
+                    >
+                        <div className="text-[10px] font-bold text-blue-500 uppercase tracking-widest mb-1.5 flex items-center gap-2">
+                            <div className="w-1 h-1 rounded-full bg-blue-500" />
+                            Role in Project
+                        </div>
+                        <p className="text-xs text-[var(--text-secondary)] leading-relaxed">
+                            {tech.role}
+                        </p>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+        </div>
+    );
+};
+
+const OnThisPage = ({ lang }) => {
+    const [activeId, setActiveId] = useState('');
+
+    const menuItems = [
+        { id: 'tech-stack', label: lang === 'en' ? 'Tech Stack' : 'เทคโนโลยีที่ใช้' },
+        { id: 'features', label: lang === 'en' ? 'Feature Highlights' : 'ฟีเจอร์เด่น' },
+        { id: 'journey', label: lang === 'en' ? 'Project Journey' : 'เส้นทางโปรเจกต์' },
+        { id: 'summary', label: lang === 'en' ? 'Final Summary' : 'สรุปโปรเจกต์' },
+        { id: 'navigation', label: lang === 'en' ? 'Other Projects' : 'โปรเจกต์อื่นๆ' }
+    ];
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        setActiveId(entry.target.id);
+                    }
+                });
+            },
+            { rootMargin: '-20% 0% -35% 0%', threshold: 0.1 }
+        );
+
+        const sections = document.querySelectorAll('section[id]');
+        sections.forEach((section) => observer.observe(section));
+
+        return () => sections.forEach((section) => observer.unobserve(section));
+    }, []);
+
+    const scrollTo = (id) => {
+        const element = document.getElementById(id);
+        if (element) {
+            const offset = 120;
+            const elementPosition = element.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - offset;
+            window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+        }
+    };
+
+    return (
+        <div className="sticky top-32">
+            <div className="flex items-center gap-3 mb-8 text-[var(--text-primary)]">
+                <svg className="w-4 h-4 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h7" />
+                </svg>
+                <h3 className="text-sm font-bold uppercase tracking-widest opacity-70">On this page</h3>
+            </div>
+
+            <div className="relative border-l border-[var(--border-color)] ml-2 pl-6 space-y-6">
+                {menuItems.map((item) => (
+                    <div key={item.id} className="space-y-4">
+                        <button
+                            onClick={() => scrollTo(item.id)}
+                            className={`block text-sm font-medium transition-all hover:text-[var(--text-primary)] relative ${activeId === item.id ? 'text-[var(--text-primary)]' : 'text-[var(--text-muted)]'
+                                }`}
+                        >
+                            {activeId === item.id && (
+                                <motion.div
+                                    layoutId="active-line"
+                                    className="absolute -left-[25px] top-0 bottom-0 w-[2px] bg-blue-500 shadow-[0_0_15px_rgba(59,130,246,0.5)]"
+                                />
+                            )}
+                            {item.label}
+                        </button>
+
+                        {item.subItems && (
+                            <div className="ml-4 space-y-4 border-l border-[var(--border-color)]/30 pl-4">
+                                {item.subItems.map((sub) => (
+                                    <button
+                                        key={sub.id}
+                                        onClick={() => scrollTo(sub.id)}
+                                        className={`block text-[13px] transition-all hover:text-[var(--text-primary)] relative ${activeId === sub.id ? 'text-[var(--text-primary)] font-medium' : 'text-[var(--text-muted)]'
+                                            }`}
+                                    >
+                                        {activeId === sub.id && (
+                                            <motion.div
+                                                layoutId="active-line-sub"
+                                                className="absolute -left-[17px] top-0 bottom-0 w-[1.5px] bg-blue-400/50"
+                                            />
+                                        )}
+                                        {sub.label}
+                                    </button>
+                                ))}
+                            </div>
+                        )}
+                    </div>
+                ))}
+            </div>
+        </div>
+    );
+};
+
+const ProjectNavigation = ({ lang }) => {
+    return (
+        <div id="navigation" className="grid md:grid-cols-2 gap-4 pt-4 scroll-mt-32">
+            <Link href="/work/my-portfolio" className="group px-6 py-5 rounded-2xl bg-[var(--bg-secondary)] border border-[var(--border-color)] hover:border-[var(--text-primary)]/30 transition-all relative overflow-hidden">
+                <div className="relative z-10">
+                    <div className="flex items-center gap-2 text-[var(--text-muted)] mb-2 text-[9px] font-bold tracking-[0.2em] uppercase">
+                        <svg className="w-3 h-3 transition-transform group-hover:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" />
+                        </svg>
+                        {lang === 'en' ? 'Previous' : 'ก่อนหน้า'}
+                    </div>
+                    <h4 className="text-lg font-heading text-[var(--text-primary)]">My Portfolio</h4>
+                </div>
+            </Link>
+
+            <Link href="/work/babybib" className="group px-6 py-5 rounded-2xl bg-[var(--bg-secondary)] border border-[var(--border-color)] hover:border-[var(--text-primary)]/30 transition-all text-right relative overflow-hidden">
+                <div className="relative z-10">
+                    <div className="flex items-center justify-end gap-2 text-[var(--text-muted)] mb-2 text-[9px] font-bold tracking-[0.2em] uppercase">
+                        {lang === 'en' ? 'Next' : 'ถัดไป'}
+                        <svg className="w-3 h-3 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
+                        </svg>
+                    </div>
+                    <h4 className="text-lg font-heading text-[var(--text-primary)]">Babybib</h4>
+                </div>
+            </Link>
+        </div>
+    );
+};
+
 export default function ObounERPPage({ theme, setTheme, lang, setLang }) {
     const [bookingOpen, setBookingOpen] = useState(false);
+    const [openFeature, setOpenFeature] = useState(0);
     const t = translations[lang] || translations.en;
+
+    const featureHighlights = [
+        {
+            title: lang === 'en' ? 'Smart POS System' : 'ระบบขายอัจฉริยะ (POS)',
+            content: lang === 'en'
+                ? 'Barcode scanning, bill holding, multi-channel payment (PromptPay, Cash, Credit), and receipt printing.'
+                : 'สแกนบาร์โค้ด, ระบบพักบิล, ชำระเงินหลายช่องทาง (PromptPay QR, เงินสด, บัตร) และพิมพ์ใบเสร็จอัตโนมัติ'
+        },
+        {
+            title: lang === 'en' ? 'Advanced Inventory Management' : 'การจัดการคลังสินค้าขั้นสูง',
+            content: lang === 'en'
+                ? 'Lot management, expiration tracking, real-time stock alerts, and automated reordering workflows.'
+                : 'จัดการ Lot สินค้า, ติดตามวันหมดอายุ, ระบบแจ้งเตือนสินค้าใกล้หมด/หมดอายุ และระบบปรับสต็อกอัจฉริยะ'
+        },
+        {
+            title: lang === 'en' ? 'Pharmacy Specialized Modules' : 'โมดูลเฉพาะทางด้านเภสัชกรรม',
+            content: lang === 'en'
+                ? 'Prescription management, drug interaction checks, allergy alerts, and controlled substance logging.'
+                : 'จัดการใบสั่งยา, ตรวจสอบการตีกันของยา, แจ้งเตือนประวัติแพ้ยา และบันทึกบัญชียาควบคุม'
+        },
+        {
+            title: lang === 'en' ? 'Enterprise Security & Compliance' : 'ความปลอดภัยระดับองค์กร',
+            content: lang === 'en'
+                ? 'Two-Factor Authentication (2FA), role-based access control (RBAC), activity logs, and automated backups.'
+                : 'ระบบ 2FA, กำหนดสิทธิ์ผู้ใช้ (RBAC), บันทึกประวัติการใช้งาน (Activity Logs) และระบบสำรองข้อมูลอัตโนมัติ'
+        },
+        {
+            title: lang === 'en' ? 'AI Assistant & LINE Integration' : 'ผู้ช่วย AI และการเชื่อมต่อ LINE',
+            content: lang === 'en'
+                ? 'Integrated Gemini AI for pharmaceutical support and LINE Messaging API for smart notifications.'
+                : 'เชื่อมต่อ Gemini AI ช่วยตอบคำถามเภสัชกรรม และ LINE Messaging API สำหรับการแจ้งเตือนอัจฉริยะ'
+        }
+    ];
 
     const project = {
         slug: 'obounerp',
@@ -201,11 +454,41 @@ export default function ObounERPPage({ theme, setTheme, lang, setLang }) {
         type: t.projects.obounERP.type,
         githubUrl: "https://github.com/thnakon/ERP_PMS",
         tech: [
-            { name: 'Laravel 11', icon: 'laravel' },
-            { name: 'Vue.js 3', icon: 'vue' },
-            { name: 'MySQL', icon: 'mysql' },
-            { name: 'Tailwind', icon: 'tailwind' },
-            { name: 'Docker', icon: 'docker' }
+            {
+                name: 'Laravel 11',
+                icon: 'laravel',
+                role: lang === 'en'
+                    ? 'Core backend framework handling business logic, API routing, and database ORM with robust security.'
+                    : 'เฟรมเวิร์กหลักฝั่ง Backend จัดการ Logic ทางธุรกิจ, API และฐานข้อมูล พร้อมระบบความปลอดภัยที่แข็งแกร่ง'
+            },
+            {
+                name: 'Vue.js 3',
+                icon: 'vue',
+                role: lang === 'en'
+                    ? 'Modern frontend framework used for high-performance reactive interfaces and state management.'
+                    : 'เฟรมเวิร์กฝั่ง Frontend สำหรับสร้างหน้าจอที่ตอบสนองไว (Reactive) และจัดการสถานะของข้อมูลที่ซับซ้อน'
+            },
+            {
+                name: 'MySQL',
+                icon: 'mysql',
+                role: lang === 'en'
+                    ? 'Primary relational database for storing comprehensive enterprise data with ACID compliance.'
+                    : 'ฐานข้อมูลหลักสำหรับจัดเก็บข้อมูลองค์กรขนาดใหญ่ รับรองความถูกต้องและเสถียรภาพของข้อมูล'
+            },
+            {
+                name: 'Tailwind',
+                icon: 'tailwind',
+                role: lang === 'en'
+                    ? 'Utility-first CSS framework for crafting a custom, responsive, and high-performance design system.'
+                    : 'CSS เฟรมเวิร์กสำหรับจัดแต่งดีไซน์ที่สวยงาม ทันสมัย และรองรับการแสดงผลทุกหน้าจออย่างรวดเร็ว'
+            },
+            {
+                name: 'Docker',
+                icon: 'docker',
+                role: lang === 'en'
+                    ? 'Containerization for consistent development environment and streamlined production deployment.'
+                    : 'การจำลองสภาพแวดล้อมเพื่อความเสถียรในการพัฒนาและการติดตั้งระบบบนเซิร์ฟเวอร์ที่ง่ายและรวดเร็ว'
+            }
         ],
         features: t.projects.obounERP.features,
         accent: 'blue'
@@ -308,86 +591,138 @@ export default function ObounERPPage({ theme, setTheme, lang, setLang }) {
                 </div>
 
                 {/* Tech Stack */}
-                <div className="mb-24">
-                    <h2 className="text-xl font-heading mb-12 flex items-center gap-4">
-                        <span className="w-12 h-[1px] bg-gradient-to-r from-[var(--text-primary)] to-transparent opacity-20"></span>
+                <section id="tech-stack" className="mb-24 scroll-mt-32">
+                    <h2 className="text-2xl font-heading mb-8 text-[var(--text-primary)]">
                         {lang === 'en' ? "Tech Stack" : "เทคโนโลยีที่ใช้"}
                     </h2>
-                    <div className="flex flex-wrap gap-4">
+                    <div className="flex flex-wrap gap-3">
                         {project.tech.map((tech, i) => (
-                            <motion.div
-                                key={i}
-                                initial={{ opacity: 0, y: 10 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: 0.4 + (i * 0.1) }}
-                                className="flex items-center gap-3 px-5 py-3 bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-2xl hover:border-[var(--text-primary)]/30 transition-all group"
-                            >
-                                <img src={`https://skillicons.dev/icons?i=${tech.icon}`} alt={tech.name} className="w-6 h-6 object-contain" />
-                                <span className="text-sm font-medium text-[var(--text-primary)]">{tech.name}</span>
-                            </motion.div>
+                            <TechBadge key={i} tech={tech} i={i} />
                         ))}
                     </div>
-                </div>
+                </section>
 
-                {/* Features & Detailed Info */}
                 <div className="grid lg:grid-cols-3 gap-16 mb-24">
                     <div className="lg:col-span-2 space-y-12">
-                        <div>
-                            <h2 className="text-2xl font-heading mb-8 text-[var(--text-primary)]">Key Features</h2>
-                            <div className="grid md:grid-cols-2 gap-x-12 gap-y-6">
-                                {project.features.map((feature, i) => (
-                                    <div key={i} className="flex gap-4">
-                                        <div className="mt-1 flex-shrink-0">
-                                            <div className="w-5 h-5 rounded-full bg-blue-500/10 flex items-center justify-center text-blue-500">
-                                                <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
-                                                </svg>
-                                            </div>
-                                        </div>
-                                        <p className="text-[15px] text-[var(--text-secondary)] leading-relaxed">{feature}</p>
-                                    </div>
+                        <section id="features" className="scroll-mt-32">
+                            <h2 className="text-2xl font-heading mb-8 text-[var(--text-primary)]">Feature Highlights</h2>
+                            <div className="bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-3xl overflow-hidden p-2">
+                                {featureHighlights.map((feature, i) => (
+                                    <AccordionItem
+                                        key={i}
+                                        title={feature.title}
+                                        content={feature.content}
+                                        isOpen={openFeature === i}
+                                        onClick={() => setOpenFeature(openFeature === i ? -1 : i)}
+                                    />
                                 ))}
                             </div>
-                        </div>
+                        </section>
+
+                        {/* Project Journey: Graduation, Challenges, and Benefits */}
+                        <section id="journey" className="pt-12 space-y-12 scroll-mt-32">
+                            <div>
+                                <h2 className="text-2xl font-heading mb-8 text-[var(--text-primary)]">Project Journey</h2>
+                                <div className="p-8 rounded-3xl bg-blue-500/5 border border-blue-500/10 mb-8">
+                                    <div className="flex items-start gap-4">
+                                        <div className="w-10 h-10 rounded-2xl bg-blue-500/20 flex items-center justify-center shrink-0">
+                                            <svg className="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14l9-5-9-5-9 5 9 5z" />
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
+                                            </svg>
+                                        </div>
+                                        <div>
+                                            <h3 className="text-lg font-bold mb-2 text-[var(--text-primary)]">
+                                                {lang === 'en' ? 'Capstone Graduation Project' : 'โปรเจกต์จบการศึกษา'}
+                                            </h3>
+                                            <p className="text-[15px] text-[var(--text-secondary)] leading-relaxed">
+                                                {lang === 'en'
+                                                    ? 'Oboun ERP was developed as my final capstone project, aimed at bridging the gap between traditional medicine management and modern digital workflows.'
+                                                    : 'Oboun ERP ถูกพัฒนาขึ้นเพื่อเป็นโปรเจกต์จบการศึกษา (Senior Project) โดยมีจุดมุ่งหมายเพื่อยกระดับการจัดการธุรกิจร้านยาแบบดั้งเดิมเข้าสู่ระบบดิจิทัลที่ทันสมัยและแม่นยำ'}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="grid md:grid-cols-2 gap-6">
+                                    {/* Challenges */}
+                                    <section id="challenges" className="p-6 rounded-3xl bg-[var(--bg-secondary)] border border-[var(--border-color)] group hover:border-red-500/30 transition-all scroll-mt-32">
+                                        <div className="w-10 h-10 rounded-2xl bg-red-500/10 flex items-center justify-center mb-4 group-hover:bg-red-500/20 transition-all">
+                                            <svg className="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                                            </svg>
+                                        </div>
+                                        <h4 className="font-bold mb-3 text-[var(--text-primary)]">
+                                            {lang === 'en' ? 'Technical Challenges' : 'ความท้าทายที่พบ'}
+                                        </h4>
+                                        <ul className="text-sm text-[var(--text-muted)] space-y-2 leading-relaxed">
+                                            {lang === 'en' ? (
+                                                <>
+                                                    <li>• Complex database relations between inventory, lots, and sales.</li>
+                                                    <li>• Ensuring high reliability for calculated dosage and expiration alerts.</li>
+                                                    <li>• Implementing multi-layered security including 2FA and encryption.</li>
+                                                </>
+                                            ) : (
+                                                <>
+                                                    <li>• ความซับซ้อนของการจัดการฐานข้อมูลระหว่างคลังสินค้า, Lot, และการขาย</li>
+                                                    <li>• การออกแบบระบบคำนวณและแจ้งเตือนวันหมดอายุที่มีความแม่นยำสูง</li>
+                                                    <li>• การใช้มาตรฐานความปลอดภัยระดับสูง เช่น 2FA และการเข้ารหัสข้อมูล</li>
+                                                </>
+                                            )}
+                                        </ul>
+                                    </section>
+
+                                    {/* Benefits */}
+                                    <section id="benefits" className="p-6 rounded-3xl bg-[var(--bg-secondary)] border border-[var(--border-color)] group hover:border-emerald-500/30 transition-all scroll-mt-32">
+                                        <div className="w-10 h-10 rounded-2xl bg-emerald-500/10 flex items-center justify-center mb-4 group-hover:bg-emerald-500/20 transition-all">
+                                            <svg className="w-5 h-5 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                            </svg>
+                                        </div>
+                                        <h4 className="font-bold mb-3 text-[var(--text-primary)]">
+                                            {lang === 'en' ? 'Professional Benefits' : 'ผลประโยชน์ที่ได้รับ'}
+                                        </h4>
+                                        <ul className="text-sm text-[var(--text-muted)] space-y-2 leading-relaxed">
+                                            {lang === 'en' ? (
+                                                <>
+                                                    <li>• Mastery over full-stack Laravel & Vue.js ecosystem.</li>
+                                                    <li>• Deep understanding of enterprise-level software requirements.</li>
+                                                    <li>• Practical experience in AI API integration and Docker deployment.</li>
+                                                </>
+                                            ) : (
+                                                <>
+                                                    <li>• ความเชี่ยวชาญในการพัฒนา Full-stack ด้วย Laravel และ Vue.js</li>
+                                                    <li>• เข้าใจกระบวนการทำงานของซอฟต์แวร์ระดับองค์กรอย่างลึกซึ้ง</li>
+                                                    <li>• ประสบการณ์จริงในการเชื่อมต่อ AI และการบริหารจัดการเซิร์ฟเวอร์ด้วย Docker</li>
+                                                </>
+                                            )}
+                                        </ul>
+                                    </section>
+                                </div>
+                            </div>
+                        </section>
+
+                        {/* Final Summary */}
+                        <section id="summary" className="pt-12 scroll-mt-32">
+                            <h2 className="text-2xl font-heading mb-8 text-[var(--text-primary)]">
+                                {lang === 'en' ? 'Conclusion' : 'สรุปส่งท้าย'}
+                            </h2>
+                            <p className="text-lg text-[var(--text-secondary)] leading-relaxed font-light italic">
+                                {lang === 'en'
+                                    ? "Oboun ERP stands as a testament to the intersection of traditional pharmaceutical practice and modern digital efficiency. By modernizing inventory control and enhancing patient safety through AI, it demonstrates how technology can transform local businesses into data-driven enterprises."
+                                    : "Oboun ERP คือความสำเร็จของการผสานภูมิปัญญาด้านเภสัชกรรมแบบดั้งเดิมเข้ากับประสิทธิภาพของเทคโนโลยีดิจิทัลสมัยใหม่ ด้วยการเปลี่ยนระบบคลังสินค้าให้เป็นดิจิทัลและเสริมความปลอดภัยผ่านระบบ AI โปรเจกต์นี้จึงเป็นต้นแบบที่แสดงให้เห็นว่าเทคโนโลยีสามารถยกระดับธุรกิจท้องถิ่นให้กลายเป็นองค์กรที่ขับเคลื่อนด้วยข้อมูลอย่างยั่งยืน"}
+                            </p>
+                            <div className="mt-6 text-xl font-heading text-[var(--text-primary)]">
+                                {lang === 'en' ? 'Thank You!' : 'ขอบคุณครับ!'}
+                            </div>
+                        </section>
+
+                        {/* Project Navigation moved inside */}
+                        <ProjectNavigation lang={lang} />
                     </div>
 
                     <div className="space-y-8">
-                        <div className="p-8 rounded-3xl bg-[var(--bg-secondary)] border border-[var(--border-color)] sticky top-32">
-                            <h3 className="text-lg font-bold mb-6 flex items-center gap-2">
-                                <svg className="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-                                Project Status
-                            </h3>
-                            <div className="space-y-4 mb-8">
-                                <div className="flex justify-between items-center text-sm py-3 border-b border-[var(--border-color)]">
-                                    <span className="text-[var(--text-muted)]">Completed</span>
-                                    <span className="text-[var(--text-primary)] font-medium">Q1 2025</span>
-                                </div>
-                                <div className="flex justify-between items-center text-sm py-3 border-b border-[var(--border-color)]">
-                                    <span className="text-[var(--text-muted)]">Client</span>
-                                    <span className="text-[var(--text-primary)] font-medium">Internal Project</span>
-                                </div>
-                                <div className="flex justify-between items-center text-sm py-3">
-                                    <span className="text-[var(--text-muted)]">Role</span>
-                                    <span className="text-[var(--text-primary)] font-medium">Full-Stack Developer</span>
-                                </div>
-                            </div>
-
-                            <a
-                                href={project.githubUrl}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="btn-premium-cta w-full flex justify-center py-4 bg-blue-500 text-white border-none hover:bg-blue-600"
-                            >
-                                {lang === 'en' ? "View Source Code" : "ดูซอร์สโค้ด"}
-                                <div className="cta-arrow-circle !w-8 !h-8">
-                                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7-7 7M3 12h18" />
-                                    </svg>
-                                </div>
-                            </a>
-                        </div>
+                        <OnThisPage lang={lang} />
                     </div>
                 </div>
             </div>
