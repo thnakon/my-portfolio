@@ -3,6 +3,7 @@ import translations from '@/lib/translations';
 import Navbar from '@/components/Navbar';
 import BookingModal from '@/components/BookingModal';
 import Footer from '@/components/Footer';
+import Contact from '@/components/Contact';
 import Link from 'next/link';
 
 const TypewriterText = ({ text, delay = 50, startDelay = 500, onComplete }) => {
@@ -138,59 +139,64 @@ const WorkstationShowcase = ({ lang, isVisible }) => {
 };
 
 /* --- Specialized Component 2: Development Tools (Bento Style) --- */
+/* --- Specialized Component 2: Development Tools (macOS Style) --- */
 const DevToolsBento = ({ lang, isVisible }) => {
     const tools = [
-        { name: 'VS Code', icon: 'vscode', desc: 'Main IDE', size: 'col-span-2' },
-        { name: 'Warp', icon: 'bash', desc: '21st Century Terminal', size: 'col-span-1' },
-        { name: 'TablePlus', icon: 'mysql', desc: 'DB Manager', size: 'col-span-1' },
-        { name: 'Postman', icon: 'postman', desc: 'API Testing', size: 'col-span-2' }
+        { name: 'Antigravity', icon: '/images/antigravity-logo.png', desc: lang === 'en' ? 'AI Assistant' : 'ผู้ช่วย AI', url: 'https://antigravity.dev' },
+        { name: 'VS Code', icon: 'vscode', desc: lang === 'en' ? 'Main IDE' : 'IDE หลัก', url: 'https://code.visualstudio.com' },
+        { name: 'Warp', icon: 'bash', desc: lang === 'en' ? 'Terminal' : 'เทอร์มินัล', url: 'https://www.warp.dev' },
+        { name: 'TablePlus', icon: 'mysql', desc: lang === 'en' ? 'DB Manager' : 'จัดการฐานข้อมูล', url: 'https://tableplus.com' },
+        { name: 'Postman', icon: 'postman', desc: lang === 'en' ? 'API Testing' : 'ทดสอบ API', url: 'https://www.postman.com' },
+        { name: 'Docker', icon: 'docker', desc: lang === 'en' ? 'Containers' : 'คอนเทนเนอร์', url: 'https://www.docker.com' },
+        { name: 'Github', icon: 'github', desc: lang === 'en' ? 'Source Control' : 'จัดการโค้ด', url: 'https://github.com' },
+        { name: 'Figma', icon: 'figma', desc: lang === 'en' ? 'UI Design' : 'ออกแบบหน้าจอ', url: 'https://www.figma.com' },
+        { name: '1Password', icon: '/images/1password-logo.png', desc: lang === 'en' ? 'Auth' : 'จัดการรหัสผ่าน', url: 'https://1password.com' },
+        { name: 'Line', icon: 'https://upload.wikimedia.org/wikipedia/commons/4/41/LINE_logo.svg', desc: lang === 'en' ? 'Chat' : 'แชท', url: 'https://line.me' },
+        { name: 'Notes', icon: '/images/apple-notes-logo.png', desc: lang === 'en' ? 'Knowledge' : 'จดบันทึก', url: 'https://www.apple.com/macos/notes/' },
+        { name: 'Xcode', icon: 'https://developer.apple.com/assets/elements/icons/xcode/xcode-128x128.png', desc: lang === 'en' ? 'iOS Dev' : 'พัฒนา iOS', url: 'https://developer.apple.com/xcode/' },
+        { name: 'ChatGPT', icon: 'https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg', desc: lang === 'en' ? 'GPT-4' : 'ปัญญาประดิษฐ์', url: 'https://chatgpt.com' },
+        { name: 'Gemini', icon: '/images/gemini-logo.png', desc: lang === 'en' ? 'Google AI' : 'เอไอของกูเกิล', url: 'https://gemini.google.com' },
+        { name: 'Claude', icon: '/images/claude-logo.png', desc: lang === 'en' ? 'Anthropic' : 'ผู้ช่วยอัจฉริยะ', url: 'https://claude.ai' },
+        { name: 'Notion', icon: 'notion', desc: lang === 'en' ? 'Workflow' : 'เวิร์คโฟลว์', url: 'https://notion.so' },
+        { name: 'Raycast', icon: '/images/raycast-logo.png', desc: lang === 'en' ? 'Launcher' : 'ตัวช่วยเปิดแอป', url: 'https://raycast.com' },
+        { name: 'Discord', icon: 'discord', desc: lang === 'en' ? 'Community' : 'คอมมูนิตี้', url: 'https://discord.com' },
+        { name: 'Sourcetree', icon: 'https://w7.pngwing.com/pngs/307/701/png-transparent-sourcetree-atlassian-bitbucket-git-github-blue-angle-electronics-thumbnail.png', desc: lang === 'en' ? 'Git Client' : 'จัดการ Git', url: 'https://www.sourcetreeapp.com' }
     ];
 
     return (
-        <div className={`grid grid-cols-2 lg:grid-cols-4 gap-4 mb-24 transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-            {tools.map((tool, i) => (
-                <div key={i} className={`group relative p-6 rounded-3xl bg-[var(--bg-secondary)] border border-[var(--border-color)] hover:border-[var(--text-primary)] transition-all duration-500 overflow-hidden ${tool.size}`}>
-                    <div className="absolute inset-0 bg-gradient-to-br from-[var(--text-primary)]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
-                    <div className="relative z-10 flex flex-col h-full items-center text-center gap-4">
-                        <div className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center border border-white/10 group-hover:scale-110 transition-transform duration-500 group-hover:-rotate-3">
-                            <img src={`https://skillicons.dev/icons?i=${tool.icon}`} className="w-7 h-7" alt={tool.name} />
+        <div className={`relative overflow-hidden bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-[40px] p-8 md:p-14 mb-24 transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'} hover:border-[var(--text-primary)]/20 shadow-md`}>
+            {/* Launchpad Style Grid - Refined & Denser */}
+            <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-7 gap-y-10 gap-x-2">
+                {tools.map((tool, i) => (
+                    <a
+                        key={i}
+                        href={tool.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group flex flex-col items-center gap-3 cursor-pointer"
+                    >
+                        {/* App Icon (Small & Clean) */}
+                        <div className="w-12 h-12 md:w-14 md:h-14 flex items-center justify-center group-hover:scale-110 group-hover:-translate-y-1.5 transition-all duration-500">
+                            <img
+                                src={tool.icon.startsWith('/') || tool.icon.startsWith('http') ? tool.icon : `https://skillicons.dev/icons?i=${tool.icon}`}
+                                className="w-10 h-10 md:w-11 md:h-11 drop-shadow-sm group-hover:drop-shadow-lg transition-all object-contain"
+                                alt={tool.name}
+                            />
                         </div>
-                        <div>
-                            <h4 className="text-[var(--text-primary)] font-bold text-sm tracking-tight">{tool.name}</h4>
-                            <p className="text-[var(--text-muted)] text-[10px] uppercase font-bold tracking-[0.2em] mt-1 group-hover:text-[var(--text-primary)] transition-colors">{tool.desc}</p>
+
+                        <div className="flex flex-col items-center text-center px-1 w-full">
+                            <span className="text-[var(--text-primary)] font-bold text-[10px] md:text-xs tracking-tight truncate w-full">{tool.name}</span>
+                            <span className="text-[var(--text-muted)] text-[7px] md:text-[8px] uppercase font-bold tracking-widest mt-0.5 opacity-60 group-hover:opacity-100 transition-opacity truncate w-full">
+                                {tool.desc}
+                            </span>
                         </div>
-                    </div>
-                </div>
-            ))}
+                    </a>
+                ))}
+            </div>
         </div>
     );
 };
 
-/* --- Specialized Component 3: Software & Productivity (Floating List) --- */
-const ProductivityGrid = ({ lang, isVisible }) => {
-    const apps = [
-        { name: 'Notion', desc: 'Second Brain & Knowledge Base', icon: 'notion' },
-        { name: 'Figma', desc: 'UI/UX Design Workflow', icon: 'figma' },
-        { name: 'Arc', desc: 'Modular Web Browsing', icon: 'chrome' },
-        { name: 'Slack', desc: 'Professional Communication', icon: 'slack' }
-    ];
-
-    return (
-        <div className={`grid grid-cols-1 md:grid-cols-2 gap-6 mb-24 transition-all duration-1000 delay-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-            {apps.map((app, i) => (
-                <div key={i} className="group relative flex items-center gap-6 p-6 rounded-[32px] bg-[var(--bg-secondary)] border border-[var(--border-color)] hover:bg-[var(--primary)] transition-all duration-500">
-                    <div className="w-16 h-16 rounded-[20px] bg-[var(--bg-primary)] border border-[var(--border-color)] flex items-center justify-center p-4 group-hover:scale-110 transition-transform duration-700 shadow-glow">
-                        <img src={`https://skillicons.dev/icons?i=${app.icon}`} className="w-full h-full object-contain" alt={app.name} />
-                    </div>
-                    <div>
-                        <h4 className="text-[var(--text-primary)] font-medium text-lg leading-tight mb-1">{app.name}</h4>
-                        <p className="text-[var(--text-muted)] text-sm leading-relaxed">{app.desc}</p>
-                    </div>
-                </div>
-            ))}
-        </div>
-    );
-};
 
 export default function UsesPage({ theme, setTheme, lang, setLang }) {
     const [bookingOpen, setBookingOpen] = useState(false);
@@ -242,25 +248,10 @@ export default function UsesPage({ theme, setTheme, lang, setLang }) {
                     <DevToolsBento lang={lang} isVisible={showContent} />
                 </div>
 
-                {/* --- Section 3: Software & Productivity --- */}
-                <div className="mb-20">
-                    <h2 className="text-xl font-heading mb-12 flex items-center gap-4">
-                        <span className="w-12 h-[1px] bg-gradient-to-r from-[var(--text-primary)] to-transparent opacity-20"></span>
-                        {lang === 'en' ? "Software & Productivity" : "ซอฟต์แวร์และผลงาน"}
-                    </h2>
-                    <ProductivityGrid lang={lang} isVisible={showContent} />
-                </div>
-
-                {/* Bottom Callout */}
-                <div className={`mt-20 p-8 rounded-[40px] bg-gradient-to-b from-white/[0.03] to-transparent border border-white/5 text-center transition-all duration-1000 delay-1000 ${showContent ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-                    <p className="text-[var(--text-secondary)] italic mb-6">
-                        {lang === 'en' ? "Note: This list is constantly evolving as I try new tools." : "หมายเหตุ: รายการเหล่านี้อาจมีการเปลี่ยนแปลงเมื่อผมได้ลองเครื่องมือใหม่ๆ"}
-                    </p>
-                    <Link href="/" className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-[var(--text-primary)] hover:gap-4 transition-all duration-300">
-                        {lang === 'en' ? "← Back to Home" : "← กลับสู่หน้าหลัก"}
-                    </Link>
-                </div>
             </div>
+
+            {/* Contact Section */}
+            <Contact t={t} onGetInTouch={() => setBookingOpen(true)} />
 
             <Footer t={t} />
             <BookingModal isOpen={bookingOpen} onClose={() => setBookingOpen(false)} t={t} />
