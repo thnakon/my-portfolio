@@ -281,6 +281,24 @@ export default function Navbar({ t, lang, setLang, theme, setTheme, onBookCall }
                          </div>
                       </Link>
                     ))}
+
+                    {/* Theme & Language Controls */}
+                    <div className="grid grid-cols-2 gap-2 mt-2">
+                       <button 
+                         onClick={toggleLang}
+                         className={`flex items-center justify-center gap-2 p-2 rounded-xl border transition-all ${theme === 'dark' ? 'bg-white/5 border-white/5 hover:bg-white/10 text-white' : 'bg-black/5 border-black/5 hover:bg-black/10 text-black'}`}
+                       >
+                          <span className="text-[10px] font-bold tracking-widest uppercase">{lang === 'en' ? 'TH' : 'EN'}</span>
+                          <span className="text-[9px] font-medium opacity-60">{lang === 'en' ? 'Language' : 'ภาษา'}</span>
+                       </button>
+                       <button 
+                         onClick={toggleTheme}
+                         className={`flex items-center justify-center gap-2 p-2 rounded-xl border transition-all ${theme === 'dark' ? 'bg-white/5 border-white/5 hover:bg-white/10 text-white' : 'bg-black/5 border-black/5 hover:bg-black/10 text-black'}`}
+                       >
+                          <div className="shrink-0 scale-90">{theme === 'dark' ? Icons.sun : Icons.moon}</div>
+                          <span className="text-[9px] font-medium uppercase tracking-widest">{theme === 'dark' ? (lang === 'en' ? 'Light' : 'โหมดสว่าง') : (lang === 'en' ? 'Dark' : 'โหมดมืด')}</span>
+                       </button>
+                    </div>
                     <button 
                       onClick={onBookCall} 
                       className={`mt-auto w-full py-4 rounded-3xl font-bold text-xs uppercase tracking-[0.2em] shadow-xl hover:scale-105 active:scale-95 transition-all ${theme === 'dark' ? 'bg-white text-black shadow-white/5' : 'bg-black text-white shadow-black/10'}`}
@@ -310,22 +328,6 @@ export default function Navbar({ t, lang, setLang, theme, setTheme, onBookCall }
              </div>
            </div>
         </div>
-      </div>
-
-      {/* 3. Controls (Theme & Lang) */}
-      <div className="fixed bottom-6 right-6 z-[1001] flex flex-col gap-3 pointer-events-none">
-        <button 
-          onClick={toggleLang} 
-          className={`pointer-events-auto h-12 w-12 rounded-full backdrop-blur-xl border flex items-center justify-center text-xs font-bold hover:scale-110 transition-all shadow-lg ${theme === 'dark' ? 'bg-black/60 border-white/10 text-white' : 'bg-white/70 border-black/10 text-black'}`}
-        >
-          {lang === 'en' ? 'TH' : 'EN'}
-        </button>
-        <button 
-          onClick={toggleTheme} 
-          className={`pointer-events-auto h-12 w-12 rounded-full backdrop-blur-xl border flex items-center justify-center hover:scale-110 transition-all shadow-lg ${theme === 'dark' ? 'bg-black/60 border-white/10 text-white' : 'bg-white/70 border-black/10 text-black'}`}
-        >
-          {theme === 'dark' ? Icons.sun : Icons.moon}
-        </button>
       </div>
     </>
   );

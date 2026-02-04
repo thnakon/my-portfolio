@@ -68,11 +68,13 @@ const IDEMockup = ({ project, isSecondary = false }) => {
   );
 };
 
-const ProjectItem = ({ project, index, t }) => {
-  const [isVisible, setIsVisible] = useState(false);
-  const [typedDesc, setTypedDesc] = useState('');
-  const [startTyping, setStartTyping] = useState(false);
-  const itemRef = useRef(null);
+const ProjectItem = ({ project, index, t, isHistory }) => {
+    const [isVisible, setIsVisible] = useState(false);
+    const [typedDesc, setTypedDesc] = useState('');
+    const [startTyping, setStartTyping] = useState(false);
+    const itemRef = useRef(null);
+
+    const isLeft = index % 2 === 0;
 
   // Color map to handle Tailwind dynamic classes (Tailwind needs static strings)
   const colorMap = {
@@ -132,13 +134,84 @@ const ProjectItem = ({ project, index, t }) => {
     return () => clearInterval(interval);
   }, [startTyping, project.descriptionPrefix]);
 
-  return (
-    <div 
-      ref={itemRef}
-      className={`py-16 flex flex-col lg:flex-row items-center gap-12 lg:gap-20 transition-all duration-1000 ${
-        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
-      }`}
-    >
+    if (isHistory) {
+        return (
+            <div 
+                ref={itemRef}
+                className={`relative py-24 flex flex-col ${isLeft ? 'lg:flex-row' : 'lg:flex-row-reverse'} items-center gap-12 lg:gap-24 transition-all duration-1000 ${
+                    isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+                }`}
+            >
+                {/* Timeline Dot & Line */}
+                <div className="hidden lg:flex absolute left-1/2 top-0 bottom-0 -translate-x-1/2 items-center justify-center z-10">
+                    <div className="w-[1px] h-full bg-gradient-to-b from-[var(--border-color)] via-[var(--text-primary)]/20 to-[var(--border-color)]" />
+                    <div className={`absolute top-24 w-4 h-4 rounded-full border-2 border-[var(--text-primary)] bg-[var(--bg-primary)] shadow-[0_0_20px_rgba(var(--primary-rgb),0.5)] transition-all duration-1000 ${isVisible ? 'scale-100' : 'scale-0'}`}>
+                        <div className={`absolute top-1/2 -translate-y-1/2 text-[10px] font-mono font-bold tracking-widest text-[var(--text-muted)] w-20 ${isLeft ? 'left-10 text-left' : '-left-24 text-right'}`}>
+                            {project.period || '2024'}
+                        </div>
+                    </div>
+                </div>
+
+                {/* Text Content */}
+                <div className={`flex-1 w-full lg:max-w-[480px] ${isLeft ? 'lg:text-right' : 'lg:text-left'}`}>
+                    <div className={`flex items-center gap-4 mb-6 ${isLeft ? 'lg:flex-row-reverse' : 'lg:flex-row'} transition-all duration-700 delay-300 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4'}`}>
+                        <div className={`w-12 h-[2px] rounded-full ${colors.bg}`} />
+                        <div className={`text-[10px] font-mono uppercase tracking-[0.2em] font-bold ${colors.text}`}>
+                            {project.type}
+                        </div>
+                    </div>
+                    
+                    <h2 className={`text-3xl md:text-5xl font-heading text-[var(--text-primary)] mb-6 transition-all duration-700 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+                        {project.title}
+                    </h2>
+                    
+                    <div className={`mb-8 min-h-[4em] ${isLeft ? 'lg:pl-12' : 'lg:pr-12'}`}>
+                        <p className="text-base md:text-lg text-[var(--text-secondary)] leading-relaxed font-body">
+                            {typedDesc}
+                        </p>
+                    </div>
+
+                    <div className={`flex flex-wrap gap-2.5 mb-10 ${isLeft ? 'lg:justify-end' : 'lg:justify-start'} transition-all duration-700 delay-900 ${isVisible ? 'opacity-100' : 'opacity-0 translate-y-4'}`}>
+                        {project.tech.map((tech, i) => (
+                            <div key={i} className="flex items-center gap-2 px-3 py-1.5 bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-full text-[10px]">
+                                <img src={`https://skillicons.dev/icons?i=${tech.icon}`} alt={tech.name} className="w-3.5 h-3.5 object-contain" />
+                                <span>{tech.name}</span>
+                            </div>
+                        ))}
+                    </div>
+                    
+                    {!project.comingSoon && (
+                        <div className={`flex flex-wrap gap-5 items-center ${isLeft ? 'lg:justify-end' : 'lg:justify-start'}`}>
+                            <Link href="/work" className="btn-premium-cta !py-1.5 !px-2 !pl-6 !text-sm hover:scale-105">
+                                {t.projects.viewProject}
+                                <div className="cta-arrow-circle !w-8 !h-8">
+                                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7-7 7M3 12h18" />
+                                    </svg>
+                                </div>
+                            </Link>
+                        </div>
+                    )}
+                </div>
+
+                {/* Visual Content */}
+                <div className={`flex-1 w-full max-w-[600px] mt-12 transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
+                    <div className="relative group/visuals w-full transition-transform duration-700 hover:scale-[1.02]">
+                        <IDEMockup project={project} />
+                        <div className={`absolute -inset-4 bg-${project.accent}-500/5 rounded-3xl blur-2xl -z-10`} />
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
+    return (
+        <div 
+          ref={itemRef}
+          className={`py-16 flex flex-col lg:flex-row items-center gap-12 lg:gap-20 transition-all duration-1000 ${
+            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+          }`}
+        >
       {/* Text Content */}
       <div className="flex-1 w-full lg:max-w-[450px]">
         {/* Decorative Line & Category */}
@@ -237,7 +310,7 @@ const ProjectItem = ({ project, index, t }) => {
   );
 };
 
-export default function Projects({ t }) {
+export default function Projects({ t, lang, isHistory = false }) {
   const [portfolioVisible, setPortfolioVisible] = useState(false);
   const [typedPortfolioDesc, setTypedPortfolioDesc] = useState('');
   const [startPortfolioTyping, setStartPortfolioTyping] = useState(false);
@@ -262,7 +335,15 @@ export default function Projects({ t }) {
   // Portfolio Typing Effect
   useEffect(() => {
     if (!startPortfolioTyping) return;
-    const portfolioText = t.portfolio?.sectionSubtitle || 'Explore projects crafted with intention and attention to every detail.';
+    
+    const historyText = lang === 'en' 
+        ? 'A detailed look into the projects I have built.' 
+        : 'เจาะลึกรายละเอียดและเบื้องหลังการพัฒนาโปรเจกต์ต่างๆ ของผม';
+        
+    const portfolioText = isHistory 
+        ? historyText 
+        : (t.portfolio?.sectionSubtitle || 'Explore projects crafted with intention and attention to every detail.');
+
     let currentIndex = 0;
     const interval = setInterval(() => {
       if (currentIndex <= portfolioText.length) {
@@ -273,11 +354,12 @@ export default function Projects({ t }) {
       }
     }, 25);
     return () => clearInterval(interval);
-  }, [startPortfolioTyping, t.portfolio?.sectionSubtitle]);
+  }, [startPortfolioTyping, t.portfolio?.sectionSubtitle, isHistory, lang]);
 
   const projects = [
     {
       title: t.projects.obounERP.title,
+      period: t.projects.obounERP.period,
       descriptionPrefix: t.projects.obounERP.description,
       type: t.projects.obounERP.type,
       githubUrl: "https://github.com/thnakon/ERP_PMS",
@@ -328,6 +410,7 @@ export default function Projects({ t }) {
     },
     {
       title: t.projects.babybib.title,
+      period: t.projects.babybib.period,
       descriptionPrefix: t.projects.babybib.description,
       type: t.projects.babybib.type,
       githubUrl: "https://github.com/thnakon/Babybib",
@@ -366,6 +449,7 @@ export default function Projects({ t }) {
     },
     {
       title: t.projects.scribehub.title,
+      period: t.projects.scribehub.period,
       descriptionPrefix: t.projects.scribehub.description,
       type: t.projects.scribehub.type,
       githubUrl: "https://github.com/thnakon/scribehub",
@@ -412,57 +496,66 @@ export default function Projects({ t }) {
       <div className="max-w-6xl mx-auto px-6">
         
         {/* Our Work Section Header */}
-        <div ref={portfolioRef} className="pt-32 pb-12 flex flex-col justify-center">
+        <div ref={portfolioRef} className="pt-20 pb-12 flex flex-col justify-center">
           <div className="text-center mb-8">
             <span className={`inline-block text-[10px] tracking-[0.3em] font-bold text-[var(--text-muted)] uppercase mb-6 transition-all duration-1000 ${portfolioVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-              PORTFOLIO
+              {isHistory ? (lang === 'en' ? 'PROJECTS ARCHIVE' : 'บันทึกผลงาน') : 'PORTFOLIO'}
             </span>
             <h2 className={`text-3xl md:text-5xl font-heading tracking-tight mb-8 transition-all duration-1000 delay-300 ${portfolioVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-              <span className="text-[var(--text-primary)]">{t.portfolio?.sectionTitlePrefix || 'Our'} </span>
-              <em className="overview-title-accent">{t.portfolio?.sectionTitleAccent || 'Work'}</em>
+              <span className="text-[var(--text-primary)]">{isHistory ? (lang === 'en' ? 'About My' : 'เกี่ยวกับ') : (t.portfolio?.sectionTitlePrefix || 'Our')} </span>
+              <em className="overview-title-accent">{isHistory ? (lang === 'en' ? 'Projects' : 'โปรเจกต์ของฉัน') : (t.portfolio?.sectionTitleAccent || 'Work')}</em>
             </h2>
-            <div className="min-h-[3em]">
+            <div className="min-h-[2em]">
               <p className="text-base md:text-lg text-[var(--text-secondary)] max-w-2xl mx-auto leading-relaxed">
                 {typedPortfolioDesc}
-                {startPortfolioTyping && typedPortfolioDesc.length < (t.portfolio?.sectionSubtitle || '').length && (
-                  <span className="inline-block w-[2px] h-[1.1em] bg-[var(--text-primary)] ml-1 animate-blink align-middle" />
+                {startPortfolioTyping && (
+                  <span className={`inline-block w-[2px] h-[1.1em] bg-[var(--text-primary)] ml-1 animate-blink align-middle ${
+                    typedPortfolioDesc.length === (isHistory 
+                      ? (lang === 'en' ? 'A detailed look into the projects I have built.' : 'เจาะลึกรายละเอียดและเบื้องหลังการพัฒนาโปรเจกต์ต่างๆ ของผม')
+                      : (t.portfolio?.sectionSubtitle || '').length) ? 'opacity-0' : 'opacity-100'
+                  }`} />
                 )}
               </p>
             </div>
           </div>
         </div>
 
-        <div className="flex flex-col">
+        <div className={`flex flex-col ${isHistory ? 'relative' : ''}`}>
+          {isHistory && (
+             <div className="hidden lg:block absolute left-1/2 top-0 bottom-0 w-[1px] bg-[var(--border-color)] -translate-x-1/2 opacity-20" />
+          )}
           {projects.map((project, index) => (
-            <ProjectItem key={index} project={project} index={index} t={t} />
+            <ProjectItem key={index} project={project} index={index} t={t} isHistory={isHistory} />
           ))}
         </div>
 
-        {/* See More Work Button */}
-        <div 
-          className={`py-20 flex flex-col items-center justify-center transition-all duration-1000 delay-500 ${
-            portfolioVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          }`}
-        >
-          <Link 
-            href="/work" 
-            className="btn-premium-cta !border-none !bg-transparent !py-2 !pl-6 !pr-2 group scale-90 md:scale-100"
+        {/* See More Work Button (Hide in history mode as it's the main list) */}
+        {!isHistory && (
+          <div 
+            className={`py-20 flex flex-col items-center justify-center transition-all duration-1000 delay-500 ${
+              portfolioVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            }`}
           >
-            <span className="text-[10px] md:text-xs font-bold tracking-[0.2em] uppercase transition-all duration-500">
-              {t.projects.seeMoreWork}
-            </span>
-            <div className="cta-arrow-circle !w-9 !h-9">
-              <svg 
-                className="w-4 h-4" 
-                fill="none" 
-                stroke="currentColor" 
-                viewBox="0 0 24 24"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7-7 7M3 12h18" />
-              </svg>
-            </div>
-          </Link>
-        </div>
+            <Link 
+              href="/work" 
+              className="btn-premium-cta !border-none !bg-transparent !py-2 !pl-6 !pr-2 group scale-90 md:scale-100"
+            >
+              <span className="text-[10px] md:text-xs font-bold tracking-[0.2em] uppercase transition-all duration-500">
+                {t.projects.seeMoreWork}
+              </span>
+              <div className="cta-arrow-circle !w-9 !h-9">
+                <svg 
+                  className="w-4 h-4" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  viewBox="0 0 24 24"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7-7 7M3 12h18" />
+                </svg>
+              </div>
+            </Link>
+          </div>
+        )}
       </div>
 
       <style jsx>{`

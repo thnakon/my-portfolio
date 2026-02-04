@@ -21,7 +21,7 @@ export default function WorkPage({ theme, setTheme, lang, setLang }) {
             />
 
             <div className="pt-20">
-                <Projects t={t} />
+                <Projects t={t} lang={lang} isHistory={true} />
             </div>
 
             <Footer t={t} />

@@ -43,7 +43,7 @@ export default function Home({ theme, setTheme, lang, setLang }) {
       />
 
       {/* Projects Section */}
-      <Projects t={t} />
+      <Projects t={t} lang={lang} />
 
       {/* Skills Section */}
       <Skills t={t} />

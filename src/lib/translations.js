@@ -285,6 +285,7 @@ const translations = {
             projectDesc: "Project details will be added soon.",
             obounERP: {
                 title: "Oboun ERP",
+                period: "2025",
                 description: "A comprehensive Enterprise Resource Planning system designed for SMEs. Streamlining operations across sales, inventory, and finance through high-performance automation.",
                 type: "Enterprise ERP",
                 features: [
@@ -298,6 +299,7 @@ const translations = {
             },
             babybib: {
                 title: "Babybib",
+                period: "2025",
                 description: "Babybib is an advanced, automated bibliography generation system designed to streamline the academic citation process. Built around the APA 7th Edition standard, it empowers students and researchers to create accurate references.",
                 type: "Academic Tool",
                 features: [
@@ -311,6 +313,7 @@ const translations = {
             },
             scribehub: {
                 title: "ScribeHub",
+                period: "2026",
                 description: "ScribeHub is a premium, all-in-one platform for modern researchers. It seamlessly integrates reference management, collaborative tools, and advanced AI intelligence to streamline the entire research lifecycle.",
                 type: "Research Ecosystem",
                 features: [
@@ -664,6 +667,7 @@ const translations = {
             comingSoon: "เร็วๆ นี้",
             obounERP: {
                 title: "Oboun ERP",
+                period: "2568",
                 description: "ระบบวางแผนทรัพยากรองค์กรที่ครอบคลุมสำหรับ SME ปรับปรุงการดำเนินงานในด้านการขาย สินค้าคงคลัง และการเงิน ผ่านการทำงานอัตโนมัติที่มีประสิทธิภาพสูง",
                 type: "ระดับเอ็นเตอร์ไพรส์",
                 features: [
@@ -677,6 +681,7 @@ const translations = {
             },
             babybib: {
                 title: "Babybib",
+                period: "2568",
                 description: "ระบบสร้างบรรณานุกรมอัตโนมัติขั้นสูงที่ช่วยลดความยุ่งยากในงานวิชาการ พัฒนาขึ้นตามมาตรฐาน APA ฉบับที่ 7 เพื่อช่วยให้นักศึกษาและนักวิจัยสร้างการอ้างอิงที่ถูกต้องแม่นยำ",
                 type: "เครื่องมือวิชาการ",
                 features: [
@@ -690,6 +695,7 @@ const translations = {
             },
             scribehub: {
                 title: "ScribeHub",
+                period: "2569",
                 description: "แพลตฟอร์มวิจัยระดับพรีเมียมแบบครบวงจรที่รวบรวมการจัดการอ้างอิง เครื่องมือทำงานร่วมกัน และ AI ขั้นสูง เพื่อช่วยให้นักวิจัยทำงานได้อย่างเป็นระบบ",
                 type: "ระบบนิเวศงานวิจัย",
                 features: [
