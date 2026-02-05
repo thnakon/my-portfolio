@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
@@ -64,13 +64,331 @@ const Icons = {
        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z" />
     </svg>
   ),
+  search: (
+    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+    </svg>
+  ),
+  guestbook: (
+    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+    </svg>
+  ),
+  bucketlist: (
+    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+    </svg>
+  ),
+  calendar: (
+    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+    </svg>
+  ),
+  attribution: (
+    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+    </svg>
+  ),
+  github: (
+    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.627-5.373-12-12-12z" />
+    </svg>
+  ),
+  linkedin: (
+    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+    </svg>
+  ),
+  twitter: (
+    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+    </svg>
+  ),
+  email: (
+    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+    </svg>
+  ),
+  arrow: (
+    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 17L17 7M17 7H7M17 7v10" />
+    </svg>
+  ),
 };
+
+// Command Palette Component
+function CommandPalette({ isOpen, onClose, theme, toggleTheme, lang, t, router, onBookCall }) {
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [isVisible, setIsVisible] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(false);
+  const inputRef = useRef(null);
+
+  const pages = [
+    { id: 'home', label: lang === 'en' ? 'Home' : 'หน้าหลัก', icon: Icons.home, href: '/' },
+    { id: 'about', label: lang === 'en' ? 'About' : 'เกี่ยวกับ', icon: Icons.user, href: '/about' },
+    { id: 'projects', label: lang === 'en' ? 'Projects' : 'โปรเจกต์', icon: Icons.work, href: '/work' },
+    { id: 'blog', label: lang === 'en' ? 'Blog' : 'บล็อก', icon: Icons.blog, href: '/blog' },
+    { id: 'guestbook', label: lang === 'en' ? 'Guestbook' : 'สมุดเยี่ยม', icon: Icons.guestbook, href: '/guestbook' },
+    { id: 'ai-toolkit', label: lang === 'en' ? 'AI Toolkit' : 'AI Toolkit', icon: Icons.ai, href: '/ai-toolkit' },
+    { id: 'book-call', label: lang === 'en' ? 'Book a call' : 'นัดโทร', icon: Icons.calendar, action: () => { onClose(); onBookCall(); } },
+    { id: 'uses', label: lang === 'en' ? 'Uses' : 'เครื่องมือ', icon: Icons.monitor, href: '/uses' },
+    { id: 'attribution', label: lang === 'en' ? 'Attribution' : 'เครดิต', icon: Icons.attribution, href: '/attribution' },
+    { id: 'links', label: lang === 'en' ? 'Links' : 'ลิงก์', icon: Icons.link, href: '/links' },
+  ];
+
+  const connect = [
+    { id: 'github', label: 'GitHub', icon: Icons.github, href: 'https://github.com/thnakon', external: true },
+    { id: 'linkedin', label: 'LinkedIn', icon: Icons.linkedin, href: 'https://www.linkedin.com/in/thnakon', external: true },
+    { id: 'twitter', label: 'X (Twitter)', icon: Icons.twitter, href: 'https://x.com/Obounwarm', external: true },
+    { id: 'email', label: 'Email', icon: Icons.email, href: 'mailto:thnakon.n@gmail.com', external: true },
+  ];
+
+  const filteredPages = pages.filter(page => 
+    page.label.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  const filteredConnect = connect.filter(item => 
+    item.label.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  const allItems = [...filteredPages, ...filteredConnect];
+
+  useEffect(() => {
+    if (isOpen) {
+      setIsVisible(true);
+      setTimeout(() => setIsAnimating(true), 10);
+      if (inputRef.current) {
+        setTimeout(() => inputRef.current.focus(), 100);
+      }
+    } else {
+      setIsAnimating(false);
+      const timer = setTimeout(() => setIsVisible(false), 300);
+      return () => clearTimeout(timer);
+    }
+    setSearchQuery('');
+    setSelectedIndex(0);
+  }, [isOpen]);
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (!isOpen) return;
+
+      if (e.key === 'Escape') {
+        onClose();
+      } else if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        setSelectedIndex(prev => (prev + 1) % allItems.length);
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        setSelectedIndex(prev => (prev - 1 + allItems.length) % allItems.length);
+      } else if (e.key === 'Enter') {
+        e.preventDefault();
+        const item = allItems[selectedIndex];
+        if (item) {
+          if (item.action) {
+            item.action();
+          } else if (item.external) {
+            window.open(item.href, '_blank');
+          } else {
+            router.push(item.href);
+          }
+          onClose();
+        }
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, selectedIndex, allItems, onClose, router]);
+
+  // Global keyboard shortcut (Cmd+K)
+  useEffect(() => {
+    const handleGlobalKeyDown = (e) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        if (!isOpen) {
+          // Trigger parent's open state
+        }
+      }
+    };
+
+    window.addEventListener('keydown', handleGlobalKeyDown);
+    return () => window.removeEventListener('keydown', handleGlobalKeyDown);
+  }, [isOpen]);
+
+  if (!isVisible) return null;
+
+  const handleClose = () => {
+    setIsAnimating(false);
+    setTimeout(() => onClose(), 300);
+  };
+
+  const handleItemClick = (item) => {
+    if (item.action) {
+      item.action();
+    } else if (item.external) {
+      window.open(item.href, '_blank');
+    } else {
+      router.push(item.href);
+    }
+    onClose();
+  };
+
+  return (
+    <>
+      {/* Backdrop - no blur to keep nav visible */}
+      <div 
+        className={`fixed inset-0 z-[2000] bg-black/50 transition-opacity duration-300 ${isAnimating ? 'opacity-100' : 'opacity-0'}`}
+        onClick={handleClose}
+      />
+
+      {/* Command Palette Modal */}
+      <div className="fixed inset-0 z-[2001] flex items-start justify-center pt-[15vh] px-4 pointer-events-none">
+        <div 
+          className={`
+            w-full max-w-xl pointer-events-auto
+            rounded-2xl overflow-hidden
+            shadow-2xl
+            border transition-all duration-300 ease-out
+            ${isAnimating ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-95 -translate-y-4'}
+            ${theme === 'dark' 
+              ? 'bg-[#0d0d0d] border-white/10' 
+              : 'bg-white border-black/10'}
+          `}
+        >
+          {/* Search Header */}
+          <div className={`flex items-center gap-3 px-5 py-4 border-b ${theme === 'dark' ? 'border-white/10' : 'border-black/10'}`}>
+            <div className={theme === 'dark' ? 'text-white/50' : 'text-black/50'}>
+              {Icons.search}
+            </div>
+            <input
+              ref={inputRef}
+              type="text"
+              placeholder={lang === 'en' ? 'Search' : 'ค้นหา'}
+              value={searchQuery}
+              onChange={(e) => {
+                setSearchQuery(e.target.value);
+                setSelectedIndex(0);
+              }}
+              className={`
+                flex-1 bg-transparent outline-none text-lg font-medium
+                placeholder:opacity-50
+                ${theme === 'dark' ? 'text-white placeholder:text-white/50' : 'text-black placeholder:text-black/50'}
+              `}
+            />
+            <button
+              onClick={toggleTheme}
+              className={`p-2 rounded-lg transition-all ${theme === 'dark' ? 'hover:bg-white/10 text-white/50' : 'hover:bg-black/10 text-black/50'}`}
+            >
+              {theme === 'dark' ? Icons.sun : Icons.moon}
+            </button>
+            <button
+              onClick={handleClose}
+              className={`px-3 py-1.5 rounded-lg text-xs font-bold uppercase tracking-wider transition-all ${theme === 'dark' ? 'bg-white/10 text-white/70 hover:bg-white/20' : 'bg-black/10 text-black/70 hover:bg-black/20'}`}
+            >
+              ESC
+            </button>
+          </div>
+
+          {/* Results */}
+          <div className="max-h-[60vh] overflow-y-auto py-2">
+            {/* Pages Section */}
+            {filteredPages.length > 0 && (
+              <div className="px-3 py-2">
+                <p className={`px-3 py-2 text-[10px] font-bold tracking-[0.2em] uppercase ${theme === 'dark' ? 'text-white/30' : 'text-black/30'}`}>
+                  {lang === 'en' ? 'PAGES' : 'หน้า'}
+                </p>
+                {filteredPages.map((page, index) => (
+                  <button
+                    key={page.id}
+                    onClick={() => handleItemClick(page)}
+                    onMouseEnter={() => setSelectedIndex(index)}
+                    className={`
+                      w-full flex items-center gap-4 px-4 py-3 rounded-xl transition-all
+                      ${selectedIndex === index 
+                        ? (theme === 'dark' ? 'bg-white/10' : 'bg-black/10') 
+                        : 'hover:bg-opacity-5'}
+                    `}
+                  >
+                    <div className={theme === 'dark' ? 'text-white/60' : 'text-black/60'}>
+                      {page.icon}
+                    </div>
+                    <span className={`text-base font-medium ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
+                      {page.label}
+                    </span>
+                  </button>
+                ))}
+              </div>
+            )}
+
+            {/* Connect Section */}
+            {filteredConnect.length > 0 && (
+              <div className="px-3 py-2">
+                <p className={`px-3 py-2 text-[10px] font-bold tracking-[0.2em] uppercase ${theme === 'dark' ? 'text-white/30' : 'text-black/30'}`}>
+                  {lang === 'en' ? 'CONNECT' : 'เชื่อมต่อ'}
+                </p>
+                {filteredConnect.map((item, index) => {
+                  const itemIndex = filteredPages.length + index;
+                  return (
+                    <button
+                      key={item.id}
+                      onClick={() => handleItemClick(item)}
+                      onMouseEnter={() => setSelectedIndex(itemIndex)}
+                      className={`
+                        w-full flex items-center justify-between gap-4 px-4 py-3 rounded-xl transition-all
+                        ${selectedIndex === itemIndex 
+                          ? (theme === 'dark' ? 'bg-white/10' : 'bg-black/10') 
+                          : 'hover:bg-opacity-5'}
+                      `}
+                    >
+                      <div className="flex items-center gap-4">
+                        <div className={theme === 'dark' ? 'text-white/60' : 'text-black/60'}>
+                          {item.icon}
+                        </div>
+                        <span className={`text-base font-medium ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
+                          {item.label}
+                        </span>
+                      </div>
+                      <div className={theme === 'dark' ? 'text-white/30' : 'text-black/30'}>
+                        {Icons.arrow}
+                      </div>
+                    </button>
+                  );
+                })}
+              </div>
+            )}
+
+            {/* No Results */}
+            {allItems.length === 0 && (
+              <div className="px-6 py-12 text-center">
+                <p className={theme === 'dark' ? 'text-white/50' : 'text-black/50'}>
+                  {lang === 'en' ? 'No results found' : 'ไม่พบผลลัพธ์'}
+                </p>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}
 
 export default function Navbar({ t, lang, setLang, theme, setTheme, onBookCall }) {
   const router = useRouter();
   const [activeSection, setActiveSection] = useState('home');
   const [isGreeting, setIsGreeting] = useState(true);
   const [isExpanded, setIsExpanded] = useState(false);
+  const [isCommandOpen, setIsCommandOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Detect mobile
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const getGreeting = () => {
     const hour = new Date().getHours();
@@ -113,6 +431,19 @@ export default function Navbar({ t, lang, setLang, theme, setTheme, onBookCall }
     return () => window.removeEventListener('scroll', handleScroll);
   }, [router.pathname]);
 
+  // Global keyboard shortcut (Cmd+K)
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        setIsCommandOpen(prev => !prev);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
   const toggleTheme = () => {
     const newTheme = theme === 'dark' ? 'light' : 'dark';
     setTheme(newTheme);
@@ -135,8 +466,20 @@ export default function Navbar({ t, lang, setLang, theme, setTheme, onBookCall }
 
   return (
     <>
-      {/* 1. Header Layer (Logo & Command) */}
-      <div className="fixed top-0 left-0 right-0 z-[1001] pointer-events-none">
+      {/* Command Palette */}
+      <CommandPalette 
+        isOpen={isCommandOpen}
+        onClose={() => setIsCommandOpen(false)}
+        theme={theme}
+        toggleTheme={toggleTheme}
+        lang={lang}
+        t={t}
+        router={router}
+        onBookCall={onBookCall}
+      />
+
+      {/* 1. Header Layer (Logo & Command) - Only on Desktop */}
+      <div className="fixed top-0 left-0 right-0 z-[1001] pointer-events-none hidden md:block">
         <div className="max-w-6xl mx-auto px-6 h-[80px] flex items-center justify-between">
           <Link 
             href="/" 
@@ -145,7 +488,7 @@ export default function Navbar({ t, lang, setLang, theme, setTheme, onBookCall }
             <img src={theme === 'dark' ? '/logo-light.png' : '/logo-dark.png'} alt="Logo" className="h-9 w-auto" />
           </Link>
           <button 
-            onClick={() => setIsExpanded(!isExpanded)} 
+            onClick={() => setIsCommandOpen(true)} 
             className={`pointer-events-auto w-10 h-10 flex items-center justify-center text-[var(--text-primary)] hover:scale-110 transition-all active:scale-90 ${!isGreeting ? 'animate-reveal-from-island-right' : 'opacity-0'}`}
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -155,8 +498,159 @@ export default function Navbar({ t, lang, setLang, theme, setTheme, onBookCall }
         </div>
       </div>
 
-      {/* 2. Centered Dynamic Island Group */}
-      <div className="fixed top-0 left-0 right-0 z-[1000] flex justify-center pt-5 pointer-events-none">
+      {/* Mobile Header - Logo | Nav | Command in one row */}
+      <div className="fixed top-0 left-0 right-0 z-[1001] md:hidden pointer-events-none">
+        <div className="px-4 h-[70px] flex items-center justify-between gap-2">
+          {/* Logo */}
+          <Link 
+            href="/" 
+            className={`pointer-events-auto transition-transform active:scale-95 shrink-0 ${!isGreeting ? 'animate-reveal-from-island-left' : 'opacity-0'}`}
+          >
+            <img src={theme === 'dark' ? '/logo-light.png' : '/logo-dark.png'} alt="Logo" className="h-8 w-auto" />
+          </Link>
+
+          {/* Mobile Nav Island */}
+          <div 
+            onClick={() => isMobile && isExpanded && setIsExpanded(false)}
+            className={`
+              pointer-events-auto flex-1 max-w-[280px]
+              relative flex items-center justify-center overflow-hidden
+              transition-all duration-500 ease-[cubic-bezier(0.2,0.8,0.2,1)]
+              backdrop-blur-2xl h-[40px] rounded-full px-1
+              ${theme === 'dark' 
+                ? 'bg-black/40 border border-white/25' 
+                : 'bg-white/40 border border-black/10'}
+              ${!isGreeting ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}
+            `}
+          >
+            <div className="flex items-center gap-0">
+              {navItems.map((item) => (
+                <Link 
+                  key={item.id} 
+                  href={item.href}
+                  onClick={() => setIsExpanded(false)}
+                  className={`
+                    px-2.5 py-1 rounded-full text-[11px] font-semibold transition-all duration-300
+                    ${activeSection === item.id 
+                      ? (theme === 'dark' ? 'bg-white text-black' : 'bg-black text-white') 
+                      : (theme === 'dark' ? 'text-white/60' : 'text-black/60')}
+                  `}
+                >
+                  {item.label}
+                </Link>
+              ))}
+              {/* More button */}
+              <div 
+                onClick={(e) => { e.stopPropagation(); setIsExpanded(!isExpanded); }}
+                className={`
+                  px-2.5 py-1 rounded-full text-[11px] font-semibold cursor-pointer transition-all duration-300 flex items-center gap-0.5
+                  ${isExpanded
+                    ? (theme === 'dark' ? 'bg-white text-black' : 'bg-black text-white') 
+                    : (theme === 'dark' ? 'text-white/60' : 'text-black/60')}
+                `}
+              >
+                <span>{t.nav.more}</span>
+                <div className={`transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`}>
+                  {Icons.chevronDown}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Command */}
+          <button 
+            onClick={() => setIsCommandOpen(true)} 
+            className={`pointer-events-auto w-9 h-9 flex items-center justify-center text-[var(--text-primary)] transition-all active:scale-90 shrink-0 ${!isGreeting ? 'animate-reveal-from-island-right' : 'opacity-0'}`}
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 6v12a3 3 0 1 0 3-3H6a3 3 0 1 0 3 3V6a3 3 0 1 0-3 3h12a3 3 0 1 0-3-3z" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile Expanded Menu Overlay */}
+      {isMobile && isExpanded && (
+        <div 
+          className="fixed inset-0 z-[999] bg-black/30 md:hidden"
+          onClick={() => setIsExpanded(false)}
+        />
+      )}
+
+      {/* Mobile Expanded Dropdown */}
+      <div className={`
+        fixed top-[75px] left-3 right-3 z-[1000] md:hidden
+        transition-all duration-500 ease-[cubic-bezier(0.2,0.8,0.2,1)]
+        ${isExpanded ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 -translate-y-4 pointer-events-none'}
+      `}>
+        <div className={`
+          rounded-[24px] p-4 overflow-y-auto max-h-[calc(100vh-100px)]
+          backdrop-blur-2xl
+          ${theme === 'dark' 
+            ? 'bg-black/80 border border-white/20' 
+            : 'bg-white/90 border border-black/10'}
+        `}>
+          {/* Visual Cards */}
+          <div className="grid grid-cols-2 gap-3 mb-4">
+            <Link href="/guestbook" onClick={() => setIsExpanded(false)} className={`relative group h-[100px] rounded-2xl overflow-hidden border ${theme === 'dark' ? 'bg-white/5 border-white/10' : 'bg-black/5 border-black/10'}`}>
+              <img src="/images/guestbook-thumb.png" className="absolute inset-0 w-full h-full object-cover opacity-70" />
+              <div className={`absolute inset-0 bg-gradient-to-t from-black/80 to-transparent`} />
+              <div className="absolute bottom-3 left-3">
+                <h4 className="text-sm font-bold text-white">{t.nav.moreDropdown.guestbook.title}</h4>
+              </div>
+            </Link>
+            <Link href="/ai-toolkit" onClick={() => setIsExpanded(false)} className={`relative group h-[100px] rounded-2xl overflow-hidden border ${theme === 'dark' ? 'bg-white/5 border-white/10' : 'bg-black/5 border-black/10'}`}>
+              <img src="/images/ai-toolkit-thumb.jpg" className="absolute inset-0 w-full h-full object-cover opacity-70" />
+              <div className={`absolute inset-0 bg-gradient-to-t from-black/80 to-transparent`} />
+              <div className="absolute bottom-3 left-3">
+                <h4 className="text-sm font-bold text-white">{t.nav.moreDropdown.aiToolkit.title}</h4>
+              </div>
+            </Link>
+          </div>
+
+          {/* Quick Links */}
+          <div className="space-y-2 mb-4">
+            {[
+              { id: 'links', icon: Icons.link, ...t.nav.moreDropdown.links },
+              { id: 'uses', icon: Icons.monitor, ...t.nav.moreDropdown.uses },
+              { id: 'attribution', icon: Icons.book, ...t.nav.moreDropdown.attribution }
+            ].map((link) => (
+              <Link key={link.id} href={`/${link.id}`} onClick={() => setIsExpanded(false)} className={`flex items-center gap-3 p-3 rounded-xl ${theme === 'dark' ? 'bg-white/5 hover:bg-white/10' : 'bg-black/5 hover:bg-black/10'}`}>
+                <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${theme === 'dark' ? 'bg-white/10 text-white' : 'bg-black/10 text-black'}`}>
+                  <div className="scale-90">{link.icon}</div>
+                </div>
+                <span className={`text-sm font-medium ${theme === 'dark' ? 'text-white' : 'text-black'}`}>{link.title}</span>
+              </Link>
+            ))}
+          </div>
+
+          {/* Controls */}
+          <div className="grid grid-cols-2 gap-2 mb-3">
+            <button 
+              onClick={toggleLang}
+              className={`flex items-center justify-center gap-2 p-2.5 rounded-xl ${theme === 'dark' ? 'bg-white/5 text-white' : 'bg-black/5 text-black'}`}
+            >
+              <span className="text-xs font-bold">{lang === 'en' ? 'TH' : 'EN'}</span>
+            </button>
+            <button 
+              onClick={toggleTheme}
+              className={`flex items-center justify-center gap-2 p-2.5 rounded-xl ${theme === 'dark' ? 'bg-white/5 text-white' : 'bg-black/5 text-black'}`}
+            >
+              <div className="scale-90">{theme === 'dark' ? Icons.sun : Icons.moon}</div>
+            </button>
+          </div>
+
+          <button 
+            onClick={() => { setIsExpanded(false); onBookCall(); }} 
+            className={`w-full py-3 rounded-xl font-bold text-xs uppercase tracking-wider ${theme === 'dark' ? 'bg-white text-black' : 'bg-black text-white'}`}
+          >
+            {t.nav.bookCall}
+          </button>
+        </div>
+      </div>
+
+      {/* 2. Centered Dynamic Island Group - Desktop Only */}
+      <div className="fixed top-0 left-0 right-0 z-[1000] hidden md:flex justify-center pt-5 pointer-events-none">
         <div className="flex items-center gap-1.5 px-4 transition-all duration-700">
            
            {/* MAIN DYNAMIC ISLAND PILL */}
@@ -171,8 +665,8 @@ export default function Navbar({ t, lang, setLang, theme, setTheme, onBookCall }
                  ? 'bg-black/40 border border-white/25 shadow-[0_20px_50px_rgba(0,0,0,0.5)]' 
                  : 'bg-white/40 border border-black/10 shadow-[0_20px_50px_rgba(0,0,0,0.08)]'}
                ${isGreeting ? 'w-[140px] h-[36px] rounded-full' : ''}
-               ${!isGreeting && !isExpanded ? 'w-[90vw] md:w-[480px] h-[44px] rounded-full px-4' : ''}
-               ${isExpanded ? 'w-[95vw] min-h-[500px] md:w-[750px] md:h-[480px] rounded-[32px] md:rounded-[42px] p-6 pt-12' : ''}
+               ${!isGreeting && !isExpanded ? 'w-[480px] h-[44px] rounded-full px-4' : ''}
+               ${isExpanded ? 'w-[750px] h-[480px] rounded-[42px] p-6 pt-12' : ''}
              `}
            >
               {/* Greeting Layer */}
@@ -183,15 +677,16 @@ export default function Navbar({ t, lang, setLang, theme, setTheme, onBookCall }
               </div>
 
               {/* Nav Items Level */}
-              <div className={`w-full flex items-center h-[44px] shrink-0 transition-all duration-500 ${!isGreeting ? 'opacity-100' : 'opacity-0 pointer-events-none'} ${isExpanded ? 'mb-8' : ''}`}>
+              <div className={`w-full flex items-center h-[44px] shrink-0 transition-all duration-500 ${!isGreeting ? 'opacity-100' : 'opacity-0 pointer-events-none'} ${isExpanded ? 'mb-4 md:mb-8' : ''}`}>
                  <div className="w-full flex items-center justify-between overflow-x-auto no-scrollbar md:overflow-visible">
-                   <div className="flex items-center gap-0.5 shrink-0">
+                   <div className="flex items-center gap-0 md:gap-0.5 shrink-0">
                      {navItems.map((item) => (
                        <Link 
                          key={item.id} 
                          href={item.href}
+                         onClick={() => setIsExpanded(false)}
                          className={`
-                           px-3 md:px-4 py-1.5 rounded-full text-[12px] font-semibold transition-all duration-300
+                           px-2 md:px-4 py-1.5 rounded-full text-[11px] md:text-[12px] font-semibold transition-all duration-300
                            ${activeSection === item.id 
                              ? (theme === 'dark' ? 'bg-white text-black' : 'bg-black text-white') 
                              : (theme === 'dark' ? 'text-white/50 hover:text-white' : 'text-black/50 hover:text-black')}
@@ -203,9 +698,10 @@ export default function Navbar({ t, lang, setLang, theme, setTheme, onBookCall }
                      
                      {/* MORE TRIGGER */}
                      <div 
-                       onMouseEnter={() => setIsExpanded(true)}
+                       onClick={() => isMobile && setIsExpanded(!isExpanded)}
+                       onMouseEnter={() => !isMobile && setIsExpanded(true)}
                         className={`
-                          px-3 md:px-4 py-1.5 rounded-full text-[12px] font-semibold cursor-pointer transition-all duration-300 flex items-center gap-1
+                          px-2 md:px-4 py-1.5 rounded-full text-[11px] md:text-[12px] font-semibold cursor-pointer transition-all duration-300 flex items-center gap-1
                           ${(isExpanded || activeSection === 'more')
                             ? (theme === 'dark' ? 'bg-white text-black' : 'bg-black text-white') 
                             : (theme === 'dark' ? 'text-white/50 hover:text-white' : 'text-black/50 hover:text-black')}
@@ -218,11 +714,11 @@ export default function Navbar({ t, lang, setLang, theme, setTheme, onBookCall }
                      </div>
                    </div>
 
-                   {/* GET IN TOUCH CTA */}
+                   {/* GET IN TOUCH CTA - Hidden on very small screens */}
                    <button 
                      onClick={onBookCall}
                      className={`
-                       flex shrink-0 items-center gap-1.5 px-1.5 py-1 rounded-full transition-all duration-300 group/cta border ml-2 md:ml-0
+                       hidden sm:flex shrink-0 items-center gap-1.5 px-1.5 py-1 rounded-full transition-all duration-300 group/cta border ml-2 md:ml-0
                        ${theme === 'dark' ? 'border-white/20 text-white hover:bg-white/10' : 'border-black/10 text-black hover:bg-black/5'}
                      `}
                    >
@@ -237,29 +733,29 @@ export default function Navbar({ t, lang, setLang, theme, setTheme, onBookCall }
               </div>
 
               {/* Dashboard Dropdown Content (Expanded) */}
-              <div className={`w-full flex-1 transition-all duration-500 delay-100 flex flex-col md:grid md:grid-cols-12 gap-6 overflow-y-auto md:overflow-hidden ${isExpanded ? 'opacity-100 scale-100' : 'opacity-0 scale-95 pointer-events-none'}`}>
+              <div className={`w-full flex-1 transition-all duration-500 delay-100 flex flex-col md:grid md:grid-cols-12 gap-4 md:gap-6 overflow-y-auto ${isExpanded ? 'opacity-100 scale-100' : 'opacity-0 scale-95 pointer-events-none'}`}>
                  {/* Left side: Grid of Visual Cards */}
-                 <div className="w-full md:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-4 shrink-0">
-                    <Link href="/guestbook" className={`relative group h-[180px] md:h-auto rounded-3xl overflow-hidden border transition-all ${theme === 'dark' ? 'bg-white/5 border-white/10 hover:border-white/20' : 'bg-black/5 border-black/5 hover:border-black/10'}`}>
+                 <div className="w-full md:col-span-8 grid grid-cols-2 gap-3 md:gap-4 shrink-0">
+                    <Link href="/guestbook" onClick={() => setIsExpanded(false)} className={`relative group h-[120px] md:h-auto rounded-2xl md:rounded-3xl overflow-hidden border transition-all ${theme === 'dark' ? 'bg-white/5 border-white/10 hover:border-white/20' : 'bg-black/5 border-black/5 hover:border-black/10'}`}>
                        <img src="/images/guestbook-thumb.png" className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-all duration-1000" />
-                       <div className={`absolute inset-0 bg-gradient-to-t via-transparent to-transparent ${theme === 'dark' ? 'from-black/80' : 'from-white/80'}`} />
-                       <div className="absolute bottom-6 left-6">
-                         <div className={`w-8 h-8 rounded-full mb-3 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform ${theme === 'dark' ? 'bg-white text-black' : 'bg-black text-white'}`}>
-                            {Icons.book}
+                       <div className={`absolute inset-0 bg-gradient-to-t via-transparent to-transparent ${theme === 'dark' ? 'from-black/90' : 'from-white/90'}`} />
+                       <div className="absolute bottom-3 md:bottom-6 left-3 md:left-6">
+                         <div className={`w-6 h-6 md:w-8 md:h-8 rounded-full mb-2 md:mb-3 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform ${theme === 'dark' ? 'bg-white text-black' : 'bg-black text-white'}`}>
+                            <div className="scale-75 md:scale-100">{Icons.book}</div>
                          </div>
-                         <h4 className={`text-lg font-bold mb-1 ${theme === 'dark' ? 'text-white' : 'text-black'}`}>{t.nav.moreDropdown.guestbook.title}</h4>
-                         <p className={`text-[10px] leading-tight max-w-[140px] ${theme === 'dark' ? 'text-white/60' : 'text-black/60'}`}>{t.nav.moreDropdown.guestbook.desc}</p>
+                         <h4 className={`text-sm md:text-lg font-bold mb-0.5 md:mb-1 ${theme === 'dark' ? 'text-white' : 'text-black'}`}>{t.nav.moreDropdown.guestbook.title}</h4>
+                         <p className={`text-[8px] md:text-[10px] leading-tight max-w-[100px] md:max-w-[140px] hidden sm:block ${theme === 'dark' ? 'text-white/60' : 'text-black/60'}`}>{t.nav.moreDropdown.guestbook.desc}</p>
                        </div>
                     </Link>
-                    <Link href="/ai-toolkit" className={`relative group h-[180px] md:h-auto rounded-3xl overflow-hidden border transition-all ${theme === 'dark' ? 'bg-white/5 border-white/10 hover:border-white/20' : 'bg-black/5 border-black/5 hover:border-black/10'}`}>
+                    <Link href="/ai-toolkit" onClick={() => setIsExpanded(false)} className={`relative group h-[120px] md:h-auto rounded-2xl md:rounded-3xl overflow-hidden border transition-all ${theme === 'dark' ? 'bg-white/5 border-white/10 hover:border-white/20' : 'bg-black/5 border-black/5 hover:border-black/10'}`}>
                        <img src="/images/ai-toolkit-thumb.jpg" className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-all duration-1000" />
-                       <div className={`absolute inset-0 bg-gradient-to-t via-transparent to-transparent ${theme === 'dark' ? 'from-black/80' : 'from-white/80'}`} />
-                       <div className="absolute bottom-6 left-6">
-                         <div className={`w-8 h-8 rounded-full mb-3 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform ${theme === 'dark' ? 'bg-white text-black' : 'bg-black text-white'}`}>
-                            {Icons.ai}
+                       <div className={`absolute inset-0 bg-gradient-to-t via-transparent to-transparent ${theme === 'dark' ? 'from-black/90' : 'from-white/90'}`} />
+                       <div className="absolute bottom-3 md:bottom-6 left-3 md:left-6">
+                         <div className={`w-6 h-6 md:w-8 md:h-8 rounded-full mb-2 md:mb-3 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform ${theme === 'dark' ? 'bg-white text-black' : 'bg-black text-white'}`}>
+                            <div className="scale-75 md:scale-100">{Icons.ai}</div>
                          </div>
-                         <h4 className={`text-lg font-bold mb-1 ${theme === 'dark' ? 'text-white' : 'text-black'}`}>{t.nav.moreDropdown.aiToolkit.title}</h4>
-                         <p className={`text-[10px] leading-tight max-w-[140px] ${theme === 'dark' ? 'text-white/60' : 'text-black/60'}`}>{t.nav.moreDropdown.aiToolkit.desc}</p>
+                         <h4 className={`text-sm md:text-lg font-bold mb-0.5 md:mb-1 ${theme === 'dark' ? 'text-white' : 'text-black'}`}>{t.nav.moreDropdown.aiToolkit.title}</h4>
+                         <p className={`text-[8px] md:text-[10px] leading-tight max-w-[100px] md:max-w-[140px] hidden sm:block ${theme === 'dark' ? 'text-white/60' : 'text-black/60'}`}>{t.nav.moreDropdown.aiToolkit.desc}</p>
                        </div>
                     </Link>
                  </div>
@@ -271,37 +767,37 @@ export default function Navbar({ t, lang, setLang, theme, setTheme, onBookCall }
                       { id: 'uses', icon: Icons.monitor, ...t.nav.moreDropdown.uses },
                       { id: 'attribution', icon: Icons.book, ...t.nav.moreDropdown.attribution }
                     ].map((link) => (
-                      <Link key={link.id} href={`/${link.id}`} className={`group flex items-center gap-4 p-4 rounded-3xl border transition-all ${theme === 'dark' ? 'bg-white/5 border-white/5 hover:bg-white/10' : 'bg-black/5 border-black/5 hover:bg-black/10'}`}>
-                         <div className={`w-10 h-10 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform ${theme === 'dark' ? 'bg-white/5 text-white' : 'bg-black/5 text-black'}`}>
-                            {link.icon}
+                      <Link key={link.id} href={`/${link.id}`} onClick={() => setIsExpanded(false)} className={`group flex items-center gap-3 md:gap-4 p-3 md:p-4 rounded-2xl md:rounded-3xl border transition-all ${theme === 'dark' ? 'bg-white/5 border-white/5 hover:bg-white/10' : 'bg-black/5 border-black/5 hover:bg-black/10'}`}>
+                         <div className={`w-8 h-8 md:w-10 md:h-10 rounded-xl md:rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform ${theme === 'dark' ? 'bg-white/5 text-white' : 'bg-black/5 text-black'}`}>
+                            <div className="scale-90 md:scale-100">{link.icon}</div>
                          </div>
                          <div>
-                            <h5 className={`text-sm font-bold ${theme === 'dark' ? 'text-white' : 'text-black'}`}>{link.title}</h5>
-                            <p className={`text-[10px] line-clamp-1 ${theme === 'dark' ? 'text-white/40' : 'text-black/40'}`}>{link.desc}</p>
+                            <h5 className={`text-xs md:text-sm font-bold ${theme === 'dark' ? 'text-white' : 'text-black'}`}>{link.title}</h5>
+                            <p className={`text-[9px] md:text-[10px] line-clamp-1 ${theme === 'dark' ? 'text-white/40' : 'text-black/40'}`}>{link.desc}</p>
                          </div>
                       </Link>
                     ))}
 
                     {/* Theme & Language Controls */}
-                    <div className="grid grid-cols-2 gap-2 mt-2">
+                    <div className="grid grid-cols-2 gap-2 mt-1 md:mt-2">
                        <button 
                          onClick={toggleLang}
-                         className={`flex items-center justify-center gap-2 p-2 rounded-xl border transition-all ${theme === 'dark' ? 'bg-white/5 border-white/5 hover:bg-white/10 text-white' : 'bg-black/5 border-black/5 hover:bg-black/10 text-black'}`}
+                         className={`flex items-center justify-center gap-1 md:gap-2 p-2 rounded-xl border transition-all ${theme === 'dark' ? 'bg-white/5 border-white/5 hover:bg-white/10 text-white' : 'bg-black/5 border-black/5 hover:bg-black/10 text-black'}`}
                        >
                           <span className="text-[10px] font-bold tracking-widest uppercase">{lang === 'en' ? 'TH' : 'EN'}</span>
-                          <span className="text-[9px] font-medium opacity-60">{lang === 'en' ? 'Language' : 'ภาษา'}</span>
+                          <span className="text-[8px] md:text-[9px] font-medium opacity-60">{lang === 'en' ? 'Lang' : 'ภาษา'}</span>
                        </button>
                        <button 
                          onClick={toggleTheme}
-                         className={`flex items-center justify-center gap-2 p-2 rounded-xl border transition-all ${theme === 'dark' ? 'bg-white/5 border-white/5 hover:bg-white/10 text-white' : 'bg-black/5 border-black/5 hover:bg-black/10 text-black'}`}
+                         className={`flex items-center justify-center gap-1 md:gap-2 p-2 rounded-xl border transition-all ${theme === 'dark' ? 'bg-white/5 border-white/5 hover:bg-white/10 text-white' : 'bg-black/5 border-black/5 hover:bg-black/10 text-black'}`}
                        >
-                          <div className="shrink-0 scale-90">{theme === 'dark' ? Icons.sun : Icons.moon}</div>
-                          <span className="text-[9px] font-medium uppercase tracking-widest">{theme === 'dark' ? (lang === 'en' ? 'Light' : 'โหมดสว่าง') : (lang === 'en' ? 'Dark' : 'โหมดมืด')}</span>
+                          <div className="shrink-0 scale-75 md:scale-90">{theme === 'dark' ? Icons.sun : Icons.moon}</div>
+                          <span className="text-[8px] md:text-[9px] font-medium uppercase tracking-wider">{theme === 'dark' ? 'Light' : 'Dark'}</span>
                        </button>
                     </div>
                     <button 
-                      onClick={onBookCall} 
-                      className={`mt-auto w-full py-4 rounded-3xl font-bold text-xs uppercase tracking-[0.2em] shadow-xl hover:scale-105 active:scale-95 transition-all ${theme === 'dark' ? 'bg-white text-black shadow-white/5' : 'bg-black text-white shadow-black/10'}`}
+                      onClick={() => { setIsExpanded(false); onBookCall(); }} 
+                      className={`mt-1 md:mt-auto w-full py-3 md:py-4 rounded-2xl md:rounded-3xl font-bold text-[10px] md:text-xs uppercase tracking-[0.15em] md:tracking-[0.2em] shadow-xl hover:scale-105 active:scale-95 transition-all ${theme === 'dark' ? 'bg-white text-black shadow-white/5' : 'bg-black text-white shadow-black/10'}`}
                     >
                       {t.nav.bookCall}
                     </button>
