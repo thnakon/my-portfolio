@@ -202,7 +202,7 @@ export default function Hero({ t, onGetInTouch }) {
           <span className={`inline-block w-[3px] h-[1em] bg-[var(--text-primary)] ml-1 align-middle ${typingComplete ? 'opacity-0' : 'animate-blink'}`} />
         </h1>
         
-        <p 
+        <div 
           className="text-secondary text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed transition-all duration-700 font-light flex flex-wrap items-center justify-center"
           style={{
             opacity: showContent ? 1 : 0,
@@ -230,7 +230,7 @@ export default function Hero({ t, onGetInTouch }) {
               )}
             </span>
           ))}
-        </p>
+        </div>
         
         {/* CTA Buttons */}
         <div 
