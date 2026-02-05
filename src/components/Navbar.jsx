@@ -241,7 +241,7 @@ export default function Navbar({ t, lang, setLang, theme, setTheme, onBookCall }
                  {/* Left side: Grid of Visual Cards */}
                  <div className="w-full md:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-4 shrink-0">
                     <Link href="/guestbook" className={`relative group h-[180px] md:h-auto rounded-3xl overflow-hidden border transition-all ${theme === 'dark' ? 'bg-white/5 border-white/10 hover:border-white/20' : 'bg-black/5 border-black/5 hover:border-black/10'}`}>
-                       <img src="/nav/guestbook_bg.png" className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-all duration-1000" />
+                       <img src="/images/guestbook-thumb.png" className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-all duration-1000" />
                        <div className={`absolute inset-0 bg-gradient-to-t via-transparent to-transparent ${theme === 'dark' ? 'from-black/80' : 'from-white/80'}`} />
                        <div className="absolute bottom-6 left-6">
                          <div className={`w-8 h-8 rounded-full mb-3 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform ${theme === 'dark' ? 'bg-white text-black' : 'bg-black text-white'}`}>
@@ -252,7 +252,7 @@ export default function Navbar({ t, lang, setLang, theme, setTheme, onBookCall }
                        </div>
                     </Link>
                     <Link href="/ai-toolkit" className={`relative group h-[180px] md:h-auto rounded-3xl overflow-hidden border transition-all ${theme === 'dark' ? 'bg-white/5 border-white/10 hover:border-white/20' : 'bg-black/5 border-black/5 hover:border-black/10'}`}>
-                       <img src="/nav/bucketlist_bg.png" className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-all duration-1000" />
+                       <img src="/images/ai-toolkit-thumb.jpg" className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-all duration-1000" />
                        <div className={`absolute inset-0 bg-gradient-to-t via-transparent to-transparent ${theme === 'dark' ? 'from-black/80' : 'from-white/80'}`} />
                        <div className="absolute bottom-6 left-6">
                          <div className={`w-8 h-8 rounded-full mb-3 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform ${theme === 'dark' ? 'bg-white text-black' : 'bg-black text-white'}`}>
