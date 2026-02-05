@@ -1,9 +1,56 @@
 import nodemailer from 'nodemailer';
 
+// Simple in-memory rate limiting
+const rateLimit = new Map();
+const RATE_LIMIT_WINDOW = 15 * 60 * 1000; // 15 minutes in milliseconds
+const MAX_REQUESTS = 5; // Max 5 emails per window per IP
+
+function checkRateLimit(ip) {
+  const now = Date.now();
+  const userLimit = rateLimit.get(ip);
+
+  if (!userLimit) {
+    rateLimit.set(ip, { count: 1, firstRequest: now });
+    return { allowed: true, remaining: MAX_REQUESTS - 1 };
+  }
+
+  // Reset if window has passed
+  if (now - userLimit.firstRequest > RATE_LIMIT_WINDOW) {
+    rateLimit.set(ip, { count: 1, firstRequest: now });
+    return { allowed: true, remaining: MAX_REQUESTS - 1 };
+  }
+
+  // Check if limit exceeded
+  if (userLimit.count >= MAX_REQUESTS) {
+    const resetIn = Math.ceil((userLimit.firstRequest + RATE_LIMIT_WINDOW - now) / 1000 / 60);
+    return { allowed: false, remaining: 0, resetIn };
+  }
+
+  // Increment count
+  userLimit.count++;
+  rateLimit.set(ip, userLimit);
+  return { allowed: true, remaining: MAX_REQUESTS - userLimit.count };
+}
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
+
+  // Rate limiting check
+  const ip = req.headers['x-forwarded-for']?.split(',')[0] || req.socket?.remoteAddress || 'unknown';
+  const rateLimitResult = checkRateLimit(ip);
+
+  if (!rateLimitResult.allowed) {
+    console.log(`⚠️ Rate limit exceeded for IP: ${ip}`);
+    return res.status(429).json({
+      error: 'Too many requests. Please try again later.',
+      resetInMinutes: rateLimitResult.resetIn
+    });
+  }
+
+  // Set rate limit headers
+  res.setHeader('X-RateLimit-Remaining', rateLimitResult.remaining);
 
   const { name, email, message } = req.body;
 

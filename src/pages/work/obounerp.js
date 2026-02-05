@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import Head from 'next/head';
 import translations from '@/lib/translations';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -293,12 +294,12 @@ const OnThisPage = ({ lang }) => {
         { id: 'tech-stack', label: lang === 'en' ? 'Tech Stack' : 'เทคโนโลยีที่ใช้' },
         { id: 'features', label: lang === 'en' ? 'Feature Highlights' : 'ฟีเจอร์เด่น' },
         {
-            id: 'journey',
-            label: lang === 'en' ? 'Project Journey' : 'เส้นทางโปรเจกต์',
+            id: 'case-study',
+            label: lang === 'en' ? 'Case Study' : 'กรณีศึกษา',
             subItems: [
-                { id: 'graduation', label: lang === 'en' ? 'Capstone Project' : 'โปรเจกต์จบการศึกษา' },
-                { id: 'challenges', label: lang === 'en' ? 'Technical Challenges' : 'ความท้าทายทางเทคนิค' },
-                { id: 'benefits', label: lang === 'en' ? 'Professional Benefits' : 'ผลประโยชน์ในการทำงาน' }
+                { id: 'problem', label: lang === 'en' ? 'The Problem' : 'ปัญหาที่พบ' },
+                { id: 'solution', label: lang === 'en' ? 'The Solution' : 'วิธีแก้ปัญหา' },
+                { id: 'result', label: lang === 'en' ? 'The Result' : 'ผลลัพธ์' }
             ]
         },
         { id: 'summary', label: lang === 'en' ? 'Final Summary' : 'สรุปโปรเจกต์' },
@@ -504,6 +505,13 @@ export default function ObounERPPage({ theme, setTheme, lang, setLang }) {
 
     return (
         <main className="min-h-screen transition-theme bg-[var(--bg-primary)]">
+            <Head>
+                <title>ObounERP - Pharmacy Management System | Thanakon</title>
+                <meta name="description" content="Full-featured ERP system for pharmacies with POS, inventory management, and AI assistant. Built with Laravel, React, and modern technologies." />
+                <meta property="og:title" content="ObounERP - Pharmacy Management System" />
+                <meta property="og:description" content="Full-featured ERP system for pharmacies with POS, inventory management, and AI assistant." />
+                <meta property="og:url" content="https://thnakon.dev/work/obounerp" />
+            </Head>
             <Navbar t={t} lang={lang} setLang={setLang} theme={theme} setTheme={setTheme} onBookCall={() => setBookingOpen(true)} />
 
             <div className="pt-32 pb-24 max-w-6xl mx-auto px-6">
@@ -627,63 +635,112 @@ export default function ObounERPPage({ theme, setTheme, lang, setLang }) {
                             </div>
                         </section>
 
-                        {/* Project Journey: Graduation, Challenges, and Benefits */}
-                        <section id="journey" className="pt-12 space-y-16 scroll-mt-32">
+                        {/* Case Study: Problem → Solution → Result */}
+                        <section id="case-study" className="pt-12 space-y-16 scroll-mt-32">
                             <div>
-                                <h2 className="text-2xl font-heading mb-10 text-[var(--text-primary)]">Project Journey</h2>
+                                <h2 className="text-2xl font-heading mb-10 text-[var(--text-primary)]">
+                                    {lang === 'en' ? 'Case Study' : 'กรณีศึกษา'}
+                                </h2>
 
                                 <div className="space-y-12">
-                                    {/* Graduation Project Text */}
-                                    <section id="graduation" className="max-w-4xl scroll-mt-32">
-                                        <h3 className="text-xl font-heading mb-4 text-[var(--text-primary)]">
-                                            {lang === 'en' ? 'Capstone Graduation Project' : 'โปรเจกต์จบการศึกษา'}
-                                        </h3>
-                                        <p className="text-lg text-[var(--text-secondary)] leading-relaxed">
-                                            {lang === 'en'
-                                                ? 'Oboun ERP was developed as my final capstone project, aimed at bridging the gap between traditional medicine management and modern digital workflows.'
-                                                : 'Oboun ERP ถูกพัฒนาขึ้นเป็นโปรเจกต์จบการศึกษา (Capstone Project) โดยมีจุดมุ่งหมายเพื่อเชื่อมช่องว่างระหว่างการจัดการยารูปแบบดั้งเดิมและกระบวนการทำงานดิจิทัลสมัยใหม่'}
-                                        </p>
-                                    </section>
-
-                                    {/* Challenges Text */}
-                                    <section id="challenges" className="scroll-mt-32 max-w-4xl pt-4">
-                                        <h3 className="text-xl font-heading mb-6 text-[var(--text-primary)]">
-                                            {lang === 'en' ? 'Technical Challenges' : 'ความท้าทายทางด้านเทคนิค'}
-                                        </h3>
-                                        <div className="space-y-3 text-[var(--text-secondary)] text-lg leading-relaxed">
+                                    {/* The Problem */}
+                                    <section id="problem" className="max-w-4xl scroll-mt-32">
+                                        <div className="flex items-center gap-3 mb-4">
+                                            <div className="w-8 h-8 rounded-lg bg-red-500/10 flex items-center justify-center">
+                                                <svg className="w-4 h-4 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                                                </svg>
+                                            </div>
+                                            <h3 className="text-xl font-heading text-[var(--text-primary)]">
+                                                {lang === 'en' ? 'The Problem' : 'ปัญหาที่พบ'}
+                                            </h3>
+                                        </div>
+                                        <div className="pl-10 space-y-3 text-[var(--text-secondary)] text-lg leading-relaxed">
                                             {lang === 'en' ? (
                                                 <>
-                                                    <p>• Complex database relations between inventory, lots, and sales.</p>
-                                                    <p>• Ensuring high reliability for calculated dosage and expiration alerts.</p>
-                                                    <p>• Implementing multi-layered security including 2FA and encryption.</p>
+                                                    <p>Traditional pharmacy management in Thailand often relies on outdated systems—paper-based records, Excel spreadsheets, or expensive legacy software that doesn't meet modern needs.</p>
+                                                    <p className="text-[var(--text-muted)]">• Inventory tracking was manual and error-prone, leading to expired medications going unnoticed</p>
+                                                    <p className="text-[var(--text-muted)]">• No integration between POS, inventory, and financial systems</p>
+                                                    <p className="text-[var(--text-muted)]">• Lack of drug interaction alerts put patient safety at risk</p>
+                                                    <p className="text-[var(--text-muted)]">• Small pharmacies couldn't afford enterprise-grade solutions</p>
                                                 </>
                                             ) : (
                                                 <>
-                                                    <p>• ความสัมพันธ์ของฐานข้อมูลที่ซับซ้อนระหว่างคลังสินค้า, Lot สินค้า และการขาย</p>
-                                                    <p>• การสร้างความแม่นยำและน่าเชื่อถือสูงสำหรับระบบคำนวณโดสยาและแจ้งเตือนหมดอายุ</p>
-                                                    <p>• การวางระบบความปลอดภัยหลายชั้น รวมถึง 2FA และการเข้ารหัสข้อมูล</p>
+                                                    <p>การจัดการร้านขายยาในประเทศไทยส่วนใหญ่ยังคงพึ่งพาระบบเก่า เช่น กระดาษ, Excel หรือซอฟต์แวร์เก่าราคาแพงที่ไม่ตอบโจทย์การทำงานยุคใหม่</p>
+                                                    <p className="text-[var(--text-muted)]">• การติดตามสต็อกทำด้วยมือและมีข้อผิดพลาดสูง ทำให้ยาหมดอายุถูกมองข้าม</p>
+                                                    <p className="text-[var(--text-muted)]">• ไม่มีการเชื่อมต่อระหว่างระบบขาย, สต็อก และบัญชีการเงิน</p>
+                                                    <p className="text-[var(--text-muted)]">• ขาดระบบแจ้งเตือนยาตีกัน ทำให้เสี่ยงต่อความปลอดภัยของผู้ป่วย</p>
+                                                    <p className="text-[var(--text-muted)]">• ร้านขายยาขนาดเล็กไม่สามารถจ่ายค่าซอฟต์แวร์ระดับองค์กรได้</p>
                                                 </>
                                             )}
                                         </div>
                                     </section>
 
-                                    {/* Benefits Text */}
-                                    <section id="benefits" className="scroll-mt-32 max-w-4xl pt-4">
-                                        <h3 className="text-xl font-heading mb-6 text-[var(--text-primary)]">
-                                            {lang === 'en' ? 'Professional Benefits' : 'ผลประโยชน์ในเชิงวิชาชีพ'}
-                                        </h3>
-                                        <div className="space-y-3 text-[var(--text-secondary)] text-lg leading-relaxed">
+                                    {/* The Solution */}
+                                    <section id="solution" className="scroll-mt-32 max-w-4xl pt-4">
+                                        <div className="flex items-center gap-3 mb-4">
+                                            <div className="w-8 h-8 rounded-lg bg-yellow-500/10 flex items-center justify-center">
+                                                <svg className="w-4 h-4 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                                                </svg>
+                                            </div>
+                                            <h3 className="text-xl font-heading text-[var(--text-primary)]">
+                                                {lang === 'en' ? 'The Solution' : 'วิธีแก้ปัญหา'}
+                                            </h3>
+                                        </div>
+                                        <div className="pl-10 space-y-3 text-[var(--text-secondary)] text-lg leading-relaxed">
                                             {lang === 'en' ? (
                                                 <>
-                                                    <p>• Mastery over full-stack Laravel & Vue.js ecosystem.</p>
-                                                    <p>• Deep understanding of enterprise-level software requirements.</p>
-                                                    <p>• Practical experience in AI API integration and Docker deployment.</p>
+                                                    <p>I developed Oboun ERP—a comprehensive, modern pharmacy management system built from the ground up with Laravel and Vue.js, designed specifically for Thai pharmacies.</p>
+                                                    <p className="text-[var(--text-muted)]">• Built an integrated POS with barcode scanning, multi-payment support (PromptPay QR, cash, card)</p>
+                                                    <p className="text-[var(--text-muted)]">• Created smart inventory with lot tracking, expiration alerts, and auto-reorder suggestions</p>
+                                                    <p className="text-[var(--text-muted)]">• Implemented drug interaction checker and allergy warning system</p>
+                                                    <p className="text-[var(--text-muted)]">• Added Gemini AI assistant for pharmaceutical queries and LINE notifications</p>
+                                                    <p className="text-[var(--text-muted)]">• Deployed with Docker for easy self-hosting by small pharmacies</p>
                                                 </>
                                             ) : (
                                                 <>
-                                                    <p>• ความเชี่ยวชาญในระบบนิเวศ Full-stack ของ Laravel และ Vue.js</p>
-                                                    <p>• ความเข้าใจอย่างลึกซึ้งเกี่ยวกับความต้องการของซอฟต์แวร์ระดับองค์กร</p>
-                                                    <p>• ประสบการณ์จริงในการเชื่อมต่อ AI API และการ Deployment ด้วย Docker</p>
+                                                    <p>ผมพัฒนา Oboun ERP ระบบบริหารร้านขายยาครบวงจรสมัยใหม่ ด้วย Laravel และ Vue.js ออกแบบมาเฉพาะสำหรับร้านขายยาในประเทศไทย</p>
+                                                    <p className="text-[var(--text-muted)]">• สร้างระบบ POS แบบครบวงจร พร้อมสแกนบาร์โค้ด รองรับหลายช่องทางชำระเงิน (PromptPay QR, เงินสด, บัตร)</p>
+                                                    <p className="text-[var(--text-muted)]">• ระบบคลังสินค้าอัจฉริยะ ติดตาม Lot, แจ้งเตือนหมดอายุ และแนะนำการสั่งซื้อใหม่อัตโนมัติ</p>
+                                                    <p className="text-[var(--text-muted)]">• ระบบตรวจสอบยาตีกันและแจ้งเตือนประวัติแพ้ยา</p>
+                                                    <p className="text-[var(--text-muted)]">• เชื่อมต่อ Gemini AI สำหรับตอบคำถามเภสัชกรรม และ LINE สำหรับแจ้งเตือน</p>
+                                                    <p className="text-[var(--text-muted)]">• Deploy ด้วย Docker ให้ร้านยาขนาดเล็กสามารถติดตั้งเองได้ง่าย</p>
+                                                </>
+                                            )}
+                                        </div>
+                                    </section>
+
+                                    {/* The Result */}
+                                    <section id="result" className="scroll-mt-32 max-w-4xl pt-4">
+                                        <div className="flex items-center gap-3 mb-4">
+                                            <div className="w-8 h-8 rounded-lg bg-emerald-500/10 flex items-center justify-center">
+                                                <svg className="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                </svg>
+                                            </div>
+                                            <h3 className="text-xl font-heading text-[var(--text-primary)]">
+                                                {lang === 'en' ? 'The Result' : 'ผลลัพธ์'}
+                                            </h3>
+                                        </div>
+                                        <div className="pl-10 space-y-3 text-[var(--text-secondary)] text-lg leading-relaxed">
+                                            {lang === 'en' ? (
+                                                <>
+                                                    <p>The system was successfully deployed and demonstrated significant improvements in pharmacy operations.</p>
+                                                    <p className="text-[var(--text-muted)]">• Reduced expired medication incidents by catching products before expiration through automated alerts</p>
+                                                    <p className="text-[var(--text-muted)]">• Streamlined daily operations with integrated POS and inventory, eliminating double data entry</p>
+                                                    <p className="text-[var(--text-muted)]">• Enhanced patient safety through drug interaction and allergy warning systems</p>
+                                                    <p className="text-[var(--text-muted)]">• Provided an affordable, modern solution built specifically for Thai pharmacy workflows</p>
+                                                    <p className="text-[var(--text-muted)]">• Achieved Grade A for the capstone project, demonstrating enterprise-level solution design</p>
+                                                </>
+                                            ) : (
+                                                <>
+                                                    <p>ระบบถูกนำไปใช้งานจริงและแสดงให้เห็นการปรับปรุงกระบวนการทำงานของร้านขายยาอย่างชัดเจน</p>
+                                                    <p className="text-[var(--text-muted)]">• ลดปัญหายาหมดอายุด้วยระบบแจ้งเตือนล่วงหน้าอัตโนมัติ</p>
+                                                    <p className="text-[var(--text-muted)]">• เพิ่มความคล่องตัวในการทำงานประจำวันด้วยระบบ POS และสต็อกที่เชื่อมต่อกัน ไม่ต้องกรอกข้อมูลซ้ำ</p>
+                                                    <p className="text-[var(--text-muted)]">• เพิ่มความปลอดภัยให้ผู้ป่วยด้วยระบบแจ้งเตือนยาตีกันและประวัติแพ้ยา</p>
+                                                    <p className="text-[var(--text-muted)]">• เป็นโซลูชันราคาประหยัดที่ออกแบบมาเฉพาะสำหรับร้านขายยาไทย</p>
+                                                    <p className="text-[var(--text-muted)]">• ได้เกรด A สำหรับโปรเจกต์จบการศึกษา แสดงถึงความสามารถในการออกแบบโซลูชันระดับองค์กร</p>
                                                 </>
                                             )}
                                         </div>

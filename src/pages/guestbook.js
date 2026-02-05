@@ -230,11 +230,37 @@ export default function GuestbookPage({ theme, setTheme, lang, setLang }) {
 
                     {/* Message Pills */}
                     {isLoading ? (
-                        <div className="absolute left-1/2 top-[20%] -translate-x-1/2 text-center">
-                            <div className="w-8 h-8 border-2 border-[var(--text-primary)] border-t-transparent rounded-full animate-spin mx-auto mb-4" />
-                            <p className="text-[var(--text-muted)] text-sm">
-                                {lang === 'en' ? 'Loading messages...' : 'กำลังโหลดข้อความ...'}
-                            </p>
+                        /* Skeleton Loading Pills */
+                        <div className="absolute inset-0 pt-[15%] px-4 md:px-8">
+                            {[1, 2, 3, 4, 5].map((i) => (
+                                <div
+                                    key={i}
+                                    className="mb-4 animate-pulse"
+                                    style={{
+                                        marginLeft: `${(i * 7) % 40}%`,
+                                        width: `${45 + (i * 5) % 20}%`,
+                                        maxWidth: '320px'
+                                    }}
+                                >
+                                    <div className={`
+                                        rounded-3xl px-5 py-4 backdrop-blur-xl
+                                        ${theme === 'dark'
+                                            ? 'bg-white/5 border border-white/10'
+                                            : 'bg-black/5 border border-black/10'}
+                                    `}>
+                                        {/* Avatar + Name skeleton */}
+                                        <div className="flex items-center gap-2 mb-2">
+                                            <div className={`w-6 h-6 rounded-full ${theme === 'dark' ? 'bg-white/10' : 'bg-black/10'}`} />
+                                            <div className={`h-3 rounded-full ${theme === 'dark' ? 'bg-white/10' : 'bg-black/10'}`} style={{ width: `${50 + (i * 10) % 30}%` }} />
+                                        </div>
+                                        {/* Message skeleton */}
+                                        <div className="space-y-2">
+                                            <div className={`h-3 rounded-full ${theme === 'dark' ? 'bg-white/10' : 'bg-black/10'}`} style={{ width: '100%' }} />
+                                            <div className={`h-3 rounded-full ${theme === 'dark' ? 'bg-white/10' : 'bg-black/10'}`} style={{ width: `${60 + (i * 5) % 30}%` }} />
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
                         </div>
                     ) : messages.length === 0 ? (
                         <div className="absolute left-1/2 top-[20%] -translate-x-1/2 text-center max-w-md">

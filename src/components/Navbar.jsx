@@ -489,6 +489,7 @@ export default function Navbar({ t, lang, setLang, theme, setTheme, onBookCall }
           </Link>
           <button 
             onClick={() => setIsCommandOpen(true)} 
+            aria-label="Open command palette"
             className={`pointer-events-auto w-10 h-10 flex items-center justify-center text-[var(--text-primary)] hover:scale-110 transition-all active:scale-90 ${!isGreeting ? 'animate-reveal-from-island-right' : 'opacity-0'}`}
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -560,6 +561,7 @@ export default function Navbar({ t, lang, setLang, theme, setTheme, onBookCall }
           {/* Command */}
           <button 
             onClick={() => setIsCommandOpen(true)} 
+            aria-label="Open command palette"
             className={`pointer-events-auto w-9 h-9 flex items-center justify-center text-[var(--text-primary)] transition-all active:scale-90 shrink-0 ${!isGreeting ? 'animate-reveal-from-island-right' : 'opacity-0'}`}
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import Head from 'next/head';
 import translations from '@/lib/translations';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -287,12 +288,12 @@ const OnThisPage = ({ lang }) => {
         { id: 'tech-stack', label: lang === 'en' ? 'Tech Stack' : 'เทคโนโลยีที่ใช้' },
         { id: 'features', label: lang === 'en' ? 'Feature Highlights' : 'ฟีเจอร์เด่น' },
         {
-            id: 'journey',
-            label: lang === 'en' ? 'Project Journey' : 'เส้นทางโปรเจกต์',
+            id: 'case-study',
+            label: lang === 'en' ? 'Case Study' : 'กรณีศึกษา',
             subItems: [
-                { id: 'origin', label: lang === 'en' ? 'Project Origin' : 'จุดเริ่มต้นโปรเจกต์' },
-                { id: 'challenges', label: lang === 'en' ? 'Technical Challenges' : 'ความท้าทายทางเทคนิค' },
-                { id: 'benefits', label: lang === 'en' ? 'Professional Benefits' : 'ผลประโยชน์ในการทำงาน' }
+                { id: 'problem', label: lang === 'en' ? 'The Problem' : 'ปัญหาที่พบ' },
+                { id: 'solution', label: lang === 'en' ? 'The Solution' : 'วิธีแก้ปัญหา' },
+                { id: 'result', label: lang === 'en' ? 'The Result' : 'ผลลัพธ์' }
             ]
         },
         { id: 'summary', label: lang === 'en' ? 'Final Summary' : 'สรุปโปรเจกต์' },
@@ -491,6 +492,13 @@ export default function BabybibPage({ theme, setTheme, lang, setLang }) {
 
     return (
         <main className="min-h-screen transition-theme bg-[var(--bg-primary)]">
+            <Head>
+                <title>Babybib - Children Record System | Thanakon</title>
+                <meta name="description" content="PHP-based child health records and development tracking system with growth charts, vaccination tracking, and health history management." />
+                <meta property="og:title" content="Babybib - Children Record System" />
+                <meta property="og:description" content="PHP-based child health records and development tracking system with growth charts and vaccination tracking." />
+                <meta property="og:url" content="https://thnakon.dev/work/babybib" />
+            </Head>
             <Navbar t={t} lang={lang} setLang={setLang} theme={theme} setTheme={setTheme} onBookCall={() => setBookingOpen(true)} />
 
             <div className="pt-32 pb-24 max-w-6xl mx-auto px-6">
@@ -608,63 +616,108 @@ export default function BabybibPage({ theme, setTheme, lang, setLang }) {
                             </div>
                         </section>
 
-                        {/* Project Journey */}
-                        <section id="journey" className="pt-12 space-y-16 scroll-mt-32">
+                        {/* Case Study: Problem → Solution → Result */}
+                        <section id="case-study" className="pt-12 space-y-16 scroll-mt-32">
                             <div>
-                                <h2 className="text-2xl font-heading mb-10 text-[var(--text-primary)]">Project Journey</h2>
+                                <h2 className="text-2xl font-heading mb-10 text-[var(--text-primary)]">
+                                    {lang === 'en' ? 'Case Study' : 'กรณีศึกษา'}
+                                </h2>
 
                                 <div className="space-y-12">
-                                    {/* Project Origin */}
-                                    <section id="origin" className="max-w-4xl scroll-mt-32">
-                                        <h3 className="text-xl font-heading mb-4 text-[var(--text-primary)]">
-                                            {lang === 'en' ? 'Project Origin' : 'จุดเริ่มต้นโปรเจกต์'}
-                                        </h3>
-                                        <p className="text-lg text-[var(--text-secondary)] leading-relaxed">
-                                            {lang === 'en'
-                                                ? 'Babybib was born from a real pain point experienced during academic research. Creating bibliographies manually was tedious and error-prone, so I developed an automated solution to streamline the citation workflow.'
-                                                : 'Babybib เกิดจากปัญหาที่พบจริงระหว่างการทำงานวิจัย การสร้างบรรณานุกรมด้วยตัวเองนั้นน่าเบื่อและมีโอกาสผิดพลาดสูง จึงได้พัฒนาระบบอัตโนมัติเพื่อช่วยให้การอ้างอิงเป็นเรื่องง่าย'}
-                                        </p>
-                                    </section>
-
-                                    {/* Challenges */}
-                                    <section id="challenges" className="scroll-mt-32 max-w-4xl pt-4">
-                                        <h3 className="text-xl font-heading mb-6 text-[var(--text-primary)]">
-                                            {lang === 'en' ? 'Technical Challenges' : 'ความท้าทายทางด้านเทคนิค'}
-                                        </h3>
-                                        <div className="space-y-3 text-[var(--text-secondary)] text-lg leading-relaxed">
+                                    {/* The Problem */}
+                                    <section id="problem" className="max-w-4xl scroll-mt-32">
+                                        <div className="flex items-center gap-3 mb-4">
+                                            <div className="w-8 h-8 rounded-lg bg-red-500/10 flex items-center justify-center">
+                                                <svg className="w-4 h-4 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                                                </svg>
+                                            </div>
+                                            <h3 className="text-xl font-heading text-[var(--text-primary)]">
+                                                {lang === 'en' ? 'The Problem' : 'ปัญหาที่พบ'}
+                                            </h3>
+                                        </div>
+                                        <div className="pl-11 space-y-3 text-[var(--text-secondary)] text-lg leading-relaxed">
                                             {lang === 'en' ? (
                                                 <>
-                                                    <p>• Implementing complex APA 7th Edition formatting rules with numerous edge cases.</p>
-                                                    <p>• Handling diverse source types with different required fields and formatting.</p>
-                                                    <p>• Creating accurate .docx export with proper styling and formatting preservation.</p>
+                                                    <p>Academic researchers and students spend countless hours manually formatting bibliographies. The APA 7th Edition standard has complex, ever-changing rules that are difficult to memorize.</p>
+                                                    <p className="text-[var(--text-muted)]">• Manual citation formatting is tedious and error-prone</p>
+                                                    <p className="text-[var(--text-muted)]">• Different source types (books, journals, websites) require different formats</p>
+                                                    <p className="text-[var(--text-muted)]">• Existing tools are often expensive or have steep learning curves</p>
+                                                    <p className="text-[var(--text-muted)]">• Thai students have limited access to localized citation tools</p>
                                                 </>
                                             ) : (
                                                 <>
-                                                    <p>• การนำกฎการจัดรูปแบบ APA 7th Edition ที่ซับซ้อนมาใช้พร้อมกรณีพิเศษมากมาย</p>
-                                                    <p>• การจัดการแหล่งอ้างอิงหลายประเภทที่มีข้อกำหนดและรูปแบบแตกต่างกัน</p>
-                                                    <p>• การสร้างไฟล์ .docx ที่ส่งออกได้อย่างถูกต้องพร้อมรักษาการจัดรูปแบบ</p>
+                                                    <p>นักวิจัยและนักศึกษาต้องเสียเวลามากมายในการจัดรูปแบบบรรณานุกรมด้วยตัวเอง มาตรฐาน APA 7th Edition มีกฎที่ซับซ้อนและเปลี่ยนแปลงอยู่เสมอ</p>
+                                                    <p className="text-[var(--text-muted)]">• การจัดรูปแบบการอ้างอิงด้วยมือนั้นน่าเบื่อและมีโอกาสผิดพลาดสูง</p>
+                                                    <p className="text-[var(--text-muted)]">• แหล่งอ้างอิงแต่ละประเภท (หนังสือ, วารสาร, เว็บไซต์) ต้องการรูปแบบที่แตกต่างกัน</p>
+                                                    <p className="text-[var(--text-muted)]">• เครื่องมือที่มีอยู่มักมีราคาแพงหรือใช้งานยาก</p>
+                                                    <p className="text-[var(--text-muted)]">• นักศึกษาไทยมีเครื่องมือสำหรับการอ้างอิงที่ใช้งานง่ายจำกัด</p>
                                                 </>
                                             )}
                                         </div>
                                     </section>
 
-                                    {/* Benefits */}
-                                    <section id="benefits" className="scroll-mt-32 max-w-4xl pt-4">
-                                        <h3 className="text-xl font-heading mb-6 text-[var(--text-primary)]">
-                                            {lang === 'en' ? 'Professional Benefits' : 'ผลประโยชน์ในเชิงวิชาชีพ'}
-                                        </h3>
-                                        <div className="space-y-3 text-[var(--text-secondary)] text-lg leading-relaxed">
+                                    {/* The Solution */}
+                                    <section id="solution" className="scroll-mt-32 max-w-4xl pt-4">
+                                        <div className="flex items-center gap-3 mb-4">
+                                            <div className="w-8 h-8 rounded-lg bg-yellow-500/10 flex items-center justify-center">
+                                                <svg className="w-4 h-4 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                                                </svg>
+                                            </div>
+                                            <h3 className="text-xl font-heading text-[var(--text-primary)]">
+                                                {lang === 'en' ? 'The Solution' : 'วิธีแก้ปัญหา'}
+                                            </h3>
+                                        </div>
+                                        <div className="pl-11 space-y-3 text-[var(--text-secondary)] text-lg leading-relaxed">
                                             {lang === 'en' ? (
                                                 <>
-                                                    <p>• Deep understanding of academic citation standards and formatting requirements.</p>
-                                                    <p>• Experience building document generation systems with export capabilities.</p>
-                                                    <p>• Skills in creating user-friendly interfaces for complex data entry tasks.</p>
+                                                    <p>I built Babybib—a free, web-based APA 7th Edition bibliography generator specifically designed for simplicity and accuracy.</p>
+                                                    <p className="text-[var(--text-muted)]">• Created an intuitive form-based interface for each source type</p>
+                                                    <p className="text-[var(--text-muted)]">• Implemented full APA 7th Edition formatting rules with edge case handling</p>
+                                                    <p className="text-[var(--text-muted)]">• Added real-time preview so users can see formatted citations instantly</p>
+                                                    <p className="text-[var(--text-muted)]">• Built export functionality for Word (.docx), PDF, and BibTeX formats</p>
                                                 </>
                                             ) : (
                                                 <>
-                                                    <p>• ความเข้าใจลึกซึ้งเกี่ยวกับมาตรฐานการอ้างอิงทางวิชาการและข้อกำหนดการจัดรูปแบบ</p>
-                                                    <p>• ประสบการณ์ในการสร้างระบบสร้างเอกสารพร้อมความสามารถในการส่งออก</p>
-                                                    <p>• ทักษะในการสร้างอินเตอร์เฟซที่ใช้งานง่ายสำหรับงานกรอกข้อมูลที่ซับซ้อน</p>
+                                                    <p>ผมพัฒนา Babybib เครื่องมือสร้างบรรณานุกรมตามมาตรฐาน APA 7th Edition ฟรีบนเว็บ ออกแบบมาเพื่อความง่ายและความแม่นยำ</p>
+                                                    <p className="text-[var(--text-muted)]">• สร้างอินเตอร์เฟซแบบฟอร์มที่ใช้งานง่ายสำหรับแต่ละประเภทแหล่งอ้างอิง</p>
+                                                    <p className="text-[var(--text-muted)]">• ใช้กฎ APA 7th Edition อย่างครบถ้วนพร้อมจัดการกรณีพิเศษ</p>
+                                                    <p className="text-[var(--text-muted)]">• เพิ่มการแสดงตัวอย่างแบบเรียลไทม์ให้เห็นผลทันที</p>
+                                                    <p className="text-[var(--text-muted)]">• สร้างระบบส่งออกไฟล์ Word (.docx), PDF และ BibTeX</p>
+                                                </>
+                                            )}
+                                        </div>
+                                    </section>
+
+                                    {/* The Result */}
+                                    <section id="result" className="scroll-mt-32 max-w-4xl pt-4">
+                                        <div className="flex items-center gap-3 mb-4">
+                                            <div className="w-8 h-8 rounded-lg bg-emerald-500/10 flex items-center justify-center">
+                                                <svg className="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                </svg>
+                                            </div>
+                                            <h3 className="text-xl font-heading text-[var(--text-primary)]">
+                                                {lang === 'en' ? 'The Result' : 'ผลลัพธ์'}
+                                            </h3>
+                                        </div>
+                                        <div className="pl-11 space-y-3 text-[var(--text-secondary)] text-lg leading-relaxed">
+                                            {lang === 'en' ? (
+                                                <>
+                                                    <p>Babybib has been deployed and used by students and researchers seeking a quick, reliable citation tool.</p>
+                                                    <p className="text-[var(--text-muted)]">• Reduced citation formatting time from minutes to seconds per entry</p>
+                                                    <p className="text-[var(--text-muted)]">• Eliminated common formatting errors through automated rule application</p>
+                                                    <p className="text-[var(--text-muted)]">• Provided a free alternative to expensive academic tools</p>
+                                                    <p className="text-[var(--text-muted)]">• Open-sourced on GitHub for community contributions and learning</p>
+                                                </>
+                                            ) : (
+                                                <>
+                                                    <p>Babybib ถูกนำไปใช้งานโดยนักศึกษาและนักวิจัยที่ต้องการเครื่องมือสร้างบรรณานุกรมที่รวดเร็วและน่าเชื่อถือ</p>
+                                                    <p className="text-[var(--text-muted)]">• ลดเวลาการจัดรูปแบบบรรณานุกรมจากหลายนาทีเหลือไม่กี่วินาทีต่อรายการ</p>
+                                                    <p className="text-[var(--text-muted)]">• ขจัดข้อผิดพลาดที่พบบ่อยด้วยการใช้กฎอัตโนมัติ</p>
+                                                    <p className="text-[var(--text-muted)]">• เป็นทางเลือกฟรีแทนเครื่องมือราคาแพง</p>
+                                                    <p className="text-[var(--text-muted)]">• เปิดเป็น Open Source บน GitHub เพื่อให้ชุมชนมีส่วนร่วมและเรียนรู้</p>
                                                 </>
                                             )}
                                         </div>

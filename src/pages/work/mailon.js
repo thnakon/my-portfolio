@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import Head from 'next/head';
 import translations from '@/lib/translations';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -287,12 +288,12 @@ const OnThisPage = ({ lang }) => {
         { id: 'tech-stack', label: lang === 'en' ? 'Tech Stack' : 'เทคโนโลยีที่ใช้' },
         { id: 'features', label: lang === 'en' ? 'Feature Highlights' : 'ฟีเจอร์เด่น' },
         {
-            id: 'journey',
-            label: lang === 'en' ? 'Project Journey' : 'เส้นทางโปรเจกต์',
+            id: 'case-study',
+            label: lang === 'en' ? 'Case Study' : 'กรณีศึกษา',
             subItems: [
-                { id: 'mission', label: lang === 'en' ? 'Mission & Purpose' : 'ภารกิจและจุดประสงค์' },
-                { id: 'challenges', label: lang === 'en' ? 'Technical Challenges' : 'ความท้าทายทางเทคนิค' },
-                { id: 'benefits', label: lang === 'en' ? 'Professional Benefits' : 'ผลประโยชน์ในการทำงาน' }
+                { id: 'problem', label: lang === 'en' ? 'The Problem' : 'ปัญหาที่พบ' },
+                { id: 'solution', label: lang === 'en' ? 'The Solution' : 'วิธีแก้ปัญหา' },
+                { id: 'result', label: lang === 'en' ? 'The Result' : 'ผลลัพธ์' }
             ]
         },
         { id: 'summary', label: lang === 'en' ? 'Final Summary' : 'สรุปโปรเจกต์' },
@@ -498,6 +499,13 @@ export default function MailonPage({ theme, setTheme, lang, setLang }) {
 
     return (
         <main className="min-h-screen transition-theme bg-[var(--bg-primary)]">
+            <Head>
+                <title>Mai-lon - Student Success Platform | Thanakon</title>
+                <meta name="description" content="Comprehensive student success platform bridging academics with career development through personalized milestone tracking and guidance." />
+                <meta property="og:title" content="Mai-lon - Student Success Platform" />
+                <meta property="og:description" content="Comprehensive student success platform bridging academics with career development." />
+                <meta property="og:url" content="https://thnakon.dev/work/mailon" />
+            </Head>
             <Navbar t={t} lang={lang} setLang={setLang} theme={theme} setTheme={setTheme} onBookCall={() => setBookingOpen(true)} />
 
             <div className="pt-32 pb-24 max-w-6xl mx-auto px-6">
@@ -615,63 +623,108 @@ export default function MailonPage({ theme, setTheme, lang, setLang }) {
                             </div>
                         </section>
 
-                        {/* Project Journey */}
-                        <section id="journey" className="pt-12 space-y-16 scroll-mt-32">
+                        {/* Case Study: Problem → Solution → Result */}
+                        <section id="case-study" className="pt-12 space-y-16 scroll-mt-32">
                             <div>
-                                <h2 className="text-2xl font-heading mb-10 text-[var(--text-primary)]">Project Journey</h2>
+                                <h2 className="text-2xl font-heading mb-10 text-[var(--text-primary)]">
+                                    {lang === 'en' ? 'Case Study' : 'กรณีศึกษา'}
+                                </h2>
 
                                 <div className="space-y-12">
-                                    {/* Mission & Purpose */}
-                                    <section id="mission" className="max-w-4xl scroll-mt-32">
-                                        <h3 className="text-xl font-heading mb-4 text-[var(--text-primary)]">
-                                            {lang === 'en' ? 'Mission & Purpose' : 'ภารกิจและจุดประสงค์'}
-                                        </h3>
-                                        <p className="text-lg text-[var(--text-secondary)] leading-relaxed">
-                                            {lang === 'en'
-                                                ? 'Mai-lon was created with a singular vision: to be the ultimate companion for students on their journey from academic excellence to career success. The platform embodies the philosophy of "study hard, succeed in careers, and live a good life."'
-                                                : 'Mai-lon ถูกสร้างขึ้นด้วยวิสัยทัศน์เดียว: เพื่อเป็นเพื่อนคู่ใจที่ดีที่สุดสำหรับนักศึกษาในเส้นทางจากความเป็นเลิศทางวิชาการสู่ความสำเร็จในอาชีพ แพลตฟอร์มนี้แสดงปรัชญา "เรียนหนัก สำเร็จในอาชีพ และใช้ชีวิตที่ดี"'}
-                                        </p>
-                                    </section>
-
-                                    {/* Challenges */}
-                                    <section id="challenges" className="scroll-mt-32 max-w-4xl pt-4">
-                                        <h3 className="text-xl font-heading mb-6 text-[var(--text-primary)]">
-                                            {lang === 'en' ? 'Technical Challenges' : 'ความท้าทายทางด้านเทคนิค'}
-                                        </h3>
-                                        <div className="space-y-3 text-[var(--text-secondary)] text-lg leading-relaxed">
+                                    {/* The Problem */}
+                                    <section id="problem" className="max-w-4xl scroll-mt-32">
+                                        <div className="flex items-center gap-3 mb-4">
+                                            <div className="w-8 h-8 rounded-lg bg-red-500/10 flex items-center justify-center">
+                                                <svg className="w-4 h-4 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                                                </svg>
+                                            </div>
+                                            <h3 className="text-xl font-heading text-[var(--text-primary)]">
+                                                {lang === 'en' ? 'The Problem' : 'ปัญหาที่พบ'}
+                                            </h3>
+                                        </div>
+                                        <div className="pl-11 space-y-3 text-[var(--text-secondary)] text-lg leading-relaxed">
                                             {lang === 'en' ? (
                                                 <>
-                                                    <p>• Designing a flexible milestone tracking system that adapts to diverse student goals.</p>
-                                                    <p>• Building a scalable architecture to handle high-volume student engagement.</p>
-                                                    <p>• Creating an intuitive UI that balances functionality with simplicity.</p>
+                                                    <p>Thai university students often struggle to balance academics, personal growth, and career preparation. Traditional educational systems lack tools that guide students holistically toward professional success.</p>
+                                                    <p className="text-[var(--text-muted)]">• No unified platform for tracking academic and career milestones</p>
+                                                    <p className="text-[var(--text-muted)]">• Limited resources connecting study habits to career outcomes</p>
+                                                    <p className="text-[var(--text-muted)]">• Students lack personalized guidance for skill development</p>
+                                                    <p className="text-[var(--text-muted)]">• Fragmented tools for portfolio building and job preparation</p>
                                                 </>
                                             ) : (
                                                 <>
-                                                    <p>• การออกแบบระบบติดตาม Milestone ที่ยืดหยุ่นและปรับตัวตามเป้าหมายที่หลากหลายของนักศึกษา</p>
-                                                    <p>• การสร้างสถาปัตยกรรมที่ขยายได้เพื่อรองรับการมีส่วนร่วมของนักศึกษาจำนวนมาก</p>
-                                                    <p>• การสร้าง UI ที่ใช้งานง่ายโดยสมดุลระหว่างฟังก์ชันการทำงานกับความเรียบง่าย</p>
+                                                    <p>นักศึกษามหาวิทยาลัยไทยมักดิ้นรนกับการสร้างสมดุลระหว่างการเรียน การพัฒนาตัวเอง และการเตรียมพร้อมสำหรับอาชีพ ระบบการศึกษาแบบดั้งเดิมขาดเครื่องมือที่ช่วยนำทางนักศึกษาสู่ความสำเร็จในอาชีพ</p>
+                                                    <p className="text-[var(--text-muted)]">• ไม่มีแพลตฟอร์มรวมศูนย์สำหรับติดตาม Milestone ทางการเรียนและอาชีพ</p>
+                                                    <p className="text-[var(--text-muted)]">• แหล่งข้อมูลเชื่อมโยงนิสัยการเรียนกับผลลัพธ์ทางอาชีพมีจำกัด</p>
+                                                    <p className="text-[var(--text-muted)]">• นักศึกษาขาดคำแนะนำเฉพาะบุคคลสำหรับการพัฒนาทักษะ</p>
+                                                    <p className="text-[var(--text-muted)]">• เครื่องมือสร้าง Portfolio และเตรียมหางานกระจัดกระจาย</p>
                                                 </>
                                             )}
                                         </div>
                                     </section>
 
-                                    {/* Benefits */}
-                                    <section id="benefits" className="scroll-mt-32 max-w-4xl pt-4">
-                                        <h3 className="text-xl font-heading mb-6 text-[var(--text-primary)]">
-                                            {lang === 'en' ? 'Professional Benefits' : 'ผลประโยชน์ในเชิงวิชาชีพ'}
-                                        </h3>
-                                        <div className="space-y-3 text-[var(--text-secondary)] text-lg leading-relaxed">
+                                    {/* The Solution */}
+                                    <section id="solution" className="scroll-mt-32 max-w-4xl pt-4">
+                                        <div className="flex items-center gap-3 mb-4">
+                                            <div className="w-8 h-8 rounded-lg bg-yellow-500/10 flex items-center justify-center">
+                                                <svg className="w-4 h-4 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                                                </svg>
+                                            </div>
+                                            <h3 className="text-xl font-heading text-[var(--text-primary)]">
+                                                {lang === 'en' ? 'The Solution' : 'วิธีแก้ปัญหา'}
+                                            </h3>
+                                        </div>
+                                        <div className="pl-11 space-y-3 text-[var(--text-secondary)] text-lg leading-relaxed">
                                             {lang === 'en' ? (
                                                 <>
-                                                    <p>• Mastery of Next.js 14 App Router and modern React patterns.</p>
-                                                    <p>• Experience building production-ready applications with Supabase.</p>
-                                                    <p>• Skills in creating accessible, premium UI with shadcn/ui components.</p>
+                                                    <p>I designed and developed Mai-lon—a comprehensive student success platform that bridges academics with career development through personalized tracking and guidance.</p>
+                                                    <p className="text-[var(--text-muted)]">• Built flexible milestone tracking adaptable to diverse student goals</p>
+                                                    <p className="text-[var(--text-muted)]">• Created scalable architecture with Supabase for high-volume engagement</p>
+                                                    <p className="text-[var(--text-muted)]">• Designed intuitive UI that balances functionality with simplicity</p>
+                                                    <p className="text-[var(--text-muted)]">• Implemented Next.js 14 App Router for optimal performance</p>
                                                 </>
                                             ) : (
                                                 <>
-                                                    <p>• ความเชี่ยวชาญใน Next.js 14 App Router และ React patterns สมัยใหม่</p>
-                                                    <p>• ประสบการณ์ในการสร้างแอปพลิเคชันพร้อมใช้งานจริงด้วย Supabase</p>
-                                                    <p>• ทักษะในการสร้าง UI พรีเมียมที่เข้าถึงได้ด้วย shadcn/ui components</p>
+                                                    <p>ผมออกแบบและพัฒนา Mai-lon แพลตฟอร์มสนับสนุนความสำเร็จของนักศึกษาที่เชื่อมการเรียนกับการพัฒนาอาชีพผ่านการติดตามและคำแนะนำเฉพาะบุคคล</p>
+                                                    <p className="text-[var(--text-muted)]">• สร้างระบบติดตาม Milestone ยืดหยุ่นปรับตามเป้าหมายที่หลากหลาย</p>
+                                                    <p className="text-[var(--text-muted)]">• สร้างสถาปัตยกรรมที่ขยายได้ด้วย Supabase สำหรับผู้ใช้จำนวนมาก</p>
+                                                    <p className="text-[var(--text-muted)]">• ออกแบบ UI ใช้งานง่ายสมดุลฟังก์ชันกับความเรียบง่าย</p>
+                                                    <p className="text-[var(--text-muted)]">• ใช้ Next.js 14 App Router เพื่อประสิทธิภาพสูงสุด</p>
+                                                </>
+                                            )}
+                                        </div>
+                                    </section>
+
+                                    {/* The Result */}
+                                    <section id="result" className="scroll-mt-32 max-w-4xl pt-4">
+                                        <div className="flex items-center gap-3 mb-4">
+                                            <div className="w-8 h-8 rounded-lg bg-emerald-500/10 flex items-center justify-center">
+                                                <svg className="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                </svg>
+                                            </div>
+                                            <h3 className="text-xl font-heading text-[var(--text-primary)]">
+                                                {lang === 'en' ? 'The Result' : 'ผลลัพธ์'}
+                                            </h3>
+                                        </div>
+                                        <div className="pl-11 space-y-3 text-[var(--text-secondary)] text-lg leading-relaxed">
+                                            {lang === 'en' ? (
+                                                <>
+                                                    <p>Mai-lon embodies "study hard, succeed in careers, and live a good life"—providing students with the tools they need for holistic success.</p>
+                                                    <p className="text-[var(--text-muted)]">• Comprehensive platform connecting academic progress to career readiness</p>
+                                                    <p className="text-[var(--text-muted)]">• Demonstrated mastery of Next.js 14 and modern React patterns</p>
+                                                    <p className="text-[var(--text-muted)]">• Showcased production-ready development with Supabase backend</p>
+                                                    <p className="text-[var(--text-muted)]">• Created accessible, premium UI with shadcn/ui components</p>
+                                                </>
+                                            ) : (
+                                                <>
+                                                    <p>Mai-lon แสดงปรัชญา "เรียนหนัก สำเร็จในอาชีพ และใช้ชีวิตที่ดี" พร้อมมอบเครื่องมือที่นักศึกษาต้องการสำหรับความสำเร็จรอบด้าน</p>
+                                                    <p className="text-[var(--text-muted)]">• แพลตฟอร์มครบวงจรเชื่อมโยงความก้าวหน้าทางการเรียนกับความพร้อมทางอาชีพ</p>
+                                                    <p className="text-[var(--text-muted)]">• แสดงความเชี่ยวชาญใน Next.js 14 และ React patterns สมัยใหม่</p>
+                                                    <p className="text-[var(--text-muted)]">• แสดงการพัฒนาระดับ Production ด้วย Supabase backend</p>
+                                                    <p className="text-[var(--text-muted)]">• สร้าง UI พรีเมียมที่เข้าถึงได้ด้วย shadcn/ui components</p>
                                                 </>
                                             )}
                                         </div>

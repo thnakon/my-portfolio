@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import Head from 'next/head';
 import translations from '@/lib/translations';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -286,12 +287,12 @@ const OnThisPage = ({ lang }) => {
         { id: 'tech-stack', label: lang === 'en' ? 'Tech Stack' : 'เทคโนโลยีที่ใช้' },
         { id: 'features', label: lang === 'en' ? 'Feature Highlights' : 'ฟีเจอร์เด่น' },
         {
-            id: 'journey',
-            label: lang === 'en' ? 'Project Journey' : 'เส้นทางโปรเจกต์',
+            id: 'case-study',
+            label: lang === 'en' ? 'Case Study' : 'กรณีศึกษา',
             subItems: [
-                { id: 'internship', label: lang === 'en' ? 'Internship Experience' : 'ประสบการณ์ฝึกงาน' },
-                { id: 'challenges', label: lang === 'en' ? 'Technical Challenges' : 'ความท้าทายทางเทคนิค' },
-                { id: 'benefits', label: lang === 'en' ? 'Professional Benefits' : 'ผลประโยชน์ในการทำงาน' }
+                { id: 'problem', label: lang === 'en' ? 'The Problem' : 'ปัญหาที่พบ' },
+                { id: 'solution', label: lang === 'en' ? 'The Solution' : 'วิธีแก้ปัญหา' },
+                { id: 'result', label: lang === 'en' ? 'The Result' : 'ผลลัพธ์' }
             ]
         },
         { id: 'summary', label: lang === 'en' ? 'Final Summary' : 'สรุปโปรเจกต์' },
@@ -490,6 +491,13 @@ export default function KlinPage({ theme, setTheme, lang, setLang }) {
 
     return (
         <main className="min-h-screen transition-theme bg-[var(--bg-primary)]">
+            <Head>
+                <title>Klin - Dental Clinic Management | Thanakon</title>
+                <meta name="description" content="Laravel-based dental clinic management system with appointment booking, patient records, and automated notifications. Built during internship at Merge Digital Agency." />
+                <meta property="og:title" content="Klin - Dental Clinic Management" />
+                <meta property="og:description" content="Laravel-based dental clinic management system with appointment booking and patient records." />
+                <meta property="og:url" content="https://thnakon.dev/work/klin" />
+            </Head>
             <Navbar t={t} lang={lang} setLang={setLang} theme={theme} setTheme={setTheme} onBookCall={() => setBookingOpen(true)} />
 
             <div className="pt-32 pb-24 max-w-6xl mx-auto px-6">
@@ -597,63 +605,108 @@ export default function KlinPage({ theme, setTheme, lang, setLang }) {
                             </div>
                         </section>
 
-                        {/* Project Journey */}
-                        <section id="journey" className="pt-12 space-y-16 scroll-mt-32">
+                        {/* Case Study: Problem → Solution → Result */}
+                        <section id="case-study" className="pt-12 space-y-16 scroll-mt-32">
                             <div>
-                                <h2 className="text-2xl font-heading mb-10 text-[var(--text-primary)]">Project Journey</h2>
+                                <h2 className="text-2xl font-heading mb-10 text-[var(--text-primary)]">
+                                    {lang === 'en' ? 'Case Study' : 'กรณีศึกษา'}
+                                </h2>
 
                                 <div className="space-y-12">
-                                    {/* Internship Experience */}
-                                    <section id="internship" className="max-w-4xl scroll-mt-32">
-                                        <h3 className="text-xl font-heading mb-4 text-[var(--text-primary)]">
-                                            {lang === 'en' ? 'Internship Experience' : 'ประสบการณ์ฝึกงาน'}
-                                        </h3>
-                                        <p className="text-lg text-[var(--text-secondary)] leading-relaxed">
-                                            {lang === 'en'
-                                                ? 'This project was developed during my internship at Merge Digital Agency. It was an invaluable opportunity to work on a real-world healthcare application, collaborating with experienced developers and understanding professional development workflows.'
-                                                : 'โปรเจกต์นี้ถูกพัฒนาระหว่างการฝึกงานที่ Merge Digital Agency เป็นโอกาสอันล้ำค่าในการทำงานกับแอปพลิเคชันด้านสุขภาพจริง ร่วมงานกับนักพัฒนาที่มีประสบการณ์และเข้าใจ Workflow การพัฒนาแบบมืออาชีพ'}
-                                        </p>
-                                    </section>
-
-                                    {/* Challenges */}
-                                    <section id="challenges" className="scroll-mt-32 max-w-4xl pt-4">
-                                        <h3 className="text-xl font-heading mb-6 text-[var(--text-primary)]">
-                                            {lang === 'en' ? 'Technical Challenges' : 'ความท้าทายทางด้านเทคนิค'}
-                                        </h3>
-                                        <div className="space-y-3 text-[var(--text-secondary)] text-lg leading-relaxed">
+                                    {/* The Problem */}
+                                    <section id="problem" className="max-w-4xl scroll-mt-32">
+                                        <div className="flex items-center gap-3 mb-4">
+                                            <div className="w-8 h-8 rounded-lg bg-red-500/10 flex items-center justify-center">
+                                                <svg className="w-4 h-4 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                                                </svg>
+                                            </div>
+                                            <h3 className="text-xl font-heading text-[var(--text-primary)]">
+                                                {lang === 'en' ? 'The Problem' : 'ปัญหาที่พบ'}
+                                            </h3>
+                                        </div>
+                                        <div className="pl-11 space-y-3 text-[var(--text-secondary)] text-lg leading-relaxed">
                                             {lang === 'en' ? (
                                                 <>
-                                                    <p>• Handling concurrent appointment bookings to prevent double-scheduling conflicts.</p>
-                                                    <p>• Designing a secure system for storing and accessing sensitive patient medical data.</p>
-                                                    <p>• Building a flexible calendar system that adapts to different dentist schedules.</p>
+                                                    <p>The dental clinic struggled with manual appointment scheduling, leading to double-bookings, missed appointments, and inefficient staff workflows. Patient records were scattered across paper files, making retrieval slow and error-prone.</p>
+                                                    <p className="text-[var(--text-muted)]">• Manual scheduling caused frequent double-booking conflicts</p>
+                                                    <p className="text-[var(--text-muted)]">• Paper-based patient records were hard to retrieve and update</p>
+                                                    <p className="text-[var(--text-muted)]">• No automated reminders for patient appointments</p>
+                                                    <p className="text-[var(--text-muted)]">• Dentist schedules were difficult to manage and coordinate</p>
                                                 </>
                                             ) : (
                                                 <>
-                                                    <p>• การจัดการการจองนัดหมายพร้อมกันเพื่อป้องกันการจองซ้ำซ้อน</p>
-                                                    <p>• การออกแบบระบบที่ปลอดภัยสำหรับจัดเก็บและเข้าถึงข้อมูลทางการแพทย์ของผู้ป่วยที่ sensitive</p>
-                                                    <p>• การสร้างระบบปฏิทินที่ยืดหยุ่นซึ่งปรับตัวตามตารางทันตแพทย์ที่แตกต่างกัน</p>
+                                                    <p>คลินิกทันตกรรมประสบปัญหากับการนัดหมายแบบมือ นำไปสู่การจองซ้ำซ้อน นัดหมายที่พลาด และ Workflow ที่ไม่มีประสิทธิภาพ ข้อมูลผู้ป่วยกระจัดกระจายอยู่ในเอกสารกระดาษ ทำให้การค้นหาช้าและมีโอกาสผิดพลาด</p>
+                                                    <p className="text-[var(--text-muted)]">• การนัดหมายด้วยมือแบบเก่าทำให้เกิดการจองซ้ำซ้อนบ่อยครั้ง</p>
+                                                    <p className="text-[var(--text-muted)]">• เอกสารผู้ป่วยแบบกระดาษค้นหายากและอัปเดตลำบาก</p>
+                                                    <p className="text-[var(--text-muted)]">• ไม่มีระบบเตือนนัดหมายอัตโนมัติสำหรับผู้ป่วย</p>
+                                                    <p className="text-[var(--text-muted)]">• ตารางทันตแพทย์จัดการและประสานงานยาก</p>
                                                 </>
                                             )}
                                         </div>
                                     </section>
 
-                                    {/* Benefits */}
-                                    <section id="benefits" className="scroll-mt-32 max-w-4xl pt-4">
-                                        <h3 className="text-xl font-heading mb-6 text-[var(--text-primary)]">
-                                            {lang === 'en' ? 'Professional Benefits' : 'ผลประโยชน์ในเชิงวิชาชีพ'}
-                                        </h3>
-                                        <div className="space-y-3 text-[var(--text-secondary)] text-lg leading-relaxed">
+                                    {/* The Solution */}
+                                    <section id="solution" className="scroll-mt-32 max-w-4xl pt-4">
+                                        <div className="flex items-center gap-3 mb-4">
+                                            <div className="w-8 h-8 rounded-lg bg-yellow-500/10 flex items-center justify-center">
+                                                <svg className="w-4 h-4 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                                                </svg>
+                                            </div>
+                                            <h3 className="text-xl font-heading text-[var(--text-primary)]">
+                                                {lang === 'en' ? 'The Solution' : 'วิธีแก้ปัญหา'}
+                                            </h3>
+                                        </div>
+                                        <div className="pl-11 space-y-3 text-[var(--text-secondary)] text-lg leading-relaxed">
                                             {lang === 'en' ? (
                                                 <>
-                                                    <p>• Hands-on experience with Laravel in a professional agency environment.</p>
-                                                    <p>• Understanding of healthcare software requirements and data security best practices.</p>
-                                                    <p>• Experience working with Git workflows and collaborative development processes.</p>
+                                                    <p>During my internship at Merge Digital Agency, I built a comprehensive clinic management system using Laravel that digitizes the entire patient journey from booking to treatment.</p>
+                                                    <p className="text-[var(--text-muted)]">• Developed real-time appointment booking with conflict prevention</p>
+                                                    <p className="text-[var(--text-muted)]">• Created secure patient record management with MySQL encryption</p>
+                                                    <p className="text-[var(--text-muted)]">• Implemented automated email notifications for bookings and reminders</p>
+                                                    <p className="text-[var(--text-muted)]">• Built responsive UI with Bootstrap for easy access on any device</p>
                                                 </>
                                             ) : (
                                                 <>
-                                                    <p>• ประสบการณ์จริงกับ Laravel ในสภาพแวดล้อม Agency มืออาชีพ</p>
-                                                    <p>• ความเข้าใจข้อกำหนดซอฟต์แวร์ด้านสุขภาพและแนวปฏิบัติที่ดีที่สุดด้านความปลอดภัยข้อมูล</p>
-                                                    <p>• ประสบการณ์การทำงานกับ Git Workflow และกระบวนการพัฒนาแบบร่วมมือ</p>
+                                                    <p>ระหว่างฝึกงานที่ Merge Digital Agency ผมพัฒนาระบบจัดการคลินิกครบวงจรโดยใช้ Laravel ที่ทำให้การดูแลผู้ป่วยตั้งแต่การจองจนถึงการรักษาเป็นดิจิทัล</p>
+                                                    <p className="text-[var(--text-muted)]">• พัฒนาระบบจองนัดหมายแบบเรียลไทม์พร้อมป้องกันการจองซ้ำซ้อน</p>
+                                                    <p className="text-[var(--text-muted)]">• สร้างระบบจัดการข้อมูลผู้ป่วยที่ปลอดภัยด้วยการเข้ารหัส MySQL</p>
+                                                    <p className="text-[var(--text-muted)]">• พัฒนาการแจ้งเตือนอัตโนมัติทางอีเมลสำหรับการจองและเตือน</p>
+                                                    <p className="text-[var(--text-muted)]">• สร้าง UI ที่ Responsive ด้วย Bootstrap สำหรับเข้าถึงได้จากทุกอุปกรณ์</p>
+                                                </>
+                                            )}
+                                        </div>
+                                    </section>
+
+                                    {/* The Result */}
+                                    <section id="result" className="scroll-mt-32 max-w-4xl pt-4">
+                                        <div className="flex items-center gap-3 mb-4">
+                                            <div className="w-8 h-8 rounded-lg bg-emerald-500/10 flex items-center justify-center">
+                                                <svg className="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                </svg>
+                                            </div>
+                                            <h3 className="text-xl font-heading text-[var(--text-primary)]">
+                                                {lang === 'en' ? 'The Result' : 'ผลลัพธ์'}
+                                            </h3>
+                                        </div>
+                                        <div className="pl-11 space-y-3 text-[var(--text-secondary)] text-lg leading-relaxed">
+                                            {lang === 'en' ? (
+                                                <>
+                                                    <p>The Klin Dental Clinic system transformed the clinic's operations, providing a pivotal internship experience in healthcare software development.</p>
+                                                    <p className="text-[var(--text-muted)]">• Eliminated double-booking issues with real-time availability checking</p>
+                                                    <p className="text-[var(--text-muted)]">• Streamlined patient record access and management</p>
+                                                    <p className="text-[var(--text-muted)]">• Gained hands-on Laravel experience in a professional agency environment</p>
+                                                    <p className="text-[var(--text-muted)]">• Learned healthcare data security best practices</p>
+                                                </>
+                                            ) : (
+                                                <>
+                                                    <p>ระบบ Klin Dental Clinic เปลี่ยนการดำเนินงานของคลินิก มอบประสบการณ์ฝึกงานสำคัญในการพัฒนาซอฟต์แวร์ด้านสุขภาพ</p>
+                                                    <p className="text-[var(--text-muted)]">• ขจัดปัญหาการจองซ้ำซ้อนด้วยการตรวจสอบความว่างแบบเรียลไทม์</p>
+                                                    <p className="text-[var(--text-muted)]">• ปรับปรุงการเข้าถึงและจัดการข้อมูลผู้ป่วย</p>
+                                                    <p className="text-[var(--text-muted)]">• ได้ประสบการณ์ Laravel จริงในสภาพแวดล้อม Agency มืออาชีพ</p>
+                                                    <p className="text-[var(--text-muted)]">• เรียนรู้แนวปฏิบัติที่ดีที่สุดด้านความปลอดภัยข้อมูลสุขภาพ</p>
                                                 </>
                                             )}
                                         </div>

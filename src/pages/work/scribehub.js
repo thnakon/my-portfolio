@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import Head from 'next/head';
 import translations from '@/lib/translations';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -287,12 +288,12 @@ const OnThisPage = ({ lang }) => {
         { id: 'tech-stack', label: lang === 'en' ? 'Tech Stack' : 'เทคโนโลยีที่ใช้' },
         { id: 'features', label: lang === 'en' ? 'Feature Highlights' : 'ฟีเจอร์เด่น' },
         {
-            id: 'journey',
-            label: lang === 'en' ? 'Project Journey' : 'เส้นทางโปรเจกต์',
+            id: 'case-study',
+            label: lang === 'en' ? 'Case Study' : 'กรณีศึกษา',
             subItems: [
-                { id: 'vision', label: lang === 'en' ? 'Vision & Goals' : 'วิสัยทัศน์และเป้าหมาย' },
-                { id: 'challenges', label: lang === 'en' ? 'Technical Challenges' : 'ความท้าทายทางเทคนิค' },
-                { id: 'benefits', label: lang === 'en' ? 'Professional Benefits' : 'ผลประโยชน์ในการทำงาน' }
+                { id: 'problem', label: lang === 'en' ? 'The Problem' : 'ปัญหาที่พบ' },
+                { id: 'solution', label: lang === 'en' ? 'The Solution' : 'วิธีแก้ปัญหา' },
+                { id: 'result', label: lang === 'en' ? 'The Result' : 'ผลลัพธ์' }
             ]
         },
         { id: 'summary', label: lang === 'en' ? 'Final Summary' : 'สรุปโปรเจกต์' },
@@ -498,6 +499,13 @@ export default function ScribeHubPage({ theme, setTheme, lang, setLang }) {
 
     return (
         <main className="min-h-screen transition-theme bg-[var(--bg-primary)]">
+            <Head>
+                <title>ScribeHub - AI Research Assistant | Thanakon</title>
+                <meta name="description" content="AI-powered research platform with knowledge graphs, real-time collaboration, and GPT-4 integration for academic discovery and organization." />
+                <meta property="og:title" content="ScribeHub - AI Research Assistant" />
+                <meta property="og:description" content="AI-powered research platform with knowledge graphs and real-time collaboration for academic discovery." />
+                <meta property="og:url" content="https://thnakon.dev/work/scribehub" />
+            </Head>
             <Navbar t={t} lang={lang} setLang={setLang} theme={theme} setTheme={setTheme} onBookCall={() => setBookingOpen(true)} />
 
             <div className="pt-32 pb-24 max-w-6xl mx-auto px-6">
@@ -615,63 +623,108 @@ export default function ScribeHubPage({ theme, setTheme, lang, setLang }) {
                             </div>
                         </section>
 
-                        {/* Project Journey */}
-                        <section id="journey" className="pt-12 space-y-16 scroll-mt-32">
+                        {/* Case Study: Problem → Solution → Result */}
+                        <section id="case-study" className="pt-12 space-y-16 scroll-mt-32">
                             <div>
-                                <h2 className="text-2xl font-heading mb-10 text-[var(--text-primary)]">Project Journey</h2>
+                                <h2 className="text-2xl font-heading mb-10 text-[var(--text-primary)]">
+                                    {lang === 'en' ? 'Case Study' : 'กรณีศึกษา'}
+                                </h2>
 
                                 <div className="space-y-12">
-                                    {/* Vision & Goals */}
-                                    <section id="vision" className="max-w-4xl scroll-mt-32">
-                                        <h3 className="text-xl font-heading mb-4 text-[var(--text-primary)]">
-                                            {lang === 'en' ? 'Vision & Goals' : 'วิสัยทัศน์และเป้าหมาย'}
-                                        </h3>
-                                        <p className="text-lg text-[var(--text-secondary)] leading-relaxed">
-                                            {lang === 'en'
-                                                ? 'ScribeHub was envisioned as the ultimate research companion—a platform that combines the power of AI with intuitive design to transform how researchers discover, organize, and collaborate on academic work.'
-                                                : 'ScribeHub ถูกออกแบบให้เป็นเพื่อนคู่ใจนักวิจัยขั้นสูงสุด—แพลตฟอร์มที่ผสมผสานพลังของ AI เข้ากับดีไซน์ที่ใช้งานง่าย เพื่อเปลี่ยนแปลงวิธีที่นักวิจัยค้นพบ จัดระเบียบ และทำงานร่วมกันในงานวิชาการ'}
-                                        </p>
-                                    </section>
-
-                                    {/* Challenges */}
-                                    <section id="challenges" className="scroll-mt-32 max-w-4xl pt-4">
-                                        <h3 className="text-xl font-heading mb-6 text-[var(--text-primary)]">
-                                            {lang === 'en' ? 'Technical Challenges' : 'ความท้าทายทางด้านเทคนิค'}
-                                        </h3>
-                                        <div className="space-y-3 text-[var(--text-secondary)] text-lg leading-relaxed">
+                                    {/* The Problem */}
+                                    <section id="problem" className="max-w-4xl scroll-mt-32">
+                                        <div className="flex items-center gap-3 mb-4">
+                                            <div className="w-8 h-8 rounded-lg bg-red-500/10 flex items-center justify-center">
+                                                <svg className="w-4 h-4 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                                                </svg>
+                                            </div>
+                                            <h3 className="text-xl font-heading text-[var(--text-primary)]">
+                                                {lang === 'en' ? 'The Problem' : 'ปัญหาที่พบ'}
+                                            </h3>
+                                        </div>
+                                        <div className="pl-11 space-y-3 text-[var(--text-secondary)] text-lg leading-relaxed">
                                             {lang === 'en' ? (
                                                 <>
-                                                    <p>• Building a responsive knowledge graph with thousands of interconnected nodes.</p>
-                                                    <p>• Implementing real-time collaboration without conflicts using CRDTs concepts.</p>
-                                                    <p>• Optimizing GPT-4 API calls for cost-efficiency while maintaining responsiveness.</p>
+                                                    <p>Academic research is fragmented across countless papers, databases, and tools. Researchers struggle to connect ideas across sources, track citations, and collaborate effectively with their teams.</p>
+                                                    <p className="text-[var(--text-muted)]">• Finding relevant papers across multiple databases is time-consuming</p>
+                                                    <p className="text-[var(--text-muted)]">• No easy way to visualize connections between research concepts</p>
+                                                    <p className="text-[var(--text-muted)]">• Collaboration on research is often limited to shared documents</p>
+                                                    <p className="text-[var(--text-muted)]">• AI assistance for research is scattered across different tools</p>
                                                 </>
                                             ) : (
                                                 <>
-                                                    <p>• การสร้าง Knowledge Graph ที่ตอบสนองได้ดีพร้อมโหนดที่เชื่อมต่อกันหลายพันรายการ</p>
-                                                    <p>• การนำการทำงานร่วมกันแบบเรียลไทม์มาใช้โดยไม่มีข้อขัดแย้งด้วยแนวคิด CRDTs</p>
-                                                    <p>• การปรับการเรียก GPT-4 API ให้ประหยัดค่าใช้จ่ายในขณะที่ยังคงความรวดเร็ว</p>
+                                                    <p>งานวิจัยทางวิชาการกระจัดกระจายอยู่ในบทความ ฐานข้อมูล และเครื่องมือมากมาย นักวิจัยต้องดิ้นรนเชื่อมโยงไอเดีย ติดตามการอ้างอิง และทำงานร่วมกับทีม</p>
+                                                    <p className="text-[var(--text-muted)]">• การค้นหาบทความที่เกี่ยวข้องจากหลายฐานข้อมูลใช้เวลามาก</p>
+                                                    <p className="text-[var(--text-muted)]">• ไม่มีวิธีง่ายๆ ในการเห็นความเชื่อมโยงระหว่างแนวคิดงานวิจัย</p>
+                                                    <p className="text-[var(--text-muted)]">• การทำงานร่วมกันมักจำกัดเฉพาะการแชร์เอกสาร</p>
+                                                    <p className="text-[var(--text-muted)]">• เครื่องมือ AI ช่วยวิจัยกระจัดกระจายอยู่ในเครื่องมือต่างๆ</p>
                                                 </>
                                             )}
                                         </div>
                                     </section>
 
-                                    {/* Benefits */}
-                                    <section id="benefits" className="scroll-mt-32 max-w-4xl pt-4">
-                                        <h3 className="text-xl font-heading mb-6 text-[var(--text-primary)]">
-                                            {lang === 'en' ? 'Professional Benefits' : 'ผลประโยชน์ในเชิงวิชาชีพ'}
-                                        </h3>
-                                        <div className="space-y-3 text-[var(--text-secondary)] text-lg leading-relaxed">
+                                    {/* The Solution */}
+                                    <section id="solution" className="scroll-mt-32 max-w-4xl pt-4">
+                                        <div className="flex items-center gap-3 mb-4">
+                                            <div className="w-8 h-8 rounded-lg bg-yellow-500/10 flex items-center justify-center">
+                                                <svg className="w-4 h-4 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                                                </svg>
+                                            </div>
+                                            <h3 className="text-xl font-heading text-[var(--text-primary)]">
+                                                {lang === 'en' ? 'The Solution' : 'วิธีแก้ปัญหา'}
+                                            </h3>
+                                        </div>
+                                        <div className="pl-11 space-y-3 text-[var(--text-secondary)] text-lg leading-relaxed">
                                             {lang === 'en' ? (
                                                 <>
-                                                    <p>• Expertise in integrating AI/LLM APIs into production-grade applications.</p>
-                                                    <p>• Deep understanding of real-time systems architecture with Supabase.</p>
-                                                    <p>• Experience building complex data visualization and graph-based interfaces.</p>
+                                                    <p>I built ScribeHub—an AI-powered research platform that unifies paper discovery, knowledge visualization, and team collaboration in one seamless experience.</p>
+                                                    <p className="text-[var(--text-muted)]">• Integrated GPT-4 for intelligent paper analysis and summarization</p>
+                                                    <p className="text-[var(--text-muted)]">• Created interactive knowledge graphs to visualize research connections</p>
+                                                    <p className="text-[var(--text-muted)]">• Built real-time collaboration with Supabase for research teams</p>
+                                                    <p className="text-[var(--text-muted)]">• Implemented automatic metadata extraction from DOIs and PDFs</p>
                                                 </>
                                             ) : (
                                                 <>
-                                                    <p>• ความเชี่ยวชาญในการนำ AI/LLM API มาใช้ในแอปพลิเคชันระดับ Production</p>
-                                                    <p>• ความเข้าใจลึกซึ้งเกี่ยวกับสถาปัตยกรรมระบบเรียลไทม์ด้วย Supabase</p>
-                                                    <p>• ประสบการณ์ในการสร้างการแสดงผลข้อมูลที่ซับซ้อนและอินเตอร์เฟซแบบ Graph</p>
+                                                    <p>ผมพัฒนา ScribeHub แพลตฟอร์มวิจัยขับเคลื่อนด้วย AI ที่รวมการค้นหาบทความ การแสดงผลความรู้ และการทำงานร่วมกันไว้ในที่เดียว</p>
+                                                    <p className="text-[var(--text-muted)]">• เชื่อมต่อ GPT-4 สำหรับวิเคราะห์และสรุปบทความอัจฉริยะ</p>
+                                                    <p className="text-[var(--text-muted)]">• สร้าง Knowledge Graph แบบ Interactive เพื่อแสดงความเชื่อมโยงงานวิจัย</p>
+                                                    <p className="text-[var(--text-muted)]">• สร้างระบบทำงานร่วมกันแบบเรียลไทม์ด้วย Supabase</p>
+                                                    <p className="text-[var(--text-muted)]">• ดึงข้อมูล Metadata อัตโนมัติจาก DOI และ PDF</p>
+                                                </>
+                                            )}
+                                        </div>
+                                    </section>
+
+                                    {/* The Result */}
+                                    <section id="result" className="scroll-mt-32 max-w-4xl pt-4">
+                                        <div className="flex items-center gap-3 mb-4">
+                                            <div className="w-8 h-8 rounded-lg bg-emerald-500/10 flex items-center justify-center">
+                                                <svg className="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                </svg>
+                                            </div>
+                                            <h3 className="text-xl font-heading text-[var(--text-primary)]">
+                                                {lang === 'en' ? 'The Result' : 'ผลลัพธ์'}
+                                            </h3>
+                                        </div>
+                                        <div className="pl-11 space-y-3 text-[var(--text-secondary)] text-lg leading-relaxed">
+                                            {lang === 'en' ? (
+                                                <>
+                                                    <p>ScribeHub demonstrates how AI can transform the research workflow, making it more efficient and collaborative.</p>
+                                                    <p className="text-[var(--text-muted)]">• Reduced paper discovery and analysis time with AI-powered summaries</p>
+                                                    <p className="text-[var(--text-muted)]">• Enabled visual exploration of research connections through knowledge graphs</p>
+                                                    <p className="text-[var(--text-muted)]">• Facilitated real-time team collaboration on research projects</p>
+                                                    <p className="text-[var(--text-muted)]">• Showcased integration of AI/LLM APIs in production-grade applications</p>
+                                                </>
+                                            ) : (
+                                                <>
+                                                    <p>ScribeHub แสดงให้เห็นว่า AI สามารถเปลี่ยนกระบวนการวิจัยให้มีประสิทธิภาพและทำงานร่วมกันได้ดีขึ้น</p>
+                                                    <p className="text-[var(--text-muted)]">• ลดเวลาค้นหาและวิเคราะห์บทความด้วยการสรุปโดย AI</p>
+                                                    <p className="text-[var(--text-muted)]">• เปิดให้สำรวจความเชื่อมโยงงานวิจัยผ่าน Knowledge Graph</p>
+                                                    <p className="text-[var(--text-muted)]">• สนับสนุนการทำงานร่วมกันแบบเรียลไทม์สำหรับโปรเจกต์วิจัย</p>
+                                                    <p className="text-[var(--text-muted)]">• แสดงการเชื่อมต่อ AI/LLM API ในแอพพลิเคชันระดับ Production</p>
                                                 </>
                                             )}
                                         </div>

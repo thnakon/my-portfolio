@@ -56,6 +56,18 @@ export default function App({ Component, pageProps: { session, ...pageProps } })
         <meta property="og:title" content="Thanakon Dungkumwattanasiri | Full Stack Developer" />
         <meta property="og:description" content="Full Stack Web Developer based in Chiang Mai, specializing in Laravel, Next.js, and modern web technologies." />
         <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://thnakon.dev" />
+        <meta property="og:site_name" content="Thanakon Dungkumwattanasiri Portfolio" />
+        <meta property="og:image" content="https://thnakon.dev/images/og-image.png" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:locale" content="en_US" />
+
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Thanakon Dungkumwattanasiri | Full Stack Developer" />
+        <meta name="twitter:description" content="Full Stack Web Developer based in Chiang Mai, specializing in Laravel, Next.js, and modern web technologies." />
+        <meta name="twitter:image" content="https://thnakon.dev/images/og-image.png" />
 
         {/* Favicon */}
         <link rel="icon" href="/favicon.png" />

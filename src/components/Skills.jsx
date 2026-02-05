@@ -97,22 +97,27 @@ export default function Skills({ t }) {
           {allSkills.map((skill, index) => (
             <div 
               key={index}
-              className={`group relative p-3 md:p-4 rounded-xl bg-[var(--bg-secondary)] border border-[var(--border-color)] transition-all duration-700 hover:border-[var(--text-primary)]/40 hover:-translate-y-2 hover:shadow-xl hover:shadow-[var(--text-primary)]/10 cursor-default ${
+              className={`group relative p-3 md:p-4 rounded-xl backdrop-blur-sm bg-[var(--bg-secondary)]/80 border border-[var(--border-color)] transition-all duration-500 ease-out cursor-default ${
                 isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
-              }`}
+              } hover:border-transparent hover:-translate-y-3 hover:scale-105 hover:rotate-[1deg] hover:shadow-2xl hover:shadow-[var(--accent-primary)]/20`}
               style={{ 
                 transitionDelay: isVisible ? `${(index % 12) * 50 + 600}ms` : '0ms'
               }}
             >
+              {/* Glassmorphism glow effect on hover */}
+              <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-[var(--accent-primary)]/10 via-[var(--accent-secondary)]/10 to-transparent -z-10" />
+              <div className="absolute -inset-[1px] rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-[var(--accent-primary)]/40 to-[var(--accent-secondary)]/40 -z-20 blur-sm" />
+              
               <img 
                 src={skill.isCustom ? skill.icon : `https://skillicons.dev/icons?i=${skill.icon}`} 
                 alt={skill.name}
-                className="w-7 h-7 md:w-9 md:h-9 transition-all duration-500 group-hover:scale-110 object-contain"
+                className="w-7 h-7 md:w-9 md:h-9 transition-all duration-300 ease-out group-hover:scale-125 group-hover:drop-shadow-lg object-contain"
               />
               
-              {/* Tooltip */}
-              <div className="absolute -top-10 left-1/2 -translate-x-1/2 px-3 py-1 bg-[var(--text-primary)] text-[var(--bg-primary)] text-[10px] font-bold rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none whitespace-nowrap z-10 shadow-lg">
+              {/* Enhanced Tooltip with animation */}
+              <div className="absolute -top-12 left-1/2 -translate-x-1/2 px-3 py-1.5 bg-[var(--text-primary)] text-[var(--bg-primary)] text-[10px] font-bold rounded-lg opacity-0 group-hover:opacity-100 scale-90 group-hover:scale-100 transition-all duration-300 pointer-events-none whitespace-nowrap z-10 shadow-xl">
                 {skill.name}
+                <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-[var(--text-primary)] rotate-45" />
               </div>
             </div>
           ))}
