@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import Link from 'next/link';
 
 export default function Hero({ t, onGetInTouch }) {
   const [copied, setCopied] = useState(false);
@@ -173,25 +174,26 @@ export default function Hero({ t, onGetInTouch }) {
       </div>
 
       <div className="max-w-4xl mx-auto relative z-10">
-        {/* Announcement Badge - Hidden until typing completes */}
-        <div 
-          className="hero-announcement group transition-all duration-700"
-          style={{
-            opacity: showContent ? 1 : 0,
-            transform: showContent ? 'translateY(0)' : 'translateY(-16px)',
-            pointerEvents: showContent ? 'auto' : 'none'
-          }}
-        >
-          <span className="announcement-tag">{t.hero.announcement.tag}</span>
-          <div className="announcement-content">
-            <span className="announcement-message ann-shimmer">
-              {t.hero.announcement.message}
-            </span>
-            <svg className="announcement-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-            </svg>
+        <Link href="/work">
+          <div 
+            className="hero-announcement group transition-all duration-700 cursor-pointer"
+            style={{
+              opacity: showContent ? 1 : 0,
+              transform: showContent ? 'translateY(0)' : 'translateY(-16px)',
+              pointerEvents: showContent ? 'auto' : 'none'
+            }}
+          >
+            <span className="announcement-tag">{t.hero.announcement.tag}</span>
+            <div className="announcement-content">
+              <span className="announcement-message ann-shimmer">
+                {t.hero.announcement.message}
+              </span>
+              <svg className="announcement-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </div>
           </div>
-        </div>
+        </Link>
 
         {/* Headline with Typewriter Effect */}
         <h1 className="hero-headline font-heading mb-8">
@@ -200,9 +202,8 @@ export default function Hero({ t, onGetInTouch }) {
           <span className={`inline-block w-[3px] h-[1em] bg-[var(--text-primary)] ml-1 align-middle ${typingComplete ? 'opacity-0' : 'animate-blink'}`} />
         </h1>
         
-        {/* Description */}
         <p 
-          className="text-secondary text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed transition-all duration-700 font-light"
+          className="text-secondary text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed transition-all duration-700 font-light flex flex-wrap items-center justify-center"
           style={{
             opacity: showContent ? 1 : 0,
             transform: showContent ? 'translateY(0)' : 'translateY(16px)',
@@ -210,16 +211,21 @@ export default function Hero({ t, onGetInTouch }) {
           }}
         >
           {t.hero.description.split('Thanakon').map((part, index, array) => (
-            <span key={index}>
+            <span key={index} className="flex items-center">
               {part}
               {index < array.length - 1 && (
                 <span className="inline-flex items-center gap-2 align-middle mx-1">
                   <span className="text-primary">Thanakon</span>
-                  <img 
-                    src="/images/profile-bento.jpg" 
-                    alt="Thanakon" 
-                    className="w-10 h-10 md:w-12 md:h-12 rounded-full object-cover border-2 border-[var(--border-color)] shadow-sm hover:scale-110 transition-transform duration-300"
-                  />
+                  <div className="relative group/avatar">
+                    <img 
+                      src="/images/profile-bento.jpg" 
+                      alt="Thanakon" 
+                      className="w-10 h-10 md:w-12 md:h-12 rounded-full object-cover border-2 border-[var(--border-color)] shadow-sm group-hover/avatar:scale-110 transition-transform duration-300"
+                    />
+                    <span className="absolute -top-6 -right-2 opacity-0 group-hover/avatar:opacity-100 transition-all duration-300 text-xl pointer-events-none group-hover/avatar:-translate-y-1">
+                      👋
+                    </span>
+                  </div>
                 </span>
               )}
             </span>

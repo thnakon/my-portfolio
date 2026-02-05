@@ -1,8 +1,9 @@
 import '@/styles/globals.css';
 import { useState, useEffect } from 'react';
 import Head from 'next/head';
+import { SessionProvider } from 'next-auth/react';
 
-export default function App({ Component, pageProps }) {
+export default function App({ Component, pageProps: { session, ...pageProps } }) {
   const [theme, setTheme] = useState('dark');
   const [lang, setLang] = useState('en');
   const [mounted, setMounted] = useState(false);
@@ -43,7 +44,7 @@ export default function App({ Component, pageProps }) {
   }
 
   return (
-    <>
+    <SessionProvider session={session}>
       <Head>
         <title>Thanakon Dungkumwattanasiri | Full Stack Developer</title>
         <meta name="description" content="Full Stack Web Developer based in Chiang Mai, specializing in Laravel, Next.js, and modern web technologies." />
@@ -60,6 +61,7 @@ export default function App({ Component, pageProps }) {
         <link rel="icon" href="/favicon.png" />
       </Head>
       <Component {...pageProps} theme={theme} setTheme={setTheme} lang={lang} setLang={setLang} />
-    </>
+    </SessionProvider>
   );
 }
+

@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useSession, signIn, signOut } from 'next-auth/react';
 import translations from '@/lib/translations';
 import Navbar from '@/components/Navbar';
 import BookingModal from '@/components/BookingModal';
@@ -36,90 +37,138 @@ const TypewriterText = ({ text, delay = 50, startDelay = 500, onComplete }) => {
     );
 };
 
-const NoteCard = ({ msg, index }) => {
-    const gradients = [
-        'from-[#FF4E50] to-[#F9D423]', // Sunset
-        'from-[#00c6ff] to-[#0072ff]', // Blue
-        'from-[#f77062] to-[#fe5196]', // Pinky
-        'from-[#11998e] to-[#38ef7d]', // Green
-        'from-[#8E2DE2] to-[#4A00E0]', // Purple
-        'from-[#f953c6] to-[#b91d73]', // Magenta
+// Pill-shaped message bubble (Freeform-style)
+const PillMessage = ({ msg, index, total }) => {
+    const colors = [
+        { bg: 'bg-gradient-to-r from-rose-500 to-pink-500', text: 'text-white' },
+        { bg: 'bg-gradient-to-r from-blue-500 to-cyan-500', text: 'text-white' },
+        { bg: 'bg-gradient-to-r from-emerald-500 to-teal-500', text: 'text-white' },
+        { bg: 'bg-gradient-to-r from-violet-500 to-purple-500', text: 'text-white' },
+        { bg: 'bg-gradient-to-r from-amber-500 to-orange-500', text: 'text-white' },
+        { bg: 'bg-gradient-to-r from-indigo-500 to-blue-600', text: 'text-white' },
     ];
 
-    const gradient = gradients[index % gradients.length];
-    const rotation = (index % 2 === 0 ? 'rotate-1' : '-rotate-1');
+    const color = colors[index % colors.length];
+
+    // Random positioning for freeform canvas feel
+    const positions = [
+        { x: '5%', y: '0%' },
+        { x: '55%', y: '5%' },
+        { x: '25%', y: '20%' },
+        { x: '70%', y: '25%' },
+        { x: '10%', y: '40%' },
+        { x: '50%', y: '45%' },
+        { x: '30%', y: '60%' },
+        { x: '65%', y: '65%' },
+        { x: '15%', y: '80%' },
+        { x: '55%', y: '85%' },
+    ];
+
+    const pos = positions[index % positions.length];
+    const rotate = (index % 2 === 0 ? 'rotate-1' : '-rotate-2');
+    const animDelay = index * 0.15;
 
     return (
-        <div className={`relative group p-8 rounded-[24px] bg-gradient-to-br ${gradient} shadow-xl transition-all duration-500 hover:rotate-0 hover:scale-[1.02] flex flex-col h-full min-h-[240px] ${rotation}`}>
-            {/* Tape Effect */}
-            <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-12 h-6 bg-white/20 backdrop-blur-sm border border-white/10 rounded-sm z-10 shadow-sm" />
+        <div
+            className="absolute transition-all duration-700 hover:scale-105 hover:z-50 cursor-pointer group"
+            style={{
+                left: pos.x,
+                top: pos.y,
+                animation: `floatIn 0.6s ease-out ${animDelay}s both, float 6s ease-in-out ${animDelay}s infinite`
+            }}
+        >
+            <div className={`${color.bg} ${color.text} ${rotate} rounded-[32px] px-5 py-4 shadow-xl hover:shadow-2xl transition-all duration-300 max-w-[320px] backdrop-blur-sm`}>
+                {/* Header: Avatar + Name + Date */}
+                <div className="flex items-center gap-3 mb-3">
+                    <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center text-white font-bold text-sm border-2 border-white/30 shadow-inner flex-shrink-0">
+                        {msg.avatar ? (
+                            <img src={msg.avatar} alt={msg.name} className="w-full h-full rounded-full object-cover" />
+                        ) : (
+                            <span>{msg.name.charAt(0).toUpperCase()}</span>
+                        )}
+                    </div>
+                    <div className="flex-1 min-w-0">
+                        <div className="font-bold text-sm truncate">{msg.name}</div>
+                        <div className="text-[10px] opacity-70 font-mono">{msg.date}</div>
+                    </div>
+                </div>
 
-            {/* Quote Mark */}
-            <div className="absolute top-4 left-6 text-6xl font-serif text-white/20 select-none">“</div>
-
-            <div className="flex-1 pt-6 px-2">
-                <p className="text-white text-lg md:text-xl font-heading leading-[1.4] italic drop-shadow-sm opacity-95 group-hover:opacity-100 transition-opacity">
-                    {msg.message}
+                {/* Message */}
+                <p className="text-sm leading-relaxed opacity-95 font-medium">
+                    "{msg.message}"
                 </p>
-            </div>
-
-            {/* Divider */}
-            <div className="h-px w-full bg-white/20 my-6" />
-
-            {/* Author Info */}
-            <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center text-white border border-white/30 overflow-hidden shadow-inner">
-                    <span className="text-sm font-bold">{msg.name.charAt(0)}</span>
-                </div>
-                <div className="flex flex-col">
-                    <span className="text-white text-sm font-bold tracking-tight">{msg.name}</span>
-                    <span className="text-white/60 text-[10px] font-mono uppercase tracking-widest">{msg.date}</span>
-                </div>
             </div>
         </div>
     );
 };
 
 export default function GuestbookPage({ theme, setTheme, lang, setLang }) {
+    const { data: session, status } = useSession();
     const [bookingOpen, setBookingOpen] = useState(false);
     const [isFormOpen, setIsFormOpen] = useState(false);
     const [showContent, setShowContent] = useState(false);
-    const [messages, setMessages] = useState([
-        { id: 1, name: "Alexander", message: "Beyond the code, there's a soul in this work. Absolutely stunning craftsmanship.", date: "Feb 01, 2026" },
-        { id: 2, name: "Sarah K.", message: "The attention to detail is actually insane. Well done on the redesign!", date: "Jan 31, 2026" },
-        { id: 3, name: "itzwarm", message: "Love the new wall aesthetic! Keep building great things.", date: "Jan 31, 2026" },
-        { id: 4, name: "John K.", message: "This site changed how I think about digital design. Pure gold.", date: "Jan 29, 2026" },
-        { id: 5, name: "Melissa", message: "So inspiring to see such a creative portfolio! ✨", date: "Jan 28, 2026" },
-    ]);
-    const [newName, setNewName] = useState('');
+    const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState('');
+    const [isLoading, setIsLoading] = useState(true);
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     const t = translations[lang] || translations.en;
 
+    // Fetch messages on mount
     useEffect(() => {
+        fetchMessages();
         const timer = setTimeout(() => setShowContent(true), 100);
         return () => clearTimeout(timer);
     }, []);
 
-    const handleSubmit = (e) => {
+    const fetchMessages = async () => {
+        try {
+            const res = await fetch('/api/guestbook');
+            const data = await res.json();
+            setMessages(data);
+        } catch (error) {
+            console.error('Failed to fetch messages:', error);
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        if (!newName.trim() || !newMessage.trim()) return;
+        if (!session || !newMessage.trim() || isSubmitting) return;
 
-        const msg = {
-            id: Date.now(),
-            name: newName,
-            message: newMessage,
-            date: new Date().toLocaleDateString(lang === 'en' ? 'en-US' : 'th-TH', {
-                year: 'numeric',
-                month: 'short',
-                day: 'numeric'
-            })
-        };
+        setIsSubmitting(true);
 
-        setMessages([msg, ...messages]);
-        setNewName('');
-        setNewMessage('');
-        setIsFormOpen(false);
+        try {
+            const res = await fetch('/api/guestbook', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    name: session.user.name,
+                    avatar: session.user.image,
+                    message: newMessage.trim()
+                })
+            });
+
+            if (res.ok) {
+                const savedMessage = await res.json();
+                setMessages([savedMessage, ...messages]);
+                setNewMessage('');
+                setIsFormOpen(false);
+            }
+        } catch (error) {
+            console.error('Failed to save message:', error);
+        } finally {
+            setIsSubmitting(false);
+        }
+    };
+
+    const handleLeaveMarkClick = () => {
+        if (!session) {
+            signIn('github');
+        } else {
+            setIsFormOpen(true);
+        }
     };
 
     return (
@@ -128,45 +177,100 @@ export default function GuestbookPage({ theme, setTheme, lang, setLang }) {
 
             <div className="pt-32 pb-24 max-w-[1400px] mx-auto px-6">
                 {/* Header Section */}
-                <div className="text-center mb-24">
-                    <span className={`inline-block text-[10px] tracking-[0.4em] font-bold text-[var(--text-muted)] uppercase mb-6 transition-all duration-1000 ${showContent ? 'opacity-60 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-                        {t.nav.moreDropdown.guestbook.title}
+                <div className="mb-16 text-center">
+                    <span className={`inline-block text-[10px] tracking-[0.3em] font-bold text-[var(--text-muted)] uppercase mb-6 transition-all duration-1000 ${showContent ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+                        {lang === 'en' ? 'LEAVE YOUR MARK' : 'ทิ้งร่องรอยของคุณ'}
                     </span>
-                    <h1 className={`text-4xl md:text-6xl font-heading mb-8 transition-all duration-1000 delay-200 ${showContent ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-                        {lang === 'en' ? "Signature Wall" : "กำแพงลายเซ็น"}
-                    </h1>
-                    <div className="text-[var(--text-secondary)] text-lg md:text-xl font-light leading-relaxed h-8">
-                        {showContent && (
-                            <TypewriterText text={lang === 'en' ? "Let me know you were here." : "ทิ้งข้อความไว้ว่าคุณเคยมาที่นี่..."} />
-                        )}
+                    <h2 className={`text-3xl md:text-5xl font-heading tracking-tight mb-8 transition-all duration-1000 delay-300 ${showContent ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+                        <span className="text-[var(--text-primary)]">{lang === 'en' ? 'Signature' : 'กำแพง'} </span>
+                        <em className="overview-title-accent">{lang === 'en' ? 'Wall' : 'ลายเซ็น'}</em>
+                    </h2>
+                    <div className="min-h-[2em]">
+                        <p className="text-base md:text-lg text-[var(--text-secondary)] max-w-2xl mx-auto leading-relaxed">
+                            {showContent && (
+                                <TypewriterText
+                                    text={lang === 'en' ? "Let me know you were here." : "ทิ้งข้อความไว้ว่าคุณเคยมาที่นี่..."}
+                                    delay={25}
+                                />
+                            )}
+                        </p>
                     </div>
                 </div>
 
-                {/* Wall of Messages Grid */}
-                <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 transition-all duration-1000 delay-1000 ${showContent ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+                {/* Freeform Canvas - Scattered Pills */}
+                <div className={`relative w-full min-h-[800px] md:min-h-[700px] transition-all duration-1000 delay-500 ${showContent ? 'opacity-100' : 'opacity-0'}`}>
 
-                    {/* CTA Card - Join the Wall */}
+                    {/* Add Button (Floating) */}
                     <div
-                        onClick={() => setIsFormOpen(true)}
-                        className="relative group p-8 rounded-[24px] border-2 border-dashed border-[var(--border-color)] bg-transparent flex flex-col items-center justify-center text-center gap-6 hover:border-[var(--text-primary)] transition-all duration-500 cursor-pointer min-h-[240px]"
+                        onClick={handleLeaveMarkClick}
+                        className="absolute left-1/2 -translate-x-1/2 top-[45%] z-40 group cursor-pointer"
                     >
-                        <div className="absolute top-4 left-1/2 -translate-x-1/2 text-lg font-heading italic opacity-40">
-                            {lang === 'en' ? '"Join the wall..."' : '"ร่วมเป็นส่วนหนึ่ง..."'}
+                        <div className="flex items-center gap-3 px-6 py-4 rounded-full bg-[var(--bg-secondary)] border-2 border-dashed border-[var(--border-color)] hover:border-[var(--text-primary)] transition-all duration-300 shadow-lg hover:shadow-xl">
+                            {session ? (
+                                <>
+                                    <img src={session.user.image} alt={session.user.name} className="w-10 h-10 rounded-full border-2 border-[var(--border-color)]" />
+                                    <span className="text-sm font-medium text-[var(--text-primary)]">
+                                        {lang === 'en' ? 'Leave your mark' : 'ทิ้งข้อความ'}
+                                    </span>
+                                </>
+                            ) : (
+                                <>
+                                    <div className="w-10 h-10 rounded-full bg-[var(--text-primary)] flex items-center justify-center group-hover:scale-110 transition-all duration-500">
+                                        <svg className="w-5 h-5 text-[var(--bg-primary)]" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                                        </svg>
+                                    </div>
+                                    <span className="text-sm font-medium text-[var(--text-primary)]">
+                                        {lang === 'en' ? 'Sign in with GitHub' : 'เข้าสู่ระบบด้วย GitHub'}
+                                    </span>
+                                </>
+                            )}
                         </div>
-                        <div className="w-16 h-16 rounded-full bg-[var(--bg-secondary)] flex items-center justify-center group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 shadow-xl border border-[var(--border-color)]">
-                            <svg className="w-8 h-8 text-[var(--text-primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-                            </svg>
-                        </div>
-                        <p className="text-[var(--text-muted)] text-xs max-w-[200px] leading-relaxed">
-                            {lang === 'en' ? "Pin your message to this board forever." : "ปักหมุดข้อความลงบนบอร์ดนี้ตลอดไป"}
-                        </p>
                     </div>
 
-                    {/* Message Cards */}
-                    {messages.map((msg, i) => (
-                        <NoteCard key={msg.id} msg={msg} index={i} />
-                    ))}
+                    {/* Message Pills */}
+                    {isLoading ? (
+                        <div className="absolute left-1/2 top-[20%] -translate-x-1/2 text-center">
+                            <div className="w-8 h-8 border-2 border-[var(--text-primary)] border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+                            <p className="text-[var(--text-muted)] text-sm">
+                                {lang === 'en' ? 'Loading messages...' : 'กำลังโหลดข้อความ...'}
+                            </p>
+                        </div>
+                    ) : messages.length === 0 ? (
+                        <div className="absolute left-1/2 top-[20%] -translate-x-1/2 text-center max-w-md">
+                            <div className="text-6xl mb-4">✍️</div>
+                            <h3 className="text-xl font-heading text-[var(--text-primary)] mb-2">
+                                {lang === 'en' ? 'No messages yet' : 'ยังไม่มีข้อความ'}
+                            </h3>
+                            <p className="text-[var(--text-muted)] text-sm">
+                                {lang === 'en'
+                                    ? 'Be the first to leave your mark on this wall!'
+                                    : 'เป็นคนแรกที่ทิ้งร่องรอยบนกำแพงนี้!'}
+                            </p>
+                        </div>
+                    ) : (
+                        messages.map((msg, i) => (
+                            <PillMessage key={msg.id} msg={msg} index={i} total={messages.length} />
+                        ))
+                    )}
+
+                    {/* CSS Animations */}
+                    <style jsx>{`
+                        @keyframes floatIn {
+                            from {
+                                opacity: 0;
+                                transform: translateY(30px) scale(0.9);
+                            }
+                            to {
+                                opacity: 1;
+                                transform: translateY(0) scale(1);
+                            }
+                        }
+                        @keyframes float {
+                            0%, 100% { transform: translateY(0px); }
+                            50% { transform: translateY(-8px); }
+                        }
+                    `}</style>
                 </div>
             </div>
 
@@ -185,7 +289,17 @@ export default function GuestbookPage({ theme, setTheme, lang, setLang }) {
 
                         <div className="relative z-10">
                             <div className="flex justify-between items-center mb-10">
-                                <h2 className="text-2xl font-heading uppercase tracking-widest border-b-2 border-black/10 pb-2">New Note</h2>
+                                <div className="flex items-center gap-4">
+                                    {session && (
+                                        <img src={session.user.image} alt={session.user.name} className="w-12 h-12 rounded-full border-2 border-black/10" />
+                                    )}
+                                    <div>
+                                        <h2 className="text-2xl font-heading uppercase tracking-widest border-b-2 border-black/10 pb-2">New Note</h2>
+                                        {session && (
+                                            <p className="text-sm text-black/50 mt-1">Signed in as <strong>{session.user.name}</strong></p>
+                                        )}
+                                    </div>
+                                </div>
                                 <button onClick={() => setIsFormOpen(false)} className="text-black/30 hover:text-black transition-colors transform hover:rotate-90 duration-300">
                                     <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -194,17 +308,6 @@ export default function GuestbookPage({ theme, setTheme, lang, setLang }) {
                             </div>
 
                             <form onSubmit={handleSubmit} className="space-y-10">
-                                <div className="relative group">
-                                    <label className="text-[10px] font-bold tracking-[0.2em] text-black/40 uppercase mb-2 block">Your Identity</label>
-                                    <input
-                                        type="text"
-                                        value={newName}
-                                        onChange={(e) => setNewName(e.target.value)}
-                                        placeholder="Name or Alias"
-                                        className="w-full bg-transparent border-b border-black/20 py-2 outline-none focus:border-black transition-colors font-heading text-xl"
-                                        required
-                                    />
-                                </div>
                                 <div className="relative group">
                                     <label className="text-[10px] font-bold tracking-[0.2em] text-black/40 uppercase mb-2 block">Your Message</label>
                                     <textarea
@@ -216,9 +319,18 @@ export default function GuestbookPage({ theme, setTheme, lang, setLang }) {
                                         required
                                     />
                                 </div>
-                                <button type="submit" className="w-full py-5 bg-black text-white rounded-none font-bold text-sm uppercase tracking-[0.3em] hover:bg-black/80 transition-all shadow-xl active:scale-[0.98]">
-                                    Pin this note
-                                </button>
+                                <div className="flex gap-4">
+                                    <button type="submit" className="flex-1 py-5 bg-black text-white rounded-none font-bold text-sm uppercase tracking-[0.3em] hover:bg-black/80 transition-all shadow-xl active:scale-[0.98]">
+                                        Pin this note
+                                    </button>
+                                    <button
+                                        type="button"
+                                        onClick={() => signOut()}
+                                        className="px-6 py-5 bg-red-500/10 text-red-600 rounded-none font-bold text-xs uppercase tracking-[0.2em] hover:bg-red-500/20 transition-all"
+                                    >
+                                        Sign Out
+                                    </button>
+                                </div>
                             </form>
                         </div>
                     </div>
