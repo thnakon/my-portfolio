@@ -101,8 +101,8 @@ export default function BookingModal({ isOpen, onClose, t }) {
     setSubmitStatus(null);
 
     try {
-      // Send to Google Sheets
-      const response = await fetch(GOOGLE_SHEETS_URL, {
+      // 1. Send to Google Sheets (for backup/record)
+      await fetch(GOOGLE_SHEETS_URL, {
         method: 'POST',
         mode: 'no-cors',
         headers: {
@@ -115,6 +115,23 @@ export default function BookingModal({ isOpen, onClose, t }) {
           timestamp: new Date().toISOString(),
         }),
       });
+
+      // 2. Send thank-you email via API
+      const emailResponse = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+        }),
+      });
+
+      if (!emailResponse.ok) {
+        console.warn('Email sending failed, but form was submitted');
+      }
 
       setSubmitStatus('success');
       setFormData({ name: '', email: '', message: '' });
@@ -348,7 +365,7 @@ export default function BookingModal({ isOpen, onClose, t }) {
                     {/* Name & Email Row */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
-                        <label className="block text-sm font-medium text-[var(--text-secondary)] mb-2">
+                        <label className="block text-sm font-medium text-[var(--text-primary)] mb-2">
                           {formContent.name}
                         </label>
                         <input
@@ -357,11 +374,11 @@ export default function BookingModal({ isOpen, onClose, t }) {
                           onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                           placeholder={formContent.namePlaceholder}
                           required
-                          className="w-full px-4 py-3 rounded-xl bg-transparent border border-[var(--border-color)] text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus:outline-none focus:border-[var(--text-primary)]/50 transition-colors"
+                          className="w-full px-4 py-3 rounded-xl bg-[var(--bg-secondary)] border-2 border-[var(--border-color)] text-[var(--text-primary)] placeholder:text-[var(--text-secondary)]/60 focus:outline-none focus:border-black dark:focus:border-white transition-colors"
                         />
                       </div>
                       <div>
-                        <label className="block text-sm font-medium text-[var(--text-secondary)] mb-2">
+                        <label className="block text-sm font-medium text-[var(--text-primary)] mb-2">
                           {formContent.email}
                         </label>
                         <input
@@ -370,7 +387,7 @@ export default function BookingModal({ isOpen, onClose, t }) {
                           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                           placeholder={formContent.emailPlaceholder}
                           required
-                          className="w-full px-4 py-3 rounded-xl bg-transparent border border-[var(--border-color)] text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus:outline-none focus:border-[var(--text-primary)]/50 transition-colors"
+                          className="w-full px-4 py-3 rounded-xl bg-[var(--bg-secondary)] border-2 border-[var(--border-color)] text-[var(--text-primary)] placeholder:text-[var(--text-secondary)]/60 focus:outline-none focus:border-black dark:focus:border-white transition-colors"
                         />
                       </div>
                     </div>
@@ -378,10 +395,10 @@ export default function BookingModal({ isOpen, onClose, t }) {
                     {/* Message */}
                     <div>
                       <div className="flex justify-between items-center mb-2">
-                        <label className="text-sm font-medium text-[var(--text-secondary)]">
+                        <label className="text-sm font-medium text-[var(--text-primary)]">
                           {formContent.message}
                         </label>
-                        <span className="text-xs text-[var(--text-muted)]">
+                        <span className="text-xs text-[var(--text-secondary)]">
                           {formData.message.length}/1000
                         </span>
                       </div>
@@ -391,7 +408,7 @@ export default function BookingModal({ isOpen, onClose, t }) {
                         placeholder={formContent.messagePlaceholder}
                         required
                         rows={5}
-                        className="w-full px-4 py-3 rounded-xl bg-transparent border border-[var(--border-color)] text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus:outline-none focus:border-[var(--text-primary)]/50 transition-colors resize-none"
+                        className="w-full px-4 py-3 rounded-xl bg-[var(--bg-secondary)] border-2 border-[var(--border-color)] text-[var(--text-primary)] placeholder:text-[var(--text-secondary)]/60 focus:outline-none focus:border-black dark:focus:border-white transition-colors resize-none"
                       />
                     </div>
 
@@ -399,11 +416,11 @@ export default function BookingModal({ isOpen, onClose, t }) {
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className={`w-full flex items-center justify-center gap-3 py-4 rounded-2xl font-medium transition-all ${
+                      className={`w-full flex items-center justify-center gap-3 py-4 rounded-2xl font-bold text-base transition-all ${
                         submitStatus === 'error'
                         ? 'bg-red-500 text-white'
-                        : 'bg-[var(--text-primary)] text-[var(--bg-primary)] hover:opacity-90'
-                      } ${isSubmitting ? 'opacity-70 cursor-not-allowed' : ''}`}
+                        : 'bg-black text-white dark:bg-white dark:text-black hover:opacity-90 shadow-lg'
+                      } ${isSubmitting ? 'opacity-70 cursor-not-allowed' : 'hover:scale-[1.02] active:scale-[0.98]'}`}
                     >
                       {submitStatus === 'error' ? (
                         formContent.error

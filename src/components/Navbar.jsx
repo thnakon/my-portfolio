@@ -615,9 +615,9 @@ export default function Navbar({ t, lang, setLang, theme, setTheme, onBookCall }
               { id: 'uses', icon: Icons.monitor, ...t.nav.moreDropdown.uses },
               { id: 'attribution', icon: Icons.book, ...t.nav.moreDropdown.attribution }
             ].map((link) => (
-              <Link key={link.id} href={`/${link.id}`} onClick={() => setIsExpanded(false)} className={`flex items-center gap-3 p-3 rounded-xl ${theme === 'dark' ? 'bg-white/5 hover:bg-white/10' : 'bg-black/5 hover:bg-black/10'}`}>
-                <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${theme === 'dark' ? 'bg-white/10 text-white' : 'bg-black/10 text-black'}`}>
-                  <div className="scale-90">{link.icon}</div>
+              <Link key={link.id} href={`/${link.id}`} onClick={() => setIsExpanded(false)} className={`flex items-center gap-2.5 py-2 px-3 rounded-xl ${theme === 'dark' ? 'bg-white/5 hover:bg-white/10' : 'bg-black/5 hover:bg-black/10'}`}>
+                <div className={`w-7 h-7 rounded-lg flex items-center justify-center ${theme === 'dark' ? 'bg-white/10 text-white' : 'bg-black/10 text-black'}`}>
+                  <div className="scale-[0.8]">{link.icon}</div>
                 </div>
                 <span className={`text-sm font-medium ${theme === 'dark' ? 'text-white' : 'text-black'}`}>{link.title}</span>
               </Link>
@@ -625,7 +625,7 @@ export default function Navbar({ t, lang, setLang, theme, setTheme, onBookCall }
           </div>
 
           {/* Controls */}
-          <div className="grid grid-cols-2 gap-2 mb-3">
+          <div className="grid grid-cols-2 gap-2">
             <button 
               onClick={toggleLang}
               className={`flex items-center justify-center gap-2 p-2.5 rounded-xl ${theme === 'dark' ? 'bg-white/5 text-white' : 'bg-black/5 text-black'}`}
@@ -639,13 +639,6 @@ export default function Navbar({ t, lang, setLang, theme, setTheme, onBookCall }
               <div className="scale-90">{theme === 'dark' ? Icons.sun : Icons.moon}</div>
             </button>
           </div>
-
-          <button 
-            onClick={() => { setIsExpanded(false); onBookCall(); }} 
-            className={`w-full py-3 rounded-xl font-bold text-xs uppercase tracking-wider ${theme === 'dark' ? 'bg-white text-black' : 'bg-black text-white'}`}
-          >
-            {t.nav.bookCall}
-          </button>
         </div>
       </div>
 
@@ -767,40 +760,34 @@ export default function Navbar({ t, lang, setLang, theme, setTheme, onBookCall }
                       { id: 'uses', icon: Icons.monitor, ...t.nav.moreDropdown.uses },
                       { id: 'attribution', icon: Icons.book, ...t.nav.moreDropdown.attribution }
                     ].map((link) => (
-                      <Link key={link.id} href={`/${link.id}`} onClick={() => setIsExpanded(false)} className={`group flex items-center gap-3 md:gap-4 p-3 md:p-4 rounded-2xl md:rounded-3xl border transition-all ${theme === 'dark' ? 'bg-white/5 border-white/5 hover:bg-white/10' : 'bg-black/5 border-black/5 hover:bg-black/10'}`}>
-                         <div className={`w-8 h-8 md:w-10 md:h-10 rounded-xl md:rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform ${theme === 'dark' ? 'bg-white/5 text-white' : 'bg-black/5 text-black'}`}>
+                      <Link key={link.id} href={`/${link.id}`} onClick={() => setIsExpanded(false)} className={`group flex items-center gap-3 py-3 px-4 md:py-3.5 md:px-5 rounded-2xl md:rounded-[28px] border transition-all ${theme === 'dark' ? 'bg-white/5 border-white/5 hover:bg-white/10' : 'bg-black/5 border-black/5 hover:bg-black/10'}`}>
+                         <div className={`w-9 h-9 md:w-10 md:h-10 rounded-xl md:rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform ${theme === 'dark' ? 'bg-white/5 text-white' : 'bg-black/5 text-black'}`}>
                             <div className="scale-90 md:scale-100">{link.icon}</div>
                          </div>
                          <div>
-                            <h5 className={`text-xs md:text-sm font-bold ${theme === 'dark' ? 'text-white' : 'text-black'}`}>{link.title}</h5>
-                            <p className={`text-[9px] md:text-[10px] line-clamp-1 ${theme === 'dark' ? 'text-white/40' : 'text-black/40'}`}>{link.desc}</p>
+                            <h5 className={`text-sm md:text-base font-bold ${theme === 'dark' ? 'text-white' : 'text-black'}`}>{link.title}</h5>
+                            <p className={`text-[10px] opacity-50 line-clamp-1 ${theme === 'dark' ? 'text-white' : 'text-black'}`}>{link.desc}</p>
                          </div>
                       </Link>
                     ))}
 
                     {/* Theme & Language Controls */}
-                    <div className="grid grid-cols-2 gap-2 mt-1 md:mt-2">
+                    <div className="grid grid-cols-2 gap-3 mt-auto">
                        <button 
                          onClick={toggleLang}
-                         className={`flex items-center justify-center gap-1 md:gap-2 p-2 rounded-xl border transition-all ${theme === 'dark' ? 'bg-white/5 border-white/5 hover:bg-white/10 text-white' : 'bg-black/5 border-black/5 hover:bg-black/10 text-black'}`}
+                         className={`flex items-center justify-center gap-2 p-3.5 rounded-[20px] border transition-all ${theme === 'dark' ? 'bg-white/5 border-white/5 hover:bg-white/10 text-white' : 'bg-black/5 border-black/5 hover:bg-black/10 text-black'}`}
                        >
-                          <span className="text-[10px] font-bold tracking-widest uppercase">{lang === 'en' ? 'TH' : 'EN'}</span>
-                          <span className="text-[8px] md:text-[9px] font-medium opacity-60">{lang === 'en' ? 'Lang' : 'ภาษา'}</span>
+                          <span className="text-xs font-bold tracking-widest uppercase">{lang === 'en' ? 'TH' : 'EN'}</span>
+                          <span className="text-[10px] font-medium opacity-60">{lang === 'en' ? 'Lang' : 'ภาษา'}</span>
                        </button>
                        <button 
                          onClick={toggleTheme}
-                         className={`flex items-center justify-center gap-1 md:gap-2 p-2 rounded-xl border transition-all ${theme === 'dark' ? 'bg-white/5 border-white/5 hover:bg-white/10 text-white' : 'bg-black/5 border-black/5 hover:bg-black/10 text-black'}`}
+                         className={`flex items-center justify-center gap-2 p-3.5 rounded-[20px] border transition-all ${theme === 'dark' ? 'bg-white/5 border-white/5 hover:bg-white/10 text-white' : 'bg-black/5 border-black/5 hover:bg-black/10 text-black'}`}
                        >
-                          <div className="shrink-0 scale-75 md:scale-90">{theme === 'dark' ? Icons.sun : Icons.moon}</div>
-                          <span className="text-[8px] md:text-[9px] font-medium uppercase tracking-wider">{theme === 'dark' ? 'Light' : 'Dark'}</span>
+                          <div className="shrink-0 scale-90">{theme === 'dark' ? Icons.sun : Icons.moon}</div>
+                          <span className="text-[10px] font-medium uppercase tracking-wider">{theme === 'dark' ? 'Light' : 'Dark'}</span>
                        </button>
                     </div>
-                    <button 
-                      onClick={() => { setIsExpanded(false); onBookCall(); }} 
-                      className={`mt-1 md:mt-auto w-full py-3 md:py-4 rounded-2xl md:rounded-3xl font-bold text-[10px] md:text-xs uppercase tracking-[0.15em] md:tracking-[0.2em] shadow-xl hover:scale-105 active:scale-95 transition-all ${theme === 'dark' ? 'bg-white text-black shadow-white/5' : 'bg-black text-white shadow-black/10'}`}
-                    >
-                      {t.nav.bookCall}
-                    </button>
                  </div>
               </div>
            </div>
