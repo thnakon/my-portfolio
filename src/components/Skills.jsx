@@ -7,34 +7,32 @@ export default function Skills({ t }) {
   const sectionRef = useRef(null);
 
   const allSkills = [
-    { name: 'React', icon: 'react' },
-    { name: 'Next.js', icon: 'nextjs' },
-    { name: 'TypeScript', icon: 'ts' },
-    { name: 'Tailwind CSS', icon: 'tailwind' },
-    { name: 'Laravel', icon: 'laravel' },
-    { name: 'Vue.js', icon: 'vue' },
-    { name: 'PHP', icon: 'php' },
-    { name: 'JavaScript', icon: 'js' },
     { name: 'HTML5', icon: 'html' },
     { name: 'CSS3', icon: 'css' },
+    { name: 'JavaScript', icon: 'js' },
+    { name: 'TypeScript', icon: 'ts' },
+    { name: 'Bun', icon: 'bun' },
     { name: 'Node.js', icon: 'nodejs' },
-    { name: 'Express', icon: 'express' },
+    { name: 'PHP', icon: 'php' },
     { name: 'Python', icon: 'py' },
+    { name: 'Laravel', icon: 'laravel' },
+    { name: 'PHPCake', icon: 'php' },
+    { name: 'Next.js', icon: 'nextjs' },
+    { name: 'React', icon: 'react' },
+    { name: 'Tailwind CSS', icon: 'tailwind' },
+    { name: 'Bootstrap 5', icon: 'bootstrap' },
     { name: 'MySQL', icon: 'mysql' },
     { name: 'PostgreSQL', icon: 'postgres' },
-    { name: 'MongoDB', icon: 'mongodb' },
-    { name: 'Redis', icon: 'redis' },
     { name: 'Supabase', icon: 'supabase' },
-    { name: 'Firebase', icon: 'firebase' },
-    { name: 'Docker', icon: 'docker' },
     { name: 'Git', icon: 'git' },
     { name: 'GitHub', icon: 'github' },
+    { name: 'GitLab', icon: 'gitlab' },
+    { name: 'Sourcetree', icon: '/images/uses/sourcetree-logo.png', isCustom: true },
+    { name: 'Cypress', icon: 'cypress' },
+    { name: 'Docker', icon: 'docker' },
+    { name: 'YOLO', icon: 'pytorch' },
     { name: 'Figma', icon: 'figma' },
-    { name: 'Linux', icon: 'linux' },
     { name: 'Vercel', icon: 'vercel' },
-    { name: 'Postman', icon: 'postman' },
-    { name: 'AWS', icon: 'aws' },
-    { name: 'Cloudflare', icon: 'cloudflare' },
   ];
 
   useEffect(() => {
@@ -107,9 +105,9 @@ export default function Skills({ t }) {
               }}
             >
               <img 
-                src={`https://skillicons.dev/icons?i=${skill.icon}`} 
+                src={skill.isCustom ? skill.icon : `https://skillicons.dev/icons?i=${skill.icon}`} 
                 alt={skill.name}
-                className="w-7 h-7 md:w-9 md:h-9 transition-all duration-500 group-hover:scale-110"
+                className="w-7 h-7 md:w-9 md:h-9 transition-all duration-500 group-hover:scale-110 object-contain"
               />
               
               {/* Tooltip */}

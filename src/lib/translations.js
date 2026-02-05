@@ -252,8 +252,9 @@ const translations = {
             tech: [
                 { name: "Next.js 15", icon: "nextjs" },
                 { name: "React 19", icon: "react" },
+                { name: "Bun (Runtime)", icon: "bun" },
                 { name: "Tailwind v4", icon: "tailwindcss" },
-                { name: "Laravel 11", icon: "laravel" },
+                { name: "Laravel 12", icon: "laravel" },
                 { name: "IDEs (AI Agents)", icon: "vscode" }
             ]
         },
@@ -289,7 +290,7 @@ const translations = {
                 description: "A comprehensive Enterprise Resource Planning system designed for SMEs. Streamlining operations across sales, inventory, and finance through high-performance automation.",
                 type: "Enterprise ERP",
                 features: [
-                    "Developed with Laravel 11 and Vue.js 3, ensuring long-term maintainability.",
+                    "Developed with Laravel 12 and Vue.js 3, ensuring long-term maintainability.",
                     "Implemented complex logic for real-time multi-warehouse inventory sync.",
                     "Designed automated financial reporting with precise tax and ledger management.",
                     "Optimized MySQL database with advanced indexing for high-scale performance.",
@@ -331,7 +332,7 @@ const translations = {
                 description: "A single platform that helps students \"study hard, succeed in their careers, and live a good life.\" Designed to empower student journeys from academic excellence to professional success.",
                 type: "Education Platform",
                 features: [
-                    "Built with Next.js 14 App Router for optimal performance and SEO.",
+                    "Built with Next.js 15 App Router for optimal performance and SEO.",
                     "Integrated Supabase for secure authentication and real-time database.",
                     "Designed with shadcn/ui and Tailwind CSS for a premium user experience.",
                     "Implemented automated student support workflows and career tracking.",
@@ -373,7 +374,7 @@ const translations = {
                 description: "A high-performance personal portfolio website built with a focus on premium aesthetics, narrative storytelling, and cutting-edge web technologies.",
                 type: "Personal Portfolio",
                 features: [
-                    "Engineered with Next.js 14 and React for lightning-fast performance.",
+                    "Engineered with Next.js 15 and React for lightning-fast performance.",
                     "Implemented a custom narrative storytelling experience with smooth animations.",
                     "Designed a premium, responsive UI with multi-language support (EN/TH).",
                     "Optimized for SEO with semantic HTML and modern web standards.",
@@ -727,7 +728,7 @@ const translations = {
                 description: "ระบบวางแผนทรัพยากรองค์กรที่ครอบคลุมสำหรับ SME ปรับปรุงการดำเนินงานในด้านการขาย สินค้าคงคลัง และการเงิน ผ่านการทำงานอัตโนมัติที่มีประสิทธิภาพสูง",
                 type: "ระดับเอ็นเตอร์ไพรส์",
                 features: [
-                    "พัฒนาด้วย Laravel 11 และ Vue.js 3 เพื่อความเสถียรและการบำรุงรักษาระยะยาว",
+                    "พัฒนาด้วย Laravel 12 และ Vue.js 3 เพื่อความเสถียรและการบำรุงรักษาระยะยาว",
                     "พัฒนาระบบซิงค์สต็อกสินค้าข้ามคลังแบบเรียลไทม์ด้วยตรรกะที่ซับซ้อน",
                     "ออกแบบรายงานทางการเงินอัตโนมัติพร้อมระบบจัดการภาษีและบัญชีแยกประเภท",
                     "เพิ่มประสิทธิภาพฐานข้อมูล MySQL ด้วยการทำ Indexing ขั้นสูงเพื่อรองรับงานขนาดใหญ่",
@@ -769,7 +770,7 @@ const translations = {
                 description: "แพลตฟอร์มที่ช่วยให้นักศึกษา \"เรียนให้เต็มที่ ประสบความสำเร็จในอาชีพ และมีชีวิตที่ดี\" ออกแบบมาเพื่อส่งเสริมนักศึกษาตั้งแต่การเรียนจนถึงความสำเร็จในอาชีพการงาน",
                 type: "แพลตฟอร์มการศึกษา",
                 features: [
-                    "พัฒนาด้วย Next.js 14 App Router เพื่อประสิทธิภาพสูงสุดและการทำ SEO",
+                    "พัฒนาด้วย Next.js 15 App Router เพื่อประสิทธิภาพสูงสุดและการทำ SEO",
                     "ใช้งาน Supabase สำหรับระบบสมาชิกและความปลอดภัยของข้อมูลแบบเรียลไทม์",
                     "ออกแบบด้วย shadcn/ui และ Tailwind CSS เพื่อประสบการณ์ใช้งานที่พรีเมียม",
                     "ระบบสนับสนุนนักศึกษาและการติดตามความก้าวหน้าในอาชีพแบบอัตโนมัติ",
@@ -811,7 +812,7 @@ const translations = {
                 description: "เว็บไซต์พอร์ตโฟลิโอส่วนตัวประสิทธิภาพสูง ที่สร้างขึ้นโดยเน้นสุนทรียภาพระดับพรีเมียม การเล่าเรื่องราวผ่านดีไซน์ และเทคโนโลยีเว็บที่ทันสมัยที่สุด",
                 type: "พอร์ตโฟลิโอส่วนตัว",
                 features: [
-                    "ออกแบบด้วย Next.js 14 และ React เพื่อประสิทธิภาพที่รวดเร็วที่สุด",
+                    "ออกแบบด้วย Next.js 15 และ React เพื่อประสิทธิภาพที่รวดเร็วที่สุด",
                     "ระบบเล่าเรื่องแบบ Narrative Storytelling พร้อมอนิเมชั่นที่นุ่มนวล",
                     "ดีไซน์อินเทอร์เฟซระดับพรีเมียม รองรับทั้งภาษาไทยและอังกฤษ",
                     "ปรับแต่ง SEO ให้ติดอันดับการค้นหาด้วยมาตรฐานเว็บสมัยใหม่",
@@ -839,8 +840,9 @@ const translations = {
             tech: [
                 { name: "Next.js 15", icon: "nextjs" },
                 { name: "React 19", icon: "react" },
+                { name: "Bun (Runtime)", icon: "bun" },
                 { name: "Tailwind v4", icon: "tailwindcss" },
-                { name: "Laravel 11", icon: "laravel" },
+                { name: "Laravel 12", icon: "laravel" },
                 { name: "IDEs (AI Agents)", icon: "vscode" }
             ]
         },

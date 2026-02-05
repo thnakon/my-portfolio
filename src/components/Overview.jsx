@@ -363,25 +363,23 @@ export default function Overview({ t, onGetInTouch }) {
              <div className="relative overflow-hidden w-full" style={{ maskImage: 'linear-gradient(to right, transparent, black 15%, black 85%, transparent)' }}>
                 {/* Continuous Marquee */}
                 <div className="flex animate-marquee-left whitespace-nowrap gap-3 py-2">
-                   {[
+                    {[
                       { name: 'Laravel', icon: 'laravel', color: 'rgba(255, 45, 32, 0.1)', text: '#ff2d20' },
                       { name: 'Next.js', icon: 'nextjs', color: 'rgba(255, 255, 255, 0.05)', text: 'var(--text-primary)' },
                       { name: 'React', icon: 'react', color: 'rgba(97, 218, 251, 0.1)', text: '#61dafb' },
                       { name: 'Tailwind', icon: 'tailwind', color: 'rgba(56, 189, 248, 0.1)', text: '#38bdf8' },
-                      { name: 'Postgres', icon: 'postgres', color: 'rgba(51, 103, 145, 0.1)', text: '#336791' },
+                      { name: 'Bun', icon: 'bun', color: 'rgba(255, 255, 255, 0.05)', text: 'var(--text-primary)' },
                       { name: 'Docker', icon: 'docker', color: 'rgba(36, 150, 237, 0.1)', text: '#2496ed' },
-                      { name: 'Redis', icon: 'redis', color: 'rgba(216, 44, 32, 0.1)', text: '#d82c20' },
                       { name: 'Node.js', icon: 'nodejs', color: 'rgba(51, 153, 51, 0.1)', text: '#339933' },
-                   ].concat([
+                    ].concat([
                       { name: 'Laravel', icon: 'laravel', color: 'rgba(255, 45, 32, 0.1)', text: '#ff2d20' },
                       { name: 'Next.js', icon: 'nextjs', color: 'rgba(255, 255, 255, 0.05)', text: 'var(--text-primary)' },
                       { name: 'React', icon: 'react', color: 'rgba(97, 218, 251, 0.1)', text: '#61dafb' },
                       { name: 'Tailwind', icon: 'tailwind', color: 'rgba(56, 189, 248, 0.1)', text: '#38bdf8' },
-                      { name: 'Postgres', icon: 'postgres', color: 'rgba(51, 103, 145, 0.1)', text: '#336791' },
+                      { name: 'Bun', icon: 'bun', color: 'rgba(255, 255, 255, 0.05)', text: 'var(--text-primary)' },
                       { name: 'Docker', icon: 'docker', color: 'rgba(36, 150, 237, 0.1)', text: '#2496ed' },
-                      { name: 'Redis', icon: 'redis', color: 'rgba(216, 44, 32, 0.1)', text: '#d82c20' },
                       { name: 'Node.js', icon: 'nodejs', color: 'rgba(51, 153, 51, 0.1)', text: '#339933' },
-                   ]).map((tech, i) => (
+                    ]).map((tech, i) => (
                       <div 
                         key={i} 
                         className="flex items-center gap-2 pl-4 pr-6 py-1.5 rounded-xl border border-[var(--border-color)] transition-all duration-300 hover:scale-105 hover:brightness-125 hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.2)] active:scale-95 group/tech-item"
@@ -399,21 +397,23 @@ export default function Overview({ t, onGetInTouch }) {
 
                 {/* Second Row - Reverse */}
                 <div className="flex animate-marquee-right whitespace-nowrap gap-3 py-2">
-                   {[
+                    {[
                       { name: 'TypeScript', icon: 'ts', color: 'rgba(49, 120, 198, 0.1)', text: '#3178c6' },
                       { name: 'Figma', icon: 'figma', color: 'rgba(242, 78, 30, 0.1)', text: '#f24e1e' },
                       { name: 'Git', icon: 'git', color: 'rgba(240, 80, 50, 0.1)', text: '#f05032' },
-                      { name: 'VS Code', icon: 'vscode', color: 'rgba(0, 122, 204, 0.1)', text: '#007acc' },
+                      { name: 'GitLab', icon: 'gitlab', color: 'rgba(226, 67, 41, 0.1)', text: '#e24329' },
                       { name: 'Python', icon: 'py', color: 'rgba(55, 115, 165, 0.1)', text: '#3773a5' },
                       { name: 'MySQL', icon: 'mysql', color: 'rgba(68, 121, 161, 0.1)', text: '#4479a1' },
-                   ].concat([
+                      { name: 'Supabase', icon: 'supabase', color: 'rgba(62, 207, 142, 0.1)', text: '#3ecf8e' },
+                    ].concat([
                       { name: 'TypeScript', icon: 'ts', color: 'rgba(49, 120, 198, 0.1)', text: '#3178c6' },
                       { name: 'Figma', icon: 'figma', color: 'rgba(242, 78, 30, 0.1)', text: '#f24e1e' },
                       { name: 'Git', icon: 'git', color: 'rgba(240, 80, 50, 0.1)', text: '#f05032' },
-                      { name: 'VS Code', icon: 'vscode', color: 'rgba(0, 122, 204, 0.1)', text: '#007acc' },
+                      { name: 'GitLab', icon: 'gitlab', color: 'rgba(226, 67, 41, 0.1)', text: '#e24329' },
                       { name: 'Python', icon: 'py', color: 'rgba(55, 115, 165, 0.1)', text: '#3773a5' },
                       { name: 'MySQL', icon: 'mysql', color: 'rgba(68, 121, 161, 0.1)', text: '#4479a1' },
-                   ]).map((tech, i) => (
+                      { name: 'Supabase', icon: 'supabase', color: 'rgba(62, 207, 142, 0.1)', text: '#3ecf8e' },
+                    ]).map((tech, i) => (
                       <div 
                         key={i} 
                         className="flex items-center gap-2 pl-4 pr-6 py-1.5 rounded-xl border border-[var(--border-color)] bg-[var(--bg-primary)]/50 transition-all duration-300 hover:scale-105 hover:brightness-125 hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.2)] active:scale-95 group/tech-item"
