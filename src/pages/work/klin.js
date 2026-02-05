@@ -22,7 +22,7 @@ const IDEMockup = ({ project }) => {
                         <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                         </svg>
-                        workspace/oboun-erp
+                        workspace/dental-clinic
                     </div>
                 </div>
             </div>
@@ -33,20 +33,20 @@ const IDEMockup = ({ project }) => {
                     <div className="text-[10px] font-bold text-white/20 uppercase tracking-widest mb-4">Project Explorer</div>
                     <div className="space-y-2">
                         <div className="flex items-center gap-2 text-white/60 text-xs">
-                            <span className="text-yellow-500/80">📁</span> app/Models
+                            <span className="text-red-500/80">📁</span> app/Http/Controllers
+                        </div>
+                        <div className="flex items-center gap-2 text-white/90 text-xs bg-white/5 -mx-2 px-2 py-1.5 rounded border-l-2 border-cyan-500">
+                            <span className="text-cyan-500/80">📄</span> BookingController.php
                         </div>
                         <div className="flex items-center gap-2 text-white/60 text-xs">
-                            <span className="text-blue-500/80">📁</span> app/Http/Controllers
+                            <span className="text-emerald-500/80">📄</span> PatientController.php
                         </div>
-                        <div className="flex items-center gap-2 text-white/90 text-xs bg-white/5 -mx-2 px-2 py-1.5 rounded border-l-2 border-blue-500">
-                            <span className="text-emerald-500/80">📄</span> SaleController.php
+                        <div className="flex items-center gap-2 text-white/60 text-xs mt-4 uppercase text-[9px] tracking-widest font-bold opacity-30">Resources</div>
+                        <div className="flex items-center gap-2 text-white/60 text-xs">
+                            <span className="text-yellow-500/80">📄</span> booking.blade.php
                         </div>
                         <div className="flex items-center gap-2 text-white/60 text-xs">
-                            <span className="text-emerald-500/80">📄</span> Inventory.php
-                        </div>
-                        <div className="flex items-center gap-2 text-white/60 text-xs mt-4 uppercase text-[9px] tracking-widest font-bold opacity-30">Frontend</div>
-                        <div className="flex items-center gap-2 text-white/60 text-xs">
-                            <span className="text-emerald-500/80">📄</span> Dashboard.vue
+                            <span className="text-blue-500/80">📄</span> booking.js
                         </div>
                     </div>
                 </div>
@@ -55,25 +55,21 @@ const IDEMockup = ({ project }) => {
                 <div className="flex-1 p-6 font-mono text-[11px] md:text-sm leading-relaxed overflow-hidden">
                     <div className="flex gap-4">
                         <div className="text-white/20 text-right select-none space-y-0.5">
-                            {Array.from({ length: 14 }).map((_, i) => (
+                            {Array.from({ length: 11 }).map((_, i) => (
                                 <div key={i}>{i + 1}</div>
                             ))}
                         </div>
                         <div className="text-white/80 space-y-0.5">
-                            <div><span className="text-purple-400">public function</span> <span className="text-yellow-400">store</span>(SaleRequest <span className="text-blue-300">$request</span>)</div>
+                            <div><span className="text-purple-400">public function</span> <span className="text-yellow-400">createAppointment</span>(Request <span className="text-blue-300">$request</span>)</div>
                             <div>{'{'}</div>
-                            <div className="pl-6"><span className="text-blue-300">$sale</span> = <span className="text-emerald-400">Sale</span>::create(<span className="text-blue-300">$request</span>-&gt;validated());</div>
+                            <div className="pl-6"><span className="text-blue-300">$patient</span> = <span className="text-emerald-400">Patient</span>::find(<span className="text-blue-300">$request</span>-&gt;id);</div>
+                            <div className="pl-6"><span className="text-blue-300">$appointment</span> = <span className="text-emerald-400">Appointment</span>::create([</div>
+                            <div className="pl-12"><span className="text-emerald-300">'patient_id'</span> =&gt; <span className="text-blue-300">$patient</span>-&gt;id,</div>
+                            <div className="pl-12"><span className="text-emerald-300">'dentist_id'</span> =&gt; <span className="text-blue-300">$request</span>-&gt;dentist_id,</div>
+                            <div className="pl-12"><span className="text-emerald-300">'scheduled_at'</span> =&gt; <span className="text-blue-300">$request</span>-&gt;date</div>
+                            <div className="pl-6">]);</div>
                             <div />
-                            <div className="pl-6"><span className="text-purple-400">foreach</span> (<span class="text-blue-300">$request</span>-&gt;items <span class="text-purple-400">as</span> <span class="text-blue-300">$item</span>) {'{'}</div>
-                            <div className="pl-12"><span className="text-blue-300">$sale</span>-&gt;items()-&gt;create([</div>
-                            <div className="pl-18"><span className="text-emerald-300">'product_id'</span> =&gt; <span className="text-blue-300">$item</span>['id'],</div>
-                            <div className="pl-18"><span className="text-emerald-300">'quantity'</span>   =&gt; <span className="text-blue-300">$item</span>['qty'],</div>
-                            <div className="pl-18"><span className="text-emerald-300">'price'</span>      =&gt; <span className="text-blue-300">$item</span>['price'],</div>
-                            <div className="pl-12">]);</div>
-                            <div />
-                            <div className="pl-12"><span className="text-blue-300">$item</span>-&gt;decrementInventory();</div>
-                            <div className="pl-6">{'}'}</div>
-                            <div className="pl-6"><span className="text-purple-400">return</span> response()-&gt;json(<span className="text-blue-300">$sale</span>-&gt;load(<span className="text-emerald-300">'items'</span>));</div>
+                            <div className="pl-6"><span className="text-purple-400">return</span> redirect()-&gt;back()-&gt;with(<span className="text-emerald-300">'success'</span>, <span className="text-emerald-300">'Booked!'</span>);</div>
                             <div>{'}'}</div>
                         </div>
                     </div>
@@ -81,14 +77,14 @@ const IDEMockup = ({ project }) => {
             </div>
 
             {/* Footer */}
-            <div className="h-6 bg-blue-600 flex items-center px-3 justify-between text-[10px] text-white shrink-0">
+            <div className="h-6 bg-cyan-600 flex items-center px-3 justify-between text-[10px] text-white shrink-0">
                 <div className="flex items-center gap-3">
                     <div className="flex items-center gap-1"><span>git(</span><span className="font-bold">main</span><span>)</span></div>
                     <div className="flex items-center gap-1 opacity-80"><span>UTF-8</span></div>
                 </div>
                 <div className="flex items-center gap-3 font-mono">
                     <span>Ln 1, Col 1</span>
-                    <span>PHP 8.3</span>
+                    <span>PHP</span>
                 </div>
             </div>
         </div>
@@ -130,11 +126,10 @@ const TypewriterText = ({ text, delay = 50, startDelay = 500, onComplete }) => {
 const ProjectShowcase = ({ project }) => {
     const [currentSlide, setCurrentSlide] = useState(0);
 
-    // Define slides: Index 0 is the IDE Mockup, others are screenshots
     const slides = [
         { type: 'code', component: <IDEMockup project={project} /> },
-        { type: 'image', src: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2426&auto=format&fit=crop', alt: 'Dashboard Overview' },
-        { type: 'image', src: 'https://images.unsplash.com/photo-1551288049-bbdac8a28a1e?q=80&w=2340&auto=format&fit=crop', alt: 'Analytics View' },
+        { type: 'image', src: 'https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=2368&auto=format&fit=crop', alt: 'Dental Clinic' },
+        { type: 'image', src: 'https://images.unsplash.com/photo-1606811841689-23dfddce3e95?q=80&w=2374&auto=format&fit=crop', alt: 'Dental Equipment' },
     ];
 
     useEffect(() => {
@@ -167,7 +162,6 @@ const ProjectShowcase = ({ project }) => {
                 </motion.div>
             </AnimatePresence>
 
-            {/* View All Photos Button */}
             <button className="absolute bottom-4 right-4 z-20 flex items-center gap-2 px-4 py-2 rounded-xl bg-black/40 backdrop-blur-md border border-white/10 text-[10px] font-bold uppercase tracking-widest text-white hover:bg-white hover:text-black transition-all duration-300 shadow-xl group/btn">
                 <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
@@ -176,7 +170,6 @@ const ProjectShowcase = ({ project }) => {
                 <span className="opacity-40 group-hover/btn:opacity-100 ml-1">{slides.length}</span>
             </button>
 
-            {/* Progress Indicators */}
             <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex gap-1.5">
                 {slides.map((_, i) => (
                     <div
@@ -200,7 +193,7 @@ const AccordionItem = ({ title, content, isOpen, onClick }) => {
                     <motion.span
                         animate={{ rotate: isOpen ? 90 : 0 }}
                         transition={{ duration: 0.3 }}
-                        className="text-[var(--text-muted)] group-hover:text-blue-500 transition-colors"
+                        className="text-[var(--text-muted)] group-hover:text-cyan-500 transition-colors"
                     >
                         <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
@@ -228,7 +221,7 @@ const AccordionItem = ({ title, content, isOpen, onClick }) => {
                         <div className="pb-6 pl-11 text-sm md:text-[15px] text-[var(--text-muted)] leading-relaxed space-y-2">
                             {content.split('\n').map((line, i) => (
                                 <div key={i} className="flex gap-2">
-                                    <span className="text-blue-500 opacity-50 select-none">•</span>
+                                    <span className="text-cyan-500 opacity-50 select-none">•</span>
                                     {line}
                                 </div>
                             ))}
@@ -250,7 +243,7 @@ const TechBadge = ({ tech, i }) => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 + (i * 0.1) }}
                 onClick={() => setIsOpen(!isOpen)}
-                className={`flex items-center gap-2.5 px-4 py-2 bg-[var(--bg-secondary)] border ${isOpen ? 'border-blue-500/50 ring-1 ring-blue-500/20' : 'border-[var(--border-color)]'} rounded-xl hover:border-[var(--text-primary)]/30 transition-all group relative z-20`}
+                className={`flex items-center gap-2.5 px-4 py-2 bg-[var(--bg-secondary)] border ${isOpen ? 'border-cyan-500/50 ring-1 ring-cyan-500/20' : 'border-[var(--border-color)]'} rounded-xl hover:border-[var(--text-primary)]/30 transition-all group relative z-20`}
             >
                 <img src={`https://skillicons.dev/icons?i=${tech.icon}`} alt={tech.name} className="w-5 h-5 object-contain" />
                 <span className="text-xs font-medium text-[var(--text-primary)]">{tech.name}</span>
@@ -272,8 +265,8 @@ const TechBadge = ({ tech, i }) => {
                         exit={{ opacity: 0, y: -10, scale: 0.95 }}
                         className="absolute top-full left-0 mt-2 w-64 p-4 bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-2xl shadow-2xl z-30"
                     >
-                        <div className="text-[10px] font-bold text-blue-500 uppercase tracking-widest mb-1.5 flex items-center gap-2">
-                            <div className="w-1 h-1 rounded-full bg-blue-500" />
+                        <div className="text-[10px] font-bold text-cyan-500 uppercase tracking-widest mb-1.5 flex items-center gap-2">
+                            <div className="w-1 h-1 rounded-full bg-cyan-500" />
                             Role in Project
                         </div>
                         <p className="text-xs text-[var(--text-secondary)] leading-relaxed">
@@ -296,7 +289,7 @@ const OnThisPage = ({ lang }) => {
             id: 'journey',
             label: lang === 'en' ? 'Project Journey' : 'เส้นทางโปรเจกต์',
             subItems: [
-                { id: 'graduation', label: lang === 'en' ? 'Capstone Project' : 'โปรเจกต์จบการศึกษา' },
+                { id: 'internship', label: lang === 'en' ? 'Internship Experience' : 'ประสบการณ์ฝึกงาน' },
                 { id: 'challenges', label: lang === 'en' ? 'Technical Challenges' : 'ความท้าทายทางเทคนิค' },
                 { id: 'benefits', label: lang === 'en' ? 'Professional Benefits' : 'ผลประโยชน์ในการทำงาน' }
             ]
@@ -353,7 +346,7 @@ const OnThisPage = ({ lang }) => {
                             {activeId === item.id && (
                                 <motion.div
                                     layoutId="active-line"
-                                    className="absolute -left-[25px] top-0 bottom-0 w-[2px] bg-blue-500 shadow-[0_0_15px_rgba(59,130,246,0.5)]"
+                                    className="absolute -left-[25px] top-0 bottom-0 w-[2px] bg-cyan-500 shadow-[0_0_15px_rgba(6,182,212,0.5)]"
                                 />
                             )}
                             {item.label}
@@ -371,7 +364,7 @@ const OnThisPage = ({ lang }) => {
                                         {activeId === sub.id && (
                                             <motion.div
                                                 layoutId="active-line-sub"
-                                                className="absolute -left-[17px] top-0 bottom-0 w-[1.5px] bg-blue-400/50"
+                                                className="absolute -left-[17px] top-0 bottom-0 w-[1.5px] bg-cyan-400/50"
                                             />
                                         )}
                                         {sub.label}
@@ -389,7 +382,7 @@ const OnThisPage = ({ lang }) => {
 const ProjectNavigation = ({ lang }) => {
     return (
         <div id="navigation" className="grid md:grid-cols-2 gap-4 pt-4 scroll-mt-32">
-            <Link href="/work/my-portfolio" className="group px-6 py-5 rounded-2xl bg-[var(--bg-secondary)] border border-[var(--border-color)] hover:border-[var(--text-primary)]/30 transition-all relative overflow-hidden">
+            <Link href="/work/mailon" className="group px-6 py-5 rounded-2xl bg-[var(--bg-secondary)] border border-[var(--border-color)] hover:border-[var(--text-primary)]/30 transition-all relative overflow-hidden">
                 <div className="relative z-10">
                     <div className="flex items-center gap-2 text-[var(--text-muted)] mb-2 text-[9px] font-bold tracking-[0.2em] uppercase">
                         <svg className="w-3 h-3 transition-transform group-hover:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -397,11 +390,11 @@ const ProjectNavigation = ({ lang }) => {
                         </svg>
                         {lang === 'en' ? 'Previous' : 'ก่อนหน้า'}
                     </div>
-                    <h4 className="text-lg font-heading text-[var(--text-primary)]">My Portfolio</h4>
+                    <h4 className="text-lg font-heading text-[var(--text-primary)]">Mai-lon</h4>
                 </div>
             </Link>
 
-            <Link href="/work/babybib" className="group px-6 py-5 rounded-2xl bg-[var(--bg-secondary)] border border-[var(--border-color)] hover:border-[var(--text-primary)]/30 transition-all text-right relative overflow-hidden">
+            <Link href="/work/singha" className="group px-6 py-5 rounded-2xl bg-[var(--bg-secondary)] border border-[var(--border-color)] hover:border-[var(--text-primary)]/30 transition-all text-right relative overflow-hidden">
                 <div className="relative z-10">
                     <div className="flex items-center justify-end gap-2 text-[var(--text-muted)] mb-2 text-[9px] font-bold tracking-[0.2em] uppercase">
                         {lang === 'en' ? 'Next' : 'ถัดไป'}
@@ -409,97 +402,90 @@ const ProjectNavigation = ({ lang }) => {
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
                         </svg>
                     </div>
-                    <h4 className="text-lg font-heading text-[var(--text-primary)]">Babybib</h4>
+                    <h4 className="text-lg font-heading text-[var(--text-primary)]">Singha.com</h4>
                 </div>
             </Link>
         </div>
     );
 };
 
-export default function ObounERPPage({ theme, setTheme, lang, setLang }) {
+export default function KlinPage({ theme, setTheme, lang, setLang }) {
     const [bookingOpen, setBookingOpen] = useState(false);
     const [openFeature, setOpenFeature] = useState(0);
     const t = translations[lang] || translations.en;
 
     const featureHighlights = [
         {
-            title: lang === 'en' ? 'Smart POS System' : 'ระบบขายอัจฉริยะ (POS)',
+            title: lang === 'en' ? 'Appointment Booking System' : 'ระบบจองนัดหมาย',
             content: lang === 'en'
-                ? 'Barcode scanning, bill holding, multi-channel payment (PromptPay, Cash, Credit), and receipt printing.'
-                : 'สแกนบาร์โค้ด, ระบบพักบิล, ชำระเงินหลายช่องทาง (PromptPay QR, เงินสด, บัตร) และพิมพ์ใบเสร็จอัตโนมัติ'
+                ? 'Engineered a seamless appointment booking system allowing patients to select dentists, services, and available time slots with real-time availability checking.'
+                : 'พัฒนาระบบจองนัดหมายที่ราบรื่นให้ผู้ป่วยเลือกทันตแพทย์ บริการ และช่วงเวลาที่ว่างพร้อมตรวจสอบความพร้อมแบบเรียลไทม์'
         },
         {
-            title: lang === 'en' ? 'Advanced Inventory Management' : 'การจัดการคลังสินค้าขั้นสูง',
+            title: lang === 'en' ? 'Patient Record Management' : 'ระบบจัดการข้อมูลผู้ป่วย',
             content: lang === 'en'
-                ? 'Lot management, expiration tracking, real-time stock alerts, and automated reordering workflows.'
-                : 'จัดการ Lot สินค้า, ติดตามวันหมดอายุ, ระบบแจ้งเตือนสินค้าใกล้หมด/หมดอายุ และระบบปรับสต็อกอัจฉริยะ'
+                ? 'Implemented a secure patient record management system using MySQL with proper data encryption and access control for sensitive medical information.'
+                : 'พัฒนาระบบจัดการข้อมูลผู้ป่วยที่ปลอดภัยโดยใช้ MySQL พร้อมการเข้ารหัสข้อมูลและการควบคุมการเข้าถึงข้อมูลทางการแพทย์ที่เหมาะสม'
         },
         {
-            title: lang === 'en' ? 'Pharmacy Specialized Modules' : 'โมดูลเฉพาะทางด้านเภสัชกรรม',
+            title: lang === 'en' ? 'Responsive Modern UI' : 'UI ที่ทันสมัยและ Responsive',
             content: lang === 'en'
-                ? 'Prescription management, drug interaction checks, allergy alerts, and controlled substance logging.'
-                : 'จัดการใบสั่งยา, ตรวจสอบการตีกันของยา, แจ้งเตือนประวัติแพ้ยา และบันทึกบัญชียาควบคุม'
+                ? 'Designed a responsive and modern user interface using Bootstrap and custom JavaScript for optimal experience across all devices.'
+                : 'ออกแบบอินเตอร์เฟซผู้ใช้ที่ทันสมัยและ Responsive โดยใช้ Bootstrap และ JavaScript เฉพาะทางเพื่อประสบการณ์ที่ดีที่สุดในทุกอุปกรณ์'
         },
         {
-            title: lang === 'en' ? 'Enterprise Security & Compliance' : 'ความปลอดภัยระดับองค์กร',
+            title: lang === 'en' ? 'Clinic Workflow Management' : 'ระบบจัดการ Workflow คลินิก',
             content: lang === 'en'
-                ? 'Two-Factor Authentication (2FA), role-based access control (RBAC), activity logs, and automated backups.'
-                : 'ระบบ 2FA, กำหนดสิทธิ์ผู้ใช้ (RBAC), บันทึกประวัติการใช้งาน (Activity Logs) และระบบสำรองข้อมูลอัตโนมัติ'
+                ? 'Streamlined clinic workflows including service selection, dentist scheduling, and calendar management for efficient daily operations.'
+                : 'ปรับปรุง Workflow คลินิกรวมถึงการเลือกบริการ การจัดตารางทันตแพทย์ และการจัดการปฏิทิน เพื่อการดำเนินงานประจำวันที่มีประสิทธิภาพ'
         },
         {
-            title: lang === 'en' ? 'AI Assistant & LINE Integration' : 'ผู้ช่วย AI และการเชื่อมต่อ LINE',
+            title: lang === 'en' ? 'Automated Notifications' : 'การแจ้งเตือนอัตโนมัติ',
             content: lang === 'en'
-                ? 'Integrated Gemini AI for pharmaceutical support and LINE Messaging API for smart notifications.'
-                : 'เชื่อมต่อ Gemini AI ช่วยตอบคำถามเภสัชกรรม และ LINE Messaging API สำหรับการแจ้งเตือนอัจฉริยะ'
+                ? 'Integrated automated notification systems for booking confirmations, appointment reminders, and schedule changes via email.'
+                : 'เชื่อมต่อระบบแจ้งเตือนอัตโนมัติสำหรับการยืนยันการจอง การเตือนนัดหมาย และการเปลี่ยนแปลงตารางเวลาผ่านอีเมล'
         }
     ];
 
     const project = {
-        slug: 'obounerp',
-        title: t.projects.obounERP.title,
-        period: t.projects.obounERP.period,
-        description: t.projects.obounERP.description,
-        type: t.projects.obounERP.type,
-        githubUrl: "https://github.com/thnakon/ERP_PMS",
+        slug: 'klin',
+        title: t.projects.klin.title,
+        period: t.projects.klin.period,
+        description: t.projects.klin.description,
+        type: t.projects.klin.type,
+        gitlabUrl: "https://gitlab.com/merge_digital_agency/intern/CMU2025_THNAKON_DUANGKUMWATTANASIRI/-/tree/main/dental-test?ref_type=heads",
         tech: [
             {
-                name: 'Laravel 11',
+                name: 'Laravel',
                 icon: 'laravel',
                 role: lang === 'en'
-                    ? 'Core backend framework handling business logic, API routing, and database ORM with robust security.'
-                    : 'เฟรมเวิร์กหลักฝั่ง Backend จัดการ Logic ทางธุรกิจ, API และฐานข้อมูล พร้อมระบบความปลอดภัยที่แข็งแกร่ง'
+                    ? 'PHP framework providing MVC architecture, Eloquent ORM, and robust backend logic for clinic operations.'
+                    : 'PHP framework ที่ให้สถาปัตยกรรม MVC, Eloquent ORM และ Backend logic ที่แข็งแกร่งสำหรับการดำเนินงานคลินิก'
             },
             {
-                name: 'Vue.js 3',
-                icon: 'vue',
+                name: 'Bootstrap',
+                icon: 'bootstrap',
                 role: lang === 'en'
-                    ? 'Modern frontend framework used for high-performance reactive interfaces and state management.'
-                    : 'เฟรมเวิร์กฝั่ง Frontend สำหรับสร้างหน้าจอที่ตอบสนองไว (Reactive) และจัดการสถานะของข้อมูลที่ซับซ้อน'
+                    ? 'CSS framework for rapid, responsive UI development with consistent styling across devices.'
+                    : 'CSS framework สำหรับพัฒนา UI ที่รวดเร็ว Responsive พร้อม Styling ที่สม่ำเสมอในทุกอุปกรณ์'
             },
             {
                 name: 'MySQL',
                 icon: 'mysql',
                 role: lang === 'en'
-                    ? 'Primary relational database for storing comprehensive enterprise data with ACID compliance.'
-                    : 'ฐานข้อมูลหลักสำหรับจัดเก็บข้อมูลองค์กรขนาดใหญ่ รับรองความถูกต้องและเสถียรภาพของข้อมูล'
+                    ? 'Relational database for secure storage of patient records, appointments, and clinic data.'
+                    : 'ฐานข้อมูลเชิงสัมพันธ์สำหรับจัดเก็บข้อมูลผู้ป่วย นัดหมาย และข้อมูลคลินิกอย่างปลอดภัย'
             },
             {
-                name: 'Tailwind',
-                icon: 'tailwind',
+                name: 'JavaScript',
+                icon: 'js',
                 role: lang === 'en'
-                    ? 'Utility-first CSS framework for crafting a custom, responsive, and high-performance design system.'
-                    : 'CSS เฟรมเวิร์กสำหรับจัดแต่งดีไซน์ที่สวยงาม ทันสมัย และรองรับการแสดงผลทุกหน้าจออย่างรวดเร็ว'
-            },
-            {
-                name: 'Docker',
-                icon: 'docker',
-                role: lang === 'en'
-                    ? 'Containerization for consistent development environment and streamlined production deployment.'
-                    : 'การจำลองสภาพแวดล้อมเพื่อความเสถียรในการพัฒนาและการติดตั้งระบบบนเซิร์ฟเวอร์ที่ง่ายและรวดเร็ว'
+                    ? 'Client-side scripting for interactive calendar, date picker, and dynamic form validation.'
+                    : 'Client-side scripting สำหรับปฏิทินแบบ Interactive, Date Picker และการ Validate Form แบบ Dynamic'
             }
         ],
-        features: t.projects.obounERP.features,
-        accent: 'blue'
+        features: t.projects.klin.features,
+        accent: 'cyan'
     };
 
     return (
@@ -524,8 +510,8 @@ export default function ObounERPPage({ theme, setTheme, lang, setLang }) {
                         className="lg:col-span-5"
                     >
                         <div className="flex items-center gap-4 mb-6">
-                            <div className="w-12 h-[2px] rounded-full bg-blue-500" />
-                            <div className="text-[10px] font-mono uppercase tracking-[0.2em] font-bold text-blue-500">
+                            <div className="w-12 h-[2px] rounded-full bg-cyan-500" />
+                            <div className="text-[10px] font-mono uppercase tracking-[0.2em] font-bold text-cyan-500">
                                 {project.type}
                             </div>
                         </div>
@@ -539,40 +525,25 @@ export default function ObounERPPage({ theme, setTheme, lang, setLang }) {
                         </p>
 
                         <div className="flex flex-wrap items-center gap-x-10 gap-y-8 text-[var(--text-muted)] border-t border-[var(--border-color)] pt-8">
-                            {/* Buttons Group */}
                             <div className="flex items-center gap-4">
-                                {/* Small GitHub Button */}
                                 <a
-                                    href={project.githubUrl}
+                                    href={project.gitlabUrl}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="group relative p-[1px] rounded-full transition-all duration-300 hover:scale-105 active:scale-95"
                                 >
-                                    <div className="absolute inset-0 rounded-full bg-gradient-to-r from-purple-500 via-red-500 via-yellow-500 to-emerald-500 opacity-40 group-hover:opacity-100 transition-opacity" />
+                                    <div className="absolute inset-0 rounded-full bg-gradient-to-r from-cyan-500 via-teal-500 to-emerald-500 opacity-40 group-hover:opacity-100 transition-opacity" />
                                     <div className="relative px-4 py-1.5 bg-[#0D1117] rounded-full flex items-center gap-2">
                                         <svg className="w-3.5 h-3.5 text-white" fill="currentColor" viewBox="0 0 24 24">
-                                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                                            <path d="M22.65 14.39L12 22.13 1.35 14.39a.84.84 0 0 1-.3-.94l1.22-3.78 2.44-7.51A.42.42 0 0 1 4.82 2a.43.43 0 0 1 .58 0 .42.42 0 0 1 .11.18l2.44 7.49h8.1l2.44-7.51A.42.42 0 0 1 18.6 2a.43.43 0 0 1 .58 0 .42.42 0 0 1 .11.18l2.44 7.51L23 13.45a.84.84 0 0 1-.35.94z" />
                                         </svg>
-                                        <span className="text-white text-[11px] font-medium tracking-tight whitespace-nowrap">Star on GitHub</span>
+                                        <span className="text-white text-[11px] font-medium tracking-tight whitespace-nowrap">View on GitLab</span>
                                     </div>
-                                </a>
-
-                                {/* Small Check it out Button */}
-                                <a
-                                    href="#"
-                                    className="px-5 py-2 bg-[#E5E7EB] hover:bg-white text-black rounded-full flex items-center gap-2 transition-all duration-300 hover:scale-105 active:scale-95 shadow-lg group"
-                                >
-                                    <span className="font-heading font-medium text-xs whitespace-nowrap">Check it out</span>
-                                    <svg className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M7 17L17 7M17 7H7M17 7V17" />
-                                    </svg>
                                 </a>
                             </div>
 
-                            {/* Separator Line */}
                             <div className="w-[1px] h-8 bg-[var(--border-color)] hidden sm:block opacity-20" />
 
-                            {/* Meta Info Group */}
                             <div className="flex items-center gap-8">
                                 <div>
                                     <div className="text-[10px] uppercase tracking-widest font-bold mb-1">{lang === 'en' ? 'Year' : 'ปีที่พัฒนา'}</div>
@@ -593,8 +564,7 @@ export default function ObounERPPage({ theme, setTheme, lang, setLang }) {
                         className="lg:col-span-7 relative"
                     >
                         <ProjectShowcase project={project} />
-                        {/* Glow Effect */}
-                        <div className="absolute -inset-10 bg-blue-500/5 rounded-full blur-[120px] -z-10" />
+                        <div className="absolute -inset-10 bg-cyan-500/5 rounded-full blur-[120px] -z-10" />
                     </motion.div>
                 </div>
 
@@ -627,25 +597,25 @@ export default function ObounERPPage({ theme, setTheme, lang, setLang }) {
                             </div>
                         </section>
 
-                        {/* Project Journey: Graduation, Challenges, and Benefits */}
+                        {/* Project Journey */}
                         <section id="journey" className="pt-12 space-y-16 scroll-mt-32">
                             <div>
                                 <h2 className="text-2xl font-heading mb-10 text-[var(--text-primary)]">Project Journey</h2>
 
                                 <div className="space-y-12">
-                                    {/* Graduation Project Text */}
-                                    <section id="graduation" className="max-w-4xl scroll-mt-32">
+                                    {/* Internship Experience */}
+                                    <section id="internship" className="max-w-4xl scroll-mt-32">
                                         <h3 className="text-xl font-heading mb-4 text-[var(--text-primary)]">
-                                            {lang === 'en' ? 'Capstone Graduation Project' : 'โปรเจกต์จบการศึกษา'}
+                                            {lang === 'en' ? 'Internship Experience' : 'ประสบการณ์ฝึกงาน'}
                                         </h3>
                                         <p className="text-lg text-[var(--text-secondary)] leading-relaxed">
                                             {lang === 'en'
-                                                ? 'Oboun ERP was developed as my final capstone project, aimed at bridging the gap between traditional medicine management and modern digital workflows.'
-                                                : 'Oboun ERP ถูกพัฒนาขึ้นเป็นโปรเจกต์จบการศึกษา (Capstone Project) โดยมีจุดมุ่งหมายเพื่อเชื่อมช่องว่างระหว่างการจัดการยารูปแบบดั้งเดิมและกระบวนการทำงานดิจิทัลสมัยใหม่'}
+                                                ? 'This project was developed during my internship at Merge Digital Agency. It was an invaluable opportunity to work on a real-world healthcare application, collaborating with experienced developers and understanding professional development workflows.'
+                                                : 'โปรเจกต์นี้ถูกพัฒนาระหว่างการฝึกงานที่ Merge Digital Agency เป็นโอกาสอันล้ำค่าในการทำงานกับแอปพลิเคชันด้านสุขภาพจริง ร่วมงานกับนักพัฒนาที่มีประสบการณ์และเข้าใจ Workflow การพัฒนาแบบมืออาชีพ'}
                                         </p>
                                     </section>
 
-                                    {/* Challenges Text */}
+                                    {/* Challenges */}
                                     <section id="challenges" className="scroll-mt-32 max-w-4xl pt-4">
                                         <h3 className="text-xl font-heading mb-6 text-[var(--text-primary)]">
                                             {lang === 'en' ? 'Technical Challenges' : 'ความท้าทายทางด้านเทคนิค'}
@@ -653,21 +623,21 @@ export default function ObounERPPage({ theme, setTheme, lang, setLang }) {
                                         <div className="space-y-3 text-[var(--text-secondary)] text-lg leading-relaxed">
                                             {lang === 'en' ? (
                                                 <>
-                                                    <p>• Complex database relations between inventory, lots, and sales.</p>
-                                                    <p>• Ensuring high reliability for calculated dosage and expiration alerts.</p>
-                                                    <p>• Implementing multi-layered security including 2FA and encryption.</p>
+                                                    <p>• Handling concurrent appointment bookings to prevent double-scheduling conflicts.</p>
+                                                    <p>• Designing a secure system for storing and accessing sensitive patient medical data.</p>
+                                                    <p>• Building a flexible calendar system that adapts to different dentist schedules.</p>
                                                 </>
                                             ) : (
                                                 <>
-                                                    <p>• ความสัมพันธ์ของฐานข้อมูลที่ซับซ้อนระหว่างคลังสินค้า, Lot สินค้า และการขาย</p>
-                                                    <p>• การสร้างความแม่นยำและน่าเชื่อถือสูงสำหรับระบบคำนวณโดสยาและแจ้งเตือนหมดอายุ</p>
-                                                    <p>• การวางระบบความปลอดภัยหลายชั้น รวมถึง 2FA และการเข้ารหัสข้อมูล</p>
+                                                    <p>• การจัดการการจองนัดหมายพร้อมกันเพื่อป้องกันการจองซ้ำซ้อน</p>
+                                                    <p>• การออกแบบระบบที่ปลอดภัยสำหรับจัดเก็บและเข้าถึงข้อมูลทางการแพทย์ของผู้ป่วยที่ sensitive</p>
+                                                    <p>• การสร้างระบบปฏิทินที่ยืดหยุ่นซึ่งปรับตัวตามตารางทันตแพทย์ที่แตกต่างกัน</p>
                                                 </>
                                             )}
                                         </div>
                                     </section>
 
-                                    {/* Benefits Text */}
+                                    {/* Benefits */}
                                     <section id="benefits" className="scroll-mt-32 max-w-4xl pt-4">
                                         <h3 className="text-xl font-heading mb-6 text-[var(--text-primary)]">
                                             {lang === 'en' ? 'Professional Benefits' : 'ผลประโยชน์ในเชิงวิชาชีพ'}
@@ -675,15 +645,15 @@ export default function ObounERPPage({ theme, setTheme, lang, setLang }) {
                                         <div className="space-y-3 text-[var(--text-secondary)] text-lg leading-relaxed">
                                             {lang === 'en' ? (
                                                 <>
-                                                    <p>• Mastery over full-stack Laravel & Vue.js ecosystem.</p>
-                                                    <p>• Deep understanding of enterprise-level software requirements.</p>
-                                                    <p>• Practical experience in AI API integration and Docker deployment.</p>
+                                                    <p>• Hands-on experience with Laravel in a professional agency environment.</p>
+                                                    <p>• Understanding of healthcare software requirements and data security best practices.</p>
+                                                    <p>• Experience working with Git workflows and collaborative development processes.</p>
                                                 </>
                                             ) : (
                                                 <>
-                                                    <p>• ความเชี่ยวชาญในระบบนิเวศ Full-stack ของ Laravel และ Vue.js</p>
-                                                    <p>• ความเข้าใจอย่างลึกซึ้งเกี่ยวกับความต้องการของซอฟต์แวร์ระดับองค์กร</p>
-                                                    <p>• ประสบการณ์จริงในการเชื่อมต่อ AI API และการ Deployment ด้วย Docker</p>
+                                                    <p>• ประสบการณ์จริงกับ Laravel ในสภาพแวดล้อม Agency มืออาชีพ</p>
+                                                    <p>• ความเข้าใจข้อกำหนดซอฟต์แวร์ด้านสุขภาพและแนวปฏิบัติที่ดีที่สุดด้านความปลอดภัยข้อมูล</p>
+                                                    <p>• ประสบการณ์การทำงานกับ Git Workflow และกระบวนการพัฒนาแบบร่วมมือ</p>
                                                 </>
                                             )}
                                         </div>
@@ -699,27 +669,27 @@ export default function ObounERPPage({ theme, setTheme, lang, setLang }) {
                             </h2>
                             <p className="text-lg text-[var(--text-secondary)] leading-relaxed font-light italic">
                                 {lang === 'en'
-                                    ? "Oboun ERP stands as a testament to the intersection of traditional pharmaceutical practice and modern digital efficiency. By modernizing inventory control and enhancing patient safety through AI, it demonstrates how technology can transform local businesses into data-driven enterprises."
-                                    : "Oboun ERP คือความสำเร็จของการผสานภูมิปัญญาด้านเภสัชกรรมแบบดั้งเดิมเข้ากับประสิทธิภาพของเทคโนโลยีดิจิทัลสมัยใหม่ ด้วยการเปลี่ยนระบบคลังสินค้าให้เป็นดิจิทัลและเสริมความปลอดภัยผ่านระบบ AI โปรเจกต์นี้จึงเป็นต้นแบบที่แสดงให้เห็นว่าเทคโนโลยีสามารถยกระดับธุรกิจท้องถิ่นให้กลายเป็นองค์กรที่ขับเคลื่อนด้วยข้อมูลอย่างยั่งยืน"}
+                                    ? "The Klin Dental Clinic project was a pivotal experience in my development journey. Working on real healthcare software during my internship gave me invaluable insights into building secure, user-friendly applications that genuinely help people manage their health."
+                                    : "โปรเจกต์ Klin Dental Clinic เป็นประสบการณ์สำคัญในเส้นทางการพัฒนาของผม การทำงานกับซอฟต์แวร์ด้านสุขภาพจริงระหว่างฝึกงานให้ข้อมูลเชิงลึกอันล้ำค่าในการสร้างแอปพลิเคชันที่ปลอดภัย ใช้งานง่าย ที่ช่วยให้ผู้คนจัดการสุขภาพของตนได้อย่างแท้จริง"}
                             </p>
                             <div className="mt-6 text-xl font-heading text-[var(--text-primary)]">
                                 {lang === 'en' ? 'Thank You!' : 'ขอบคุณครับ!'}
                             </div>
                         </section>
 
-                        {/* Project Navigation moved inside */}
+                        {/* Project Navigation */}
                         <ProjectNavigation lang={lang} />
                     </div>
 
                     <div className="space-y-8">
                         <OnThisPage lang={lang} />
                     </div>
-                </div >
-            </div >
+                </div>
+            </div>
 
             <Contact t={t} onGetInTouch={() => setBookingOpen(true)} />
             <Footer t={t} />
             <BookingModal isOpen={bookingOpen} onClose={() => setBookingOpen(false)} t={t} />
-        </main >
+        </main>
     );
 }

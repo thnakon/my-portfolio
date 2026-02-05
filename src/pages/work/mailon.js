@@ -22,7 +22,7 @@ const IDEMockup = ({ project }) => {
                         <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                         </svg>
-                        workspace/oboun-erp
+                        workspace/mailon
                     </div>
                 </div>
             </div>
@@ -33,20 +33,20 @@ const IDEMockup = ({ project }) => {
                     <div className="text-[10px] font-bold text-white/20 uppercase tracking-widest mb-4">Project Explorer</div>
                     <div className="space-y-2">
                         <div className="flex items-center gap-2 text-white/60 text-xs">
-                            <span className="text-yellow-500/80">📁</span> app/Models
+                            <span className="text-yellow-500/80">📁</span> app/(dashboard)
                         </div>
                         <div className="flex items-center gap-2 text-white/60 text-xs">
-                            <span className="text-blue-500/80">📁</span> app/Http/Controllers
+                            <span className="text-blue-500/80">📁</span> components/ui
                         </div>
-                        <div className="flex items-center gap-2 text-white/90 text-xs bg-white/5 -mx-2 px-2 py-1.5 rounded border-l-2 border-blue-500">
-                            <span className="text-emerald-500/80">📄</span> SaleController.php
+                        <div className="flex items-center gap-2 text-white/90 text-xs bg-white/5 -mx-2 px-2 py-1.5 rounded border-l-2 border-yellow-500">
+                            <span className="text-emerald-500/80">📄</span> StudentJourney.tsx
                         </div>
                         <div className="flex items-center gap-2 text-white/60 text-xs">
-                            <span className="text-emerald-500/80">📄</span> Inventory.php
+                            <span className="text-emerald-500/80">📄</span> CareerTracker.tsx
                         </div>
-                        <div className="flex items-center gap-2 text-white/60 text-xs mt-4 uppercase text-[9px] tracking-widest font-bold opacity-30">Frontend</div>
+                        <div className="flex items-center gap-2 text-white/60 text-xs mt-4 uppercase text-[9px] tracking-widest font-bold opacity-30">Database</div>
                         <div className="flex items-center gap-2 text-white/60 text-xs">
-                            <span className="text-emerald-500/80">📄</span> Dashboard.vue
+                            <span className="text-yellow-500/80">📄</span> schema.sql
                         </div>
                     </div>
                 </div>
@@ -55,40 +55,37 @@ const IDEMockup = ({ project }) => {
                 <div className="flex-1 p-6 font-mono text-[11px] md:text-sm leading-relaxed overflow-hidden">
                     <div className="flex gap-4">
                         <div className="text-white/20 text-right select-none space-y-0.5">
-                            {Array.from({ length: 14 }).map((_, i) => (
+                            {Array.from({ length: 12 }).map((_, i) => (
                                 <div key={i}>{i + 1}</div>
                             ))}
                         </div>
                         <div className="text-white/80 space-y-0.5">
-                            <div><span className="text-purple-400">public function</span> <span className="text-yellow-400">store</span>(SaleRequest <span className="text-blue-300">$request</span>)</div>
+                            <div><span className="text-purple-400">export default function</span> <span className="text-yellow-400">JourneyTracker</span>()</div>
                             <div>{'{'}</div>
-                            <div className="pl-6"><span className="text-blue-300">$sale</span> = <span className="text-emerald-400">Sale</span>::create(<span className="text-blue-300">$request</span>-&gt;validated());</div>
+                            <div className="pl-6"><span className="text-purple-400">const</span> {'{'} <span className="text-blue-300">user</span> {'}'} = useAuth();</div>
+                            <div className="pl-6"><span className="text-purple-400">const</span> [<span className="text-blue-300">goals</span>, <span className="text-blue-300">setGoals</span>] = useState([]);</div>
                             <div />
-                            <div className="pl-6"><span className="text-purple-400">foreach</span> (<span class="text-blue-300">$request</span>-&gt;items <span class="text-purple-400">as</span> <span class="text-blue-300">$item</span>) {'{'}</div>
-                            <div className="pl-12"><span className="text-blue-300">$sale</span>-&gt;items()-&gt;create([</div>
-                            <div className="pl-18"><span className="text-emerald-300">'product_id'</span> =&gt; <span className="text-blue-300">$item</span>['id'],</div>
-                            <div className="pl-18"><span className="text-emerald-300">'quantity'</span>   =&gt; <span className="text-blue-300">$item</span>['qty'],</div>
-                            <div className="pl-18"><span className="text-emerald-300">'price'</span>      =&gt; <span className="text-blue-300">$item</span>['price'],</div>
-                            <div className="pl-12">]);</div>
-                            <div />
-                            <div className="pl-12"><span className="text-blue-300">$item</span>-&gt;decrementInventory();</div>
-                            <div className="pl-6">{'}'}</div>
-                            <div className="pl-6"><span className="text-purple-400">return</span> response()-&gt;json(<span className="text-blue-300">$sale</span>-&gt;load(<span className="text-emerald-300">'items'</span>));</div>
-                            <div>{'}'}</div>
+                            <div className="pl-6"><span className="text-purple-400">return</span> (</div>
+                            <div className="pl-12">&lt;<span className="text-blue-300">div</span> <span className="text-emerald-300">className</span>=<span className="text-emerald-300">"grid gap-6"</span>&gt;</div>
+                            <div className="pl-18">&lt;<span className="text-yellow-400">StudyHardCard</span> /&gt;</div>
+                            <div className="pl-18">&lt;<span className="text-yellow-400">CareerSuccessGrid</span> /&gt;</div>
+                            <div className="pl-18">&lt;<span className="text-yellow-400">GoodLifeMetrics</span> /&gt;</div>
+                            <div className="pl-12">&lt;/<span className="text-blue-300">div</span>&gt;</div>
+                            <div className="pl-6">);</div>
                         </div>
                     </div>
                 </div>
             </div>
 
             {/* Footer */}
-            <div className="h-6 bg-blue-600 flex items-center px-3 justify-between text-[10px] text-white shrink-0">
+            <div className="h-6 bg-yellow-600 flex items-center px-3 justify-between text-[10px] text-white shrink-0">
                 <div className="flex items-center gap-3">
                     <div className="flex items-center gap-1"><span>git(</span><span className="font-bold">main</span><span>)</span></div>
                     <div className="flex items-center gap-1 opacity-80"><span>UTF-8</span></div>
                 </div>
                 <div className="flex items-center gap-3 font-mono">
                     <span>Ln 1, Col 1</span>
-                    <span>PHP 8.3</span>
+                    <span>TypeScript</span>
                 </div>
             </div>
         </div>
@@ -130,11 +127,10 @@ const TypewriterText = ({ text, delay = 50, startDelay = 500, onComplete }) => {
 const ProjectShowcase = ({ project }) => {
     const [currentSlide, setCurrentSlide] = useState(0);
 
-    // Define slides: Index 0 is the IDE Mockup, others are screenshots
     const slides = [
         { type: 'code', component: <IDEMockup project={project} /> },
-        { type: 'image', src: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2426&auto=format&fit=crop', alt: 'Dashboard Overview' },
-        { type: 'image', src: 'https://images.unsplash.com/photo-1551288049-bbdac8a28a1e?q=80&w=2340&auto=format&fit=crop', alt: 'Analytics View' },
+        { type: 'image', src: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=2370&auto=format&fit=crop', alt: 'Student Learning' },
+        { type: 'image', src: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=2371&auto=format&fit=crop', alt: 'Collaboration' },
     ];
 
     useEffect(() => {
@@ -167,7 +163,6 @@ const ProjectShowcase = ({ project }) => {
                 </motion.div>
             </AnimatePresence>
 
-            {/* View All Photos Button */}
             <button className="absolute bottom-4 right-4 z-20 flex items-center gap-2 px-4 py-2 rounded-xl bg-black/40 backdrop-blur-md border border-white/10 text-[10px] font-bold uppercase tracking-widest text-white hover:bg-white hover:text-black transition-all duration-300 shadow-xl group/btn">
                 <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
@@ -176,7 +171,6 @@ const ProjectShowcase = ({ project }) => {
                 <span className="opacity-40 group-hover/btn:opacity-100 ml-1">{slides.length}</span>
             </button>
 
-            {/* Progress Indicators */}
             <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex gap-1.5">
                 {slides.map((_, i) => (
                     <div
@@ -200,7 +194,7 @@ const AccordionItem = ({ title, content, isOpen, onClick }) => {
                     <motion.span
                         animate={{ rotate: isOpen ? 90 : 0 }}
                         transition={{ duration: 0.3 }}
-                        className="text-[var(--text-muted)] group-hover:text-blue-500 transition-colors"
+                        className="text-[var(--text-muted)] group-hover:text-yellow-500 transition-colors"
                     >
                         <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
@@ -228,7 +222,7 @@ const AccordionItem = ({ title, content, isOpen, onClick }) => {
                         <div className="pb-6 pl-11 text-sm md:text-[15px] text-[var(--text-muted)] leading-relaxed space-y-2">
                             {content.split('\n').map((line, i) => (
                                 <div key={i} className="flex gap-2">
-                                    <span className="text-blue-500 opacity-50 select-none">•</span>
+                                    <span className="text-yellow-500 opacity-50 select-none">•</span>
                                     {line}
                                 </div>
                             ))}
@@ -250,7 +244,7 @@ const TechBadge = ({ tech, i }) => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 + (i * 0.1) }}
                 onClick={() => setIsOpen(!isOpen)}
-                className={`flex items-center gap-2.5 px-4 py-2 bg-[var(--bg-secondary)] border ${isOpen ? 'border-blue-500/50 ring-1 ring-blue-500/20' : 'border-[var(--border-color)]'} rounded-xl hover:border-[var(--text-primary)]/30 transition-all group relative z-20`}
+                className={`flex items-center gap-2.5 px-4 py-2 bg-[var(--bg-secondary)] border ${isOpen ? 'border-yellow-500/50 ring-1 ring-yellow-500/20' : 'border-[var(--border-color)]'} rounded-xl hover:border-[var(--text-primary)]/30 transition-all group relative z-20`}
             >
                 <img src={`https://skillicons.dev/icons?i=${tech.icon}`} alt={tech.name} className="w-5 h-5 object-contain" />
                 <span className="text-xs font-medium text-[var(--text-primary)]">{tech.name}</span>
@@ -272,8 +266,8 @@ const TechBadge = ({ tech, i }) => {
                         exit={{ opacity: 0, y: -10, scale: 0.95 }}
                         className="absolute top-full left-0 mt-2 w-64 p-4 bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-2xl shadow-2xl z-30"
                     >
-                        <div className="text-[10px] font-bold text-blue-500 uppercase tracking-widest mb-1.5 flex items-center gap-2">
-                            <div className="w-1 h-1 rounded-full bg-blue-500" />
+                        <div className="text-[10px] font-bold text-yellow-500 uppercase tracking-widest mb-1.5 flex items-center gap-2">
+                            <div className="w-1 h-1 rounded-full bg-yellow-500" />
                             Role in Project
                         </div>
                         <p className="text-xs text-[var(--text-secondary)] leading-relaxed">
@@ -296,7 +290,7 @@ const OnThisPage = ({ lang }) => {
             id: 'journey',
             label: lang === 'en' ? 'Project Journey' : 'เส้นทางโปรเจกต์',
             subItems: [
-                { id: 'graduation', label: lang === 'en' ? 'Capstone Project' : 'โปรเจกต์จบการศึกษา' },
+                { id: 'mission', label: lang === 'en' ? 'Mission & Purpose' : 'ภารกิจและจุดประสงค์' },
                 { id: 'challenges', label: lang === 'en' ? 'Technical Challenges' : 'ความท้าทายทางเทคนิค' },
                 { id: 'benefits', label: lang === 'en' ? 'Professional Benefits' : 'ผลประโยชน์ในการทำงาน' }
             ]
@@ -353,7 +347,7 @@ const OnThisPage = ({ lang }) => {
                             {activeId === item.id && (
                                 <motion.div
                                     layoutId="active-line"
-                                    className="absolute -left-[25px] top-0 bottom-0 w-[2px] bg-blue-500 shadow-[0_0_15px_rgba(59,130,246,0.5)]"
+                                    className="absolute -left-[25px] top-0 bottom-0 w-[2px] bg-yellow-500 shadow-[0_0_15px_rgba(234,179,8,0.5)]"
                                 />
                             )}
                             {item.label}
@@ -371,7 +365,7 @@ const OnThisPage = ({ lang }) => {
                                         {activeId === sub.id && (
                                             <motion.div
                                                 layoutId="active-line-sub"
-                                                className="absolute -left-[17px] top-0 bottom-0 w-[1.5px] bg-blue-400/50"
+                                                className="absolute -left-[17px] top-0 bottom-0 w-[1.5px] bg-yellow-400/50"
                                             />
                                         )}
                                         {sub.label}
@@ -389,7 +383,7 @@ const OnThisPage = ({ lang }) => {
 const ProjectNavigation = ({ lang }) => {
     return (
         <div id="navigation" className="grid md:grid-cols-2 gap-4 pt-4 scroll-mt-32">
-            <Link href="/work/my-portfolio" className="group px-6 py-5 rounded-2xl bg-[var(--bg-secondary)] border border-[var(--border-color)] hover:border-[var(--text-primary)]/30 transition-all relative overflow-hidden">
+            <Link href="/work/scribehub" className="group px-6 py-5 rounded-2xl bg-[var(--bg-secondary)] border border-[var(--border-color)] hover:border-[var(--text-primary)]/30 transition-all relative overflow-hidden">
                 <div className="relative z-10">
                     <div className="flex items-center gap-2 text-[var(--text-muted)] mb-2 text-[9px] font-bold tracking-[0.2em] uppercase">
                         <svg className="w-3 h-3 transition-transform group-hover:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -397,11 +391,11 @@ const ProjectNavigation = ({ lang }) => {
                         </svg>
                         {lang === 'en' ? 'Previous' : 'ก่อนหน้า'}
                     </div>
-                    <h4 className="text-lg font-heading text-[var(--text-primary)]">My Portfolio</h4>
+                    <h4 className="text-lg font-heading text-[var(--text-primary)]">ScribeHub</h4>
                 </div>
             </Link>
 
-            <Link href="/work/babybib" className="group px-6 py-5 rounded-2xl bg-[var(--bg-secondary)] border border-[var(--border-color)] hover:border-[var(--text-primary)]/30 transition-all text-right relative overflow-hidden">
+            <Link href="/work/klin" className="group px-6 py-5 rounded-2xl bg-[var(--bg-secondary)] border border-[var(--border-color)] hover:border-[var(--text-primary)]/30 transition-all text-right relative overflow-hidden">
                 <div className="relative z-10">
                     <div className="flex items-center justify-end gap-2 text-[var(--text-muted)] mb-2 text-[9px] font-bold tracking-[0.2em] uppercase">
                         {lang === 'en' ? 'Next' : 'ถัดไป'}
@@ -409,97 +403,97 @@ const ProjectNavigation = ({ lang }) => {
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
                         </svg>
                     </div>
-                    <h4 className="text-lg font-heading text-[var(--text-primary)]">Babybib</h4>
+                    <h4 className="text-lg font-heading text-[var(--text-primary)]">Klin Dental Clinic</h4>
                 </div>
             </Link>
         </div>
     );
 };
 
-export default function ObounERPPage({ theme, setTheme, lang, setLang }) {
+export default function MailonPage({ theme, setTheme, lang, setLang }) {
     const [bookingOpen, setBookingOpen] = useState(false);
     const [openFeature, setOpenFeature] = useState(0);
     const t = translations[lang] || translations.en;
 
     const featureHighlights = [
         {
-            title: lang === 'en' ? 'Smart POS System' : 'ระบบขายอัจฉริยะ (POS)',
+            title: lang === 'en' ? 'Next.js 14 App Router' : 'Next.js 14 App Router',
             content: lang === 'en'
-                ? 'Barcode scanning, bill holding, multi-channel payment (PromptPay, Cash, Credit), and receipt printing.'
-                : 'สแกนบาร์โค้ด, ระบบพักบิล, ชำระเงินหลายช่องทาง (PromptPay QR, เงินสด, บัตร) และพิมพ์ใบเสร็จอัตโนมัติ'
+                ? 'Built with Next.js 14 App Router for optimal performance, SEO, and server-side rendering capabilities.'
+                : 'พัฒนาด้วย Next.js 14 App Router สำหรับประสิทธิภาพสูงสุด, SEO และความสามารถในการ Render ฝั่งเซิร์ฟเวอร์'
         },
         {
-            title: lang === 'en' ? 'Advanced Inventory Management' : 'การจัดการคลังสินค้าขั้นสูง',
+            title: lang === 'en' ? 'Supabase Backend' : 'Supabase Backend',
             content: lang === 'en'
-                ? 'Lot management, expiration tracking, real-time stock alerts, and automated reordering workflows.'
-                : 'จัดการ Lot สินค้า, ติดตามวันหมดอายุ, ระบบแจ้งเตือนสินค้าใกล้หมด/หมดอายุ และระบบปรับสต็อกอัจฉริยะ'
+                ? 'Integrated Supabase for secure authentication, real-time database subscriptions, and scalable storage solutions.'
+                : 'เชื่อมต่อ Supabase สำหรับการยืนยันตัวตนที่ปลอดภัย, ฐานข้อมูลเรียลไทม์ และระบบจัดเก็บที่ขยายได้'
         },
         {
-            title: lang === 'en' ? 'Pharmacy Specialized Modules' : 'โมดูลเฉพาะทางด้านเภสัชกรรม',
+            title: lang === 'en' ? 'Premium UI with shadcn/ui' : 'UI พรีเมียมด้วย shadcn/ui',
             content: lang === 'en'
-                ? 'Prescription management, drug interaction checks, allergy alerts, and controlled substance logging.'
-                : 'จัดการใบสั่งยา, ตรวจสอบการตีกันของยา, แจ้งเตือนประวัติแพ้ยา และบันทึกบัญชียาควบคุม'
+                ? 'Designed with shadcn/ui and Tailwind CSS for a premium, accessible, and consistent user experience across all devices.'
+                : 'ออกแบบด้วย shadcn/ui และ Tailwind CSS เพื่อประสบการณ์ผู้ใช้ระดับพรีเมียม เข้าถึงได้ และสม่ำเสมอในทุกอุปกรณ์'
         },
         {
-            title: lang === 'en' ? 'Enterprise Security & Compliance' : 'ความปลอดภัยระดับองค์กร',
+            title: lang === 'en' ? 'Student Support Workflows' : 'เวิร์กโฟลว์สนับสนุนนักศึกษา',
             content: lang === 'en'
-                ? 'Two-Factor Authentication (2FA), role-based access control (RBAC), activity logs, and automated backups.'
-                : 'ระบบ 2FA, กำหนดสิทธิ์ผู้ใช้ (RBAC), บันทึกประวัติการใช้งาน (Activity Logs) และระบบสำรองข้อมูลอัตโนมัติ'
+                ? 'Implemented automated student support workflows including career tracking, milestone management, and goal setting.'
+                : 'พัฒนาเวิร์กโฟลว์สนับสนุนนักศึกษาอัตโนมัติ รวมถึงการติดตามอาชีพ การจัดการ Milestone และการตั้งเป้าหมาย'
         },
         {
-            title: lang === 'en' ? 'AI Assistant & LINE Integration' : 'ผู้ช่วย AI และการเชื่อมต่อ LINE',
+            title: lang === 'en' ? 'Academic Resource Storage' : 'พื้นที่จัดเก็บทรัพยากรการศึกษา',
             content: lang === 'en'
-                ? 'Integrated Gemini AI for pharmaceutical support and LINE Messaging API for smart notifications.'
-                : 'เชื่อมต่อ Gemini AI ช่วยตอบคำถามเภสัชกรรม และ LINE Messaging API สำหรับการแจ้งเตือนอัจฉริยะ'
+                ? 'Features dedicated storage for academic resources, portfolio assets, and student achievement records.'
+                : 'มีพื้นที่จัดเก็บเฉพาะสำหรับทรัพยากรการศึกษา, ไฟล์ Portfolio และบันทึกความสำเร็จของนักศึกษา'
         }
     ];
 
     const project = {
-        slug: 'obounerp',
-        title: t.projects.obounERP.title,
-        period: t.projects.obounERP.period,
-        description: t.projects.obounERP.description,
-        type: t.projects.obounERP.type,
-        githubUrl: "https://github.com/thnakon/ERP_PMS",
+        slug: 'mailon',
+        title: t.projects.mailon.title,
+        period: t.projects.mailon.period,
+        description: t.projects.mailon.description,
+        type: t.projects.mailon.type,
+        githubUrl: "#",
         tech: [
             {
-                name: 'Laravel 11',
-                icon: 'laravel',
+                name: 'Next.js 14',
+                icon: 'nextjs',
                 role: lang === 'en'
-                    ? 'Core backend framework handling business logic, API routing, and database ORM with robust security.'
-                    : 'เฟรมเวิร์กหลักฝั่ง Backend จัดการ Logic ทางธุรกิจ, API และฐานข้อมูล พร้อมระบบความปลอดภัยที่แข็งแกร่ง'
+                    ? 'Full-stack React framework with App Router for server components, API routes, and optimized builds.'
+                    : 'เฟรมเวิร์ก React แบบ Full-stack พร้อม App Router สำหรับ Server Components, API routes และการ Build ที่เหมาะสม'
             },
             {
-                name: 'Vue.js 3',
-                icon: 'vue',
+                name: 'Supabase',
+                icon: 'supabase',
                 role: lang === 'en'
-                    ? 'Modern frontend framework used for high-performance reactive interfaces and state management.'
-                    : 'เฟรมเวิร์กฝั่ง Frontend สำหรับสร้างหน้าจอที่ตอบสนองไว (Reactive) และจัดการสถานะของข้อมูลที่ซับซ้อน'
-            },
-            {
-                name: 'MySQL',
-                icon: 'mysql',
-                role: lang === 'en'
-                    ? 'Primary relational database for storing comprehensive enterprise data with ACID compliance.'
-                    : 'ฐานข้อมูลหลักสำหรับจัดเก็บข้อมูลองค์กรขนาดใหญ่ รับรองความถูกต้องและเสถียรภาพของข้อมูล'
+                    ? 'Backend-as-a-Service providing authentication, PostgreSQL database, and real-time subscriptions.'
+                    : 'Backend-as-a-Service ที่ให้บริการยืนยันตัวตน, ฐานข้อมูล PostgreSQL และการสมัครสมาชิกแบบเรียลไทม์'
             },
             {
                 name: 'Tailwind',
                 icon: 'tailwind',
                 role: lang === 'en'
-                    ? 'Utility-first CSS framework for crafting a custom, responsive, and high-performance design system.'
-                    : 'CSS เฟรมเวิร์กสำหรับจัดแต่งดีไซน์ที่สวยงาม ทันสมัย และรองรับการแสดงผลทุกหน้าจออย่างรวดเร็ว'
+                    ? 'Utility-first CSS framework for rapid, consistent, and responsive UI development.'
+                    : 'CSS เฟรมเวิร์กแบบ Utility-first สำหรับพัฒนา UI ที่รวดเร็ว สม่ำเสมอ และตอบสนองทุกหน้าจอ'
             },
             {
-                name: 'Docker',
-                icon: 'docker',
+                name: 'TypeScript',
+                icon: 'ts',
                 role: lang === 'en'
-                    ? 'Containerization for consistent development environment and streamlined production deployment.'
-                    : 'การจำลองสภาพแวดล้อมเพื่อความเสถียรในการพัฒนาและการติดตั้งระบบบนเซิร์ฟเวอร์ที่ง่ายและรวดเร็ว'
+                    ? 'Strongly-typed JavaScript ensuring code reliability and excellent developer experience.'
+                    : 'JavaScript แบบ Type-safe ที่ช่วยให้โค้ดน่าเชื่อถือและประสบการณ์การพัฒนาที่ยอดเยี่ยม'
+            },
+            {
+                name: 'shadcn/ui',
+                icon: 'react',
+                role: lang === 'en'
+                    ? 'Premium component library built on Radix UI primitives for accessible and beautiful interfaces.'
+                    : 'ไลบรารี Component พรีเมียมที่สร้างบน Radix UI primitives สำหรับอินเตอร์เฟซที่สวยงามและเข้าถึงได้'
             }
         ],
-        features: t.projects.obounERP.features,
-        accent: 'blue'
+        features: t.projects.mailon.features,
+        accent: 'yellow'
     };
 
     return (
@@ -524,8 +518,8 @@ export default function ObounERPPage({ theme, setTheme, lang, setLang }) {
                         className="lg:col-span-5"
                     >
                         <div className="flex items-center gap-4 mb-6">
-                            <div className="w-12 h-[2px] rounded-full bg-blue-500" />
-                            <div className="text-[10px] font-mono uppercase tracking-[0.2em] font-bold text-blue-500">
+                            <div className="w-12 h-[2px] rounded-full bg-yellow-500" />
+                            <div className="text-[10px] font-mono uppercase tracking-[0.2em] font-bold text-yellow-500">
                                 {project.type}
                             </div>
                         </div>
@@ -539,16 +533,14 @@ export default function ObounERPPage({ theme, setTheme, lang, setLang }) {
                         </p>
 
                         <div className="flex flex-wrap items-center gap-x-10 gap-y-8 text-[var(--text-muted)] border-t border-[var(--border-color)] pt-8">
-                            {/* Buttons Group */}
                             <div className="flex items-center gap-4">
-                                {/* Small GitHub Button */}
                                 <a
-                                    href={project.githubUrl}
+                                    href="https://github.com/thnakon/Mai-Lon"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="group relative p-[1px] rounded-full transition-all duration-300 hover:scale-105 active:scale-95"
                                 >
-                                    <div className="absolute inset-0 rounded-full bg-gradient-to-r from-purple-500 via-red-500 via-yellow-500 to-emerald-500 opacity-40 group-hover:opacity-100 transition-opacity" />
+                                    <div className="absolute inset-0 rounded-full bg-gradient-to-r from-yellow-500 via-amber-500 to-orange-500 opacity-40 group-hover:opacity-100 transition-opacity" />
                                     <div className="relative px-4 py-1.5 bg-[#0D1117] rounded-full flex items-center gap-2">
                                         <svg className="w-3.5 h-3.5 text-white" fill="currentColor" viewBox="0 0 24 24">
                                             <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
@@ -557,22 +549,19 @@ export default function ObounERPPage({ theme, setTheme, lang, setLang }) {
                                     </div>
                                 </a>
 
-                                {/* Small Check it out Button */}
                                 <a
                                     href="#"
                                     className="px-5 py-2 bg-[#E5E7EB] hover:bg-white text-black rounded-full flex items-center gap-2 transition-all duration-300 hover:scale-105 active:scale-95 shadow-lg group"
                                 >
-                                    <span className="font-heading font-medium text-xs whitespace-nowrap">Check it out</span>
+                                    <span className="font-heading font-medium text-xs whitespace-nowrap">Coming Soon</span>
                                     <svg className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M7 17L17 7M17 7H7M17 7V17" />
                                     </svg>
                                 </a>
                             </div>
 
-                            {/* Separator Line */}
                             <div className="w-[1px] h-8 bg-[var(--border-color)] hidden sm:block opacity-20" />
 
-                            {/* Meta Info Group */}
                             <div className="flex items-center gap-8">
                                 <div>
                                     <div className="text-[10px] uppercase tracking-widest font-bold mb-1">{lang === 'en' ? 'Year' : 'ปีที่พัฒนา'}</div>
@@ -593,8 +582,7 @@ export default function ObounERPPage({ theme, setTheme, lang, setLang }) {
                         className="lg:col-span-7 relative"
                     >
                         <ProjectShowcase project={project} />
-                        {/* Glow Effect */}
-                        <div className="absolute -inset-10 bg-blue-500/5 rounded-full blur-[120px] -z-10" />
+                        <div className="absolute -inset-10 bg-yellow-500/5 rounded-full blur-[120px] -z-10" />
                     </motion.div>
                 </div>
 
@@ -627,25 +615,25 @@ export default function ObounERPPage({ theme, setTheme, lang, setLang }) {
                             </div>
                         </section>
 
-                        {/* Project Journey: Graduation, Challenges, and Benefits */}
+                        {/* Project Journey */}
                         <section id="journey" className="pt-12 space-y-16 scroll-mt-32">
                             <div>
                                 <h2 className="text-2xl font-heading mb-10 text-[var(--text-primary)]">Project Journey</h2>
 
                                 <div className="space-y-12">
-                                    {/* Graduation Project Text */}
-                                    <section id="graduation" className="max-w-4xl scroll-mt-32">
+                                    {/* Mission & Purpose */}
+                                    <section id="mission" className="max-w-4xl scroll-mt-32">
                                         <h3 className="text-xl font-heading mb-4 text-[var(--text-primary)]">
-                                            {lang === 'en' ? 'Capstone Graduation Project' : 'โปรเจกต์จบการศึกษา'}
+                                            {lang === 'en' ? 'Mission & Purpose' : 'ภารกิจและจุดประสงค์'}
                                         </h3>
                                         <p className="text-lg text-[var(--text-secondary)] leading-relaxed">
                                             {lang === 'en'
-                                                ? 'Oboun ERP was developed as my final capstone project, aimed at bridging the gap between traditional medicine management and modern digital workflows.'
-                                                : 'Oboun ERP ถูกพัฒนาขึ้นเป็นโปรเจกต์จบการศึกษา (Capstone Project) โดยมีจุดมุ่งหมายเพื่อเชื่อมช่องว่างระหว่างการจัดการยารูปแบบดั้งเดิมและกระบวนการทำงานดิจิทัลสมัยใหม่'}
+                                                ? 'Mai-lon was created with a singular vision: to be the ultimate companion for students on their journey from academic excellence to career success. The platform embodies the philosophy of "study hard, succeed in careers, and live a good life."'
+                                                : 'Mai-lon ถูกสร้างขึ้นด้วยวิสัยทัศน์เดียว: เพื่อเป็นเพื่อนคู่ใจที่ดีที่สุดสำหรับนักศึกษาในเส้นทางจากความเป็นเลิศทางวิชาการสู่ความสำเร็จในอาชีพ แพลตฟอร์มนี้แสดงปรัชญา "เรียนหนัก สำเร็จในอาชีพ และใช้ชีวิตที่ดี"'}
                                         </p>
                                     </section>
 
-                                    {/* Challenges Text */}
+                                    {/* Challenges */}
                                     <section id="challenges" className="scroll-mt-32 max-w-4xl pt-4">
                                         <h3 className="text-xl font-heading mb-6 text-[var(--text-primary)]">
                                             {lang === 'en' ? 'Technical Challenges' : 'ความท้าทายทางด้านเทคนิค'}
@@ -653,21 +641,21 @@ export default function ObounERPPage({ theme, setTheme, lang, setLang }) {
                                         <div className="space-y-3 text-[var(--text-secondary)] text-lg leading-relaxed">
                                             {lang === 'en' ? (
                                                 <>
-                                                    <p>• Complex database relations between inventory, lots, and sales.</p>
-                                                    <p>• Ensuring high reliability for calculated dosage and expiration alerts.</p>
-                                                    <p>• Implementing multi-layered security including 2FA and encryption.</p>
+                                                    <p>• Designing a flexible milestone tracking system that adapts to diverse student goals.</p>
+                                                    <p>• Building a scalable architecture to handle high-volume student engagement.</p>
+                                                    <p>• Creating an intuitive UI that balances functionality with simplicity.</p>
                                                 </>
                                             ) : (
                                                 <>
-                                                    <p>• ความสัมพันธ์ของฐานข้อมูลที่ซับซ้อนระหว่างคลังสินค้า, Lot สินค้า และการขาย</p>
-                                                    <p>• การสร้างความแม่นยำและน่าเชื่อถือสูงสำหรับระบบคำนวณโดสยาและแจ้งเตือนหมดอายุ</p>
-                                                    <p>• การวางระบบความปลอดภัยหลายชั้น รวมถึง 2FA และการเข้ารหัสข้อมูล</p>
+                                                    <p>• การออกแบบระบบติดตาม Milestone ที่ยืดหยุ่นและปรับตัวตามเป้าหมายที่หลากหลายของนักศึกษา</p>
+                                                    <p>• การสร้างสถาปัตยกรรมที่ขยายได้เพื่อรองรับการมีส่วนร่วมของนักศึกษาจำนวนมาก</p>
+                                                    <p>• การสร้าง UI ที่ใช้งานง่ายโดยสมดุลระหว่างฟังก์ชันการทำงานกับความเรียบง่าย</p>
                                                 </>
                                             )}
                                         </div>
                                     </section>
 
-                                    {/* Benefits Text */}
+                                    {/* Benefits */}
                                     <section id="benefits" className="scroll-mt-32 max-w-4xl pt-4">
                                         <h3 className="text-xl font-heading mb-6 text-[var(--text-primary)]">
                                             {lang === 'en' ? 'Professional Benefits' : 'ผลประโยชน์ในเชิงวิชาชีพ'}
@@ -675,15 +663,15 @@ export default function ObounERPPage({ theme, setTheme, lang, setLang }) {
                                         <div className="space-y-3 text-[var(--text-secondary)] text-lg leading-relaxed">
                                             {lang === 'en' ? (
                                                 <>
-                                                    <p>• Mastery over full-stack Laravel & Vue.js ecosystem.</p>
-                                                    <p>• Deep understanding of enterprise-level software requirements.</p>
-                                                    <p>• Practical experience in AI API integration and Docker deployment.</p>
+                                                    <p>• Mastery of Next.js 14 App Router and modern React patterns.</p>
+                                                    <p>• Experience building production-ready applications with Supabase.</p>
+                                                    <p>• Skills in creating accessible, premium UI with shadcn/ui components.</p>
                                                 </>
                                             ) : (
                                                 <>
-                                                    <p>• ความเชี่ยวชาญในระบบนิเวศ Full-stack ของ Laravel และ Vue.js</p>
-                                                    <p>• ความเข้าใจอย่างลึกซึ้งเกี่ยวกับความต้องการของซอฟต์แวร์ระดับองค์กร</p>
-                                                    <p>• ประสบการณ์จริงในการเชื่อมต่อ AI API และการ Deployment ด้วย Docker</p>
+                                                    <p>• ความเชี่ยวชาญใน Next.js 14 App Router และ React patterns สมัยใหม่</p>
+                                                    <p>• ประสบการณ์ในการสร้างแอปพลิเคชันพร้อมใช้งานจริงด้วย Supabase</p>
+                                                    <p>• ทักษะในการสร้าง UI พรีเมียมที่เข้าถึงได้ด้วย shadcn/ui components</p>
                                                 </>
                                             )}
                                         </div>
@@ -699,27 +687,27 @@ export default function ObounERPPage({ theme, setTheme, lang, setLang }) {
                             </h2>
                             <p className="text-lg text-[var(--text-secondary)] leading-relaxed font-light italic">
                                 {lang === 'en'
-                                    ? "Oboun ERP stands as a testament to the intersection of traditional pharmaceutical practice and modern digital efficiency. By modernizing inventory control and enhancing patient safety through AI, it demonstrates how technology can transform local businesses into data-driven enterprises."
-                                    : "Oboun ERP คือความสำเร็จของการผสานภูมิปัญญาด้านเภสัชกรรมแบบดั้งเดิมเข้ากับประสิทธิภาพของเทคโนโลยีดิจิทัลสมัยใหม่ ด้วยการเปลี่ยนระบบคลังสินค้าให้เป็นดิจิทัลและเสริมความปลอดภัยผ่านระบบ AI โปรเจกต์นี้จึงเป็นต้นแบบที่แสดงให้เห็นว่าเทคโนโลยีสามารถยกระดับธุรกิจท้องถิ่นให้กลายเป็นองค์กรที่ขับเคลื่อนด้วยข้อมูลอย่างยั่งยืน"}
+                                    ? "Mai-lon represents a commitment to student success—a platform that goes beyond traditional learning management to truly support the complete student journey. By combining modern technology with thoughtful design, it aims to be the trusted companion for the next generation of achievers."
+                                    : "Mai-lon แสดงถึงความมุ่งมั่นต่อความสำเร็จของนักศึกษา—แพลตฟอร์มที่ก้าวข้ามระบบจัดการการเรียนรู้แบบดั้งเดิมเพื่อสนับสนุนเส้นทางนักศึกษาอย่างแท้จริง ด้วยการผสมผสานเทคโนโลยีสมัยใหม่เข้ากับการออกแบบอย่างรอบคอบ มุ่งหวังที่จะเป็นเพื่อนคู่ใจที่ไว้วางใจได้สำหรับคนรุ่นใหม่ที่ประสบความสำเร็จ"}
                             </p>
                             <div className="mt-6 text-xl font-heading text-[var(--text-primary)]">
                                 {lang === 'en' ? 'Thank You!' : 'ขอบคุณครับ!'}
                             </div>
                         </section>
 
-                        {/* Project Navigation moved inside */}
+                        {/* Project Navigation */}
                         <ProjectNavigation lang={lang} />
                     </div>
 
                     <div className="space-y-8">
                         <OnThisPage lang={lang} />
                     </div>
-                </div >
-            </div >
+                </div>
+            </div>
 
             <Contact t={t} onGetInTouch={() => setBookingOpen(true)} />
             <Footer t={t} />
             <BookingModal isOpen={bookingOpen} onClose={() => setBookingOpen(false)} t={t} />
-        </main >
+        </main>
     );
 }
