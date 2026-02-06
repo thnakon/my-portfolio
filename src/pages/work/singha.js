@@ -32,7 +32,7 @@ const IDEMockup = () => (
             <div className="flex-1 p-6 font-mono text-[11px] md:text-sm leading-relaxed">
                 <div className="flex gap-4">
                     <div className="text-white/20 text-right select-none space-y-0.5">
-                        {[1,2,3,4,5,6,7,8,9,10,11].map(n => <div key={n}>{n}</div>)}
+                        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map(n => <div key={n}>{n}</div>)}
                     </div>
                     <div className="text-white/80 space-y-0.5">
                         <div><span className="text-purple-400">namespace</span> App\Services;</div>
@@ -71,23 +71,93 @@ const TypewriterText = ({ text, delay = 50, startDelay = 500 }) => {
     return <span>{displayedText}{displayedText.length < text.length && <span className="inline-block w-0.5 h-5 ml-1 bg-[var(--text-primary)] animate-pulse align-middle" />}</span>;
 };
 
-const ProjectShowcase = () => {
-    const [currentSlide, setCurrentSlide] = useState(0);
-    const slides = [
-        { type: 'code', component: <IDEMockup /> },
-        { type: 'image', src: 'https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?q=80&w=2370', alt: 'Beer Brand' },
-    ];
-    useEffect(() => { const t = setInterval(() => setCurrentSlide(p => (p + 1) % slides.length), 5000); return () => clearInterval(t); }, [slides.length]);
+// SinghaShowcase component for Singha project with hover effect
+const SinghaShowcase = () => {
+    const [isHovered, setIsHovered] = useState(false);
+
     return (
-        <div className="relative w-full aspect-video rounded-2xl overflow-hidden shadow-2xl border border-white/5 bg-[#0D1117]">
-            <AnimatePresence mode="wait">
-                <motion.div key={currentSlide} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="w-full h-full">
-                    {slides[currentSlide].type === 'code' ? slides[currentSlide].component : <img src={slides[currentSlide].src} alt={slides[currentSlide].alt} className="w-full h-full object-cover" />}
+        <div
+            className="relative w-full aspect-[5/3] rounded-2xl overflow-hidden shadow-2xl border border-white/10 bg-[#0D0D0D] cursor-pointer group"
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+        >
+            {/* Glow effect on hover - amber for Singha brand */}
+            <div className={`absolute -inset-1 bg-gradient-to-r from-amber-500/20 via-yellow-500/20 to-amber-500/20 rounded-2xl blur-xl transition-opacity duration-700 ${isHovered ? 'opacity-100' : 'opacity-0'}`} />
+
+            {/* Main container with perspective for 3D effect */}
+            <div className="relative w-full h-full" style={{ perspective: '1000px' }}>
+
+                {/* First Image - Singha Products (default state) */}
+                <motion.div
+                    className="absolute inset-0 w-full h-full"
+                    initial={false}
+                    animate={{
+                        opacity: isHovered ? 0 : 1,
+                        scale: isHovered ? 1.05 : 1,
+                        rotateY: isHovered ? -15 : 0,
+                    }}
+                    transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
+                >
+                    <img
+                        src="/images/projects/singha-products.png"
+                        alt="Singha Products Page"
+                        className="w-full h-full object-cover object-top"
+                    />
+                    {/* Subtle overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
                 </motion.div>
-            </AnimatePresence>
-            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex gap-1.5">
-                {slides.map((_, i) => <div key={i} className={`h-1 rounded-full transition-all ${currentSlide === i ? 'w-6 bg-white' : 'w-1.5 bg-white/30'}`} />)}
+
+                {/* Second Image - Singha Ingredients (hover state) */}
+                <motion.div
+                    className="absolute inset-0 w-full h-full"
+                    initial={false}
+                    animate={{
+                        opacity: isHovered ? 1 : 0,
+                        scale: isHovered ? 1 : 0.95,
+                        rotateY: isHovered ? 0 : 15,
+                    }}
+                    transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
+                >
+                    <img
+                        src="/images/projects/singha-ingredients.png"
+                        alt="Singha Ingredients Page"
+                        className="w-full h-full object-cover object-top"
+                    />
+                    {/* Subtle overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
+                </motion.div>
+
+                {/* Hover indicator */}
+                <div className={`absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2 px-4 py-2 bg-black/60 backdrop-blur-md rounded-full border border-white/10 transition-all duration-500 ${isHovered ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+                    <div className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
+                    <span className="text-[11px] text-white/90 font-medium">Ingredients Page</span>
+                </div>
+
+                {/* Default state indicator */}
+                <div className={`absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2 px-4 py-2 bg-black/60 backdrop-blur-md rounded-full border border-white/10 transition-all duration-500 ${isHovered ? 'opacity-0 -translate-y-4' : 'opacity-100 translate-y-0'}`}>
+                    <span className="text-[11px] text-white/70">Hover to explore</span>
+                    <svg className="w-3 h-3 text-white/50 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
+                    </svg>
+                </div>
             </div>
+
+            {/* Corner accent - Singha gold/amber theme */}
+            <div className={`absolute top-3 right-3 w-8 h-8 rounded-full bg-amber-500/10 backdrop-blur-sm flex items-center justify-center transition-all duration-500 ${isHovered ? 'scale-110 bg-amber-500/20' : 'scale-100'}`}>
+                <motion.svg
+                    className="w-4 h-4 text-amber-400/70"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    animate={{ rotate: isHovered ? 180 : 0 }}
+                    transition={{ duration: 0.5 }}
+                >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                </motion.svg>
+            </div>
+
+            {/* Amber glow background - matches the project accent */}
+            <div className="absolute -inset-4 bg-amber-500/5 rounded-3xl blur-2xl -z-10" />
         </div>
     );
 };
@@ -217,7 +287,7 @@ export default function SinghaPage({ theme, setTheme, lang, setLang }) {
                         </div>
                     </motion.div>
                     <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.2 }} className="lg:col-span-7 relative">
-                        <ProjectShowcase />
+                        <SinghaShowcase />
                         <div className="absolute -inset-10 bg-amber-500/5 rounded-full blur-[120px] -z-10" />
                     </motion.div>
                 </div>
