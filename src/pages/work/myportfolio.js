@@ -33,7 +33,7 @@ const IDEMockup = () => (
             <div className="flex-1 p-6 font-mono text-[11px] md:text-sm leading-relaxed">
                 <div className="flex gap-4">
                     <div className="text-white/20 text-right select-none space-y-0.5">
-                        {[1,2,3,4,5,6].map(n => <div key={n}>{n}</div>)}
+                        {[1, 2, 3, 4, 5, 6].map(n => <div key={n}>{n}</div>)}
                     </div>
                     <div className="text-white/80 space-y-0.5">
                         <div><span className="text-purple-400">const</span> <span className="text-yellow-400">getGreeting</span> = () =&gt; {'{'}</div>
@@ -67,22 +67,90 @@ const TypewriterText = ({ text, delay = 50, startDelay = 500 }) => {
     return <span>{displayedText}{displayedText.length < text.length && <span className="inline-block w-0.5 h-5 ml-1 bg-[var(--text-primary)] animate-pulse align-middle" />}</span>;
 };
 
-const ProjectShowcase = () => {
-    const [currentSlide, setCurrentSlide] = useState(0);
-    const slides = [
-        { type: 'code', component: <IDEMockup /> },
-        { type: 'image', src: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=2370', alt: 'Code' },
-    ];
-    useEffect(() => { const t = setInterval(() => setCurrentSlide(p => (p + 1) % slides.length), 5000); return () => clearInterval(t); }, [slides.length]);
+const ImageShowcase = () => {
+    const [isHovered, setIsHovered] = useState(false);
+
     return (
-        <div className="relative w-full aspect-video rounded-2xl overflow-hidden shadow-2xl border border-white/5 bg-[#0D1117]">
-            <AnimatePresence mode="wait">
-                <motion.div key={currentSlide} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="w-full h-full">
-                    {slides[currentSlide].type === 'code' ? slides[currentSlide].component : <img src={slides[currentSlide].src} alt={slides[currentSlide].alt} className="w-full h-full object-cover" />}
+        <div
+            className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl border border-white/10 bg-[#0D0D0D] cursor-pointer group"
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+        >
+            {/* Glow effect on hover */}
+            <div className={`absolute -inset-1 bg-gradient-to-r from-purple-500/20 via-pink-500/20 to-blue-500/20 rounded-2xl blur-xl transition-opacity duration-700 ${isHovered ? 'opacity-100' : 'opacity-0'}`} />
+
+            {/* Main container with perspective for 3D effect */}
+            <div className="relative w-full h-full" style={{ perspective: '1000px' }}>
+
+                {/* First Image - Homepage (default state) */}
+                <motion.div
+                    className="absolute inset-0 w-full h-full"
+                    initial={false}
+                    animate={{
+                        opacity: isHovered ? 0 : 1,
+                        scale: isHovered ? 1.05 : 1,
+                        rotateY: isHovered ? -15 : 0,
+                        z: isHovered ? -50 : 0
+                    }}
+                    transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
+                >
+                    <img
+                        src="/images/projects/portfolio-home.png"
+                        alt="Portfolio Homepage"
+                        className="w-full h-full object-cover object-top"
+                    />
+                    {/* Subtle overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
                 </motion.div>
-            </AnimatePresence>
-            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex gap-1.5">
-                {slides.map((_, i) => <div key={i} className={`h-1 rounded-full transition-all ${currentSlide === i ? 'w-6 bg-white' : 'w-1.5 bg-white/30'}`} />)}
+
+                {/* Second Image - About Page (hover state) */}
+                <motion.div
+                    className="absolute inset-0 w-full h-full"
+                    initial={false}
+                    animate={{
+                        opacity: isHovered ? 1 : 0,
+                        scale: isHovered ? 1 : 0.95,
+                        rotateY: isHovered ? 0 : 15,
+                        z: isHovered ? 0 : -50
+                    }}
+                    transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
+                >
+                    <img
+                        src="/images/projects/portfolio-about.png"
+                        alt="Portfolio About Page"
+                        className="w-full h-full object-cover object-top"
+                    />
+                    {/* Subtle overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
+                </motion.div>
+
+                {/* Hover indicator */}
+                <div className={`absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2 px-4 py-2 bg-black/60 backdrop-blur-md rounded-full border border-white/10 transition-all duration-500 ${isHovered ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+                    <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
+                    <span className="text-[11px] text-white/90 font-medium">About Page</span>
+                </div>
+
+                {/* Default state indicator */}
+                <div className={`absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2 px-4 py-2 bg-black/60 backdrop-blur-md rounded-full border border-white/10 transition-all duration-500 ${isHovered ? 'opacity-0 -translate-y-4' : 'opacity-100 translate-y-0'}`}>
+                    <span className="text-[11px] text-white/70">Hover to explore</span>
+                    <svg className="w-3 h-3 text-white/50 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
+                    </svg>
+                </div>
+            </div>
+
+            {/* Corner accent */}
+            <div className={`absolute top-3 right-3 w-8 h-8 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center transition-all duration-500 ${isHovered ? 'scale-110 bg-white/20' : 'scale-100'}`}>
+                <motion.svg
+                    className="w-4 h-4 text-white/70"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    animate={{ rotate: isHovered ? 180 : 0 }}
+                    transition={{ duration: 0.5 }}
+                >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                </motion.svg>
             </div>
         </div>
     );
@@ -203,7 +271,7 @@ export default function MyPortfolioPage({ theme, setTheme, lang, setLang }) {
                             <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="group relative p-[1px] rounded-full hover:scale-105 transition-transform">
                                 <div className="absolute inset-0 rounded-full bg-gradient-to-r from-gray-400 to-white opacity-40 group-hover:opacity-100 transition-opacity" />
                                 <div className="relative px-4 py-1.5 bg-[#0D1117] rounded-full flex items-center gap-2">
-                                    <svg className="w-3.5 h-3.5 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                                    <svg className="w-3.5 h-3.5 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" /></svg>
                                     <span className="text-white text-[11px] font-medium">View on GitHub</span>
                                 </div>
                             </a>
@@ -214,7 +282,7 @@ export default function MyPortfolioPage({ theme, setTheme, lang, setLang }) {
                         </div>
                     </motion.div>
                     <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.2 }} className="lg:col-span-7 relative">
-                        <ProjectShowcase />
+                        <ImageShowcase />
                         <div className="absolute -inset-10 bg-white/5 rounded-full blur-[120px] -z-10" />
                     </motion.div>
                 </div>
