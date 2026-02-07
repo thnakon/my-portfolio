@@ -125,61 +125,93 @@ const TypewriterText = ({ text, delay = 50, startDelay = 500, onComplete }) => {
     );
 };
 
-const ProjectShowcase = ({ project }) => {
-    const [currentSlide, setCurrentSlide] = useState(0);
-
-    const slides = [
-        { type: 'code', component: <IDEMockup project={project} /> },
-        { type: 'image', src: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=2370&auto=format&fit=crop', alt: 'Student Learning' },
-        { type: 'image', src: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=2371&auto=format&fit=crop', alt: 'Collaboration' },
-    ];
-
-    useEffect(() => {
-        const timer = setInterval(() => {
-            setCurrentSlide((prev) => (prev + 1) % slides.length);
-        }, 5000);
-        return () => clearInterval(timer);
-    }, [slides.length]);
+// MailonShowcase component for Mai-lon project with hover effect
+const MailonShowcase = ({ project }) => {
+    const [isHovered, setIsHovered] = useState(false);
 
     return (
-        <div className="relative group w-full aspect-video rounded-2xl overflow-hidden shadow-2xl border border-white/5 bg-[#0D1117]">
-            <AnimatePresence mode="wait">
+        <div
+            className="relative w-full aspect-[5/3] rounded-2xl overflow-hidden shadow-2xl border border-white/10 bg-[#0D0D0D] cursor-pointer group"
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+        >
+            {/* Glow effect on hover - orange for Mai-lon brand */}
+            <div className={`absolute -inset-1 bg-gradient-to-r from-orange-500/20 via-amber-500/20 to-orange-500/20 rounded-2xl blur-xl transition-opacity duration-700 ${isHovered ? 'opacity-100' : 'opacity-0'}`} />
+
+            {/* Main container with perspective for 3D effect */}
+            <div className="relative w-full h-full" style={{ perspective: '1000px' }}>
+
+                {/* First Image - Mai-lon Homepage (default state) */}
                 <motion.div
-                    key={currentSlide}
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: -20 }}
-                    transition={{ duration: 0.7, ease: "easeInOut" }}
-                    className="w-full h-full"
+                    className="absolute inset-0 w-full h-full"
+                    initial={false}
+                    animate={{
+                        opacity: isHovered ? 0 : 1,
+                        scale: isHovered ? 1.05 : 1,
+                        rotateY: isHovered ? -15 : 0,
+                    }}
+                    transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
                 >
-                    {slides[currentSlide].type === 'code' ? (
-                        slides[currentSlide].component
-                    ) : (
-                        <img
-                            src={slides[currentSlide].src}
-                            alt={slides[currentSlide].alt}
-                            className="w-full h-full object-cover"
-                        />
-                    )}
-                </motion.div>
-            </AnimatePresence>
-
-            <button className="absolute bottom-4 right-4 z-20 flex items-center gap-2 px-4 py-2 rounded-xl bg-black/40 backdrop-blur-md border border-white/10 text-[10px] font-bold uppercase tracking-widest text-white hover:bg-white hover:text-black transition-all duration-300 shadow-xl group/btn">
-                <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                </svg>
-                <span>View all photos</span>
-                <span className="opacity-40 group-hover/btn:opacity-100 ml-1">{slides.length}</span>
-            </button>
-
-            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex gap-1.5">
-                {slides.map((_, i) => (
-                    <div
-                        key={i}
-                        className={`h-1 rounded-full transition-all duration-500 ${currentSlide === i ? 'w-6 bg-white' : 'w-1.5 bg-white/30'}`}
+                    <img
+                        src="/images/projects/mailon-home.png"
+                        alt="Mai-lon Homepage"
+                        className="w-full h-full object-cover object-top"
                     />
-                ))}
+                    {/* Subtle overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
+                </motion.div>
+
+                {/* Second Image - Mai-lon Dashboard (hover state) */}
+                <motion.div
+                    className="absolute inset-0 w-full h-full"
+                    initial={false}
+                    animate={{
+                        opacity: isHovered ? 1 : 0,
+                        scale: isHovered ? 1 : 0.95,
+                        rotateY: isHovered ? 0 : 15,
+                    }}
+                    transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
+                >
+                    <img
+                        src="/images/projects/mailon-dashboard.png"
+                        alt="Mai-lon Dashboard"
+                        className="w-full h-full object-cover object-top"
+                    />
+                    {/* Subtle overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
+                </motion.div>
+
+                {/* Hover indicator */}
+                <div className={`absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2 px-4 py-2 bg-black/60 backdrop-blur-md rounded-full border border-white/10 transition-all duration-500 ${isHovered ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+                    <div className="w-2 h-2 rounded-full bg-orange-400 animate-pulse" />
+                    <span className="text-[11px] text-white/90 font-medium">Dashboard</span>
+                </div>
+
+                {/* Default state indicator */}
+                <div className={`absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2 px-4 py-2 bg-black/60 backdrop-blur-md rounded-full border border-white/10 transition-all duration-500 ${isHovered ? 'opacity-0 -translate-y-4' : 'opacity-100 translate-y-0'}`}>
+                    <span className="text-[11px] text-white/70">Hover to explore</span>
+                    <svg className="w-3 h-3 text-white/50 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
+                    </svg>
+                </div>
             </div>
+
+            {/* Corner accent - Mai-lon orange theme */}
+            <div className={`absolute top-3 right-3 w-8 h-8 rounded-full bg-orange-500/10 backdrop-blur-sm flex items-center justify-center transition-all duration-500 ${isHovered ? 'scale-110 bg-orange-500/20' : 'scale-100'}`}>
+                <motion.svg
+                    className="w-4 h-4 text-orange-400/70"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    animate={{ rotate: isHovered ? 180 : 0 }}
+                    transition={{ duration: 0.5 }}
+                >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                </motion.svg>
+            </div>
+
+            {/* Orange glow background - matches the project accent */}
+            <div className="absolute -inset-4 bg-orange-500/5 rounded-3xl blur-2xl -z-10" />
         </div>
     );
 };
@@ -589,7 +621,7 @@ export default function MailonPage({ theme, setTheme, lang, setLang }) {
                         transition={{ duration: 0.8, delay: 0.2 }}
                         className="lg:col-span-7 relative"
                     >
-                        <ProjectShowcase project={project} />
+                        <MailonShowcase project={project} />
                         <div className="absolute -inset-10 bg-yellow-500/5 rounded-full blur-[120px] -z-10" />
                     </motion.div>
                 </div>

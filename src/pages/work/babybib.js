@@ -125,61 +125,101 @@ const TypewriterText = ({ text, delay = 50, startDelay = 500, onComplete }) => {
     );
 };
 
-const ProjectShowcase = ({ project }) => {
-    const [currentSlide, setCurrentSlide] = useState(0);
+// BabybibShowcase component for Babybib project with 3 images
+const BabybibShowcase = ({ project }) => {
+    const [currentImage, setCurrentImage] = useState(0);
+    const [isHovered, setIsHovered] = useState(false);
 
-    const slides = [
-        { type: 'code', component: <IDEMockup project={project} /> },
-        { type: 'image', src: 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?q=80&w=2428&auto=format&fit=crop', alt: 'Library Research' },
-        { type: 'image', src: 'https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?q=80&w=2373&auto=format&fit=crop', alt: 'Academic Work' },
+    const images = [
+        { src: "/images/projects/babybib-home.png", alt: "Babybib Homepage", label: "Homepage" },
+        { src: "/images/projects/babybib-generate.png", alt: "Babybib Generate", label: "Generate" },
+        { src: "/images/projects/babybib-references.png", alt: "Babybib References", label: "References" }
     ];
 
-    useEffect(() => {
-        const timer = setInterval(() => {
-            setCurrentSlide((prev) => (prev + 1) % slides.length);
-        }, 5000);
-        return () => clearInterval(timer);
-    }, [slides.length]);
+    const nextImage = () => {
+        setCurrentImage((prev) => (prev + 1) % images.length);
+    };
+
+    const prevImage = () => {
+        setCurrentImage((prev) => (prev - 1 + images.length) % images.length);
+    };
 
     return (
-        <div className="relative group w-full aspect-video rounded-2xl overflow-hidden shadow-2xl border border-white/5 bg-[#0D1117]">
-            <AnimatePresence mode="wait">
-                <motion.div
-                    key={currentSlide}
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: -20 }}
-                    transition={{ duration: 0.7, ease: "easeInOut" }}
-                    className="w-full h-full"
-                >
-                    {slides[currentSlide].type === 'code' ? (
-                        slides[currentSlide].component
-                    ) : (
+        <div
+            className="relative w-full aspect-[5/3] rounded-2xl overflow-hidden shadow-2xl border border-white/10 bg-[#0D0D0D] cursor-pointer group"
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+        >
+            {/* Glow effect on hover - violet for Babybib brand */}
+            <div className={`absolute -inset-1 bg-gradient-to-r from-violet-500/20 via-purple-500/20 to-violet-500/20 rounded-2xl blur-xl transition-opacity duration-700 ${isHovered ? 'opacity-100' : 'opacity-0'}`} />
+
+            {/* Main container */}
+            <div className="relative w-full h-full">
+                {/* Images */}
+                {images.map((image, index) => (
+                    <motion.div
+                        key={index}
+                        className="absolute inset-0 w-full h-full"
+                        initial={false}
+                        animate={{
+                            opacity: currentImage === index ? 1 : 0,
+                            scale: currentImage === index ? 1 : 0.95,
+                            x: currentImage === index ? 0 : (index > currentImage ? 50 : -50),
+                        }}
+                        transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
+                    >
                         <img
-                            src={slides[currentSlide].src}
-                            alt={slides[currentSlide].alt}
-                            className="w-full h-full object-cover"
+                            src={image.src}
+                            alt={image.alt}
+                            className="w-full h-full object-cover object-top"
                         />
-                    )}
-                </motion.div>
-            </AnimatePresence>
-
-            <button className="absolute bottom-4 right-4 z-20 flex items-center gap-2 px-4 py-2 rounded-xl bg-black/40 backdrop-blur-md border border-white/10 text-[10px] font-bold uppercase tracking-widest text-white hover:bg-white hover:text-black transition-all duration-300 shadow-xl group/btn">
-                <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                </svg>
-                <span>View all photos</span>
-                <span className="opacity-40 group-hover/btn:opacity-100 ml-1">{slides.length}</span>
-            </button>
-
-            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex gap-1.5">
-                {slides.map((_, i) => (
-                    <div
-                        key={i}
-                        className={`h-1 rounded-full transition-all duration-500 ${currentSlide === i ? 'w-6 bg-white' : 'w-1.5 bg-white/30'}`}
-                    />
+                        {/* Subtle overlay */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
+                    </motion.div>
                 ))}
+
+                {/* Navigation arrows */}
+                <button
+                    onClick={(e) => { e.stopPropagation(); prevImage(); }}
+                    className={`absolute left-3 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-black/50 backdrop-blur-md flex items-center justify-center border border-white/10 transition-all duration-300 ${isHovered ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-2'} hover:bg-violet-500/30`}
+                >
+                    <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                    </svg>
+                </button>
+                <button
+                    onClick={(e) => { e.stopPropagation(); nextImage(); }}
+                    className={`absolute right-3 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-black/50 backdrop-blur-md flex items-center justify-center border border-white/10 transition-all duration-300 ${isHovered ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-2'} hover:bg-violet-500/30`}
+                >
+                    <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                </button>
+
+                {/* Slide indicator with labels */}
+                <div className={`absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2 px-4 py-2 bg-black/60 backdrop-blur-md rounded-full border border-white/10 transition-all duration-500`}>
+                    {images.map((image, index) => (
+                        <button
+                            key={index}
+                            onClick={(e) => { e.stopPropagation(); setCurrentImage(index); }}
+                            className={`flex items-center gap-1.5 px-2 py-1 rounded-full transition-all duration-300 ${currentImage === index ? 'bg-violet-500/30' : 'hover:bg-white/10'}`}
+                        >
+                            <div className={`w-2 h-2 rounded-full transition-all duration-300 ${currentImage === index ? 'bg-violet-400' : 'bg-white/30'}`} />
+                            <span className={`text-[10px] font-medium transition-all duration-300 ${currentImage === index ? 'text-white/90' : 'text-white/50'}`}>
+                                {image.label}
+                            </span>
+                        </button>
+                    ))}
+                </div>
             </div>
+
+            {/* Corner accent - Babybib violet theme */}
+            <div className={`absolute top-3 right-3 w-8 h-8 rounded-full bg-violet-500/10 backdrop-blur-sm flex items-center justify-center transition-all duration-500 ${isHovered ? 'scale-110 bg-violet-500/20' : 'scale-100'}`}>
+                <span className="text-[10px] font-bold text-violet-400">{currentImage + 1}/{images.length}</span>
+            </div>
+
+            {/* Violet glow background */}
+            <div className="absolute -inset-4 bg-violet-500/5 rounded-3xl blur-2xl -z-10" />
         </div>
     );
 };
@@ -582,7 +622,7 @@ export default function BabybibPage({ theme, setTheme, lang, setLang }) {
                         transition={{ duration: 0.8, delay: 0.2 }}
                         className="lg:col-span-7 relative"
                     >
-                        <ProjectShowcase project={project} />
+                        <BabybibShowcase project={project} />
                         <div className="absolute -inset-10 bg-purple-500/5 rounded-full blur-[120px] -z-10" />
                     </motion.div>
                 </div>
