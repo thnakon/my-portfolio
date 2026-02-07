@@ -620,6 +620,107 @@ const BabybibShowcase = ({ project }) => {
     );
 };
 
+// ObounShowcase component for Oboun ERP project with 5 images
+const ObounShowcase = ({ project }) => {
+    const [currentImage, setCurrentImage] = useState(0);
+    const [isHovered, setIsHovered] = useState(false);
+    
+    const images = [
+        { src: "/images/projects/oboun-home.png", alt: "Oboun ERP Landing", label: "Landing" },
+        { src: "/images/projects/oboun-dashboard.png", alt: "Oboun ERP Dashboard", label: "Dashboard" },
+        { src: "/images/projects/oboun-pos.png", alt: "Oboun ERP POS", label: "POS" },
+        { src: "/images/projects/oboun-receipt.png", alt: "Oboun ERP Receipt", label: "Receipt" },
+        { src: "/images/projects/oboun-order.png", alt: "Oboun ERP Order Details", label: "Order" }
+    ];
+    
+    const nextImage = () => {
+        setCurrentImage((prev) => (prev + 1) % images.length);
+    };
+    
+    const prevImage = () => {
+        setCurrentImage((prev) => (prev - 1 + images.length) % images.length);
+    };
+    
+    return (
+        <div 
+            className="relative w-full aspect-[5/3] rounded-2xl overflow-hidden shadow-2xl border border-white/10 bg-[#0D0D0D] cursor-pointer group"
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+        >
+            {/* Glow effect on hover - blue for Oboun ERP brand */}
+            <div className={`absolute -inset-1 bg-gradient-to-r from-blue-500/20 via-sky-500/20 to-blue-500/20 rounded-2xl blur-xl transition-opacity duration-700 ${isHovered ? 'opacity-100' : 'opacity-0'}`} />
+            
+            {/* Main container */}
+            <div className="relative w-full h-full">
+                {/* Images */}
+                {images.map((image, index) => (
+                    <motion.div 
+                        key={index}
+                        className="absolute inset-0 w-full h-full"
+                        initial={false}
+                        animate={{ 
+                            opacity: currentImage === index ? 1 : 0,
+                            scale: currentImage === index ? 1 : 0.95,
+                            x: currentImage === index ? 0 : (index > currentImage ? 50 : -50),
+                        }}
+                        transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
+                    >
+                        <img 
+                            src={image.src} 
+                            alt={image.alt}
+                            className="w-full h-full object-cover object-top"
+                        />
+                        {/* Subtle overlay */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
+                    </motion.div>
+                ))}
+                
+                {/* Navigation arrows */}
+                <button 
+                    onClick={(e) => { e.stopPropagation(); prevImage(); }}
+                    className={`absolute left-3 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-black/50 backdrop-blur-md flex items-center justify-center border border-white/10 transition-all duration-300 ${isHovered ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-2'} hover:bg-blue-500/30`}
+                >
+                    <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                    </svg>
+                </button>
+                <button 
+                    onClick={(e) => { e.stopPropagation(); nextImage(); }}
+                    className={`absolute right-3 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-black/50 backdrop-blur-md flex items-center justify-center border border-white/10 transition-all duration-300 ${isHovered ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-2'} hover:bg-blue-500/30`}
+                >
+                    <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                </button>
+                
+                {/* Slide indicator with labels */}
+                <div className={`absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex items-center gap-1.5 px-3 py-1.5 bg-black/60 backdrop-blur-md rounded-full border border-white/10 transition-all duration-500`}>
+                    {images.map((image, index) => (
+                        <button
+                            key={index}
+                            onClick={(e) => { e.stopPropagation(); setCurrentImage(index); }}
+                            className={`flex items-center gap-1 px-1.5 py-0.5 rounded-full transition-all duration-300 ${currentImage === index ? 'bg-blue-500/30' : 'hover:bg-white/5'}`}
+                        >
+                            <div className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${currentImage === index ? 'bg-blue-400' : 'bg-white/20'}`} />
+                            <span className={`text-[9px] font-medium transition-all duration-300 ${currentImage === index ? 'text-white/90' : 'text-white/40'}`}>
+                                {image.label}
+                            </span>
+                        </button>
+                    ))}
+                </div>
+            </div>
+            
+            {/* Corner accent - Oboun blue theme */}
+            <div className={`absolute top-3 right-3 w-8 h-8 rounded-full bg-blue-500/10 backdrop-blur-sm flex items-center justify-center transition-all duration-500 ${isHovered ? 'scale-110 bg-blue-500/20' : 'scale-100'}`}>
+                <span className="text-[10px] font-bold text-blue-400">{currentImage + 1}/{images.length}</span>
+            </div>
+            
+            {/* Blue glow background */}
+            <div className="absolute -inset-4 bg-blue-500/5 rounded-3xl blur-2xl -z-10" />
+        </div>
+    );
+};
+
 const ProjectItem = ({ project, index, t, isHistory }) => {
     const [isVisible, setIsVisible] = useState(false);
     const [typedDesc, setTypedDesc] = useState('');
@@ -790,6 +891,8 @@ const ProjectItem = ({ project, index, t, isHistory }) => {
                           <ScribeHubShowcase project={project} />
                         ) : project.slug === 'babybib' ? (
                           <BabybibShowcase project={project} />
+                        ) : project.slug === 'obounerp' ? (
+                          <ObounShowcase project={project} />
                         ) : (
                           <IDEMockup project={project} />
                         )}
@@ -910,6 +1013,10 @@ const ProjectItem = ({ project, index, t, isHistory }) => {
           ) : project.slug === 'babybib' ? (
             <div className="relative h-full transition-transform duration-700 hover:scale-[1.02]">
               <BabybibShowcase project={project} />
+            </div>
+          ) : project.slug === 'obounerp' ? (
+            <div className="relative h-full transition-transform duration-700 hover:scale-[1.02]">
+              <ObounShowcase project={project} />
             </div>
           ) : (
             <div className="relative h-[320px] md:h-[400px]">
