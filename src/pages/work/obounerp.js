@@ -7,6 +7,7 @@ import BookingModal from '@/components/BookingModal';
 import Contact from '@/components/Contact';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
+import ImageModal from '@/components/ImageModal';
 
 const IDEMockup = ({ project }) => {
     return (
@@ -129,7 +130,7 @@ const TypewriterText = ({ text, delay = 50, startDelay = 500, onComplete }) => {
 };
 
 // ObounShowcase component for Oboun ERP project with 5 images
-const ObounShowcase = ({ project }) => {
+const ObounShowcase = ({ project, onImageClick }) => {
     const [currentImage, setCurrentImage] = useState(0);
     const [isHovered, setIsHovered] = useState(false);
 
@@ -151,9 +152,10 @@ const ObounShowcase = ({ project }) => {
 
     return (
         <div
-            className="relative w-full aspect-[5/3] rounded-2xl overflow-hidden shadow-2xl border border-white/10 bg-[#0D0D0D] cursor-pointer group"
+            className="relative w-full aspect-[5/3] rounded-2xl overflow-hidden shadow-2xl border border-white/10 bg-[#0D0D0D] cursor-zoom-in group"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
+            onClick={() => onImageClick(images[currentImage].src, images[currentImage].alt)}
         >
             {/* Glow effect on hover - blue for Oboun ERP brand */}
             <div className={`absolute -inset-1 bg-gradient-to-r from-blue-500/20 via-sky-500/20 to-blue-500/20 rounded-2xl blur-xl transition-opacity duration-700 ${isHovered ? 'opacity-100' : 'opacity-0'}`} />
@@ -457,9 +459,13 @@ const ProjectNavigation = ({ lang }) => {
 };
 
 export default function ObounERPPage({ theme, setTheme, lang, setLang }) {
-    const [bookingOpen, setBookingOpen] = useState(false);
+    const [isBookingOpen, setIsBookingOpen] = useState(false);
+    const [modalImage, setModalImage] = useState(null);
     const [openFeature, setOpenFeature] = useState(0);
     const t = translations[lang] || translations.en;
+
+    const openImage = (src, alt) => setModalImage({ src, alt });
+    const closeImage = () => setModalImage(null);
 
     const featureHighlights = [
         {
@@ -551,7 +557,7 @@ export default function ObounERPPage({ theme, setTheme, lang, setLang }) {
                 <meta property="og:description" content="Full-featured ERP system for pharmacies with POS, inventory management, and AI assistant." />
                 <meta property="og:url" content="https://thnakon.dev/work/obounerp" />
             </Head>
-            <Navbar t={t} lang={lang} setLang={setLang} theme={theme} setTheme={setTheme} onBookCall={() => setBookingOpen(true)} />
+            <Navbar t={t} lang={lang} setLang={setLang} theme={theme} setTheme={setTheme} onBookCall={() => setIsBookingOpen(true)} />
 
             <div className="pt-32 pb-24 max-w-6xl mx-auto px-6">
                 {/* Back Button */}
@@ -639,7 +645,7 @@ export default function ObounERPPage({ theme, setTheme, lang, setLang }) {
                         transition={{ duration: 0.8, delay: 0.2 }}
                         className="lg:col-span-7 relative"
                     >
-                        <ObounShowcase project={project} />
+                        <ObounShowcase onImageClick={openImage} project={project} />
                         {/* Glow Effect */}
                         <div className="absolute -inset-10 bg-blue-500/5 rounded-full blur-[120px] -z-10" />
                     </motion.div>
@@ -813,9 +819,16 @@ export default function ObounERPPage({ theme, setTheme, lang, setLang }) {
                 </div >
             </div >
 
-            <Contact t={t} onGetInTouch={() => setBookingOpen(true)} />
+            <Contact t={t} onGetInTouch={() => setIsBookingOpen(true)} />
             <Footer t={t} />
-            <BookingModal isOpen={bookingOpen} onClose={() => setBookingOpen(false)} t={t} />
+            <BookingModal isOpen={isBookingOpen} onClose={() => setIsBookingOpen(false)} t={t} />
+
+            <ImageModal
+                isOpen={!!modalImage}
+                onClose={closeImage}
+                imageSrc={modalImage?.src}
+                imageAlt={modalImage?.alt}
+            />
         </main >
     );
 }

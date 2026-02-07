@@ -6,6 +6,7 @@ import BookingModal from '@/components/BookingModal';
 import Contact from '@/components/Contact';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
+import ImageModal from '@/components/ImageModal';
 
 const IDEMockup = () => (
     <div className="w-full h-full bg-[#0D1117] rounded-xl border border-white/10 overflow-hidden shadow-2xl flex flex-col">
@@ -67,14 +68,18 @@ const TypewriterText = ({ text, delay = 50, startDelay = 500 }) => {
     return <span>{displayedText}{displayedText.length < text.length && <span className="inline-block w-0.5 h-5 ml-1 bg-[var(--text-primary)] animate-pulse align-middle" />}</span>;
 };
 
-const ImageShowcase = () => {
+const ImageShowcase = ({ onImageClick }) => {
     const [isHovered, setIsHovered] = useState(false);
 
     return (
         <div
-            className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl border border-white/10 bg-[#0D0D0D] cursor-pointer group"
+            className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl border border-white/10 bg-[#0D0D0D] cursor-zoom-in group"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
+            onClick={() => onImageClick(
+                isHovered ? "/images/projects/portfolio-about.png" : "/images/projects/portfolio-home.png",
+                isHovered ? "Project About Page" : "Project Homepage"
+            )}
         >
             {/* Glow effect on hover */}
             <div className={`absolute -inset-1 bg-gradient-to-r from-purple-500/20 via-pink-500/20 to-blue-500/20 rounded-2xl blur-xl transition-opacity duration-700 ${isHovered ? 'opacity-100' : 'opacity-0'}`} />
@@ -224,9 +229,12 @@ const ProjectNavigation = ({ lang }) => (
 );
 
 export default function MyPortfolioPage({ theme, setTheme, lang, setLang }) {
-    const [bookingOpen, setBookingOpen] = useState(false);
-    const [openFeature, setOpenFeature] = useState(0);
+    const [isBookingOpen, setIsBookingOpen] = useState(false);
+    const [modalImage, setModalImage] = useState(null);
     const t = translations[lang] || translations.en;
+
+    const openImage = (src, alt) => setModalImage({ src, alt });
+    const closeImage = () => setModalImage(null);
 
     const features = [
         { title: lang === 'en' ? 'Next.js 14 Performance' : 'ประสิทธิภาพ Next.js 14', content: lang === 'en' ? 'Built with Next.js 14 and React for lightning-fast performance with server-side rendering.' : 'สร้างด้วย Next.js 14 และ React สำหรับประสิทธิภาพที่รวดเร็วพร้อม Server-side Rendering' },
@@ -251,7 +259,7 @@ export default function MyPortfolioPage({ theme, setTheme, lang, setLang }) {
 
     return (
         <main className="min-h-screen transition-theme bg-[var(--bg-primary)]">
-            <Navbar t={t} lang={lang} setLang={setLang} theme={theme} setTheme={setTheme} onBookCall={() => setBookingOpen(true)} />
+            <Navbar t={t} lang={lang} setLang={setLang} theme={theme} setTheme={setTheme} onBookCall={() => setIsBookingOpen(true)} />
             <div className="pt-32 pb-24 max-w-6xl mx-auto px-6">
                 <Link href="/work" className="inline-flex items-center gap-2 px-4 py-2 mb-12 rounded-full border border-[var(--border-color)] text-[10px] font-bold uppercase tracking-widest text-[var(--text-secondary)] hover:text-[var(--text-primary)]">
                     ← {lang === 'en' ? 'Back to work' : 'กลับไปหน้าผลงาน'}
@@ -282,7 +290,7 @@ export default function MyPortfolioPage({ theme, setTheme, lang, setLang }) {
                         </div>
                     </motion.div>
                     <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.2 }} className="lg:col-span-7 relative">
-                        <ImageShowcase />
+                        <ImageShowcase onImageClick={openImage} />
                         <div className="absolute -inset-10 bg-white/5 rounded-full blur-[120px] -z-10" />
                     </motion.div>
                 </div>
@@ -321,9 +329,15 @@ export default function MyPortfolioPage({ theme, setTheme, lang, setLang }) {
                     <div><OnThisPage lang={lang} /></div>
                 </div>
             </div>
-            <Contact t={t} onGetInTouch={() => setBookingOpen(true)} />
+            <Contact t={t} onGetInTouch={() => setIsBookingOpen(true)} />
             <Footer t={t} />
-            <BookingModal isOpen={bookingOpen} onClose={() => setBookingOpen(false)} t={t} />
+            <BookingModal isOpen={isBookingOpen} onClose={() => setIsBookingOpen(false)} t={t} />
+            <ImageModal
+                isOpen={!!modalImage}
+                onClose={closeImage}
+                imageSrc={modalImage?.src}
+                imageAlt={modalImage?.alt}
+            />
         </main>
     );
 }

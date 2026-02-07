@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
+import ImageModal from '@/components/ImageModal';
 
 // SVG Icons for Projects section
 const Icons = {
@@ -69,15 +70,21 @@ const IDEMockup = ({ project, isSecondary = false }) => {
   );
 };
 
+
+
 // ImageShowcase component for portfolio project with hover effect
-const ImageShowcase = ({ project }) => {
+const ImageShowcase = ({ project, onImageClick }) => {
     const [isHovered, setIsHovered] = useState(false);
     
     return (
         <div 
-            className="relative w-full aspect-[5/3] rounded-2xl overflow-hidden shadow-2xl border border-white/10 bg-[#0D0D0D] cursor-pointer group"
+            className="relative w-full aspect-[5/3] rounded-2xl overflow-hidden shadow-2xl border border-white/10 bg-[#0D0D0D] cursor-zoom-in group"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
+            onClick={() => onImageClick(
+                isHovered ? "/images/projects/portfolio-about.png" : "/images/projects/portfolio-home.png",
+                isHovered ? "Project About Page" : "Project Homepage"
+            )}
         >
             {/* Glow effect on hover */}
             <div className={`absolute -inset-1 bg-gradient-to-r from-purple-500/20 via-pink-500/20 to-blue-500/20 rounded-2xl blur-xl transition-opacity duration-700 ${isHovered ? 'opacity-100' : 'opacity-0'}`} />
@@ -158,14 +165,18 @@ const ImageShowcase = ({ project }) => {
 };
 
 // SinghaShowcase component for Singha project with hover effect
-const SinghaShowcase = ({ project }) => {
+const SinghaShowcase = ({ project, onImageClick }) => {
     const [isHovered, setIsHovered] = useState(false);
     
     return (
         <div 
-            className="relative w-full aspect-[5/3] rounded-2xl overflow-hidden shadow-2xl border border-white/10 bg-[#0D0D0D] cursor-pointer group"
+            className="relative w-full aspect-[5/3] rounded-2xl overflow-hidden shadow-2xl border border-white/10 bg-[#0D0D0D] cursor-zoom-in group"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
+            onClick={() => onImageClick(
+                isHovered ? "/images/projects/singha-ingredients.png" : "/images/projects/singha-products.png",
+                isHovered ? "Singha Ingredients Page" : "Singha Products Page"
+            )}
         >
             {/* Glow effect on hover - amber for Singha brand */}
             <div className={`absolute -inset-1 bg-gradient-to-r from-amber-500/20 via-yellow-500/20 to-amber-500/20 rounded-2xl blur-xl transition-opacity duration-700 ${isHovered ? 'opacity-100' : 'opacity-0'}`} />
@@ -249,14 +260,18 @@ const SinghaShowcase = ({ project }) => {
 };
 
 // KlinShowcase component for Klin Dental Clinic project with hover effect
-const KlinShowcase = ({ project }) => {
+const KlinShowcase = ({ project, onImageClick }) => {
     const [isHovered, setIsHovered] = useState(false);
     
     return (
         <div 
-            className="relative w-full aspect-[5/3] rounded-2xl overflow-hidden shadow-2xl border border-white/10 bg-[#0D0D0D] cursor-pointer group"
+            className="relative w-full aspect-[5/3] rounded-2xl overflow-hidden shadow-2xl border border-white/10 bg-[#0D0D0D] cursor-zoom-in group"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
+            onClick={() => onImageClick(
+                isHovered ? "/images/projects/klin-dashboard.png" : "/images/projects/klin-home.png",
+                isHovered ? "Klin Dental Dashboard" : "Klin Dental Homepage"
+            )}
         >
             {/* Glow effect on hover - cyan for Klin Dental brand */}
             <div className={`absolute -inset-1 bg-gradient-to-r from-cyan-500/20 via-blue-500/20 to-cyan-500/20 rounded-2xl blur-xl transition-opacity duration-700 ${isHovered ? 'opacity-100' : 'opacity-0'}`} />
@@ -340,14 +355,18 @@ const KlinShowcase = ({ project }) => {
 };
 
 // MailonShowcase component for Mai-lon project with hover effect
-const MailonShowcase = ({ project }) => {
+const MailonShowcase = ({ project, onImageClick }) => {
     const [isHovered, setIsHovered] = useState(false);
     
     return (
         <div 
-            className="relative w-full aspect-[5/3] rounded-2xl overflow-hidden shadow-2xl border border-white/10 bg-[#0D0D0D] cursor-pointer group"
+            className="relative w-full aspect-[5/3] rounded-2xl overflow-hidden shadow-2xl border border-white/10 bg-[#0D0D0D] cursor-zoom-in group"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
+            onClick={() => onImageClick(
+                isHovered ? "/images/projects/mailon-dashboard.png" : "/images/projects/mailon-home.png",
+                isHovered ? "Mai-lon Dashboard" : "Mai-lon Homepage"
+            )}
         >
             {/* Glow effect on hover - orange for Mai-lon brand */}
             <div className={`absolute -inset-1 bg-gradient-to-r from-orange-500/20 via-amber-500/20 to-orange-500/20 rounded-2xl blur-xl transition-opacity duration-700 ${isHovered ? 'opacity-100' : 'opacity-0'}`} />
@@ -431,14 +450,18 @@ const MailonShowcase = ({ project }) => {
 };
 
 // ScribeHubShowcase component for ScribeHub project with hover effect
-const ScribeHubShowcase = ({ project }) => {
+const ScribeHubShowcase = ({ project, onImageClick }) => {
     const [isHovered, setIsHovered] = useState(false);
     
     return (
         <div 
-            className="relative w-full aspect-[5/3] rounded-2xl overflow-hidden shadow-2xl border border-white/10 bg-[#0D0D0D] cursor-pointer group"
+            className="relative w-full aspect-[5/3] rounded-2xl overflow-hidden shadow-2xl border border-white/10 bg-[#0D0D0D] cursor-zoom-in group"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
+            onClick={() => onImageClick(
+                isHovered ? "/images/projects/scribehub-dashboard.png" : "/images/projects/scribehub-home.png",
+                isHovered ? "ScribeHub Dashboard" : "ScribeHub Homepage"
+            )}
         >
             {/* Glow effect on hover - teal/slate for ScribeHub brand */}
             <div className={`absolute -inset-1 bg-gradient-to-r from-teal-500/20 via-slate-500/20 to-teal-500/20 rounded-2xl blur-xl transition-opacity duration-700 ${isHovered ? 'opacity-100' : 'opacity-0'}`} />
@@ -522,7 +545,7 @@ const ScribeHubShowcase = ({ project }) => {
 };
 
 // BabybibShowcase component for Babybib project with 3 images
-const BabybibShowcase = ({ project }) => {
+const BabybibShowcase = ({ project, onImageClick }) => {
     const [currentImage, setCurrentImage] = useState(0);
     const [isHovered, setIsHovered] = useState(false);
     
@@ -542,9 +565,10 @@ const BabybibShowcase = ({ project }) => {
     
     return (
         <div 
-            className="relative w-full aspect-[5/3] rounded-2xl overflow-hidden shadow-2xl border border-white/10 bg-[#0D0D0D] cursor-pointer group"
+            className="relative w-full aspect-[5/3] rounded-2xl overflow-hidden shadow-2xl border border-white/10 bg-[#0D0D0D] cursor-zoom-in group"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
+            onClick={() => onImageClick(images[currentImage].src, images[currentImage].alt)}
         >
             {/* Glow effect on hover - violet for Babybib brand */}
             <div className={`absolute -inset-1 bg-gradient-to-r from-violet-500/20 via-purple-500/20 to-violet-500/20 rounded-2xl blur-xl transition-opacity duration-700 ${isHovered ? 'opacity-100' : 'opacity-0'}`} />
@@ -621,7 +645,7 @@ const BabybibShowcase = ({ project }) => {
 };
 
 // ObounShowcase component for Oboun ERP project with 5 images
-const ObounShowcase = ({ project }) => {
+const ObounShowcase = ({ project, onImageClick }) => {
     const [currentImage, setCurrentImage] = useState(0);
     const [isHovered, setIsHovered] = useState(false);
     
@@ -643,9 +667,10 @@ const ObounShowcase = ({ project }) => {
     
     return (
         <div 
-            className="relative w-full aspect-[5/3] rounded-2xl overflow-hidden shadow-2xl border border-white/10 bg-[#0D0D0D] cursor-pointer group"
+            className="relative w-full aspect-[5/3] rounded-2xl overflow-hidden shadow-2xl border border-white/10 bg-[#0D0D0D] cursor-zoom-in group"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
+            onClick={() => onImageClick(images[currentImage].src, images[currentImage].alt)}
         >
             {/* Glow effect on hover - blue for Oboun ERP brand */}
             <div className={`absolute -inset-1 bg-gradient-to-r from-blue-500/20 via-sky-500/20 to-blue-500/20 rounded-2xl blur-xl transition-opacity duration-700 ${isHovered ? 'opacity-100' : 'opacity-0'}`} />
@@ -721,7 +746,7 @@ const ObounShowcase = ({ project }) => {
     );
 };
 
-const ProjectItem = ({ project, index, t, isHistory }) => {
+const ProjectItem = ({ project, index, t, isHistory, onImageClick }) => {
     const [isVisible, setIsVisible] = useState(false);
     const [typedDesc, setTypedDesc] = useState('');
     const [startTyping, setStartTyping] = useState(false);
@@ -880,19 +905,19 @@ const ProjectItem = ({ project, index, t, isHistory }) => {
                 <div className={`flex-1 w-full max-w-[600px] mt-12 transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
                     <div className="relative group/visuals w-full transition-transform duration-700 hover:scale-[1.02]">
                         {project.slug === 'myportfolio' ? (
-                          <ImageShowcase project={project} />
+                          <ImageShowcase project={project} onImageClick={onImageClick} />
                         ) : project.slug === 'singha' ? (
-                          <SinghaShowcase project={project} />
+                          <SinghaShowcase project={project} onImageClick={onImageClick} />
                         ) : project.slug === 'klin' ? (
-                          <KlinShowcase project={project} />
+                          <KlinShowcase project={project} onImageClick={onImageClick} />
                         ) : project.slug === 'mailon' ? (
-                          <MailonShowcase project={project} />
+                          <MailonShowcase project={project} onImageClick={onImageClick} />
                         ) : project.slug === 'scribehub' ? (
-                          <ScribeHubShowcase project={project} />
+                          <ScribeHubShowcase project={project} onImageClick={onImageClick} />
                         ) : project.slug === 'babybib' ? (
-                          <BabybibShowcase project={project} />
+                          <BabybibShowcase project={project} onImageClick={onImageClick} />
                         ) : project.slug === 'obounerp' ? (
-                          <ObounShowcase project={project} />
+                          <ObounShowcase project={project} onImageClick={onImageClick} />
                         ) : (
                           <IDEMockup project={project} />
                         )}
@@ -992,31 +1017,31 @@ const ProjectItem = ({ project, index, t, isHistory }) => {
         <div className="relative group/visuals w-full">
           {project.slug === 'myportfolio' ? (
             <div className="relative h-full transition-transform duration-700 hover:scale-[1.02]">
-              <ImageShowcase project={project} />
+              <ImageShowcase project={project} onImageClick={onImageClick} />
             </div>
           ) : project.slug === 'singha' ? (
             <div className="relative h-full transition-transform duration-700 hover:scale-[1.02]">
-              <SinghaShowcase project={project} />
+              <SinghaShowcase project={project} onImageClick={onImageClick} />
             </div>
           ) : project.slug === 'klin' ? (
             <div className="relative h-full transition-transform duration-700 hover:scale-[1.02]">
-              <KlinShowcase project={project} />
+              <KlinShowcase project={project} onImageClick={onImageClick} />
             </div>
           ) : project.slug === 'mailon' ? (
             <div className="relative h-full transition-transform duration-700 hover:scale-[1.02]">
-              <MailonShowcase project={project} />
+              <MailonShowcase project={project} onImageClick={onImageClick} />
             </div>
           ) : project.slug === 'scribehub' ? (
             <div className="relative h-full transition-transform duration-700 hover:scale-[1.02]">
-              <ScribeHubShowcase project={project} />
+              <ScribeHubShowcase project={project} onImageClick={onImageClick} />
             </div>
           ) : project.slug === 'babybib' ? (
             <div className="relative h-full transition-transform duration-700 hover:scale-[1.02]">
-              <BabybibShowcase project={project} />
+              <BabybibShowcase project={project} onImageClick={onImageClick} />
             </div>
           ) : project.slug === 'obounerp' ? (
             <div className="relative h-full transition-transform duration-700 hover:scale-[1.02]">
-              <ObounShowcase project={project} />
+              <ObounShowcase project={project} onImageClick={onImageClick} />
             </div>
           ) : (
             <div className="relative h-[320px] md:h-[400px]">
@@ -1040,11 +1065,15 @@ const ProjectItem = ({ project, index, t, isHistory }) => {
   );
 };
 
-export default function Projects({ t, lang, isHistory = false }) {
+export default function Projects({ t, lang, isHistory = false, openImage: externalOpenImage }) {
   const [portfolioVisible, setPortfolioVisible] = useState(false);
   const [typedPortfolioDesc, setTypedPortfolioDesc] = useState('');
   const [startPortfolioTyping, setStartPortfolioTyping] = useState(false);
+  const [modalImage, setModalImage] = useState(null);
   const portfolioRef = useRef(null);
+
+  const handleImageClick = externalOpenImage || ((src, alt) => setModalImage({ src, alt }));
+  const closeImage = () => setModalImage(null);
 
   // Portfolio Section Intersection Observer
   useEffect(() => {
@@ -1410,9 +1439,18 @@ export default function Projects({ t, lang, isHistory = false }) {
              <div className="hidden lg:block absolute left-1/2 top-0 bottom-0 w-[1px] bg-[var(--border-color)] -translate-x-1/2 opacity-20" />
           )}
           {(isHistory ? projects : projects.filter(p => [t.projects.obounERP.title, t.projects.babybib.title, t.projects.scribehub.title].includes(p.title))).map((project, index) => (
-            <ProjectItem key={index} project={project} index={index} t={t} isHistory={isHistory} />
+            <ProjectItem key={index} project={project} index={index} t={t} isHistory={isHistory} onImageClick={handleImageClick} />
           ))}
         </div>
+
+        {!externalOpenImage && (
+          <ImageModal 
+            isOpen={!!modalImage} 
+            onClose={closeImage} 
+            imageSrc={modalImage?.src} 
+            imageAlt={modalImage?.alt} 
+          />
+        )}
 
         {/* See More Work Button (Hide in history mode as it's the main list) */}
         {!isHistory && (

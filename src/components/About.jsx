@@ -5,7 +5,7 @@ import MySite from './MySite';
 import OpenSource from './OpenSource';
 import Contact from './Contact';
 
-export default function About({ t, isFull = true, onGetInTouch }) {
+export default function About({ t, isFull = true, onGetInTouch, onImageClick }) {
   const [isVisible, setIsVisible] = useState(false);
   const [typedAboutDesc, setTypedAboutDesc] = useState('');
   const [startAboutTyping, setStartAboutTyping] = useState(false);
@@ -158,9 +158,10 @@ export default function About({ t, isFull = true, onGetInTouch }) {
                           key={src}
                           src={src} 
                           alt={`Lifestyle ${idx + 1}`} 
-                          className={`absolute inset-0 w-full h-full object-cover transition-all duration-1000 ease-in-out group-hover:scale-105 ${
+                          className={`absolute inset-0 w-full h-full object-cover transition-all duration-1000 ease-in-out group-hover:scale-105 cursor-zoom-in ${
                             currentImage === idx ? 'opacity-100 scale-100' : 'opacity-0 scale-110 pointer-events-none'
                           }`}
+                          onClick={() => onImageClick && onImageClick(src, `Lifestyle ${idx + 1}`)}
                         />
                       ))}
                     </div>

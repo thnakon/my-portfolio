@@ -4,10 +4,15 @@ import Navbar from '@/components/Navbar';
 import About from '@/components/About';
 import BookingModal from '@/components/BookingModal';
 import Footer from '@/components/Footer';
+import ImageModal from '@/components/ImageModal';
 
 export default function AboutPage({ theme, setTheme, lang, setLang }) {
     const [bookingOpen, setBookingOpen] = useState(false);
+    const [modalImage, setModalImage] = useState(null);
     const t = translations[lang] || translations.en;
+
+    const openImage = (src, alt) => setModalImage({ src, alt });
+    const closeImage = () => setModalImage(null);
 
     return (
         <main className="min-h-screen transition-theme">
@@ -24,6 +29,7 @@ export default function AboutPage({ theme, setTheme, lang, setLang }) {
                 <About
                     t={t}
                     onGetInTouch={() => setBookingOpen(true)}
+                    onImageClick={openImage}
                 />
             </div>
 
@@ -33,6 +39,13 @@ export default function AboutPage({ theme, setTheme, lang, setLang }) {
                 isOpen={bookingOpen}
                 onClose={() => setBookingOpen(false)}
                 t={t}
+            />
+
+            <ImageModal
+                isOpen={!!modalImage}
+                onClose={closeImage}
+                imageSrc={modalImage?.src}
+                imageAlt={modalImage?.alt}
             />
         </main>
     );

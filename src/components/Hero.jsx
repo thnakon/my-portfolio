@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 
-export default function Hero({ t, onGetInTouch }) {
+export default function Hero({ t, onGetInTouch, onImageClick }) {
   const [copied, setCopied] = useState(false);
   const [fireflies, setFireflies] = useState([]);
   const [typedText, setTypedText] = useState('');
@@ -220,7 +220,8 @@ export default function Hero({ t, onGetInTouch }) {
                     <img 
                       src="/images/profile-bento.jpg" 
                       alt="Thanakon" 
-                      className="w-10 h-10 md:w-12 md:h-12 rounded-full object-cover border-2 border-[var(--border-color)] shadow-sm group-hover/avatar:scale-110 transition-transform duration-300"
+                      className="w-10 h-10 md:w-12 md:h-12 rounded-full object-cover border-2 border-[var(--border-color)] shadow-sm group-hover/avatar:scale-110 transition-transform duration-300 cursor-zoom-in"
+                      onClick={() => onImageClick && onImageClick("/images/profile-bento.jpg", "Thanakon")}
                     />
                     <span className="absolute -top-6 -right-2 opacity-0 group-hover/avatar:opacity-100 transition-all duration-300 text-xl pointer-events-none group-hover/avatar:-translate-y-1">
                       👋

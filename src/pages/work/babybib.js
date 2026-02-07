@@ -7,6 +7,7 @@ import BookingModal from '@/components/BookingModal';
 import Contact from '@/components/Contact';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
+import ImageModal from '@/components/ImageModal';
 
 const IDEMockup = ({ project }) => {
     return (
@@ -126,7 +127,7 @@ const TypewriterText = ({ text, delay = 50, startDelay = 500, onComplete }) => {
 };
 
 // BabybibShowcase component for Babybib project with 3 images
-const BabybibShowcase = ({ project }) => {
+const ProjectShowcase = ({ project, onImageClick }) => {
     const [currentImage, setCurrentImage] = useState(0);
     const [isHovered, setIsHovered] = useState(false);
 
@@ -146,9 +147,10 @@ const BabybibShowcase = ({ project }) => {
 
     return (
         <div
-            className="relative w-full aspect-[5/3] rounded-2xl overflow-hidden shadow-2xl border border-white/10 bg-[#0D0D0D] cursor-pointer group"
+            className="relative w-full aspect-[5/3] rounded-2xl overflow-hidden shadow-2xl border border-white/10 bg-[#0D0D0D] cursor-zoom-in group"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
+            onClick={() => onImageClick(images[currentImage].src, images[currentImage].alt)}
         >
             {/* Glow effect on hover - violet for Babybib brand */}
             <div className={`absolute -inset-1 bg-gradient-to-r from-violet-500/20 via-purple-500/20 to-violet-500/20 rounded-2xl blur-xl transition-opacity duration-700 ${isHovered ? 'opacity-100' : 'opacity-0'}`} />
@@ -452,9 +454,13 @@ const ProjectNavigation = ({ lang }) => {
 };
 
 export default function BabybibPage({ theme, setTheme, lang, setLang }) {
-    const [bookingOpen, setBookingOpen] = useState(false);
+    const [isBookingOpen, setIsBookingOpen] = useState(false);
+    const [modalImage, setModalImage] = useState(null);
     const [openFeature, setOpenFeature] = useState(0);
     const t = translations[lang] || translations.en;
+
+    const openImage = (src, alt) => setModalImage({ src, alt });
+    const closeImage = () => setModalImage(null);
 
     const featureHighlights = [
         {
@@ -539,7 +545,7 @@ export default function BabybibPage({ theme, setTheme, lang, setLang }) {
                 <meta property="og:description" content="PHP-based child health records and development tracking system with growth charts and vaccination tracking." />
                 <meta property="og:url" content="https://thnakon.dev/work/babybib" />
             </Head>
-            <Navbar t={t} lang={lang} setLang={setLang} theme={theme} setTheme={setTheme} onBookCall={() => setBookingOpen(true)} />
+            <Navbar t={t} lang={lang} setLang={setLang} theme={theme} setTheme={setTheme} onBookCall={() => setIsBookingOpen(true)} />
 
             <div className="pt-32 pb-24 max-w-6xl mx-auto px-6">
                 {/* Back Button */}
@@ -622,7 +628,7 @@ export default function BabybibPage({ theme, setTheme, lang, setLang }) {
                         transition={{ duration: 0.8, delay: 0.2 }}
                         className="lg:col-span-7 relative"
                     >
-                        <BabybibShowcase project={project} />
+                        <ProjectShowcase onImageClick={openImage} project={project} />
                         <div className="absolute -inset-10 bg-purple-500/5 rounded-full blur-[120px] -z-10" />
                     </motion.div>
                 </div>
@@ -791,9 +797,15 @@ export default function BabybibPage({ theme, setTheme, lang, setLang }) {
                 </div>
             </div>
 
-            <Contact t={t} onGetInTouch={() => setBookingOpen(true)} />
+            <Contact t={t} onGetInTouch={() => setIsBookingOpen(true)} />
             <Footer t={t} />
-            <BookingModal isOpen={bookingOpen} onClose={() => setBookingOpen(false)} t={t} />
+            <BookingModal isOpen={isBookingOpen} onClose={() => setIsBookingOpen(false)} t={t} />
+            <ImageModal
+                isOpen={!!modalImage}
+                onClose={closeImage}
+                imageSrc={modalImage?.src}
+                imageAlt={modalImage?.alt}
+            />
         </main>
     );
 }
