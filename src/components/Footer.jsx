@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 // SVG Icons
 const Icons = {
   github: (
@@ -33,10 +35,10 @@ export default function Footer({ t }) {
   return (
     <footer className="pt-24 pb-12 bg-[var(--bg-primary)] border-t border-[var(--border-color)]">
       <div className="max-w-6xl mx-auto px-6">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 mb-16">
+        <div className="flex flex-col md:flex-row justify-between gap-12 mb-16">
           
           {/* Brand Column */}
-          <div className="md:col-span-5 flex flex-col items-start gap-6">
+          <div className="flex flex-col items-start gap-6">
             <div className="flex items-center gap-3 group cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
                 <div className="w-10 h-10 rounded-full overflow-hidden border border-[var(--border-color)] group-hover:border-[var(--text-primary)] transition-colors duration-500">
                     <img src="/images/profile-bento.jpg" alt="Profile" className="w-full h-full object-cover transition-all duration-500" />
@@ -54,47 +56,50 @@ export default function Footer({ t }) {
           </div>
 
           {/* Links Columns */}
-          <div className="md:col-span-7 grid grid-cols-2 sm:grid-cols-3 gap-8">
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-8 md:gap-16 md:text-right">
             
             {/* Navigation */}
             <div className="flex flex-col gap-4">
               <h4 className="text-[10px] font-bold tracking-[0.3em] text-[var(--text-primary)] uppercase">{t.footer.linksTitle}</h4>
               <ul className="flex flex-col gap-3">
-                <li><button onClick={() => scrollToSection('home')} className="text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors inline-block">{t.nav.home}</button></li>
-                <li><button onClick={() => scrollToSection('about')} className="text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors inline-block">{t.nav.about}</button></li>
-                <li><button onClick={() => scrollToSection('projects')} className="text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors inline-block">{t.nav.projects}</button></li>
-                <li><button onClick={() => scrollToSection('contact')} className="text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors inline-block">{t.nav.contact}</button></li>
+                <li><Link href="/" className="text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">{t.nav.home}</Link></li>
+                <li><Link href="/about" className="text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">{t.nav.about}</Link></li>
+                <li><Link href="/work" className="text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">{t.nav.work}</Link></li>
+                <li><Link href="/uses" className="text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">{t.nav.uses}</Link></li>
+                <li><button onClick={() => scrollToSection('contact')} className="text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors inline-block">{t.nav.contact || "Contact"}</button></li>
               </ul>
             </div>
 
-            {/* Legal */}
+            {/* Explore */}
             <div className="flex flex-col gap-4">
-              <h4 className="text-[10px] font-bold tracking-[0.3em] text-[var(--text-primary)] uppercase">{t.footer.legalTitle}</h4>
+              <h4 className="text-[10px] font-bold tracking-[0.3em] text-[var(--text-primary)] uppercase">{t.footer.exploreTitle}</h4>
               <ul className="flex flex-col gap-3">
-                <li><a href="#" className="text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">{t.footer.privacy}</a></li>
-                <li><a href="#" className="text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">{t.footer.terms}</a></li>
+                <li><Link href="/ai-toolkit" className="text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">{t.nav.moreDropdown.aiToolkit.title}</Link></li>
+                <li><Link href="/guestbook" className="text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">{t.nav.moreDropdown.guestbook.title}</Link></li>
+                <li><Link href="/links" className="text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">{t.nav.moreDropdown.links.title}</Link></li>
+                <li><Link href="/attribution" className="text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">{t.nav.moreDropdown.attribution.title}</Link></li>
               </ul>
             </div>
 
             {/* Social */}
             <div className="flex flex-col gap-4">
               <h4 className="text-[10px] font-bold tracking-[0.3em] text-[var(--text-primary)] uppercase">{t.footer.socialTitle}</h4>
-              <ul className="flex flex-col gap-3">
+              <ul className="flex flex-col md:items-end gap-3">
                 <li>
                   <a href="https://github.com/thnakon" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors group">
-                    <span className="opacity-60 group-hover:opacity-100 transition-opacity">{Icons.github}</span>
+                    <span className="opacity-60 group-hover:opacity-100 transition-opacity whitespace-nowrap">{Icons.github}</span>
                     <span>GitHub</span>
                   </a>
                 </li>
                 <li>
-                  <a href="https://www.linkedin.com/public-profile/settings?trk=d_flagship3_profile_self_view_public_profile" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors group">
-                    <span className="opacity-60 group-hover:opacity-100 transition-opacity">{Icons.linkedin}</span>
+                  <a href="https://www.linkedin.com/in/thnakon" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors group">
+                    <span className="opacity-60 group-hover:opacity-100 transition-opacity whitespace-nowrap">{Icons.linkedin}</span>
                     <span>LinkedIn</span>
                   </a>
                 </li>
                 <li>
                   <a href="https://x.com/Obounwarm" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors group">
-                    <span className="opacity-60 group-hover:opacity-100 transition-opacity">{Icons.twitter}</span>
+                    <span className="opacity-60 group-hover:opacity-100 transition-opacity whitespace-nowrap">{Icons.twitter}</span>
                     <span>X (Twitter)</span>
                   </a>
                 </li>

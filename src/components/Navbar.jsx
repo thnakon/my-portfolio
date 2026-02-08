@@ -128,11 +128,10 @@ function CommandPalette({ isOpen, onClose, theme, toggleTheme, lang, t, router, 
     { id: 'home', label: lang === 'en' ? 'Home' : 'หน้าหลัก', icon: Icons.home, href: '/' },
     { id: 'about', label: lang === 'en' ? 'About' : 'เกี่ยวกับ', icon: Icons.user, href: '/about' },
     { id: 'projects', label: lang === 'en' ? 'Projects' : 'โปรเจกต์', icon: Icons.work, href: '/work' },
-    { id: 'blog', label: lang === 'en' ? 'Blog' : 'บล็อก', icon: Icons.blog, href: '/blog' },
+    { id: 'uses', label: lang === 'en' ? 'Uses' : 'เครื่องมือ', icon: Icons.monitor, href: '/uses' },
     { id: 'guestbook', label: lang === 'en' ? 'Guestbook' : 'สมุดเยี่ยม', icon: Icons.guestbook, href: '/guestbook' },
     { id: 'ai-toolkit', label: lang === 'en' ? 'AI Toolkit' : 'AI Toolkit', icon: Icons.ai, href: '/ai-toolkit' },
     { id: 'book-call', label: lang === 'en' ? 'Book a call' : 'นัดโทร', icon: Icons.calendar, action: () => { onClose(); onBookCall(); } },
-    { id: 'uses', label: lang === 'en' ? 'Uses' : 'เครื่องมือ', icon: Icons.monitor, href: '/uses' },
     { id: 'attribution', label: lang === 'en' ? 'Attribution' : 'เครดิต', icon: Icons.attribution, href: '/attribution' },
     { id: 'links', label: lang === 'en' ? 'Links' : 'ลิงก์', icon: Icons.link, href: '/links' },
   ];
@@ -420,7 +419,6 @@ export default function Navbar({ t, lang, setLang, theme, setTheme, onBookCall }
       } else {
         if (router.pathname === '/about') setActiveSection('about');
         else if (router.pathname.includes('/work')) setActiveSection('projects');
-        else if (router.pathname === '/blog') setActiveSection('blog');
         else if (router.pathname === '/uses') setActiveSection('uses');
         else if (router.pathname === '/guestbook') setActiveSection('guestbook');
         else if (['/ai-toolkit', '/links', '/attribution'].includes(router.pathname)) setActiveSection('more');
@@ -461,7 +459,7 @@ export default function Navbar({ t, lang, setLang, theme, setTheme, onBookCall }
     { id: 'home', label: t.nav.home, href: '/' },
     { id: 'about', label: t.nav.about, href: '/about' },
     { id: 'projects', label: t.nav.work, href: '/work' },
-    { id: 'blog', label: t.nav.blog, href: '/blog' },
+    { id: 'uses', label: t.nav.uses, href: '/uses' },
   ];
 
   return (

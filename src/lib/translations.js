@@ -6,7 +6,7 @@ const translations = {
             home: "Home",
             about: "About",
             work: "Work",
-            blog: "Blog",
+            uses: "Uses",
             more: "More",
             bookCall: "Book a Call",
             greetings: {
@@ -168,7 +168,7 @@ const translations = {
                     workType: "On-site",
                     logo: "/images/logos/merge-logo.png",
                     duration: "April 2025 - Oct 2025",
-                    description: "Full-service digital agency work spanning Web Production, Mobile Apps, and AI integration. Contributed to enterprise-level projects like <a href='https://singha.com/' target='_blank' rel='noopener noreferrer' class='text-[var(--text-primary)] font-bold border-b border-[var(--text-primary)]/20 hover:border-[var(--text-primary)] transition-all decoration-transparent'>singha.com</a>.",
+                    description: "Full-service Merge digital agency work spanning Web Production, Mobile Apps, and AI integration. Contributed to enterprise-level projects like <a href='https://singha.com/' target='_blank' rel='noopener noreferrer' class='text-[var(--text-primary)] font-bold border-b border-[var(--text-primary)]/20 hover:border-[var(--text-primary)] transition-all decoration-transparent'>singha.com</a>.",
                     achievements: [
                         "<b>Tech Stack</b>: Mastered <b>Laravel</b>, <b>Vue.js</b>, and <b>Tailwind CSS</b> for high-performance agency projects.",
                         "<b>Automated Testing</b>: Integrated <b>Cypress</b> for E2E testing to ensure zero-defect deployments.",
@@ -454,11 +454,9 @@ const translations = {
             copyright: "© 2026 Thanakon D. All rights reserved.",
             madeWith: "Made with",
             inThailand: "in Thailand",
-            linksTitle: "Links",
-            legalTitle: "Legal",
+            linksTitle: "Navigation",
+            exploreTitle: "Explore",
             socialTitle: "Social",
-            privacy: "Privacy Policy",
-            terms: "Terms of Service"
         },
     },
 
@@ -468,7 +466,7 @@ const translations = {
             home: "หน้าแรก",
             about: "เกี่ยวกับ",
             work: "ผลงาน",
-            blog: "บล็อก",
+            uses: "เครื่องมือ",
             more: "เพิ่มเติม",
             bookCall: "นัดคุย",
             greetings: {
@@ -630,7 +628,7 @@ const translations = {
                     workType: "On-site",
                     logo: "/images/logos/merge-logo.png",
                     duration: "เม.ย. 2025 - ต.ค. 2025",
-                    description: "บริษัท Digital Agency ชั้นนำที่ให้บริการพัฒนาสื่อดิจิทัลครบวงจร ทั้ง Web Production, Mobile Apps และงาน AI Programming ร่วมเป็นส่วนหนึ่งในการพัฒนา <a href='https://singha.com/' target='_blank' rel='noopener noreferrer' class='text-[var(--text-primary)] font-bold border-b border-[var(--text-primary)]/20 hover:border-[var(--text-primary)] transition-all'>singha.com</a>",
+                    description: "บริษัท Merge Digital Agency ชั้นนำที่ให้บริการพัฒนาสื่อดิจิทัลครบวงจร ทั้ง Web Production, Mobile Apps และงาน AI Programming ร่วมเป็นส่วนหนึ่งในการพัฒนา <a href='https://singha.com/' target='_blank' rel='noopener noreferrer' class='text-[var(--text-primary)] font-bold border-b border-[var(--text-primary)]/20 hover:border-[var(--text-primary)] transition-all'>singha.com</a>",
                     achievements: [
                         "<b>Laravel & Tools</b>: เชี่ยวชาญ <b>Laravel</b> ที่เป็นแกนหลัก พร้อม <b>Cypress</b> สำหรับการทดสอบอัตโนมัติ",
                         "<b>Dental CMS</b>: พัฒนาระบบเว็บคลินิกทำฟันและ CMS ควบคุมระบบหลังบ้านทั้งหมด",
@@ -916,11 +914,9 @@ const translations = {
             copyright: "© 2026 Thanakon D. สงวนลิขสิทธิ์ทั้งหมด",
             madeWith: "สร้างด้วย",
             inThailand: "ในเชียงใหม่, ประเทศไทย",
-            linksTitle: "ลิงก์หลัก",
-            legalTitle: "กฎหมาย",
+            linksTitle: "การนำทาง",
+            exploreTitle: "สำรวจ",
             socialTitle: "โซเชียล",
-            privacy: "นโยบายความเป็นส่วนตัว",
-            terms: "ข้อกำหนดการใช้งาน"
         },
     },
 };
