@@ -114,7 +114,7 @@ export default async function handler(req, res) {
   try {
     console.log('📤 Sending thank-you email to:', email);
     await transporter.sendMail({
-      from: `"Thanakorn Ngamsuth" <${process.env.GMAIL_USER}>`,
+      from: `"Thanakon Dungkumwattanasiri" <${process.env.GMAIL_USER}>`,
       to: email,
       replyTo: process.env.GMAIL_USER,
       subject: `Thank you for reaching out, ${name}! 🙏`,
@@ -151,8 +151,8 @@ export default async function handler(req, res) {
           
           <p style="color: #999; font-size: 12px; text-align: center;">
             Best regards,<br>
-            <strong>Thanakorn Ngamsuth</strong><br>
-            Frontend Developer
+            <strong>Thanakon Dungkumwattanasiri</strong><br>
+            AI-Augmented Developer
           </p>
         </div>
       `,

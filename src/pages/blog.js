@@ -41,12 +41,12 @@ const blogPosts = [
         date: 'FEB 05, 2026',
         readTime: 5,
         title: {
-            en: 'My 2026 Stack as a Frontend Developer',
-            th: 'Stack ที่ฉันใช้ในฐานะ Frontend Developer ปี 2026'
+            en: 'My 2026 Stack as an AI-Augmented Developer',
+            th: 'Stack ที่ฉันใช้ในฐานะ AI-Augmented Developer ปี 2024'
         },
         excerpt: {
-            en: "As a Frontend Developer in 2026, I've fine-tuned my development environment with a set of powerful tools that enhance productivity, efficiency, and customization. Let me share my current stack...",
-            th: "ในฐานะ Frontend Developer ในปี 2026 ผมได้ปรับแต่งสภาพแวดล้อมการพัฒนาด้วยเครื่องมือที่ทรงพลังหลายตัวที่เพิ่มประสิทธิภาพและความสะดวก..."
+            en: "As an AI-Augmented Developer in 2026, I've fine-tuned my environment with a set of powerful AI-driven tools that enhance productivity and efficiency. Let me share my current stack...",
+            th: "ในฐานะนักพัฒนาที่ขับเคลื่อนด้วย AI ในปี 2024 ผมได้ปรับแต่งสภาพแวดล้อมการพัฒนาด้วยเครื่องมือที่ทรงพลังที่เพิ่มประสิทธิภาพและความสะดวก..."
         },
         image: '/images/blog/stack-2026.png',
         tags: ['next.js', 'react', 'tools', 'productivity']

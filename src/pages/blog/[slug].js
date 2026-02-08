@@ -13,15 +13,15 @@ const blogPosts = {
         readTime: 5,
         image: '/images/blog/stack-2026.png',
         title: {
-            en: 'My 2026 Stack as a Frontend Developer',
-            th: 'Stack ที่ฉันใช้ในฐานะ Frontend Developer ปี 2026'
+            en: 'My 2026 Stack as an AI-Augmented Developer',
+            th: 'Stack ที่ฉันใช้ในฐานะ AI-Augmented Developer ปี 2024'
         },
         tags: ['next.js', 'react', 'tools', 'productivity'],
         content: {
             en: `
 ## Introduction
 
-As a Frontend Developer in 2026, I've spent countless hours refining my development environment. The right tools don't just make you faster—they transform how you think about code. Here's my current stack that keeps me productive and happy.
+As an AI-Augmented Developer in 2026, I've spent countless hours refining my development environment. The right tools don't just make you faster—they transform how you think about code, especially when integrated with high-intelligence AI workflows. Here's my current stack that keeps me productive and happy.
 
 ## Editor & Terminal
 
@@ -85,7 +85,7 @@ What's your stack look like? Let me know on Twitter!
             th: `
 ## บทนำ
 
-ในฐานะ Frontend Developer ในปี 2026 ผมใช้เวลานับไม่ถ้วนในการปรับแต่งสภาพแวดล้อมการพัฒนา เครื่องมือที่ถูกต้องไม่เพียงแค่ทำให้คุณเร็วขึ้น—มันเปลี่ยนวิธีที่คุณคิดเกี่ยวกับโค้ด นี่คือ Stack ปัจจุบันของผมที่ทำให้ผมทำงานได้อย่างมีประสิทธิภาพและมีความสุข
+ในฐานะนักพัฒนาที่ขับเคลื่อนด้วย AI ในปี 2024 ผมใช้เวลานับไม่ถ้วนในการปรับแต่งสภาพแวดล้อมการพัฒนา เครื่องมือที่ถูกต้องไม่เพียงแค่ทำให้คุณเร็วขึ้น—มันเปลี่ยนวิธีที่คุณคิดเกี่ยวกับโค้ด โดยเฉพาะเมื่อผสานรวมกับกระบวนการทำงานแบบ AI อัจฉริยะ นี่คือ Stack ปัจจุบันของผมที่ทำให้ผมทำงานได้อย่างมีประสิทธิภาพและมีความสุข
 
 ## Editor & Terminal
 

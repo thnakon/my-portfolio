@@ -46,15 +46,15 @@ export default function App({ Component, pageProps: { session, ...pageProps } })
   return (
     <SessionProvider session={session}>
       <Head>
-        <title>Thanakon Dungkumwattanasiri | Full Stack Developer</title>
-        <meta name="description" content="Full Stack Web Developer based in Chiang Mai, specializing in Laravel, Next.js, and modern web technologies." />
+        <title>Thanakon Dungkumwattanasiri | AI-Augmented Software Developer</title>
+        <meta name="description" content="AI-Augmented Software Developer based in Chiang Mai, specializing in Laravel, Next.js, and scaling intelligent digital systems through advanced AI orchestration." />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="author" content="Thanakon Dungkumwattanasiri" />
-        <meta name="keywords" content="Full Stack Developer, Web Developer, Laravel, Next.js, React, Chiang Mai, Thailand" />
+        <meta name="keywords" content="AI-Augmented Developer, Software Engineer, AI Integration, LLM, AI Agent, Laravel, Next.js, React, Chiang Mai, Thailand" />
 
         {/* Open Graph */}
-        <meta property="og:title" content="Thanakon Dungkumwattanasiri | Full Stack Developer" />
-        <meta property="og:description" content="Full Stack Web Developer based in Chiang Mai, specializing in Laravel, Next.js, and modern web technologies." />
+        <meta property="og:title" content="Thanakon Dungkumwattanasiri | AI-Augmented Software Developer" />
+        <meta property="og:description" content="AI-Augmented Software Developer based in Chiang Mai, specializing in Laravel, Next.js, and scaling intelligent digital systems through advanced AI orchestration." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://thnakon.dev" />
         <meta property="og:site_name" content="Thanakon Dungkumwattanasiri Portfolio" />
@@ -65,8 +65,8 @@ export default function App({ Component, pageProps: { session, ...pageProps } })
 
         {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Thanakon Dungkumwattanasiri | Full Stack Developer" />
-        <meta name="twitter:description" content="Full Stack Web Developer based in Chiang Mai, specializing in Laravel, Next.js, and modern web technologies." />
+        <meta name="twitter:title" content="Thanakon Dungkumwattanasiri | AI-Augmented Software Developer" />
+        <meta name="twitter:description" content="AI-Augmented Software Developer based in Chiang Mai, specializing in Laravel, Next.js, and scaling intelligent digital systems through advanced AI orchestration." />
         <meta name="twitter:image" content="https://thnakon.dev/images/og-image.png" />
 
         {/* Favicon */}
