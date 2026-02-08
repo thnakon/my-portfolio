@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 
-export default function Hero({ t, onGetInTouch, onImageClick }) {
+export default function Hero({ t, lang, onGetInTouch, onImageClick }) {
   const [copied, setCopied] = useState(false);
   const [fireflies, setFireflies] = useState([]);
   const [typedText, setTypedText] = useState('');
@@ -203,19 +203,19 @@ export default function Hero({ t, onGetInTouch, onImageClick }) {
         </h1>
         
         <div 
-          className="text-secondary text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed transition-all duration-700 font-light flex flex-wrap items-center justify-center"
+          className="text-secondary text-lg md:text-xl max-w-4xl mx-auto mb-10 leading-relaxed transition-all duration-700 font-light block"
           style={{
             opacity: showContent ? 1 : 0,
             transform: showContent ? 'translateY(0)' : 'translateY(16px)',
             transitionDelay: '100ms'
           }}
         >
-          {t.hero.description.split('Thanakon').map((part, index, array) => (
-            <span key={index} className="flex items-center">
+          {t.hero.description.split(/Thanakon|ธนากร/).map((part, index, array) => (
+            <span key={index}>
               {part}
               {index < array.length - 1 && (
                 <span className="inline-flex items-center gap-2 align-middle mx-1">
-                  <span className="text-primary">Thanakon</span>
+                  <span className="text-primary">{lang === 'en' ? 'Thanakon' : 'ธนากร'}</span>
                   <div className="relative group/avatar">
                     <img 
                       src="/images/profile-bento.jpg" 

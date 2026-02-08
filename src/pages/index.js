@@ -35,7 +35,7 @@ export default function Home({ theme, setTheme, lang, setLang }) {
       />
 
       {/* Hero Section */}
-      <Hero t={t} onGetInTouch={() => setBookingOpen(true)} onImageClick={openImage} />
+      <Hero t={t} lang={lang} onGetInTouch={() => setBookingOpen(true)} onImageClick={openImage} />
 
       {/* Overview Section */}
       <Overview t={t} onGetInTouch={() => setBookingOpen(true)} />
