@@ -29,11 +29,6 @@ const Icons = {
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
     </svg>
   ),
-  blog: (
-    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-    </svg>
-  ),
   link: (
     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
@@ -116,15 +111,9 @@ const Icons = {
   ),
 };
 
-// Command Palette Component
-function CommandPalette({ isOpen, onClose, theme, toggleTheme, lang, t, router, onBookCall }) {
-  const [searchQuery, setSearchQuery] = useState('');
-  const [selectedIndex, setSelectedIndex] = useState(0);
-  const [isVisible, setIsVisible] = useState(false);
-  const [isAnimating, setIsAnimating] = useState(false);
-  const inputRef = useRef(null);
-
-  const pages = [
+// Shared Navigation Data
+const getNavData = (lang, t, onClose, onBookCall) => ({
+  pages: [
     { id: 'home', label: lang === 'en' ? 'Home' : 'หน้าหลัก', icon: Icons.home, href: '/' },
     { id: 'about', label: lang === 'en' ? 'About' : 'เกี่ยวกับ', icon: Icons.user, href: '/about' },
     { id: 'projects', label: lang === 'en' ? 'Projects' : 'โปรเจกต์', icon: Icons.work, href: '/work' },
@@ -134,244 +123,14 @@ function CommandPalette({ isOpen, onClose, theme, toggleTheme, lang, t, router, 
     { id: 'book-call', label: lang === 'en' ? 'Book a call' : 'นัดโทร', icon: Icons.calendar, action: () => { onClose(); onBookCall(); } },
     { id: 'attribution', label: lang === 'en' ? 'Attribution' : 'เครดิต', icon: Icons.attribution, href: '/attribution' },
     { id: 'links', label: lang === 'en' ? 'Links' : 'ลิงก์', icon: Icons.link, href: '/links' },
-  ];
-
-  const connect = [
+  ],
+  connect: [
     { id: 'github', label: 'GitHub', icon: Icons.github, href: 'https://github.com/thnakon', external: true },
     { id: 'linkedin', label: 'LinkedIn', icon: Icons.linkedin, href: 'https://www.linkedin.com/in/thnakon', external: true },
     { id: 'twitter', label: 'X (Twitter)', icon: Icons.twitter, href: 'https://x.com/Obounwarm', external: true },
     { id: 'email', label: 'Email', icon: Icons.email, href: 'mailto:thnakon.n@gmail.com', external: true },
-  ];
-
-  const filteredPages = pages.filter(page => 
-    page.label.toLowerCase().includes(searchQuery.toLowerCase())
-  );
-
-  const filteredConnect = connect.filter(item => 
-    item.label.toLowerCase().includes(searchQuery.toLowerCase())
-  );
-
-  const allItems = [...filteredPages, ...filteredConnect];
-
-  useEffect(() => {
-    if (isOpen) {
-      setIsVisible(true);
-      setTimeout(() => setIsAnimating(true), 10);
-      if (inputRef.current) {
-        setTimeout(() => inputRef.current.focus(), 100);
-      }
-    } else {
-      setIsAnimating(false);
-      const timer = setTimeout(() => setIsVisible(false), 300);
-      return () => clearTimeout(timer);
-    }
-    setSearchQuery('');
-    setSelectedIndex(0);
-  }, [isOpen]);
-
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (!isOpen) return;
-
-      if (e.key === 'Escape') {
-        onClose();
-      } else if (e.key === 'ArrowDown') {
-        e.preventDefault();
-        setSelectedIndex(prev => (prev + 1) % allItems.length);
-      } else if (e.key === 'ArrowUp') {
-        e.preventDefault();
-        setSelectedIndex(prev => (prev - 1 + allItems.length) % allItems.length);
-      } else if (e.key === 'Enter') {
-        e.preventDefault();
-        const item = allItems[selectedIndex];
-        if (item) {
-          if (item.action) {
-            item.action();
-          } else if (item.external) {
-            window.open(item.href, '_blank');
-          } else {
-            router.push(item.href);
-          }
-          onClose();
-        }
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isOpen, selectedIndex, allItems, onClose, router]);
-
-  // Global keyboard shortcut (Cmd+K)
-  useEffect(() => {
-    const handleGlobalKeyDown = (e) => {
-      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
-        e.preventDefault();
-        if (!isOpen) {
-          // Trigger parent's open state
-        }
-      }
-    };
-
-    window.addEventListener('keydown', handleGlobalKeyDown);
-    return () => window.removeEventListener('keydown', handleGlobalKeyDown);
-  }, [isOpen]);
-
-  if (!isVisible) return null;
-
-  const handleClose = () => {
-    setIsAnimating(false);
-    setTimeout(() => onClose(), 300);
-  };
-
-  const handleItemClick = (item) => {
-    if (item.action) {
-      item.action();
-    } else if (item.external) {
-      window.open(item.href, '_blank');
-    } else {
-      router.push(item.href);
-    }
-    onClose();
-  };
-
-  return (
-    <>
-      {/* Backdrop - no blur to keep nav visible */}
-      <div 
-        className={`fixed inset-0 z-[2000] bg-black/50 transition-opacity duration-300 ${isAnimating ? 'opacity-100' : 'opacity-0'}`}
-        onClick={handleClose}
-      />
-
-      {/* Command Palette Modal */}
-      <div className="fixed inset-0 z-[2001] flex items-start justify-center pt-[15vh] px-4 pointer-events-none">
-        <div 
-          className={`
-            w-full max-w-xl pointer-events-auto
-            rounded-2xl overflow-hidden
-            shadow-2xl
-            border transition-all duration-300 ease-out
-            ${isAnimating ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-95 -translate-y-4'}
-            ${theme === 'dark' 
-              ? 'bg-[#0d0d0d] border-white/10' 
-              : 'bg-white border-black/10'}
-          `}
-        >
-          {/* Search Header */}
-          <div className={`flex items-center gap-3 px-5 py-4 border-b ${theme === 'dark' ? 'border-white/10' : 'border-black/10'}`}>
-            <div className={theme === 'dark' ? 'text-white/50' : 'text-black/50'}>
-              {Icons.search}
-            </div>
-            <input
-              ref={inputRef}
-              type="text"
-              placeholder={lang === 'en' ? 'Search' : 'ค้นหา'}
-              value={searchQuery}
-              onChange={(e) => {
-                setSearchQuery(e.target.value);
-                setSelectedIndex(0);
-              }}
-              className={`
-                flex-1 bg-transparent outline-none text-lg font-medium
-                placeholder:opacity-50
-                ${theme === 'dark' ? 'text-white placeholder:text-white/50' : 'text-black placeholder:text-black/50'}
-              `}
-            />
-            <button
-              onClick={toggleTheme}
-              className={`p-2 rounded-lg transition-all ${theme === 'dark' ? 'hover:bg-white/10 text-white/50' : 'hover:bg-black/10 text-black/50'}`}
-            >
-              {theme === 'dark' ? Icons.sun : Icons.moon}
-            </button>
-            <button
-              onClick={handleClose}
-              className={`px-3 py-1.5 rounded-lg text-xs font-bold uppercase tracking-wider transition-all ${theme === 'dark' ? 'bg-white/10 text-white/70 hover:bg-white/20' : 'bg-black/10 text-black/70 hover:bg-black/20'}`}
-            >
-              ESC
-            </button>
-          </div>
-
-          {/* Results */}
-          <div className="max-h-[60vh] overflow-y-auto py-2">
-            {/* Pages Section */}
-            {filteredPages.length > 0 && (
-              <div className="px-3 py-2">
-                <p className={`px-3 py-2 text-[10px] font-bold tracking-[0.2em] uppercase ${theme === 'dark' ? 'text-white/30' : 'text-black/30'}`}>
-                  {lang === 'en' ? 'PAGES' : 'หน้า'}
-                </p>
-                {filteredPages.map((page, index) => (
-                  <button
-                    key={page.id}
-                    onClick={() => handleItemClick(page)}
-                    onMouseEnter={() => setSelectedIndex(index)}
-                    className={`
-                      w-full flex items-center gap-4 px-4 py-3 rounded-xl transition-all
-                      ${selectedIndex === index 
-                        ? (theme === 'dark' ? 'bg-white/10' : 'bg-black/10') 
-                        : 'hover:bg-opacity-5'}
-                    `}
-                  >
-                    <div className={theme === 'dark' ? 'text-white/60' : 'text-black/60'}>
-                      {page.icon}
-                    </div>
-                    <span className={`text-base font-medium ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
-                      {page.label}
-                    </span>
-                  </button>
-                ))}
-              </div>
-            )}
-
-            {/* Connect Section */}
-            {filteredConnect.length > 0 && (
-              <div className="px-3 py-2">
-                <p className={`px-3 py-2 text-[10px] font-bold tracking-[0.2em] uppercase ${theme === 'dark' ? 'text-white/30' : 'text-black/30'}`}>
-                  {lang === 'en' ? 'CONNECT' : 'เชื่อมต่อ'}
-                </p>
-                {filteredConnect.map((item, index) => {
-                  const itemIndex = filteredPages.length + index;
-                  return (
-                    <button
-                      key={item.id}
-                      onClick={() => handleItemClick(item)}
-                      onMouseEnter={() => setSelectedIndex(itemIndex)}
-                      className={`
-                        w-full flex items-center justify-between gap-4 px-4 py-3 rounded-xl transition-all
-                        ${selectedIndex === itemIndex 
-                          ? (theme === 'dark' ? 'bg-white/10' : 'bg-black/10') 
-                          : 'hover:bg-opacity-5'}
-                      `}
-                    >
-                      <div className="flex items-center gap-4">
-                        <div className={theme === 'dark' ? 'text-white/60' : 'text-black/60'}>
-                          {item.icon}
-                        </div>
-                        <span className={`text-base font-medium ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
-                          {item.label}
-                        </span>
-                      </div>
-                      <div className={theme === 'dark' ? 'text-white/30' : 'text-black/30'}>
-                        {Icons.arrow}
-                      </div>
-                    </button>
-                  );
-                })}
-              </div>
-            )}
-
-            {/* No Results */}
-            {allItems.length === 0 && (
-              <div className="px-6 py-12 text-center">
-                <p className={theme === 'dark' ? 'text-white/50' : 'text-black/50'}>
-                  {lang === 'en' ? 'No results found' : 'ไม่พบผลลัพธ์'}
-                </p>
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
-    </>
-  );
-}
+  ]
+});
 
 export default function Navbar({ t, lang, setLang, theme, setTheme, onBookCall }) {
   const router = useRouter();
@@ -379,7 +138,20 @@ export default function Navbar({ t, lang, setLang, theme, setTheme, onBookCall }
   const [isGreeting, setIsGreeting] = useState(true);
   const [isExpanded, setIsExpanded] = useState(false);
   const [isCommandOpen, setIsCommandOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedIndex, setSelectedIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
+  const searchInputRef = useRef(null);
+
+  const { pages, connect } = getNavData(lang, t, () => setIsCommandOpen(false), onBookCall);
+
+  const filteredPages = pages.filter(page => 
+    page.label.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+  const filteredConnect = connect.filter(item => 
+    item.label.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+  const allItems = [...filteredPages, ...filteredConnect];
 
   // Detect mobile
   useEffect(() => {
@@ -429,18 +201,55 @@ export default function Navbar({ t, lang, setLang, theme, setTheme, onBookCall }
     return () => window.removeEventListener('scroll', handleScroll);
   }, [router.pathname]);
 
-  // Global keyboard shortcut (Cmd+K)
+  // Keyboard handling for search
   useEffect(() => {
     const handleKeyDown = (e) => {
       if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
         e.preventDefault();
         setIsCommandOpen(prev => !prev);
+        setIsExpanded(false);
+      } else if (e.key === 'Escape') {
+        setIsCommandOpen(false);
+      } else if (isCommandOpen) {
+        if (e.key === 'ArrowDown') {
+          e.preventDefault();
+          setSelectedIndex(prev => (prev + 1) % allItems.length);
+        } else if (e.key === 'ArrowUp') {
+          e.preventDefault();
+          setSelectedIndex(prev => (prev - 1 + allItems.length) % allItems.length);
+        } else if (e.key === 'Enter') {
+          e.preventDefault();
+          const item = allItems[selectedIndex];
+          if (item) {
+            handleItemClick(item);
+          }
+        }
       }
     };
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, []);
+  }, [isCommandOpen, selectedIndex, allItems]);
+
+  // Focus search input when opened
+  useEffect(() => {
+    if (isCommandOpen) {
+      setTimeout(() => searchInputRef.current?.focus(), 100);
+      setSearchQuery('');
+      setSelectedIndex(0);
+    }
+  }, [isCommandOpen]);
+
+  const handleItemClick = (item) => {
+    if (item.action) {
+      item.action();
+    } else if (item.external) {
+      window.open(item.href, '_blank');
+    } else {
+      router.push(item.href);
+    }
+    setIsCommandOpen(false);
+  };
 
   const toggleTheme = () => {
     const newTheme = theme === 'dark' ? 'light' : 'dark';
@@ -464,17 +273,13 @@ export default function Navbar({ t, lang, setLang, theme, setTheme, onBookCall }
 
   return (
     <>
-      {/* Command Palette */}
-      <CommandPalette 
-        isOpen={isCommandOpen}
-        onClose={() => setIsCommandOpen(false)}
-        theme={theme}
-        toggleTheme={toggleTheme}
-        lang={lang}
-        t={t}
-        router={router}
-        onBookCall={onBookCall}
-      />
+      {/* Command Palette Backdrop */}
+      {isCommandOpen && (
+        <div 
+          className="fixed inset-0 z-[999] bg-black/40 backdrop-blur-sm transition-opacity duration-500"
+          onClick={() => setIsCommandOpen(false)}
+        />
+      )}
 
       {/* 1. Header Layer (Logo & Command) - Only on Desktop */}
       <div className="fixed top-0 left-0 right-0 z-[1001] pointer-events-none hidden md:block">
@@ -658,8 +463,9 @@ export default function Navbar({ t, lang, setLang, theme, setTheme, onBookCall }
                  ? 'bg-black/40 border border-white/25 shadow-[0_20px_50px_rgba(0,0,0,0.5)]' 
                  : 'bg-white/40 border border-black/10 shadow-[0_20px_50px_rgba(0,0,0,0.08)]'}
                ${isGreeting ? 'w-[140px] h-[36px] rounded-full' : ''}
-               ${!isGreeting && !isExpanded ? 'w-[480px] h-[44px] rounded-full px-4' : ''}
-               ${isExpanded ? 'w-[750px] h-[480px] rounded-[42px] p-6 pt-12' : ''}
+               ${!isGreeting && !isExpanded && !isCommandOpen ? 'w-[480px] h-[44px] rounded-full px-4' : ''}
+               ${isExpanded && !isCommandOpen ? 'w-[750px] h-[480px] rounded-[42px] p-6 pt-12' : ''}
+               ${isCommandOpen ? 'w-[640px] h-[520px] rounded-[32px] p-0' : ''}
              `}
            >
               {/* Greeting Layer */}
@@ -670,7 +476,7 @@ export default function Navbar({ t, lang, setLang, theme, setTheme, onBookCall }
               </div>
 
               {/* Nav Items Level */}
-              <div className={`w-full flex items-center h-[44px] shrink-0 transition-all duration-500 ${!isGreeting ? 'opacity-100' : 'opacity-0 pointer-events-none'} ${isExpanded ? 'mb-4 md:mb-8' : ''}`}>
+              <div className={`w-full flex items-center h-[44px] shrink-0 transition-all duration-500 ${!isGreeting && !isCommandOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'} ${isExpanded ? 'mb-4 md:mb-8' : ''}`}>
                  <div className="w-full flex items-center justify-between overflow-x-auto no-scrollbar md:overflow-visible">
                    <div className="flex items-center gap-0 md:gap-0.5 shrink-0">
                      {navItems.map((item) => (
@@ -725,8 +531,127 @@ export default function Navbar({ t, lang, setLang, theme, setTheme, onBookCall }
                  </div>
               </div>
 
+              {/* Command Palette Interface (Inline) */}
+              {isCommandOpen && (
+                <div className="w-full h-full flex flex-col animate-reveal-fade-up">
+                   {/* Search Header */}
+                   <div className={`flex items-center gap-3 px-6 py-5 border-b ${theme === 'dark' ? 'border-white/10' : 'border-black/10'}`}>
+                     <div className={theme === 'dark' ? 'text-white/50' : 'text-black/50'}>
+                       {Icons.search}
+                     </div>
+                     <input
+                       ref={searchInputRef}
+                       type="text"
+                       placeholder={lang === 'en' ? 'Search' : 'ค้นหา'}
+                       value={searchQuery}
+                       onChange={(e) => {
+                         setSearchQuery(e.target.value);
+                         setSelectedIndex(0);
+                       }}
+                       className={`
+                         flex-1 bg-transparent outline-none text-xl font-medium
+                         placeholder:opacity-50
+                         ${theme === 'dark' ? 'text-white placeholder:text-white/50' : 'text-black placeholder:text-black/50'}
+                       `}
+                     />
+                     <div className="flex items-center gap-2">
+                       <button
+                         onClick={toggleTheme}
+                         className={`p-2 rounded-lg transition-all ${theme === 'dark' ? 'hover:bg-white/10 text-white/50' : 'hover:bg-black/10 text-black/50'}`}
+                       >
+                         {theme === 'dark' ? Icons.sun : Icons.moon}
+                       </button>
+                       <button
+                         onClick={() => setIsCommandOpen(false)}
+                         className={`px-3 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-wider transition-all ${theme === 'dark' ? 'bg-white/10 text-white/70 hover:bg-white/20' : 'bg-black/10 text-black/70 hover:bg-black/20'}`}
+                       >
+                         ESC
+                       </button>
+                     </div>
+                   </div>
+
+                   {/* Results Container */}
+                   <div className="flex-1 overflow-y-auto px-2 py-4 no-scrollbar">
+                     {/* Pages Section */}
+                     {filteredPages.length > 0 && (
+                       <div className="px-3 py-2 mb-4">
+                         <p className={`px-3 py-2 text-[10px] font-bold tracking-[0.2em] uppercase ${theme === 'dark' ? 'text-white/30' : 'text-black/30'}`}>
+                           {lang === 'en' ? 'PAGES' : 'หน้า'}
+                         </p>
+                         {filteredPages.map((page, index) => (
+                           <button
+                             key={page.id}
+                             onClick={() => handleItemClick(page)}
+                             onMouseEnter={() => setSelectedIndex(index)}
+                             className={`
+                               w-full flex items-center gap-4 px-4 py-3 rounded-2xl transition-all
+                               ${selectedIndex === index 
+                                 ? (theme === 'dark' ? 'bg-white/10 scale-[1.02]' : 'bg-black/10 scale-[1.02]') 
+                                 : 'hover:bg-opacity-5 hover:scale-[1.01]'}
+                             `}
+                           >
+                             <div className={theme === 'dark' ? 'text-white/60' : 'text-black/60'}>
+                               {page.icon}
+                             </div>
+                             <span className={`text-base font-medium ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
+                               {page.label}
+                             </span>
+                           </button>
+                         ))}
+                       </div>
+                     )}
+
+                     {/* Connect Section */}
+                     {filteredConnect.length > 0 && (
+                       <div className="px-3 py-2">
+                         <p className={`px-3 py-2 text-[10px] font-bold tracking-[0.2em] uppercase ${theme === 'dark' ? 'text-white/30' : 'text-black/30'}`}>
+                           {lang === 'en' ? 'CONNECT' : 'เชื่อมต่อ'}
+                         </p>
+                         {filteredConnect.map((item, index) => {
+                           const itemIndex = filteredPages.length + index;
+                           return (
+                             <button
+                               key={item.id}
+                               onClick={() => handleItemClick(item)}
+                               onMouseEnter={() => setSelectedIndex(itemIndex)}
+                               className={`
+                                 w-full flex items-center justify-between gap-4 px-4 py-3 rounded-2xl transition-all
+                                 ${selectedIndex === itemIndex 
+                                   ? (theme === 'dark' ? 'bg-white/10 scale-[1.02]' : 'bg-black/10 scale-[1.02]') 
+                                   : 'hover:bg-opacity-5 hover:scale-[1.01]'}
+                               `}
+                             >
+                               <div className="flex items-center gap-4">
+                                 <div className={theme === 'dark' ? 'text-white/60' : 'text-black/60'}>
+                                   {item.icon}
+                                 </div>
+                                 <span className={`text-base font-medium ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
+                                   {item.label}
+                                 </span>
+                               </div>
+                               <div className={theme === 'dark' ? 'text-white/30' : 'text-black/30'}>
+                                 {Icons.arrow}
+                               </div>
+                             </button>
+                           );
+                         })}
+                       </div>
+                     )}
+
+                     {/* No Results */}
+                     {allItems.length === 0 && (
+                       <div className="px-6 py-12 text-center">
+                         <p className={theme === 'dark' ? 'text-white/50' : 'text-black/50'}>
+                           {lang === 'en' ? 'No results found' : 'ไม่พบผลลัพธ์'}
+                         </p>
+                       </div>
+                     )}
+                   </div>
+                </div>
+              )}
+
               {/* Dashboard Dropdown Content (Expanded) */}
-              <div className={`w-full flex-1 transition-all duration-500 delay-100 flex flex-col md:grid md:grid-cols-12 gap-4 md:gap-6 overflow-y-auto ${isExpanded ? 'opacity-100 scale-100' : 'opacity-0 scale-95 pointer-events-none'}`}>
+              <div className={`w-full flex-1 transition-all duration-500 delay-100 flex flex-col md:grid md:grid-cols-12 gap-4 md:gap-6 overflow-y-auto ${isExpanded && !isCommandOpen ? 'opacity-100 scale-100' : 'opacity-0 scale-95 pointer-events-none'}`}>
                  {/* Left side: Grid of Visual Cards */}
                  <div className="w-full md:col-span-8 grid grid-cols-2 gap-3 md:gap-4 shrink-0">
                     <Link href="/guestbook" onClick={() => setIsExpanded(false)} className={`relative group h-[120px] md:h-auto rounded-2xl md:rounded-3xl overflow-hidden border transition-all ${theme === 'dark' ? 'bg-white/5 border-white/10 hover:border-white/20' : 'bg-black/5 border-black/5 hover:border-black/10'}`}>
@@ -798,13 +723,12 @@ export default function Navbar({ t, lang, setLang, theme, setTheme, onBookCall }
              hidden md:flex items-center justify-center
              backdrop-blur-2xl transition-all duration-700 ease-[cubic-bezier(0.2,0.8,0.2,1)]
              ${theme === 'dark' ? 'bg-black/40 border border-white/25' : 'bg-white/40 border border-black/10'}
-             ${!isGreeting && !isExpanded ? 'w-[38px] h-[38px] rounded-full opacity-100 shadow-lg' : 'w-0 h-0 opacity-0 overflow-hidden'}
+             ${!isGreeting && !isExpanded && !isCommandOpen ? 'w-[38px] h-[38px] rounded-full opacity-100 shadow-lg' : 'w-0 h-0 opacity-0 overflow-hidden'}
            `}>
              <div className={`scale-100 animate-reveal-fade-up ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
                {activeSection === 'home' && Icons.home}
                {activeSection === 'about' && Icons.user}
                {activeSection === 'projects' && Icons.work}
-               {activeSection === 'blog' && Icons.blog}
                {activeSection === 'guestbook' && Icons.book}
                {activeSection === 'uses' && Icons.monitor}
                {activeSection === 'more' && Icons.ai}
