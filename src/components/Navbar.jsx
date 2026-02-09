@@ -398,14 +398,14 @@ export default function Navbar({ t, lang, setLang, theme, setTheme, onBookCall }
           {/* Visual Cards */}
           <div className="grid grid-cols-2 gap-3 mb-4">
             <Link href="/guestbook" onClick={() => setIsExpanded(false)} className={`relative group h-[100px] rounded-2xl overflow-hidden border ${theme === 'dark' ? 'bg-white/5 border-white/10' : 'bg-black/5 border-black/10'}`}>
-              <img src="/images/guestbook-thumb.png" className="absolute inset-0 w-full h-full object-cover opacity-70" />
+              <img src="/images/guestbook-motivation.png" className="absolute inset-0 w-full h-full object-cover opacity-70" />
               <div className={`absolute inset-0 bg-gradient-to-t from-black/80 to-transparent`} />
               <div className="absolute bottom-3 left-3">
                 <h4 className="text-sm font-bold text-white">{t.nav.moreDropdown.guestbook.title}</h4>
               </div>
             </Link>
             <Link href="/ai-toolkit" onClick={() => setIsExpanded(false)} className={`relative group h-[100px] rounded-2xl overflow-hidden border ${theme === 'dark' ? 'bg-white/5 border-white/10' : 'bg-black/5 border-black/10'}`}>
-              <img src="/images/ai-toolkit-thumb.jpg" className="absolute inset-0 w-full h-full object-cover opacity-70" />
+              <img src="/images/ai-toolkit-future.png" className="absolute inset-0 w-full h-full object-cover opacity-70" />
               <div className={`absolute inset-0 bg-gradient-to-t from-black/80 to-transparent`} />
               <div className="absolute bottom-3 left-3">
                 <h4 className="text-sm font-bold text-white">{t.nav.moreDropdown.aiToolkit.title}</h4>
@@ -655,7 +655,7 @@ export default function Navbar({ t, lang, setLang, theme, setTheme, onBookCall }
                  {/* Left side: Grid of Visual Cards */}
                  <div className="w-full md:col-span-8 grid grid-cols-2 gap-3 md:gap-4 shrink-0">
                     <Link href="/guestbook" onClick={() => setIsExpanded(false)} className={`relative group h-[120px] md:h-auto rounded-2xl md:rounded-3xl overflow-hidden border transition-all ${theme === 'dark' ? 'bg-white/5 border-white/10 hover:border-white/20' : 'bg-black/5 border-black/5 hover:border-black/10'}`}>
-                       <img src="/images/guestbook-thumb.png" className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-all duration-1000" />
+                       <img src="/images/guestbook-motivation.png" className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-all duration-1000" />
                        <div className={`absolute inset-0 bg-gradient-to-t via-transparent to-transparent ${theme === 'dark' ? 'from-black/90' : 'from-white/90'}`} />
                        <div className="absolute bottom-3 md:bottom-6 left-3 md:left-6">
                          <div className={`w-6 h-6 md:w-8 md:h-8 rounded-full mb-2 md:mb-3 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform ${theme === 'dark' ? 'bg-white text-black' : 'bg-black text-white'}`}>
@@ -666,7 +666,7 @@ export default function Navbar({ t, lang, setLang, theme, setTheme, onBookCall }
                        </div>
                     </Link>
                     <Link href="/ai-toolkit" onClick={() => setIsExpanded(false)} className={`relative group h-[120px] md:h-auto rounded-2xl md:rounded-3xl overflow-hidden border transition-all ${theme === 'dark' ? 'bg-white/5 border-white/10 hover:border-white/20' : 'bg-black/5 border-black/5 hover:border-black/10'}`}>
-                       <img src="/images/ai-toolkit-thumb.jpg" className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-all duration-1000" />
+                       <img src="/images/ai-toolkit-future.png" className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-all duration-1000" />
                        <div className={`absolute inset-0 bg-gradient-to-t via-transparent to-transparent ${theme === 'dark' ? 'from-black/90' : 'from-white/90'}`} />
                        <div className="absolute bottom-3 md:bottom-6 left-3 md:left-6">
                          <div className={`w-6 h-6 md:w-8 md:h-8 rounded-full mb-2 md:mb-3 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform ${theme === 'dark' ? 'bg-white text-black' : 'bg-black text-white'}`}>
