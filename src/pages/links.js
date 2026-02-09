@@ -79,20 +79,6 @@ const links = [
         bgGradient: 'from-gray-800 to-black'
     },
     {
-        id: 'gitlab',
-        name: 'GitLab',
-        url: 'https://gitlab.com/thnakon',
-        description: 'Private projects & enterprise work',
-        descriptionTH: 'โปรเจกต์ส่วนตัวและงานองค์กร',
-        icon: (
-            <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                <path d="m23.6 9.593-.033-.086L20.3.98a.851.851 0 0 0-.336-.405.87.87 0 0 0-.52-.144.87.87 0 0 0-.52.152.86.86 0 0 0-.324.413l-2.178 6.674H7.59L5.412.996a.856.856 0 0 0-.324-.413A.87.87 0 0 0 4.568.43a.87.87 0 0 0-.52.144.851.851 0 0 0-.336.405L.433 9.502l-.032.086a6.066 6.066 0 0 0 2.012 7.01l.01.008.028.02 4.984 3.737 2.467 1.87 1.502 1.136a1.01 1.01 0 0 0 1.22 0l1.502-1.136 2.467-1.87 5.012-3.757.013-.01a6.07 6.07 0 0 0 2.005-7.003z" />
-            </svg>
-        ),
-        color: '#FC6D26',
-        bgGradient: 'from-orange-500 to-orange-700'
-    },
-    {
         id: 'email',
         name: 'Email',
         url: 'mailto:thnakon.d@gmail.com',
