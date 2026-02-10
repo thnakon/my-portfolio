@@ -118,7 +118,7 @@ const getNavData = (lang, t, onClose, onBookCall) => ({
     { id: 'about', label: lang === 'en' ? 'About' : 'เกี่ยวกับ', icon: Icons.user, href: '/about' },
     { id: 'projects', label: lang === 'en' ? 'Projects' : 'โปรเจกต์', icon: Icons.work, href: '/work' },
     { id: 'uses', label: lang === 'en' ? 'Uses' : 'เครื่องมือ', icon: Icons.monitor, href: '/uses' },
-    { id: 'guestbook', label: lang === 'en' ? 'Guestbook' : 'สมุดเยี่ยม', icon: Icons.guestbook, href: '/guestbook' },
+    { id: 'guestbook', label: lang === 'en' ? 'Signature Wall' : 'Signature Wall', icon: Icons.guestbook, href: '/guestbook' },
     { id: 'ai-toolkit', label: lang === 'en' ? 'AI Toolkit' : 'AI Toolkit', icon: Icons.ai, href: '/ai-toolkit' },
     { id: 'book-call', label: lang === 'en' ? 'Book a call' : 'นัดโทร', icon: Icons.calendar, action: () => { onClose(); onBookCall(); } },
     { id: 'attribution', label: lang === 'en' ? 'Attribution' : 'เครดิต', icon: Icons.attribution, href: '/attribution' },

@@ -17,7 +17,7 @@ const translations = {
             },
             moreDropdown: {
                 guestbook: {
-                    title: "Guestbook",
+                    title: "Signature Wall",
                     desc: "Let me know you were here"
                 },
                 aiToolkit: {
@@ -477,7 +477,7 @@ const translations = {
             },
             moreDropdown: {
                 guestbook: {
-                    title: "สมุดเยี่ยม",
+                    title: "Signature Wall",
                     desc: "เขียนข้อความทักทายกันได้ที่นี่"
                 },
                 aiToolkit: {
