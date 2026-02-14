@@ -38,7 +38,7 @@ const TypewriterText = ({ text, delay = 50, startDelay = 500, onComplete }) => {
 };
 
 // Pill-shaped message bubble (Freeform-style)
-const PillMessage = ({ msg, index, total }) => {
+const PillMessage = ({ msg, index, isAdmin, onDelete }) => {
     const colors = [
         { bg: 'bg-gradient-to-r from-rose-500 to-pink-500', text: 'text-white' },
         { bg: 'bg-gradient-to-r from-blue-500 to-cyan-500', text: 'text-white' },
@@ -77,7 +77,22 @@ const PillMessage = ({ msg, index, total }) => {
                 animation: `floatIn 0.6s ease-out ${animDelay}s both, float 6s ease-in-out ${animDelay}s infinite`
             }}
         >
-            <div className={`${color.bg} ${color.text} ${rotate} rounded-[32px] px-5 py-4 shadow-xl hover:shadow-2xl transition-all duration-300 max-w-[320px] backdrop-blur-sm`}>
+            <div className={`${color.bg} ${color.text} ${rotate} rounded-[32px] px-5 py-4 shadow-xl hover:shadow-2xl transition-all duration-300 max-w-[320px] backdrop-blur-sm relative`}>
+                {isAdmin && (
+                    <button
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            if (confirm('Delete this message?')) {
+                                onDelete(msg.id);
+                            }
+                        }}
+                        className="absolute -top-2 -right-2 w-8 h-8 bg-red-500 text-white rounded-full flex items-center justify-center shadow-lg hover:bg-red-600 transition-colors z-[60] opacity-0 group-hover:opacity-100"
+                    >
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                        </svg>
+                    </button>
+                )}
                 {/* Header: Avatar + Name + Date */}
                 <div className="flex items-center gap-3 mb-3">
                     <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center text-white font-bold text-sm border-2 border-white/30 shadow-inner flex-shrink-0">
@@ -130,6 +145,21 @@ export default function GuestbookPage({ theme, setTheme, lang, setLang }) {
             console.error('Failed to fetch messages:', error);
         } finally {
             setIsLoading(false);
+        }
+    };
+
+    const handleDelete = async (id) => {
+        try {
+            const res = await fetch(`/api/guestbook?id=${id}`, {
+                method: 'DELETE',
+            });
+            if (res.ok) {
+                setMessages(messages.filter((msg) => msg.id !== id));
+            } else {
+                alert('Failed to delete message');
+            }
+        } catch (error) {
+            console.error('Failed to delete message:', error);
         }
     };
 
@@ -276,7 +306,14 @@ export default function GuestbookPage({ theme, setTheme, lang, setLang }) {
                         </div>
                     ) : (
                         messages.map((msg, i) => (
-                            <PillMessage key={msg.id} msg={msg} index={i} total={messages.length} />
+                            <PillMessage
+                                key={msg.id}
+                                msg={msg}
+                                index={i}
+                                total={messages.length}
+                                isAdmin={session?.user?.email === 'thnakon.d@gmail.com'}
+                                onDelete={handleDelete}
+                            />
                         ))
                     )}
 
