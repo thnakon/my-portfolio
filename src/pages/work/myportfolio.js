@@ -231,6 +231,7 @@ const ProjectNavigation = ({ lang }) => (
 export default function MyPortfolioPage({ theme, setTheme, lang, setLang }) {
     const [isBookingOpen, setIsBookingOpen] = useState(false);
     const [modalImage, setModalImage] = useState(null);
+    const [openFeature, setOpenFeature] = useState(-1);
     const t = translations[lang] || translations.en;
 
     const openImage = (src, alt) => setModalImage({ src, alt });
