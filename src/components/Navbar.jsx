@@ -258,11 +258,6 @@ export default function Navbar({ t, lang, setLang, theme, setTheme, onBookCall }
     localStorage.setItem('theme', newTheme);
   };
 
-  const toggleLang = () => {
-    const newLang = lang === 'en' ? 'th' : 'en';
-    setLang(newLang);
-    localStorage.setItem('lang', newLang);
-  };
 
   const navItems = [
     { id: 'home', label: t.nav.home, href: '/' },
@@ -430,18 +425,13 @@ export default function Navbar({ t, lang, setLang, theme, setTheme, onBookCall }
           </div>
 
           {/* Controls */}
-          <div className="grid grid-cols-2 gap-2">
-            <button 
-              onClick={toggleLang}
-              className={`flex items-center justify-center gap-2 p-2.5 rounded-xl ${theme === 'dark' ? 'bg-white/5 text-white' : 'bg-black/5 text-black'}`}
-            >
-              <span className="text-xs font-bold">{lang === 'en' ? 'TH' : 'EN'}</span>
-            </button>
+          <div className="flex gap-2">
             <button 
               onClick={toggleTheme}
-              className={`flex items-center justify-center gap-2 p-2.5 rounded-xl ${theme === 'dark' ? 'bg-white/5 text-white' : 'bg-black/5 text-black'}`}
+              className={`flex-1 flex items-center justify-center gap-2 p-2.5 rounded-xl ${theme === 'dark' ? 'bg-white/5 text-white' : 'bg-black/5 text-black'}`}
             >
               <div className="scale-90">{theme === 'dark' ? Icons.sun : Icons.moon}</div>
+              <span className="text-xs font-bold uppercase tracking-wider">{theme === 'dark' ? 'Light' : 'Dark'}</span>
             </button>
           </div>
         </div>
@@ -696,18 +686,11 @@ export default function Navbar({ t, lang, setLang, theme, setTheme, onBookCall }
                       </Link>
                     ))}
 
-                    {/* Theme & Language Controls */}
-                    <div className="grid grid-cols-2 gap-3 mt-auto">
-                       <button 
-                         onClick={toggleLang}
-                         className={`flex items-center justify-center gap-2 p-3.5 rounded-[20px] border transition-all ${theme === 'dark' ? 'bg-white/5 border-white/5 hover:bg-white/10 text-white' : 'bg-black/5 border-black/5 hover:bg-black/10 text-black'}`}
-                       >
-                          <span className="text-xs font-bold tracking-widest uppercase">{lang === 'en' ? 'TH' : 'EN'}</span>
-                          <span className="text-[10px] font-medium opacity-60">{lang === 'en' ? 'Lang' : 'ภาษา'}</span>
-                       </button>
+                    {/* Theme Controls */}
+                    <div className="flex gap-3 mt-auto">
                        <button 
                          onClick={toggleTheme}
-                         className={`flex items-center justify-center gap-2 p-3.5 rounded-[20px] border transition-all ${theme === 'dark' ? 'bg-white/5 border-white/5 hover:bg-white/10 text-white' : 'bg-black/5 border-black/5 hover:bg-black/10 text-black'}`}
+                         className={`flex-1 flex items-center justify-center gap-2 p-3.5 rounded-[20px] border transition-all ${theme === 'dark' ? 'bg-white/5 border-white/5 hover:bg-white/10 text-white' : 'bg-black/5 border-black/5 hover:bg-black/10 text-black'}`}
                        >
                           <div className="shrink-0 scale-90">{theme === 'dark' ? Icons.sun : Icons.moon}</div>
                           <span className="text-[10px] font-medium uppercase tracking-wider">{theme === 'dark' ? 'Light' : 'Dark'}</span>
