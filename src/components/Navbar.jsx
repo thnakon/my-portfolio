@@ -448,7 +448,7 @@ export default function Navbar({ t, lang, setLang, theme, setTheme, onBookCall }
       </div>
 
       {/* 2. Centered Dynamic Island Group - Visible on Mobile only when Command is open */}
-      <div className={`fixed top-0 left-0 right-0 z-[1000] ${isCommandOpen ? 'flex' : 'hidden md:flex'} justify-center pt-16 md:pt-20 pointer-events-none`}>
+      <div className={`fixed top-0 left-0 right-0 z-[1000] ${isCommandOpen ? 'flex' : 'hidden md:flex'} justify-center ${isCommandOpen ? 'pt-16 md:pt-20' : 'pt-4 md:pt-[18px]'} pointer-events-none`}>
         <div className={`flex items-center justify-center gap-1.5 px-4 transition-all duration-700 ${isCommandOpen ? 'w-full max-w-2xl' : ''}`}>
            
            {/* MAIN DYNAMIC ISLAND PILL */}
