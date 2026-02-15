@@ -447,9 +447,9 @@ export default function Navbar({ t, lang, setLang, theme, setTheme, onBookCall }
         </div>
       </div>
 
-      {/* 2. Centered Dynamic Island Group - Desktop Only */}
-      <div className="fixed top-0 left-0 right-0 z-[1000] hidden md:flex justify-center pt-5 pointer-events-none">
-        <div className="flex items-center gap-1.5 px-4 transition-all duration-700">
+      {/* 2. Centered Dynamic Island Group - Visible on Mobile only when Command is open */}
+      <div className={`fixed top-0 left-0 right-0 z-[1000] ${isCommandOpen ? 'flex' : 'hidden md:flex'} justify-center pt-16 md:pt-20 pointer-events-none`}>
+        <div className={`flex items-center justify-center gap-1.5 px-4 transition-all duration-700 ${isCommandOpen ? 'w-full max-w-2xl' : ''}`}>
            
            {/* MAIN DYNAMIC ISLAND PILL */}
            <div 
@@ -465,7 +465,7 @@ export default function Navbar({ t, lang, setLang, theme, setTheme, onBookCall }
                ${isGreeting ? 'w-[140px] h-[36px] rounded-full' : ''}
                ${!isGreeting && !isExpanded && !isCommandOpen ? 'w-[480px] h-[44px] rounded-full px-4' : ''}
                ${isExpanded && !isCommandOpen ? 'w-[750px] h-[480px] rounded-[42px] p-6 pt-12' : ''}
-               ${isCommandOpen ? 'w-[640px] h-[520px] rounded-[32px] p-0' : ''}
+               ${isCommandOpen ? 'w-[92%] md:w-[640px] h-[70vh] md:h-[520px] rounded-[32px] p-0 shadow-2xl' : ''}
              `}
            >
               {/* Greeting Layer */}
