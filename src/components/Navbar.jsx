@@ -282,7 +282,7 @@ export default function Navbar({ t, lang, setLang, theme, setTheme, onBookCall }
       )}
 
       {/* 1. Header Layer (Logo & Command) - Only on Desktop */}
-      <div className="fixed top-0 left-0 right-0 z-[1001] pointer-events-none hidden md:block">
+      <div className={`fixed top-0 left-0 right-0 z-[1001] pointer-events-none hidden md:block transition-all duration-300 ${isCommandOpen ? 'opacity-0 invisible' : 'opacity-100 visible'}`}>
         <div className="max-w-6xl mx-auto px-6 h-[80px] flex items-center justify-between">
           <Link 
             href="/" 
@@ -303,7 +303,7 @@ export default function Navbar({ t, lang, setLang, theme, setTheme, onBookCall }
       </div>
 
       {/* Mobile Header - Logo | Nav | Command in one row */}
-      <div className="fixed top-0 left-0 right-0 z-[1001] md:hidden pointer-events-none">
+      <div className={`fixed top-0 left-0 right-0 z-[1001] md:hidden pointer-events-none transition-all duration-300 ${isCommandOpen ? 'opacity-0 invisible' : 'opacity-100 visible'}`}>
         <div className="px-4 h-[70px] flex items-center justify-between gap-2">
           {/* Logo */}
           <Link 
@@ -448,7 +448,7 @@ export default function Navbar({ t, lang, setLang, theme, setTheme, onBookCall }
       </div>
 
       {/* 2. Centered Dynamic Island Group - Visible on Mobile only when Command is open */}
-      <div className={`fixed top-0 left-0 right-0 z-[1000] ${isCommandOpen ? 'flex' : 'hidden md:flex'} justify-center ${isCommandOpen ? 'pt-16 md:pt-20' : 'pt-4 md:pt-[18px]'} pointer-events-none`}>
+      <div className={`fixed top-0 left-0 right-0 z-[1000] ${isCommandOpen ? 'flex' : 'hidden md:flex'} justify-center ${isCommandOpen ? 'pt-20 md:pt-20' : 'pt-4 md:pt-[18px]'} pointer-events-none transition-all duration-500`}>
         <div className={`flex items-center justify-center gap-1.5 px-4 transition-all duration-700 ${isCommandOpen ? 'w-full max-w-2xl' : ''}`}>
            
            {/* MAIN DYNAMIC ISLAND PILL */}
@@ -534,41 +534,41 @@ export default function Navbar({ t, lang, setLang, theme, setTheme, onBookCall }
               {/* Command Palette Interface (Inline) */}
               {isCommandOpen && (
                 <div className="w-full h-full flex flex-col animate-reveal-fade-up">
-                   {/* Search Header */}
-                   <div className={`flex items-center gap-3 px-6 py-5 border-b ${theme === 'dark' ? 'border-white/10' : 'border-black/10'}`}>
-                     <div className={theme === 'dark' ? 'text-white/50' : 'text-black/50'}>
-                       {Icons.search}
-                     </div>
-                     <input
-                       ref={searchInputRef}
-                       type="text"
-                       placeholder={lang === 'en' ? 'Search' : 'ค้นหา'}
-                       value={searchQuery}
-                       onChange={(e) => {
-                         setSearchQuery(e.target.value);
-                         setSelectedIndex(0);
-                       }}
-                       className={`
-                         flex-1 bg-transparent outline-none text-xl font-medium
-                         placeholder:opacity-50
-                         ${theme === 'dark' ? 'text-white placeholder:text-white/50' : 'text-black placeholder:text-black/50'}
-                       `}
-                     />
-                     <div className="flex items-center gap-2">
-                       <button
-                         onClick={toggleTheme}
-                         className={`p-2 rounded-lg transition-all ${theme === 'dark' ? 'hover:bg-white/10 text-white/50' : 'hover:bg-black/10 text-black/50'}`}
-                       >
-                         {theme === 'dark' ? Icons.sun : Icons.moon}
-                       </button>
-                       <button
-                         onClick={() => setIsCommandOpen(false)}
-                         className={`px-3 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-wider transition-all ${theme === 'dark' ? 'bg-white/10 text-white/70 hover:bg-white/20' : 'bg-black/10 text-black/70 hover:bg-black/20'}`}
-                       >
-                         ESC
-                       </button>
-                     </div>
-                   </div>
+                    {/* Search Header */}
+                    <div className={`flex items-center gap-3 px-4 md:px-6 py-4 md:py-5 border-b ${theme === 'dark' ? 'border-white/10' : 'border-black/10'}`}>
+                      <div className={theme === 'dark' ? 'text-white/50' : 'text-black/50'}>
+                        {Icons.search}
+                      </div>
+                      <input
+                        ref={searchInputRef}
+                        type="text"
+                        placeholder={lang === 'en' ? 'Search' : 'ค้นหา'}
+                        value={searchQuery}
+                        onChange={(e) => {
+                          setSearchQuery(e.target.value);
+                          setSelectedIndex(0);
+                        }}
+                        className={`
+                          flex-1 bg-transparent outline-none text-lg md:text-xl font-medium
+                          placeholder:opacity-50
+                          ${theme === 'dark' ? 'text-white placeholder:text-white/50' : 'text-black placeholder:text-black/50'}
+                        `}
+                      />
+                      <div className="flex items-center gap-1.5 md:gap-2">
+                        <button
+                          onClick={toggleTheme}
+                          className={`p-2 rounded-lg transition-all ${theme === 'dark' ? 'hover:bg-white/10 text-white/50' : 'hover:bg-black/10 text-black/50'}`}
+                        >
+                          {theme === 'dark' ? Icons.sun : Icons.moon}
+                        </button>
+                        <button
+                          onClick={() => setIsCommandOpen(false)}
+                          className={`px-2.5 py-1.5 md:px-3 md:py-1.5 rounded-lg text-[9px] md:text-[10px] font-bold uppercase tracking-wider transition-all ${theme === 'dark' ? 'bg-white/10 text-white/70 hover:bg-white/20' : 'bg-black/10 text-black/70 hover:bg-black/20'}`}
+                        >
+                          {lang === 'en' ? 'ESC' : 'ปิด'}
+                        </button>
+                      </div>
+                    </div>
 
                    {/* Results Container */}
                    <div className="flex-1 overflow-y-auto px-2 py-4 no-scrollbar">
